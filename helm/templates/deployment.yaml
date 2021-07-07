@@ -27,15 +27,28 @@ spec:
       serviceAccountName: {{ include "OpenZaakBrug.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: properties
+          secret:
+            secretName: {{ template "OpenZaakBrug.fullname" . }}
+            defaultMode: 420
       containers:
         - name: {{ .Chart.Name }}
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+          volumeMounts:
+            - mountPath: /
+              subPath: application.properties-kubernetes
+              name: properties
+              readOnly: true
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.image.image }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:
