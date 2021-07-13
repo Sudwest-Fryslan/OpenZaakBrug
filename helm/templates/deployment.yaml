@@ -38,8 +38,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "kubernetes"
           volumeMounts:
-            - mountPath: /
-              subPath: application.properties-kubernetes
+            - mountPath: /home/config
               name: properties
               readOnly: true
           securityContext:
@@ -52,11 +51,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /debug
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /debug
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

@@ -5,7 +5,7 @@
 replicaCount: 1
 
 config:
-  debug: WARNING
+  debug: ERROR
   openzaak:
     baseUrl: https://openzaak.local
     jwt:
@@ -24,10 +24,10 @@ config:
   enableJwtEndpoint: false
 
 image:
-  image: docker.io/conduction/openzaakbrug
+  image: docker.io/openzaakbrug/openzaakbrug
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.1"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -81,9 +81,9 @@ postgresql:
   imageTag: 11-alpine
   # If bringing your own PostgreSQL, the full uri to use
   url: "psql://a:b@example.com/c"
-  postgresqlUsername: "openzaakbrug"
+  postgresqlUsername: "postgres"
   postgresqlPassword: "!ChangeMe!"
-  postgresqlDatabase: "openzaakbrug"
+  postgresqlDatabase: "postgres"
   # Persistent Volume Storage configuration.
   # ref: https://kubernetes.io/docs/user-guide/persistent-volumes
   persistence:
