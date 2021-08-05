@@ -559,6 +559,16 @@ public class ZaakService {
 
 		zgwEnkelvoudigInformatieObject.indicatieGebruiksrecht = "false";
 
+		if(zgwEnkelvoudigInformatieObject.status != null) {
+			/*			
+			in_bewerking - (In bewerking) Aan het informatieobject wordt nog gewerkt.
+			ter_vaststelling - (Ter vaststelling) Informatieobject gereed maar moet nog vastgesteld worden.
+			definitief - (Definitief) Informatieobject door bevoegd iets of iemand vastgesteld dan wel ontvangen.
+			gearchiveerd - (Gearchiveerd) Informatieobject duurzaam bewaarbaar gemaakt; een gearchiveerd informatie-element.
+			*/
+			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.replace(" ", "_");
+			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.toLowerCase();							
+		}			
 		zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(zgwEnkelvoudigInformatieObject);
 		ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
 
