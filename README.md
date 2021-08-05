@@ -31,6 +31,7 @@ Hierbij hebben we de volgende uitgangspunten:
 - Team Open Zaakbrug op [commonground.nl](https://commonground.nl/groups/view/c2df2f42-b3ea-405e-953f-fe808ab56ba0/team-openzaakbrug)
 - 2021-02-05 [Fieldlab DOiT video](https://vimeo.com/512518040/2284537066)
 - 2021-02-05 [Powerpoint Fieldlab DOiT](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210205-FieldLab2021-Eduard-Open%20Zaakbrug,%20commonground%20in%20de%20praktijk.pptx?raw=true)
+- 2021-07-09 [Powerpoint DemoDam](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210709-DemoDam-OpenZaak%20en%20Open%20Zaakbrug-Commonground%20in%20de%20praktijk.pptx?raw=true)
 
 ## Continue implementatie / continue  levering
 
