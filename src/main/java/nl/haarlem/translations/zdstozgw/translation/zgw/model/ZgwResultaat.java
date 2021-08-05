@@ -9,17 +9,17 @@ public class ZgwResultaat {
 	public String url;
 	@SerializedName("uuid")
 	@Expose
-	public String uuid;	
+	public String uuid;
 	@SerializedName("zaak")
-	@Expose	
+	@Expose
 	public String zaak;
-	
+
 	@SerializedName("resultaattype")
-	@Expose		
+	@Expose
 	public String resultaattype;
 
 	@SerializedName("toelichting")
-	@Expose		
+	@Expose
 	public String toelichting;
-	
+
 }

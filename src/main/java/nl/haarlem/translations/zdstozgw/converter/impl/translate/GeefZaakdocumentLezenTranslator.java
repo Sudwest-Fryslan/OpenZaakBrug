@@ -9,7 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsAntwoord;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsEdcLa01GeefZaakdocumentLezen;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsEdcLv01;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsParameters;
@@ -35,9 +34,9 @@ public class GeefZaakdocumentLezenTranslator extends Converter {
 		var zdsEdcLv01 = (ZdsEdcLv01) this.getZdsDocument();
 		var documentIdentificatie = zdsEdcLv01.gelijk.identificatie;
 
-		this.getSession().setFunctie("GeefZaakdocumentLezen");		
+		this.getSession().setFunctie("GeefZaakdocumentLezen");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie);
-				
+
 		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(documentIdentificatie);
 		var edcLa01 = new ZdsEdcLa01GeefZaakdocumentLezen(zdsEdcLv01.stuurgegevens, this.getSession().getReferentienummer());
 		edcLa01.antwoord = new ZdsZaakDocumentAntwoord();

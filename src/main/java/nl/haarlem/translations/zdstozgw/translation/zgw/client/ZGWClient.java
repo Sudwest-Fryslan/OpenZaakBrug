@@ -63,13 +63,13 @@ public class ZGWClient {
 
 	@Value("${zgw.endpoint.resultaat:/zaken/api/v1/resultaten}")
 	private String endpointResultaat;
-	
+
 	@Value("${zgw.endpoint.statustype:/catalogi/api/v1/statustypen}")
 	private String endpointStatustype;
 
 	@Value("${zgw.endpoint.resultaattype:/catalogi/api/v1/resultaattypen}")
 	private String endpointResultaattype;
-		
+
 	@Value("${zgw.endpoint.zaakinformatieobject:/zaken/api/v1/zaakinformatieobjecten}")
 	private String endpointZaakinformatieobject;
 
@@ -102,7 +102,7 @@ public class ZGWClient {
 				return response;
 			});
 			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
-			long endTime = System.currentTimeMillis();			
+			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
 			var message = "POST to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
 			log.debug(message);
@@ -155,7 +155,7 @@ public class ZGWClient {
 			var duration = endTime - startTime;
 			var message = "GET to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
 			log.debug(message);
-			debug.infopoint("Duration", message);			
+			debug.infopoint("Duration", message);
 			log.debug("GET response: " + zgwResponse);
 			return zgwResponse;
 		} catch (HttpStatusCodeException hsce) {
@@ -193,7 +193,7 @@ public class ZGWClient {
 			var duration = endTime - startTime;
 			var message = "DELETE to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
 			log.debug(message);
-			debug.infopoint("Duration", message);			
+			debug.infopoint("Duration", message);
 			log.debug("DELETE response: " + zgwResponse);
 			return zgwResponse;
 		} catch (HttpStatusCodeException hsce) {
@@ -231,7 +231,7 @@ public class ZGWClient {
 			var duration = endTime - startTime;
 			var message = "PUT to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
 			log.debug(message);
-			debug.infopoint("Duration", message);						
+			debug.infopoint("Duration", message);
 			log.debug("PUT response: " + zgwResponse);
 			return zgwResponse;
 		} catch (HttpStatusCodeException hsce) {
@@ -257,11 +257,11 @@ public class ZGWClient {
 
 	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByIdentiticatie(String identificatie) {
 		log.debug("get zaakdocument #" + identificatie);
-		
+
 		if(identificatie == null || identificatie.length() == 0) {
-			throw new ConverterException("getZgwEnkelvoudigInformatieObjectByIdentiticatie without an identificatie");			
+			throw new ConverterException("getZgwEnkelvoudigInformatieObjectByIdentiticatie without an identificatie");
 		}
-		
+
 		var documentJson = get(
 				this.baseUrl + this.endpointEnkelvoudiginformatieobject + "?identificatie=" + identificatie, null);
 		Type type = new TypeToken<QueryResult<ZgwEnkelvoudigInformatieObject>>() {
@@ -378,7 +378,7 @@ public class ZGWClient {
 
 	public ZgwEnkelvoudigInformatieObject getZaakDocumentByUrl(String url) {
 		var zaakInformatieObjectJson = get(url, null);
-		Gson gson = new Gson();		
+		Gson gson = new Gson();
 		var result = gson.fromJson(zaakInformatieObjectJson, ZgwEnkelvoudigInformatieObject.class);
 		if(result == null) {
 			throw new ConverterException("ZaakDocument met url:" + url + " niet gevonden!");
@@ -393,11 +393,11 @@ public class ZGWClient {
 		Gson gson = new Gson();
 		QueryResult<ZgwStatusType> queryResult = gson.fromJson(statusTypeJson, type);
 		if(queryResult.getResults() == null) {
-			return new ArrayList<ZgwStatusType>(); 
+			return new ArrayList<ZgwStatusType>();
 		}
 		return queryResult.getResults();
 	}
-	
+
 	public List<ZgwResultaatType> getResultaatTypes(Map<String, String> parameters) {
 		var restulaatTypeJson = get(this.baseUrl + this.endpointResultaattype, parameters);
 		Type type = new TypeToken<QueryResult<ZgwResultaatType>>() {
@@ -405,10 +405,10 @@ public class ZGWClient {
 		Gson gson = new Gson();
 		QueryResult<ZgwResultaatType> queryResult = gson.fromJson(restulaatTypeJson, type);
 		if(queryResult.getResults() == null) {
-			return new ArrayList<ZgwResultaatType>(); 
-		}		
+			return new ArrayList<ZgwResultaatType>();
+		}
 		return queryResult.getResults();
-	}		
+	}
 
 	public List<ZgwResultaat> getResultaten(Map<String, String> parameters) {
 		var restulaatJson = get(this.baseUrl + this.endpointResultaat, parameters);
@@ -417,12 +417,12 @@ public class ZGWClient {
 		Gson gson = new Gson();
 		QueryResult<ZgwResultaat> queryResult = gson.fromJson(restulaatJson, type);
 		if(queryResult.getResults() == null) {
-			return new ArrayList<ZgwResultaat>(); 
-		}				
+			return new ArrayList<ZgwResultaat>();
+		}
 		return queryResult.getResults();
-	}		
-	
-	
+	}
+
+
 	public List<ZgwStatus> getStatussen(Map<String, String> parameters) {
 		var statusTypeJson = get(this.baseUrl + this.endpointStatus, parameters);
 		Type type = new TypeToken<QueryResult<ZgwStatus>>() {
@@ -453,8 +453,8 @@ public class ZGWClient {
 		String json = gson.toJson(zgwResultaat);
 		String response = this.post(this.baseUrl + this.endpointResultaat, json);
 		return gson.fromJson(response, ZgwResultaat.class);
-	}		
-	
+	}
+
 	public List<ZgwZaakType> getZaakTypes(Map<String, String> parameters) {
 		var zaakTypeJson = get(this.baseUrl + this.endpointZaaktype, parameters);
 		Type type = new TypeToken<QueryResult<ZgwZaakType>>() {
@@ -463,7 +463,7 @@ public class ZGWClient {
 		QueryResult<ZgwZaakType> queryResult = gson.fromJson(zaakTypeJson, type);
 		if(queryResult == null) {
 			return new ArrayList<ZgwZaakType>();
-		}		
+		}
 		return queryResult.getResults();
 	}
 
@@ -473,11 +473,11 @@ public class ZGWClient {
 		ZgwZaakType result = gson.fromJson(zaakTypeJson, ZgwZaakType.class);
 		return result;
 	}
-	
+
 
 	public ZgwZaakType getZaakTypeByZaak(ZgwZaak zgwZaak) {
 		return getZaakTypeByUrl(zgwZaak.getZaaktype());
-	}	
+	}
 
 	public List<ZgwRol> getRollen(Map<String, String> parameters) {
 		var zaakTypeJson = get(this.baseUrl + this.endpointRol, parameters);
@@ -487,7 +487,7 @@ public class ZGWClient {
 		QueryResult<ZgwRol> queryResult = gson.fromJson(zaakTypeJson, type);
 		if(queryResult == null) {
 			return new ArrayList<ZgwRol>();
-		}		
+		}
 		return queryResult.getResults();
 	}
 
@@ -499,16 +499,16 @@ public class ZGWClient {
 		QueryResult<ZgwRolType> queryResult = gson.fromJson(rolTypeJson, type);
 		if(queryResult == null) {
 			return new ArrayList<ZgwRolType>();
-		}		
+		}
 		return queryResult.getResults();
 	}
 
 	public ZgwRolType getRolTypeByZaaktypeAndOmschrijving(ZgwZaakType zgwZaakType, String omschrijving) {
-		for (String found : zgwZaakType.roltypen) {		
+		for (String found : zgwZaakType.roltypen) {
 			ZgwRolType roltype = getRolTypeByUrl(found);
 			if (roltype.omschrijving.equals(omschrijving)) {
 				return roltype;
-			}			
+			}
 		}
 		return null;
 	}
@@ -531,8 +531,8 @@ public class ZGWClient {
 			throw new ConverterException("zaakresultaat uuid may not be null");
 		}
 		delete(this.baseUrl + this.endpointResultaat + "/" + uuid);
-	}	
-		
+	}
+
 	public List<ZgwZaakInformatieObject> getZaakInformatieObjectenByZaak(String zaakUrl) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("zaak", zaakUrl);
@@ -541,10 +541,10 @@ public class ZGWClient {
 
 	public ZgwZaak getZaakByIdentificatie(String zaakIdentificatie) {
 		if(zaakIdentificatie == null || zaakIdentificatie.length() == 0) {
-			throw new ConverterException("getZaakByIdentificatie without an identificatie");			
+			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
-		
-		
+
+
 		Map<String, String> parameters = new HashMap();
 		parameters.put("identificatie", zaakIdentificatie);
 
@@ -583,12 +583,12 @@ public class ZGWClient {
 		List<ZgwStatusType> statustypes = this.getStatusTypes(parameters);
 		return statustypes;
 	}
-	
-	public ZgwStatusType getStatusTypeByZaakTypeAndOmschrijving(ZgwZaakType zaakType, String statusOmschrijving, String verwachteVolgnummer) {	
+
+	public ZgwStatusType getStatusTypeByZaakTypeAndOmschrijving(ZgwZaakType zaakType, String statusOmschrijving, String verwachteVolgnummer) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("zaaktype", zaakType.url);
-		List<ZgwStatusType> statustypes = this.getStatusTypes(parameters);	
-		
+		List<ZgwStatusType> statustypes = this.getStatusTypes(parameters);
+
 		for (ZgwStatusType statustype : statustypes) {
 			log.debug("opgehaald:" + statustype.omschrijving + " zoeken naar: " + statusOmschrijving);
 			if (statustype.omschrijving.startsWith(statusOmschrijving)) {
@@ -614,12 +614,12 @@ public class ZGWClient {
 		var omschrijving = resultaatOmschrijving;
 		if(omschrijving.length() > 20) {
 			// maximum length of openzaak is 20 characters
-			omschrijving = omschrijving.substring(0, 20);		
-		}			
+			omschrijving = omschrijving.substring(0, 20);
+		}
 		for (String found: zaakType.resultaattypen) {
 			ZgwResultaatType resultaatType = getResultaatTypeByUrl(found);
 			log.debug("opgehaald:" + resultaatType.omschrijving + " zoeken naar: " + omschrijving + "' (ingekort van: " + resultaatOmschrijving + ")");
-			
+
 			// in some applications, the omschrijving can not be as long as we want.....
 			if (resultaatType.omschrijving.startsWith(omschrijving)) {
 				log.debug("gevonden:" + resultaatType.omschrijving + " zoeken naar: " + omschrijving);
@@ -627,8 +627,8 @@ public class ZGWClient {
 			}
 		}
 		throw new ConverterException("zaakresultaat niet gevonden voor omschrijving: '" + resultaatOmschrijving + "'");
-	}		
-	
+	}
+
 	private ZgwResultaatType getResultaatTypeByUrl(String url) {
 		var resultaatTypeJson = get(url, null);
 		Gson gson = new Gson();
@@ -637,15 +637,15 @@ public class ZGWClient {
 			throw new ConverterException("ZgwResultaatType met url:" + url + " niet gevonden!");
 		}
 		return result;
-		
+
 	}
 
 	public List<ZgwResultaat> getResultatenByZaakUrl(String zaakUrl) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("zaak", zaakUrl);
 		return this.getResultaten(parameters);
-	}	
-	
+	}
+
 	public List<ZgwRol> getRollenByZaakUrl(String zaakUrl) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("zaak", zaakUrl);
@@ -676,14 +676,14 @@ public class ZGWClient {
 
 	public ZgwZaakType getZgwZaakTypeByIdentificatie(String identificatie) {
 		if(identificatie == null || identificatie.length() == 0) {
-			throw new ConverterException("getZgwZaakTypeByIdentificatie without an identificatie");			
-		}		
-		
+			throw new ConverterException("getZgwZaakTypeByIdentificatie without an identificatie");
+		}
+
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("identificatie", identificatie);
 		parameters.put("status", "definitief");
 		var types = this.getZaakTypes(parameters);
-			
+
 		var now = new Date();
 		var active = new ArrayList<ZgwZaakType>();
 		for(ZgwZaakType zaaktype : types) {
@@ -693,7 +693,7 @@ public class ZGWClient {
 				}
 				else {
 					debugWarning("zaaktype met identificatie: '" + identificatie + "' heeft een versie die al beeindigd is:" + zaaktype.beginGeldigheid + " (" + zaaktype.url + ")");
-				}				
+				}
 			}
 			else {
 				debugWarning("zaaktype met identificatie: '" + identificatie + "' heeft een versie die nog moet beginnen:" + zaaktype.beginGeldigheid + " (" + zaaktype.url + ")");
@@ -710,13 +710,13 @@ public class ZGWClient {
 		}
 	}
 
-	public ZgwInformatieObjectType getZgwInformatieObjectTypeByOmschrijving(ZgwZaakType zaaktype, String omschrijving) {		
+	public ZgwInformatieObjectType getZgwInformatieObjectTypeByOmschrijving(ZgwZaakType zaaktype, String omschrijving) {
 		for (String found : zaaktype.informatieobjecttypen ) {
 			ZgwInformatieObjectType ziot = getZgwInformatieObjectTypeByUrl(found);
 			log.debug("gevonden ZgwInformatieObjectType met omschrijving: '" + ziot.omschrijving + "'");
 			if (omschrijving.equals(ziot.omschrijving)) {
 				return ziot;
-			}			
+			}
 		}
 		return null;
 	}
@@ -737,7 +737,7 @@ public class ZGWClient {
 
 	public void getZgwInformatieObjectUnLock(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject, ZgwLock zgwLock) {
 			Gson gson = new Gson();
-			String json = gson.toJson(zgwLock);		
+			String json = gson.toJson(zgwLock);
 			var lock = post(zgwEnkelvoudigInformatieObject.url + "/unlock", json);
 			Object result = gson.fromJson(lock, Object.class);
 			return;
@@ -749,7 +749,7 @@ public class ZGWClient {
 		String response = this.put(zgwEnkelvoudigInformatieObject.url, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
 	}
-	
+
 	private void debugWarning(String message) {
 		log.info("[processing warning] " + message);
 		debug.infopoint("Warning", message);

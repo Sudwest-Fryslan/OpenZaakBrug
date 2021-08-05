@@ -23,7 +23,7 @@ public class ZdsEdcLa01 {
 	public String entiteittype ="EDC";
 	@XmlAttribute(namespace = STUF)
 	public String functie = "antwoord";
-	
+
 	public ZdsEdcLa01() {
 	}
 }

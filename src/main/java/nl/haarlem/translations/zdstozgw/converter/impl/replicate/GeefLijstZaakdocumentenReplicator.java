@@ -41,6 +41,6 @@ public class GeefLijstZaakdocumentenReplicator extends GeefLijstZaakdocumentenTr
 		}
 		replicator.replicateZaak(zdsZakLv01.gelijk.identificatie);
 		//return super.execute();
-		return legacyresponse;		
+		return legacyresponse;
 	}
 }

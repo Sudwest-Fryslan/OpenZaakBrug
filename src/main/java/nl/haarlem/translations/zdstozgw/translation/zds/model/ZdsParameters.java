@@ -15,7 +15,7 @@ public class ZdsParameters extends ZdsObject {
 	@XmlElement(namespace = STUF)
 	public String indicatorVervolgvraag;
 
-	@XmlElement(namespace = ZKN)	
+	@XmlElement(namespace = ZKN)
 	public String checkedOutId;
 
 	public ZdsParameters() {

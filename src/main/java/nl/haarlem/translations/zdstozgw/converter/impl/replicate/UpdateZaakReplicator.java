@@ -31,7 +31,7 @@ public class UpdateZaakReplicator extends UpdateZaakTranslator {
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
-		
+
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
 		if (legacyresponse.getStatusCode() != HttpStatus.OK) {

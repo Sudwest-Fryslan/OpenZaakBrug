@@ -27,14 +27,14 @@ public class UpdateZaakTranslator extends Converter {
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
-		
-		this.getSession().setFunctie("UpdateZaak");		
-		this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLk01.objects.get(0).identificatie);		
-		
+
+		this.getSession().setFunctie("UpdateZaak");
+		this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLk01.objects.get(0).identificatie);
+
 		ZdsZaak was = null;
 		ZdsZaak wordt = null;
 		if(zdsZakLk01.objects.size() == 1) {
-			wordt = zdsZakLk01.objects.get(0);			
+			wordt = zdsZakLk01.objects.get(0);
 		}
 		else if(zdsZakLk01.objects.size() == 2) {
 			was = zdsZakLk01.objects.get(0);

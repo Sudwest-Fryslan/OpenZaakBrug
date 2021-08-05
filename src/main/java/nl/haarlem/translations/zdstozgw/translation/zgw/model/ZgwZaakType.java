@@ -25,14 +25,14 @@ public class ZgwZaakType {
 	public Date beginGeldigheid;
 	@SerializedName("eindeGeldigheid")
 	@Expose
-	public Date eindeGeldigheid;	
-		
+	public Date eindeGeldigheid;
+
 	@SerializedName("statustypen")
 	@Expose
 	public List<String> statustypen = null;
 	@SerializedName("resultaattypen")
 	@Expose
-	public List<String> resultaattypen = null;	
+	public List<String> resultaattypen = null;
 	@SerializedName("informatieobjecttypen")
 	@Expose
 	public List<String> informatieobjecttypen = null;

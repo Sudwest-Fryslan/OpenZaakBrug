@@ -35,10 +35,10 @@ public class GeefLijstZaakdocumentenTranslator extends Converter {
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		ZdsZakLv01 zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
 		var zaakidentificatie = zdsZakLv01.gelijk.identificatie;
-		
-		this.getSession().setFunctie("GeefLijstZaakdocumenten");		
+
+		this.getSession().setFunctie("GeefLijstZaakdocumenten");
 		this.getSession().setKenmerk("zaakidentificatie:" + zaakidentificatie);
-		
+
 		List<ZdsHeeftRelevant> gerelateerdeDocumenten = this.getZaakService()
 				.geefLijstZaakdocumenten(zaakidentificatie);
 

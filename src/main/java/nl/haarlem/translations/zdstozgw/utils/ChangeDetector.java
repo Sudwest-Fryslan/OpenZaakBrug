@@ -24,7 +24,7 @@ public class ChangeDetector {
 		private ChangeType changeType;
 		private Object currentValue;
 		private Object newValue;
-		
+
 		public Change(Field field, ChangeType changeType, Object currentValue, Object newValue) {
 			this.field = field;
 			this.changeType = changeType;
@@ -35,8 +35,8 @@ public class ChangeDetector {
 
 	public enum ChangeType {
 		DELETED, CHANGED, NEW
-	}	
-	
+	}
+
 	public class Changes extends HashMap<Change, ChangeType>  {
 		public Changes() {
 			super();
@@ -54,7 +54,7 @@ public class ChangeDetector {
 							changeTypeChangeEntry -> changeTypeChangeEntry.getValue()));
 			return new Changes(result);
 		}
-		
+
 		public ChangeDetector.Changes getAllChangesByDeclaringClassAndFilter(Class classType, Class filterFieldType) {
 			Map<Change, ChangeType> result =  this.entrySet().stream()
 					.filter(changeTypeChangeEntry -> changeTypeChangeEntry.getKey().getField().getDeclaringClass()
@@ -64,7 +64,7 @@ public class ChangeDetector {
 					.collect(Collectors.toMap(changeTypeChangeEntry -> changeTypeChangeEntry.getKey(),
 							changeTypeChangeEntry -> changeTypeChangeEntry.getValue()));
 			return new Changes(result);
-		}		
+		}
 	}
 
 	public ChangeDetector() {
@@ -79,14 +79,14 @@ public class ChangeDetector {
 				ChangeType changeType = null;
 
 				log.debug("looking for changes in current: '" + currentValue + "' into: '" + field + "'");
-				
+
 				if (currentValue == null && newValue != null) {
 					changeType = ChangeType.NEW;
-				} 
+				}
 				else if (currentValue != null && newValue == null) {
 					changeType = ChangeType.DELETED;
-				} 
-				else if (currentValue != null && !currentValue.equals(newValue)) {					
+				}
+				else if (currentValue != null && !currentValue.equals(newValue)) {
 					changeType = ChangeType.CHANGED;
 				}
 

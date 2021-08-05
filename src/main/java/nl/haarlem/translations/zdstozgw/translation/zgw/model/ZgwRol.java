@@ -30,5 +30,5 @@ public class ZgwRol extends ZgwObject {
 	public String omschrijvingGeneriek;
 	@SerializedName("omschrijving")
 	@Expose
-	public String omschrijving;	
+	public String omschrijving;
 }

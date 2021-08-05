@@ -64,32 +64,32 @@ public class ZgwBetrokkeneIdentificatie {
 	@SerializedName("naam")
 	@Expose
 	public String naam;
-	
-	// Niet natuurlijk persoon	
+
+	// Niet natuurlijk persoon
 	@Expose
 	public String innNnpId;
-	
+
 	@Expose
 	public String annIdentificatie;
 
 	@Expose
 	public String statutaireNaam;
-	
+
 	@Expose
 	public String innRechtsvorm;
 
 	@Expose
 	public String bezoekadres;
-	
-	// Vestiging 
+
+	// Vestiging
 	@Expose
 	public String vestigingsNummer;
-	
+
 	@Expose
-	public String[] handelsnaam;	
-	
+	public String[] handelsnaam;
+
 	// verblijfsobject was al gedefinieerd
-	
+
 	@Expose
-	public String subVerblijfBuitenland;	
+	public String subVerblijfBuitenland;
 }

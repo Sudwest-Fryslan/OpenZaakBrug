@@ -12,15 +12,13 @@ import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.impl.translate.GeefZaakdocumentLezenTranslator;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsEdcLv01;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsStuurgegevens;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLv01;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
 
 public class GeefZaakdocumentLezenReplicator extends GeefZaakdocumentLezenTranslator {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	
+
 	public GeefZaakdocumentLezenReplicator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
 		super(session, translation, zaakService);
 	}

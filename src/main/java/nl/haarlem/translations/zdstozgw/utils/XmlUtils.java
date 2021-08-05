@@ -252,17 +252,17 @@ public class XmlUtils {
 			var message = MessageFactory.newInstance().createMessage(null, inputstream);
 			var document = message.getSOAPBody().extractContentAsDocument();
 			var unmarshaller = JAXBContext.newInstance(c).createUnmarshaller();
-			// WORKAROUND [A] : otherwise here exception: 
+			// WORKAROUND [A] : otherwise here exception:
 			//	java.lang.RuntimeException: com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML declaration parsing failed
 			//	java.io.IOException: Unexpected characters before XML declaration
 			object = unmarshaller.unmarshal(document);
 		}
 		catch (SOAPException se) {
 			throw new ConverterException("create soapmessage from request:" + se.toString(), body, se);
-		}		
+		}
 		catch (JAXBException jaxbe) {
 			throw new ConverterException("unmarshalllen request to class:" + c.getName() + " : " + jaxbe.toString(), jaxbe.getMessage(), jaxbe);
-		} 		
+		}
 		catch (Exception e) {
 			throw new ConverterException("fout bij parsen xml:" + e.toString(), e);
 		}

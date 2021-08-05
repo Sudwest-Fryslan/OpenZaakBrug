@@ -14,14 +14,14 @@ public class ZdsParametersMetSortering extends ZdsParameters{
 
 	@XmlElement(namespace = STUF, nillable = true)
 	public String sortering;
-	
+
 	// Overrides the base.indicatorVervolgvraag
 	@XmlElement(namespace = STUF, nillable = true)
 	public String indicatorVervolgvraag;
 
 	public ZdsParametersMetSortering() {
-	}	
-	
+	}
+
 	public ZdsParametersMetSortering(ZdsParametersMetSortering zdsParameters) {
 		this.sortering = zdsParameters.sortering;
 		this.indicatorVervolgvraag = zdsParameters.indicatorVervolgvraag;

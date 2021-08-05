@@ -17,11 +17,13 @@ public class DebugServlet extends WebContainerServlet {
 	private static final long serialVersionUID = 1L;
 	private WebApplicationContext webApplicationContext;
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 		webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletConfig.getServletContext());
 	}
 
+	@Override
 	public ApplicationInstance newApplicationInstance() {
 		return (Echo2Application)webApplicationContext.getBean("echo2Application");
 	}

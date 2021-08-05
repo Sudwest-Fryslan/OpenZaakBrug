@@ -79,7 +79,7 @@ public abstract class RequestHandler {
 		Configuration configuration = this.configService.getConfiguration();
 
 		try {
-			this.converter.load();			
+			this.converter.load();
 			var response = this.converter.execute();
 
 			return response;
@@ -94,6 +94,6 @@ public abstract class RequestHandler {
 			return response;
 		}
 	}
-	
+
 	public abstract void save(RequestResponseCycle session);
 }

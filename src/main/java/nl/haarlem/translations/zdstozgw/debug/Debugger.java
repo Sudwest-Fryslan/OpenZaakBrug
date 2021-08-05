@@ -37,7 +37,7 @@ public class Debugger {
 		}
 		return debugger;
 	}
-	
+
 	public Boolean isReportGeneratorEnabled() {
 		return testTool.isReportGeneratorEnabled();
 	}
@@ -103,22 +103,22 @@ public class Debugger {
 		this.inputpoint("endpoint", session.getEndpoint());
 		this.inputpoint("soapAction", session.getClientSoapAction());
 		this.infopoint("referentienummer", session.getReferentienummer());
-	}	
-	
+	}
+
 	public void infopoint(Converter converter, RequestHandler handler, String path) {
 		this.infopoint("converter", converter.getClass().getCanonicalName());
 		this.infopoint("handler", handler.getClass().getCanonicalName());
-		this.infopoint("path", path);		
+		this.infopoint("path", path);
 	}
 
 	public void endpoint(RequestResponseCycle session, ResponseEntity<?> response) {
 		this.outputpoint("statusCode", response.getStatusCodeValue());
 		this.outputpoint("kenmerk", session.getKenmerk());
 
-		var message = "Soapaction: " + session.getClientSoapAction() + " took " + session.getDurationInMilliseconds() + " milliseconds";			
-		this.infopoint("Total duration", message);			
+		var message = "Soapaction: " + session.getClientSoapAction() + " took " + session.getDurationInMilliseconds() + " milliseconds";
+		this.infopoint("Total duration", message);
 		this.endpoint(session.getReportName(), response.getBody().toString());
-		
+
 		if(response.getStatusCode() == HttpStatus.OK) {
 			this.endpoint(session.getReportName(), response.getBody().toString());
 		}

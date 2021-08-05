@@ -43,10 +43,10 @@ public class GeefZaakDetailsTranslator extends Converter {
 
 		if (zdsZakLv01.gelijk != null && zdsZakLv01.gelijk.identificatie != null) {
 			zdsResponse.antwoord.zaak = new ArrayList<ZdsZaak>();
-			
-			this.getSession().setFunctie("GeefZaakDetails-ZaakId");		
+
+			this.getSession().setFunctie("GeefZaakDetails-ZaakId");
 			this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLv01.gelijk.identificatie);
-			
+
 			zdsResponse.antwoord.zaak
 					.add(this.getZaakService().getZaakDetailsByIdentificatie(zdsZakLv01.gelijk.identificatie));
 		} else if (zdsZakLv01.gelijk != null && zdsZakLv01.gelijk.heeftAlsInitiator != null
@@ -58,8 +58,8 @@ public class GeefZaakDetailsTranslator extends Converter {
 						+ "' moet beginnen met '11' gevolgd door het bsnnummer");
 			}
 			var bsn = gerelateerdeidentificatie.substring(2);
-			
-			this.getSession().setFunctie("GeefZaakDetails-Bsn");		
+
+			this.getSession().setFunctie("GeefZaakDetails-Bsn");
 			this.getSession().setKenmerk("bsn:" + bsn);
 
 			zdsResponse.antwoord.zaak = this.getZaakService()

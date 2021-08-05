@@ -17,13 +17,13 @@ public class ZdsNietNatuurlijkPersoon extends ZdsObject {
 
 	@XmlAttribute(namespace = STUF)
 	public String entiteittype;
-	
+
 	@XmlElement(namespace = BG, name = "inn.nnpId")
 	public String innNnpId;
-	
+
 	@XmlElement(namespace = BG)
-	public ZdsAuthentiek authentiek = new ZdsAuthentiek();	
-	
+	public ZdsAuthentiek authentiek = new ZdsAuthentiek();
+
 	//@XmlElement(namespace = BG, name = "ann.identificatie")
 	//public String annIdentificatie;
 
@@ -32,7 +32,7 @@ public class ZdsNietNatuurlijkPersoon extends ZdsObject {
 
 	@XmlElement(namespace = BG, name = "inn.rechtsvorm")
 	public String innRechtsvorm;
-	
+
 
 	@XmlElement(namespace = ZKN)
 	public ZdsAdres bezoekadres;

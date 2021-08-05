@@ -20,8 +20,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
 import nl.haarlem.translations.zdstozgw.converter.ConverterFactory;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
-import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestHandlerFactory;
+import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 
 @RestController
 public class SoapController {
@@ -49,8 +49,8 @@ public class SoapController {
      * @return List of available endpoints
      */
 	@GetMapping(path = { "/" }, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<?> HandleRequest() {	
-		return new  ResponseEntity<>("Open Zaakbrug, supported translations:\n" + this.configService.getConfiguration().getTranslationsString() 
+	public ResponseEntity<?> HandleRequest() {
+		return new  ResponseEntity<>("Open Zaakbrug, supported translations:\n" + this.configService.getConfiguration().getTranslationsString()
 				+ "\n\nRequest-log can be found at path 'debug/' (not persistent)", HttpStatus.OK);
 	}
 
@@ -74,32 +74,32 @@ public class SoapController {
 
 		// used by the ladybug-tests
 		if (referentienummer == null)  referentienummer = "ozb-" + java.util.UUID.randomUUID().toString();
-		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;		
+		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;
 		log.info("Processing request for path: /" + path + "/ with soapaction: " + soapAction + " with referentienummer:" + referentienummer);
-		
-		
-		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);		
+
+
+		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);
 		RequestContextHolder.getRequestAttributes().setAttribute("referentienummer", referentienummer, RequestAttributes.SCOPE_REQUEST);
 		debug.startpoint(session);
-		
+
 		ResponseEntity<?> response;
 		try {
 			var converter = this.converterFactory.getConverter(session);
-			var handler = this.requestHandlerFactory.getRequestHandler(converter);		
+			var handler = this.requestHandlerFactory.getRequestHandler(converter);
 			handler.save(session);
-			
+
 			debug.infopoint(converter, handler, path);
 			response = handler.execute();
-			debug.endpoint(session, response);			
+			debug.endpoint(session, response);
 
 			session.setResponse(response);
-			handler.save(session);			
-		} catch(Throwable t) {			
+			handler.save(session);
+		} catch(Throwable t) {
 			debug.abortpoint(session.getReportName(), t.toString());
 			throw t;
 		} finally {
 			debug.close();
-		}		
+		}
 		return response;
 	}
 }

@@ -14,14 +14,14 @@ import com.google.gson.GsonBuilder;
 
 public class ModelMapperAdvice {
 	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
-	
+
 	private String getDebugName(Object source, Class<?> destination) {
 		return "ModelMapper " + source.getClass().getSimpleName() + "->" + destination.getSimpleName();
 	}
 	private String convertToString(Object obj) {
 		return new GsonBuilder().setPrettyPrinting().create().toJson(obj);
 	}
-	
+
 	public Object debugModelMapperMap(ProceedingJoinPoint pjp, Object source, Class<?> destination) throws Throwable {
 		if (debug.isReportGeneratorEnabled()) {
 			String debugName = getDebugName(source, destination);

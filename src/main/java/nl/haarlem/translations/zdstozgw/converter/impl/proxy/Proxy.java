@@ -34,14 +34,14 @@ public class Proxy extends Converter {
 		var url = this.getTranslation().getLegacyservice();
 		var soapaction = this.getTranslation().getSoapAction();
 		var request = this.getSession().getClientRequestBody();
-		
+
 		this.getSession().setFunctie("Proxy");
 		this.getSession().setKenmerk(url);
-		
+
 		log.info("relaying request to url: " + url + " with soapaction: " + soapaction + " request-size:"
 				+ request.length());
 
-		ZDSClient zdsClient = SpringContext.getBean(ZDSClient.class);		
+		ZDSClient zdsClient = SpringContext.getBean(ZDSClient.class);
 		return zdsClient.post(this.getSession().getReferentienummer(), url, soapaction, request);
 	}
 }

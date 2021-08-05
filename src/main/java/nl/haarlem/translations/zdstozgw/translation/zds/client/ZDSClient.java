@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
@@ -52,7 +50,7 @@ public class ZDSClient {
 			var httpclient = new org.apache.commons.httpclient.HttpClient();
 
 			//String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer", RequestAttributes.SCOPE_REQUEST);
-			
+
             ZdsRequestResponseCycle zdsRequestResponseCycle = new ZdsRequestResponseCycle(zdsUrl, zdsSoapAction, zdsRequestBody, referentienummer);
             this.repository.save(zdsRequestResponseCycle);
 
@@ -64,8 +62,8 @@ public class ZDSClient {
 			String zdsResponseBody = (String) debug.endpoint(debugName, () -> {
 					return method.getResponseBodyAsString();
 			}, (IOException)null);
-			
-			ResponseEntity<?> result = new ResponseEntity<>(zdsResponseBody, HttpStatus.valueOf(responsecode));	
+
+			ResponseEntity<?> result = new ResponseEntity<>(zdsResponseBody, HttpStatus.valueOf(responsecode));
 			zdsRequestResponseCycle.setResponse(result);
 			this.repository.save(zdsRequestResponseCycle);
 

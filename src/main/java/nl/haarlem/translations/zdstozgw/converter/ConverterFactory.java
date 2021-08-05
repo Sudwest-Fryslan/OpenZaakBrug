@@ -43,8 +43,8 @@ public class ConverterFactory {
 		String classname = translation.implementation;
 		session.setConverterImplementation(classname);
 		try {
-			Class<?> c = Class.forName(classname);				
-			java.lang.reflect.Constructor<?> ctor = c.getConstructor(RequestResponseCycle.class, Translation.class, ZaakService.class);			
+			Class<?> c = Class.forName(classname);
+			java.lang.reflect.Constructor<?> ctor = c.getConstructor(RequestResponseCycle.class, Translation.class, ZaakService.class);
 			Object object = ctor.newInstance(new Object[] { session, translation, this.zaakService });
 
 			var converter = (Converter) object;

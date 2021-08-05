@@ -26,5 +26,5 @@ public class RequestResponseCycleService {
 
 	public ZdsRequestResponseCycle add(ZdsRequestResponseCycle interimRequestResponseCycle) {
 		return this.zdsRequestResponseCycleRepository.save(interimRequestResponseCycle);
-	}	
+	}
 }

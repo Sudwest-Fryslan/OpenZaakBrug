@@ -29,10 +29,10 @@ public class CreeerZaakTranslator extends Converter {
 		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
 		ZdsZakLk01 zdsZakLk01 = (ZdsZakLk01) this.zdsDocument;
 		ZdsZaak zdsZaak = zdsZakLk01.objects.get(0);
-		
-		this.getSession().setFunctie("CreeerZaak");		
+
+		this.getSession().setFunctie("CreeerZaak");
 		this.getSession().setKenmerk("zaakidentificatie:" + zdsZaak.identificatie);
-		
+
 		var zgwZaak = this.getZaakService().creeerZaak(rsin, zdsZaak);
 		var bv03 = new ZdsBv03(zdsZakLk01.stuurgegevens, this.getSession().getReferentienummer());
 		var response = XmlUtils.getSOAPMessageFromObject(bv03);

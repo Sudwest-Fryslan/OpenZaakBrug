@@ -16,7 +16,7 @@ public class ZdsVestiging extends ZdsObject {
 
 	@XmlAttribute(namespace = STUF)
 	public String entiteittype;
-	
+
 	@XmlElement(namespace = BG)
 	public String vestigingsNummer;
 

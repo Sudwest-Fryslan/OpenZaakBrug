@@ -9,8 +9,8 @@ import lombok.Data;
 public class ZgwRolOmschrijving {
 	@SerializedName("heeftBetrekkingOp")
 	@Expose
-	String heeftBetrekkingOp = null;	
-	
+	String heeftBetrekkingOp = null;
+
 	@SerializedName("heeftAlsBelanghebbende")
 	@Expose
 	String heeftAlsBelanghebbende = null;

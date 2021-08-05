@@ -11,7 +11,7 @@ public class ZgwResultaatType {
 	@SerializedName("url")
 	@Expose
 	public String url;
-	
+
 	@SerializedName("zaaktype")
 	@Expose
 	public String zaaktype;
@@ -31,11 +31,11 @@ public class ZgwResultaatType {
 	@SerializedName("selectielijstklasse")
 	@Expose
 	public String selectielijstklasse;
-	
+
 	@SerializedName("toelichting")
 	@Expose
 	public String toelichting;
-	
+
 	@SerializedName("archiefnominatie")
 	@Expose
 	public String archiefnominatie;

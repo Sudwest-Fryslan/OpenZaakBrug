@@ -24,6 +24,7 @@ public class Rerunner implements nl.nn.testtool.Rerunner {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+	@Override
 	@Transactional
 	public String rerun(String correlationId, Report originalReport, SecurityContext securityContext,
 			ReportRunner reportRunner) {

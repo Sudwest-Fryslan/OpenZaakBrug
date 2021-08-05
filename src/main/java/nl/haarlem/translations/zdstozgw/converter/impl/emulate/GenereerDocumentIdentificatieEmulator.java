@@ -40,13 +40,13 @@ public class GenereerDocumentIdentificatieEmulator extends Converter {
 		var did = prefixparam.getParameterValue() + identificatie;
 		this.getSession().setFunctie("GenereerDocumentIdentificatie");
 		this.getSession().setKenmerk("documentidentificatie:" + did);
-		
+
 		var di02 = (ZdsGenereerDocumentIdentificatieDi02) this.zdsDocument;
 		var du02 = new ZdsGenereerDocumentIdentificatieDu02(di02.stuurgegevens, this.getSession().getReferentienummer());
 		du02.document = new ZdsZaakDocument();
 		du02.document.functie = "entiteit";
 		du02.document.identificatie = did;
-				
+
 		var response = XmlUtils.getSOAPMessageFromObject(du02);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
