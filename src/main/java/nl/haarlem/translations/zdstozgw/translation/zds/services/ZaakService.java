@@ -323,10 +323,8 @@ public class ZaakService {
 		ZgwRol zgwRol = new ZgwRol();
 		zgwRol.roltoelichting = typeRolOmschrijving + ": ";
 		if (zdsRol.gerelateerde.medewerker != null) {
-			zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.medewerker,
-					ZgwBetrokkeneIdentificatie.class);
-			// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/118
-			zgwRol.roltoelichting += zdsRol.gerelateerde.medewerker.achternaam;
+			zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.medewerker, ZgwBetrokkeneIdentificatie.class);
+			zgwRol.roltoelichting += zdsRol.gerelateerde.medewerker.achternaam != null ? zdsRol.gerelateerde.medewerker.achternaam : zdsRol.gerelateerde.medewerker.identificatie; 
 			zgwRol.betrokkeneType = BetrokkeneType.MEDEWERKER.getDescription();
 		}
 		if (zdsRol.gerelateerde.natuurlijkPersoon != null) {
