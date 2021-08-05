@@ -7,6 +7,12 @@ Hiermee kan de gemeente de bestaande zaaksgewijswerken applicaties blijven gebru
 
 Door te beginnen met een zgw-zaaksysteem kunnen alle nieuwe domein-specifieke-applicaties via deze nieuwe standaard aansluiten en krijgen de leveranciers van de bestaande applicaties de tijd om de ZGW koppeling in te bouwen.
 
+## Status
+### Súdwest-Fryslân live
+De gemeente Súdwest-Fryslân is inmiddels live met Open Zaakbrug in combinatie met OpenZaak, de oude dossiers zijn vanuit, met Open Zaakbrug, vanuit het oude systeem gemigreerd naar Open Zaak. Na 2021-Q3 moeten alle systemen over zijn en de gegevens gemigreerd.
+### Haarlem testen
+De gemeente Haarlem is bezig om hetomgevingswet pakket te testen met de Open Zaakbrug.
+
 ## Over OpenZaakBrug
 De API-standaarden voor zaakgericht werken stellen gemeenten in staat om de informatievoorziening rondom zaakgericht werken in te richten volgens de informatiekundige visie Common Ground. Hiermee zetten ze een eerste stap in de richting van een modernisering van het ICT-landschap. Dit helpt bij het (ont)koppelen van processystemen en de opslagcomponenten waar documenten en overige informatie in zijn opgeslagen.
 
