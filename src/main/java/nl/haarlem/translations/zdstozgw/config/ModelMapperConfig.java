@@ -2,6 +2,7 @@ package nl.haarlem.translations.zdstozgw.config;
 
 import nl.haarlem.translations.zdstozgw.translation.BetrokkeneType;
 
+import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.TimeZone;
 
 import org.apache.commons.lang.StringUtils;
@@ -60,9 +62,49 @@ public class ModelMapperConfig {
 	public String timeoffset;
 	public static ModelMapperConfig singleton;
 	
+	public class ApplicationInformation {
+
+		public String name;
+		public String version;
+		
+	}
+	
+	public ApplicationInformation getApplicationInformation() {
+	    try {
+	        InputStream is = this.getClass().getResourceAsStream("/META-INF/maven/nl.haarlem.translations/zds-to-zgw/pom.properties");
+	        Properties p = new Properties();
+	        p.load(is);
+            var ai = new ApplicationInformation();
+            ai.name = p.getProperty("m2e.projectName");
+            ai.version = p.getProperty("version");
+	        is.close();	        
+	        return ai;	        
+	    } catch (Exception e) { }
+
+        Package aPackage = this.getClass().getPackage();
+        if (aPackage != null) {
+        	var ai = new ApplicationInformation();
+            ai.name = aPackage.getImplementationTitle();
+            if (ai.name == null) {
+            	ai.name = aPackage.getSpecificationTitle();
+            }
+        	ai.version = aPackage.getImplementationVersion();
+            if (ai.version == null) {
+            	ai.version = aPackage.getSpecificationVersion();
+            }
+            if(ai.name != null && ai.version != null) {
+            	return ai;
+            }
+        }
+	    throw new RuntimeException("Version information could not be retrieved!");
+	}	
+	
 	@Bean
 	public ModelMapper modelMapper() {
-		log.info("nl.haarlem.translations.zdstozgw.timeoffset.minutes = " + this.timeoffset);
+		var ai = this.getApplicationInformation();
+		log.info("Application name:\t\t" + ai.name);
+		log.info("Application version:\t" + ai.version);
+		log.info("nl.haarlem.translations.zdstozgw.timeoffset.minutes: " + this.timeoffset);
 		ModelMapper modelMapper = new ModelMapper();
 		ModelMapperConfig.singleton = this;
 		
