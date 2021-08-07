@@ -135,6 +135,18 @@ public class ZaakService {
 
 		setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);
 
+		// subzaak ( eigenlijk heeftBetrekkingOpAndere )
+		if(zdsZaak.heeftBetrekkingOpAndere != null 
+				&& zdsZaak.heeftBetrekkingOpAndere.gerelateerde != null 
+				&& "ZAK".equals(zdsZaak.heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
+
+			ZgwZaak zgwChildZaak= this.zgwClient.getZaakByIdentificatie(zdsZaak.heeftBetrekkingOpAndere.gerelateerde.identificatie);
+			if (zgwChildZaak == null) {
+					throw new RuntimeException("Zaak with identification " + zdsZaak.heeftBetrekkingOpAndere.gerelateerde.identificatie + " not found in ZGW");
+				}
+				zgwClient.addChildZaakToZaak(zgwZaak, zgwChildZaak);
+		}		
+		
 		return zgwZaak;
 	}
 

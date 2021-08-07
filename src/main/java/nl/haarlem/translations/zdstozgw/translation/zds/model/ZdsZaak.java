@@ -120,4 +120,7 @@ public class ZdsZaak extends ZdsZaakIdentificatie {
 
 	@XmlElement(namespace = ZKN)
 	public ZdsHeeftRelevant heeftRelevant;
+
+	@XmlElement(namespace = ZKN)	
+	public ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere;
 }

@@ -770,4 +770,8 @@ public class ZGWClient {
 		debug.infopoint("Warning", message);
 	}
 
+	public void addChildZaakToZaak(ZgwZaak zgwZaak, ZgwZaak zgwChildZaak) {
+		throw new ConverterException("NOT IMPLEMENTED: adding child zaak:" + zgwChildZaak.identificatie + " to zaak:" + zgwZaak.identificatie);
+	}
+
 }
