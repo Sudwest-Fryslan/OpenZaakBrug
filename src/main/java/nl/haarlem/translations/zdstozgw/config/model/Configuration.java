@@ -47,7 +47,7 @@ public class Configuration {
 	public String getTranslationsString() {
 		String combinations = "";
 		for (Translation t : this.getTranslations()) {
-			combinations += "\n\tpath: '" + t.getPath() + "' soapaction: '" + t.getSoapAction() + "'";
+			combinations += "\n\tpath: './" + t.getPath() + "' soapaction: '" + t.getSoapAction() + "'";
 		}
 		return combinations;
 	}

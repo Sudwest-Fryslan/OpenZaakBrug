@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import nl.haarlem.translations.zdstozgw.config.ApplicationInformation;
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
 import nl.haarlem.translations.zdstozgw.converter.ConverterFactory;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
@@ -65,8 +66,15 @@ public class SoapController {
      */
 	@GetMapping(path = { "/" }, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<?> HandleRequest() {
-		return new  ResponseEntity<>("Open Zaakbrug, supported translations:\n" + this.configService.getConfiguration().getTranslationsString()
-				+ "\n\nRequest-log can be found at path 'debug/' (not persistent)", HttpStatus.OK);
+		var response = "=== Open Zaakbrug ===\n\n";
+		var ai = ApplicationInformation.getApplicationInformation();
+		response += "Application name:\t\t" + ai.name + "\n";
+		response += "Application version:\t\t" + ai.version + "\n\n";
+
+		response += "Supported translations:" + this.configService.getConfiguration().getTranslationsString();		
+		response += "\n\nDebugging:\n\t(not-persistent) request-log can be found at path './debug/'\n\tpersistent (error-)log in de database";
+		
+		return new  ResponseEntity<>(response, HttpStatus.OK);
 	}
 
     /**
