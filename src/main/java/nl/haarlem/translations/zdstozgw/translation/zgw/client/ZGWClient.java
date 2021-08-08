@@ -186,52 +186,6 @@ public class ZGWClient {
 		}
 	}
 
-	private String patch(String url, Map<String, String> parameters) {
-		if (parameters != null) {
-			url = getUrlWithParameters(url, parameters);
-		}
-		String debugName = "ZGWClient PATCH";
-		debug.startpoint(debugName);
-		url = debug.inputpoint("url", url);
-		if (parameters != null) {
-			for (String key : parameters.keySet()) {
-				parameters.put(key, debug.inputpoint("Parameter " + key, parameters.get(key)));
-			}
-		}
-		log.debug("PATCH: " + url);
-		HttpEntity entity = new HttpEntity(this.restTemplateService.getHeaders());
-		try {
-			long startTime = System.currentTimeMillis();
-			long[] exchangeDuration = new long[2];
-			String finalUrl = url;
-			String zgwResponse = (String) debug.endpoint(debugName, () -> {
-				exchangeDuration[0] = System.currentTimeMillis();
-				ResponseEntity<String> response = this.restTemplateService.getRestTemplate().exchange(finalUrl,
-						HttpMethod.PATCH, entity, String.class);
-				exchangeDuration[1] = System.currentTimeMillis();
-				return response.getBody();
-			});
-			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
-			long endTime = System.currentTimeMillis();
-			var duration = endTime - startTime;
-			var message = "PATCH to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
-			log.debug(message);
-			debug.infopoint("Duration", message);
-			log.debug("PATCH response: " + zgwResponse);
-			return zgwResponse;
-		} catch (HttpStatusCodeException hsce) {
-			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
-					"\"\n}");
-			var details = "--------------PATCH:\n" + url + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("PATCH naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("PATCH naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
-					hsce);
-		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
-		}
-	}
-	
 	private String delete(String url) {
 		String debugName = "ZGWClient DELETE";
 		debug.startpoint(debugName);
@@ -309,6 +263,46 @@ public class ZGWClient {
 		}
 	}
 
+
+	private String patch(String url, String json) {
+		String debugName = "ZGWClient PATCH";
+		json = debug.startpoint(debugName, json);
+		url = debug.inputpoint("url", url);
+		log.debug("PATCH: " + url + ", json: " + json);
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.restTemplateService.getHeaders());
+		try {
+			long startTime = System.currentTimeMillis();
+			long[] exchangeDuration = new long[2];
+			String finalUrl = url;
+			String zgwResponse = (String) debug.endpoint(debugName, () -> {
+				exchangeDuration[0] = System.currentTimeMillis();
+				ResponseEntity<String> response = this.restTemplateService.getRestTemplate().exchange(finalUrl,
+						HttpMethod.PATCH, entity, String.class);
+				exchangeDuration[1] = System.currentTimeMillis();
+				return response.getBody();
+			});
+			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
+			long endTime = System.currentTimeMillis();
+			var duration = endTime - startTime;
+			var message = "PATCH to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			log.debug(message);
+			debug.infopoint("Duration", message);
+			log.debug("PATCH response: " + zgwResponse);
+			return zgwResponse;
+		} catch (HttpStatusCodeException hsce) {
+			json = json.replace("{", "{\n").replace("\",", "\",\n").replace("\"}", "\"\n}");
+			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
+					"\"\n}");
+			var details = "--------------PATCH:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			log.warn("PATCH naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("PATCH naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+					hsce);
+		} catch (org.springframework.web.client.ResourceAccessException rae) {
+			log.warn("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
+			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
+		}
+	}
+		
 	private String getUrlWithParameters(String url, Map<String, String> parameters) {
 		for (String key : parameters.keySet()) {
 			url += !url.contains("?") ? "?" + key + "=" + parameters.get(key) : "&" + key + "=" + parameters.get(key);
@@ -409,7 +403,7 @@ public class ZGWClient {
 	public void patchZaak(String zaakUuid, ZgwZaak zaak) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zaak);
-		this.put(this.baseUrl + this.endpointZaak + "/" + zaakUuid, json);
+		this.patch(this.baseUrl + this.endpointZaak + "/" + zaakUuid, json);
 	}
 	public ZgwRol addZgwRol(ZgwRol zgwRol) {
 		Gson gson = new Gson();
