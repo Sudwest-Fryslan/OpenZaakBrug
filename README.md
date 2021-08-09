@@ -1,16 +1,5 @@
 # [Open Zaakbrug (zds-to-zgw)](https://sudwest-fryslan.github.io/OpenZaakBrug/) #
 
-<!-- PROJECT SHIELDS -->
-![Project Maintenance][maintenance-shield]
-[![License][license-shield]](LICENSE)
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-
-[![GitHub Activity][commits-shield]][commits]
-[![GitHub Last Commit][last-commit-shield]][commits]
-[![Contributors][contributors-shield]][contributors-url]
-
 De nieuwe standaard voor het zaakgewijs werken is de [zgw standaard](https://www.vngrealisatie.nl/producten/api-standaarden-zaakgericht-werken), dit is de opvolger van de Zaak- en Documentservices (ZDS) standaard.
 Om de overstap te maken naar deze nieuwe standaard vinden wij het belangrijk om niet meer te investeren in de oude-zds-koppelingen, maar  zo snel mogelijk de nieuwe zgw-standaard te gebruiken. Om deze reden heeft het team Open Zaakbrug een oplossing om de bestaande applicaties, die de oude zds-standaard praten, toch met een zgw-zaaksysteem te laten praten.
 
