@@ -51,7 +51,7 @@
 	<bean name="testStorage" class="nl.nn.testtool.storage.xml.XmlStorage" autowire="byName" init-method="init">
 		<property name="name" value="Test"/>
 		<property name="metadataFile" value="data/ladybug-metadata.xml"/>
-		<property name="reportsFolder" value="src/test/resources/ladybug"/>
+		<property name="reportsFolder" value="data/tests"/>
 	</bean>
 
 	<bean name="whiteBoxViewMetadataNames" class="java.util.ArrayList">
