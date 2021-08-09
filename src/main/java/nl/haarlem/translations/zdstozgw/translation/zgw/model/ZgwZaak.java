@@ -38,7 +38,7 @@ public class ZgwZaak extends ZgwZaakPut {
 	public String betalingsindicatieWeergave;
 	@SerializedName("deelzaken")
 	@Expose
-	public List<Object> deelzaken = null;
+	public List<String> deelzaken = null;
 	@SerializedName("eigenschappen")
 	@Expose
 	public List<Object> eigenschappen = null;

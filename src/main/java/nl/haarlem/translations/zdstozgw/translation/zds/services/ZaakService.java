@@ -38,6 +38,7 @@ import nl.haarlem.translations.zdstozgw.debug.Debugger;
 import nl.haarlem.translations.zdstozgw.translation.BetrokkeneType;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGerelateerde;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeft;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeftBetrekkingOpAndere;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeftRelevant;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsInhoud;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsIsRelevantVoor;
@@ -134,18 +135,18 @@ public class ZaakService {
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsOverigBetrokkene, zgwRolOmschrijving.getHeeftAlsOverigBetrokkene());
 
 		setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);
-
 		// subzaak ( eigenlijk heeftBetrekkingOpAndere )
-		if(zdsZaak.heeftBetrekkingOpAndere != null 
-				&& zdsZaak.heeftBetrekkingOpAndere.gerelateerde != null 
-				&& "ZAK".equals(zdsZaak.heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
-
-			ZgwZaak zgwChildZaak= this.zgwClient.getZaakByIdentificatie(zdsZaak.heeftBetrekkingOpAndere.gerelateerde.identificatie);
-			if (zgwChildZaak == null) {
-					throw new RuntimeException("Zaak with identification " + zdsZaak.heeftBetrekkingOpAndere.gerelateerde.identificatie + " not found in ZGW");
-				}
-				zgwClient.addChildZaakToZaak(zgwZaak, zgwChildZaak);
-		}		
+		if(zdsZaak.heeftBetrekkingOpAndere != null) {
+			for(ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere: zdsZaak.heeftBetrekkingOpAndere) {
+				if(heeftBetrekkingOpAndere.gerelateerde != null  && "ZAK".equals(heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
+					ZgwZaak zgwChildZaak= this.zgwClient.getZaakByIdentificatie(heeftBetrekkingOpAndere.gerelateerde.identificatie);
+					if (zgwChildZaak == null) {
+							throw new RuntimeException("Zaak with identification " + heeftBetrekkingOpAndere.gerelateerde.identificatie + " not found in ZGW");
+					}
+					zgwClient.addChildZaakToZaak(zgwZaak, zgwChildZaak);
+				}		
+			}
+		}
 		
 		return zgwZaak;
 	}
@@ -781,6 +782,36 @@ public class ZaakService {
 				? this.modelMapper.map(zgwZaak.getVerlenging(), ZdsVerlenging.class)
 				: null;
 
+		// heeft deze zaak ook subzaken
+		var deelzaken = zgwZaak.getDeelzaken();
+		for(String deelzaak: deelzaken) {
+			/*
+            <ZKN:heeftBetrekkingOpAndere StUF:entiteittype="ZAKZAKBTR" StUF:verwerkingssoort="T">
+               <ZKN:gerelateerde StUF:entiteittype="ZAK" StUF:verwerkingssoort="T">
+                  <ZKN:identificatie>${Properties#ChildZaakIdentificatie}</ZKN:identificatie>
+               </ZKN:gerelateerde>
+            </ZKN:heeftBetrekkingOpAndere>
+			 */
+			if(zaak.heeftBetrekkingOpAndere == null) {
+				zaak.heeftBetrekkingOpAndere = new ArrayList<ZdsHeeftBetrekkingOpAndere>();
+			}
+			
+			var childzaak = zgwClient.getZaakByUrl(deelzaak);			
+			var heeftBetrekkingOpAndere = new ZdsHeeftBetrekkingOpAndere();
+			heeftBetrekkingOpAndere.entiteittype = "ZAKZAKBTR";
+			heeftBetrekkingOpAndere.gerelateerde = new ZdsGerelateerde();
+			heeftBetrekkingOpAndere.gerelateerde.entiteittype = "ZAK";
+			heeftBetrekkingOpAndere.gerelateerde.identificatie = childzaak.identificatie;			
+			zaak.heeftBetrekkingOpAndere.add(heeftBetrekkingOpAndere);
+		}
+		
+		// is deze zaak zelf een subzaak?
+		var hoofzaak = zgwZaak.getHoofdzaak();
+		if(hoofzaak != null) {
+			var zgwHoofdzaak = zgwClient.getZaakByUrl(hoofzaak);
+			debugWarning("zaak:" + zgwZaak.identificatie + " is child zaak from parent zaak:" + zgwHoofdzaak.getIdentificatie() + " don't know how to mention the parentzaak in zds");
+		}
+		
 		var zdsStatussen = new ArrayList<ZdsHeeft>();
 		for (ZgwStatus zgwStatus : this.zgwClient.getStatussenByZaakUrl(zgwZaak.url)) {
 			ZgwStatusType zgwStatusType = this.zgwClient.getResource(zgwStatus.statustype, ZgwStatusType.class);

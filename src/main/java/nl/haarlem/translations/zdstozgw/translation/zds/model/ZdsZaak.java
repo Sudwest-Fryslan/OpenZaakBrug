@@ -115,12 +115,13 @@ public class ZdsZaak extends ZdsZaakIdentificatie {
 	@XmlElement(namespace = ZKN)
 	public ZdsRol heeftAlsOverigBetrokkene;
 
+	@XmlElement(namespace = ZKN)	
+	public List<ZdsHeeftBetrekkingOpAndere> heeftBetrekkingOpAndere;
+
 	@XmlElement(namespace = ZKN)
 	public List<ZdsHeeft> heeft;
 
 	@XmlElement(namespace = ZKN)
 	public ZdsHeeftRelevant heeftRelevant;
 
-	@XmlElement(namespace = ZKN)	
-	public ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere;
 }
