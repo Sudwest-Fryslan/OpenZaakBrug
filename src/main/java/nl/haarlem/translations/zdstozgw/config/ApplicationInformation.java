@@ -34,6 +34,9 @@ public class ApplicationInformation {
             	return ai;
             }
         }
-	    throw new RuntimeException("Version information could not be retrieved!");
-	}	
+	    //throw new RuntimeException("Version information could not be retrieved!");
+    	var ai = new ApplicationInformation();
+    	ai.name = "undefined";
+    	ai.version = "undefined";
+    }	
 }
