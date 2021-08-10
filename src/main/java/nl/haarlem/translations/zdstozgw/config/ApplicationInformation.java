@@ -38,5 +38,6 @@ public class ApplicationInformation {
     	var ai = new ApplicationInformation();
     	ai.name = "undefined";
     	ai.version = "undefined";
+    	return ai;
     }	
 }
