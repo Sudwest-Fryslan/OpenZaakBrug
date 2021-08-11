@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.utils;
 
 import java.lang.invoke.MethodHandles;
@@ -24,7 +39,7 @@ public class ChangeDetector {
 		private ChangeType changeType;
 		private Object currentValue;
 		private Object newValue;
-		
+
 		public Change(Field field, ChangeType changeType, Object currentValue, Object newValue) {
 			this.field = field;
 			this.changeType = changeType;
@@ -35,8 +50,8 @@ public class ChangeDetector {
 
 	public enum ChangeType {
 		DELETED, CHANGED, NEW
-	}	
-	
+	}
+
 	public class Changes extends HashMap<Change, ChangeType>  {
 		public Changes() {
 			super();
@@ -54,7 +69,7 @@ public class ChangeDetector {
 							changeTypeChangeEntry -> changeTypeChangeEntry.getValue()));
 			return new Changes(result);
 		}
-		
+
 		public ChangeDetector.Changes getAllChangesByDeclaringClassAndFilter(Class classType, Class filterFieldType) {
 			Map<Change, ChangeType> result =  this.entrySet().stream()
 					.filter(changeTypeChangeEntry -> changeTypeChangeEntry.getKey().getField().getDeclaringClass()
@@ -64,7 +79,7 @@ public class ChangeDetector {
 					.collect(Collectors.toMap(changeTypeChangeEntry -> changeTypeChangeEntry.getKey(),
 							changeTypeChangeEntry -> changeTypeChangeEntry.getValue()));
 			return new Changes(result);
-		}		
+		}
 	}
 
 	public ChangeDetector() {
@@ -79,14 +94,14 @@ public class ChangeDetector {
 				ChangeType changeType = null;
 
 				log.debug("looking for changes in current: '" + currentValue + "' into: '" + field + "'");
-				
+
 				if (currentValue == null && newValue != null) {
 					changeType = ChangeType.NEW;
-				} 
+				}
 				else if (currentValue != null && newValue == null) {
 					changeType = ChangeType.DELETED;
-				} 
-				else if (currentValue != null && !currentValue.equals(newValue)) {					
+				}
+				else if (currentValue != null && !currentValue.equals(newValue)) {
 					changeType = ChangeType.CHANGED;
 				}
 

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.controller;
 
 import java.lang.invoke.MethodHandles;
@@ -17,11 +32,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import nl.haarlem.translations.zdstozgw.config.ApplicationInformation;
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
 import nl.haarlem.translations.zdstozgw.converter.ConverterFactory;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
-import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestHandlerFactory;
+import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 
 @RestController
 public class SoapController {
@@ -49,9 +65,16 @@ public class SoapController {
      * @return List of available endpoints
      */
 	@GetMapping(path = { "/" }, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<?> HandleRequest() {	
-		return new  ResponseEntity<>("Open Zaakbrug, supported translations:\n" + this.configService.getConfiguration().getTranslationsString() 
-				+ "\n\nRequest-log can be found at path 'debug/' (not persistent)", HttpStatus.OK);
+	public ResponseEntity<?> HandleRequest() {
+		var response = "=== Open Zaakbrug ===\n\n";
+		var ai = ApplicationInformation.getApplicationInformation();
+		response += "Application name:\t\t" + ai.name + "\n";
+		response += "Application version:\t\t" + ai.version + "\n\n";
+
+		response += "Supported translations:" + this.configService.getConfiguration().getTranslationsString();		
+		response += "\n\nDebugging:\n\t(not-persistent) request-log can be found at path './debug/'\n\tpersistent (error-)log in de database";
+		
+		return new  ResponseEntity<>(response, HttpStatus.OK);
 	}
 
     /**
@@ -74,32 +97,32 @@ public class SoapController {
 
 		// used by the ladybug-tests
 		if (referentienummer == null)  referentienummer = "ozb-" + java.util.UUID.randomUUID().toString();
-		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;		
+		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;
 		log.info("Processing request for path: /" + path + "/ with soapaction: " + soapAction + " with referentienummer:" + referentienummer);
-		
-		
-		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);		
+
+
+		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);
 		RequestContextHolder.getRequestAttributes().setAttribute("referentienummer", referentienummer, RequestAttributes.SCOPE_REQUEST);
 		debug.startpoint(session);
-		
+
 		ResponseEntity<?> response;
 		try {
 			var converter = this.converterFactory.getConverter(session);
-			var handler = this.requestHandlerFactory.getRequestHandler(converter);		
+			var handler = this.requestHandlerFactory.getRequestHandler(converter);
 			handler.save(session);
-			
+
 			debug.infopoint(converter, handler, path);
 			response = handler.execute();
-			debug.endpoint(session, response);			
+			debug.endpoint(session, response);
 
 			session.setResponse(response);
-			handler.save(session);			
-		} catch(Throwable t) {			
+			handler.save(session);
+		} catch(Throwable t) {
 			debug.abortpoint(session.getReportName(), t.toString());
 			throw t;
 		} finally {
 			debug.close();
-		}		
+		}
 		return response;
 	}
 }

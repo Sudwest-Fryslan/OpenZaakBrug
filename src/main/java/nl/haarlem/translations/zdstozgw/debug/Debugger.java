@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.debug;
 
 import java.util.HashMap;
@@ -37,7 +52,7 @@ public class Debugger {
 		}
 		return debugger;
 	}
-	
+
 	public Boolean isReportGeneratorEnabled() {
 		return testTool.isReportGeneratorEnabled();
 	}
@@ -103,22 +118,22 @@ public class Debugger {
 		this.inputpoint("endpoint", session.getEndpoint());
 		this.inputpoint("soapAction", session.getClientSoapAction());
 		this.infopoint("referentienummer", session.getReferentienummer());
-	}	
-	
+	}
+
 	public void infopoint(Converter converter, RequestHandler handler, String path) {
 		this.infopoint("converter", converter.getClass().getCanonicalName());
 		this.infopoint("handler", handler.getClass().getCanonicalName());
-		this.infopoint("path", path);		
+		this.infopoint("path", path);
 	}
 
 	public void endpoint(RequestResponseCycle session, ResponseEntity<?> response) {
 		this.outputpoint("statusCode", response.getStatusCodeValue());
 		this.outputpoint("kenmerk", session.getKenmerk());
 
-		var message = "Soapaction: " + session.getClientSoapAction() + " took " + session.getDurationInMilliseconds() + " milliseconds";			
-		this.infopoint("Total duration", message);			
+		var message = "Soapaction: " + session.getClientSoapAction() + " took " + session.getDurationInMilliseconds() + " milliseconds";
+		this.infopoint("Total duration", message);
 		this.endpoint(session.getReportName(), response.getBody().toString());
-		
+
 		if(response.getStatusCode() == HttpStatus.OK) {
 			this.endpoint(session.getReportName(), response.getBody().toString());
 		}
