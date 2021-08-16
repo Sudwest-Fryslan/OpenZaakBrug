@@ -7,6 +7,10 @@ Hiermee kan de gemeente de bestaande zaaksgewijswerken applicaties blijven gebru
 
 Door te beginnen met een zgw-zaaksysteem kunnen alle nieuwe domein-specifieke-applicaties via deze nieuwe standaard aansluiten en krijgen de leveranciers van de bestaande applicaties de tijd om de ZGW koppeling in te bouwen.
 
+## Nieuws
+- [Súdwest-Fryslân live met OpenZaak en Open Zaakbrug](https://commonground.nl/blog/view/6a946c44-851a-4a2b-bfaf-8368d886aff7/sudwest-fryslan-live-met-openzaak-en-open-zaakbrug)
+- [Borging van Open ZaakBrug](https://blog.wearefrank.nl/borging-openzaakbrug-integratie-vng)
+
 ## Status
 ### Súdwest-Fryslân live
 De gemeente Súdwest-Fryslân is inmiddels live met Open Zaakbrug in combinatie met OpenZaak, de oude dossiers zijn vanuit, met Open Zaakbrug, vanuit het oude systeem gemigreerd naar Open Zaak. Na 2021-Q3 moeten alle systemen over zijn en de gegevens gemigreerd.
