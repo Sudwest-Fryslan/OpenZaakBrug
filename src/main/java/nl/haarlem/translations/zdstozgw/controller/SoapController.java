@@ -1,9 +1,9 @@
 /*
  * Copyright 2020-2021 The Open Zaakbrug Contributors
  *
- * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
  * European Commission - subsequent versions of the EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
@@ -49,14 +49,16 @@ public class SoapController {
 	private final ConverterFactory converterFactory;
 	private final ConfigService configService;
 	private final RequestHandlerFactory requestHandlerFactory;
+    private final ApplicationInformation applicationInformation;
 
 	@Autowired
 	public SoapController(ConverterFactory converterFactory, ConfigService configService,
-			RequestHandlerFactory requestHandlerFactory) {
+                          RequestHandlerFactory requestHandlerFactory, ApplicationInformation applicationInformation) {
 		this.converterFactory = converterFactory;
 		this.configService = configService;
 		this.requestHandlerFactory = requestHandlerFactory;
-	}
+        this.applicationInformation = applicationInformation;
+    }
 
 
     /**
@@ -67,13 +69,12 @@ public class SoapController {
 	@GetMapping(path = { "/" }, produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<?> HandleRequest() {
 		var response = "=== Open Zaakbrug ===\n\n";
-		var ai = ApplicationInformation.getApplicationInformation();
-		response += "Application name:\t\t" + ai.name + "\n";
-		response += "Application version:\t\t" + ai.version + "\n\n";
+		response += "Application name:\t\t" + applicationInformation.getName() + "\n";
+		response += "Application version:\t\t" + applicationInformation.getVersion() + "\n\n";
 
-		response += "Supported translations:" + this.configService.getConfiguration().getTranslationsString();		
+		response += "Supported translations:" + this.configService.getConfiguration().getTranslationsString();
 		response += "\n\nDebugging:\n\t(not-persistent) request-log can be found at path './debug/'\n\tpersistent (error-)log in de database";
-		
+
 		return new  ResponseEntity<>(response, HttpStatus.OK);
 	}
 

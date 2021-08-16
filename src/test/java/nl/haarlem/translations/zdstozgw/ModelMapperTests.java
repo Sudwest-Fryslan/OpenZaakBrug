@@ -1,9 +1,9 @@
 /*
  * Copyright 2020-2021 The Open Zaakbrug Contributors
  *
- * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
  * European Commission - subsequent versions of the EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
@@ -16,6 +16,8 @@
 package nl.haarlem.translations.zdstozgw;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import nl.haarlem.translations.zdstozgw.config.ApplicationInformation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +34,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInfo
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ModelMapperConfig.class)
+@SpringBootTest(classes = {ModelMapperConfig.class, ApplicationInformation.class})
 public class ModelMapperTests {
 
     @Autowired
@@ -41,8 +43,8 @@ public class ModelMapperTests {
     @Test
     public void zgwEnkelvoudigInformatieObjectToZdsZaakDocument_shouldMapCorrectly(){
         //assign
-    	System.setProperty("user.timezone", "CET");        
-    	ModelMapperConfig.singleton.timeoffset = "0";    	        
+    	System.setProperty("user.timezone", "CET");
+    	ModelMapperConfig.singleton.timeoffset = "0";
         ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = new ZgwEnkelvoudigInformatieObject()
                 .setBestandsnaam("bestandsnaam")
                 .setInhoud("inhoud")
@@ -63,7 +65,7 @@ public class ModelMapperTests {
                 .setVerzenddatum("2020-05-09");
         // String expectedCreatieDatum = "20200230";
         // TODO: use gooed expectd values
-        String expectedCreatieDatum = "20200229";        
+        String expectedCreatieDatum = "20200229";
 
         //act
         ZdsZaakDocument zdsZaakDocument = modelMapper.map(zgwEnkelvoudigInformatieObject, ZdsZaakDocument.class);
@@ -79,7 +81,7 @@ public class ModelMapperTests {
     	ModelMapperConfig.singleton.timeoffset = "0";
         ZdsHeeft zdsHeeft = new ZdsHeeft().setDatumStatusGezet("20200904103404929");
         String expectedDatum = "2020-09-04T08:34:04.920000Z";
-        
+
         //act
         ZgwStatus zgwStatus =  modelMapper.map(zdsHeeft, ZgwStatus.class);
 
