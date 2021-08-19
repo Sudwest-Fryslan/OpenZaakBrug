@@ -1,0 +1,28 @@
+name: Maven CI/CD
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish_image:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: publish image
+        run: |
+          chmod +x docker_push.sh
+          export BRANCH_NAME=${GITHUB_REF##*/}
+          export TAG_NAME=${{ github.event.release.tag_name}}
+          export EVENT_TYPE=${{ github.event_name}}
+          ./docker_push.sh

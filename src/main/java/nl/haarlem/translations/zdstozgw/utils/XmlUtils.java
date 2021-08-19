@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.utils;
 
 import java.io.ByteArrayInputStream;
@@ -252,17 +267,17 @@ public class XmlUtils {
 			var message = MessageFactory.newInstance().createMessage(null, inputstream);
 			var document = message.getSOAPBody().extractContentAsDocument();
 			var unmarshaller = JAXBContext.newInstance(c).createUnmarshaller();
-			// WORKAROUND [A] : otherwise here exception: 
+			// WORKAROUND [A] : otherwise here exception:
 			//	java.lang.RuntimeException: com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML declaration parsing failed
 			//	java.io.IOException: Unexpected characters before XML declaration
 			object = unmarshaller.unmarshal(document);
 		}
 		catch (SOAPException se) {
 			throw new ConverterException("create soapmessage from request:" + se.toString(), body, se);
-		}		
+		}
 		catch (JAXBException jaxbe) {
 			throw new ConverterException("unmarshalllen request to class:" + c.getName() + " : " + jaxbe.toString(), jaxbe.getMessage(), jaxbe);
-		} 		
+		}
 		catch (Exception e) {
 			throw new ConverterException("fout bij parsen xml:" + e.toString(), e);
 		}

@@ -7,6 +7,15 @@ Hiermee kan de gemeente de bestaande zaaksgewijswerken applicaties blijven gebru
 
 Door te beginnen met een zgw-zaaksysteem kunnen alle nieuwe domein-specifieke-applicaties via deze nieuwe standaard aansluiten en krijgen de leveranciers van de bestaande applicaties de tijd om de ZGW koppeling in te bouwen.
 
+## Status
+### Nieuws
+- [Súdwest-Fryslân live met OpenZaak en Open Zaakbrug](https://commonground.nl/blog/view/6a946c44-851a-4a2b-bfaf-8368d886aff7/sudwest-fryslan-live-met-openzaak-en-open-zaakbrug)
+- [Borging van Open ZaakBrug](https://blog.wearefrank.nl/borging-openzaakbrug-integratie-vng)
+### Súdwest-Fryslân live
+De gemeente Súdwest-Fryslân is inmiddels live met Open Zaakbrug in combinatie met OpenZaak, de oude dossiers zijn vanuit, met Open Zaakbrug, vanuit het oude systeem gemigreerd naar Open Zaak. Na 2021-Q3 moeten alle systemen over zijn en de gegevens gemigreerd.
+### Haarlem testen
+De gemeente Haarlem is bezig om hetomgevingswet pakket te testen met de Open Zaakbrug.
+
 ## Over OpenZaakBrug
 De API-standaarden voor zaakgericht werken stellen gemeenten in staat om de informatievoorziening rondom zaakgericht werken in te richten volgens de informatiekundige visie Common Ground. Hiermee zetten ze een eerste stap in de richting van een modernisering van het ICT-landschap. Dit helpt bij het (ont)koppelen van processystemen en de opslagcomponenten waar documenten en overige informatie in zijn opgeslagen.
 
@@ -31,6 +40,7 @@ Hierbij hebben we de volgende uitgangspunten:
 - Team Open Zaakbrug op [commonground.nl](https://commonground.nl/groups/view/c2df2f42-b3ea-405e-953f-fe808ab56ba0/team-openzaakbrug)
 - 2021-02-05 [Fieldlab DOiT video](https://vimeo.com/512518040/2284537066)
 - 2021-02-05 [Powerpoint Fieldlab DOiT](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210205-FieldLab2021-Eduard-Open%20Zaakbrug,%20commonground%20in%20de%20praktijk.pptx?raw=true)
+- 2021-07-09 [Powerpoint DemoDam](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210709-DemoDam-OpenZaak%20en%20Open%20Zaakbrug-Commonground%20in%20de%20praktijk.pptx?raw=true)
 
 ## Continue implementatie / continue  levering
 
@@ -82,9 +92,10 @@ Op dit moment wordt er druk gewerkt om de Open Zaakbrug live te krijgen. Hiervoo
 | Applicatie                                                   | Proxy functionaliteit     | Translate functionaliteit | Replicatie functionaliteit | Status        |
 | ------------------------------------------------------------ | ------------------------- | ------------------------- | -------------------------- | ------------- |
 | Suites voor Sociaaldomein                                    | Getest door fb en akkoord | Getest door fb en akkoord | Getest door fb en akkoord  | in acceptatie |
-| Gisvg (wabo/apv-vergunningen)                                | Getest door fb en akkoord | Getest door fb en punten  | Getest door fb en punten   | in acceptatie |
-| Midofficevuller met BZ (verhuizing/identieitskaart/rijbewijs) | Getest door fb en akkoord | Getest door fb en akkoord | nvt.                       | live          |
-| [Sleeptool](https://github.com/Sudwest-Fryslan/DeSleepTool) (toevoegen documenten aan bestaande zaak) | Getest door fb en akkoord | Getest door fb en akkoord | nvt,                       | -             |
+| Gisvg (wabo/apv-vergunningen)                                | Getest door fb en akkoord |  **live**                 | **live**                   | **live**      |
+| Midofficevuller met BZ (verhuizing/identieitskaart/rijbewijs) | Getest door fb en akkoord | **live**                 | nvt.                       | **live**      |
+| [Sleeptool](https://github.com/Sudwest-Fryslan/DeSleepTool) (toevoegen documenten aan bestaande zaak) | Getest door fb en akkoord | **live** | nvt. | -           |
+| Verint Kana                                                  | Getest door fb en akkoord | Getest door fb en akkoord | Getest door fb en akkoord  | in acceptatie |
 | Gidso regiesysteem                                           | -                         | -                         | -                          | -             |
 | Powerbrowser                                                 | -                         | -                         | -                          | -             |
 

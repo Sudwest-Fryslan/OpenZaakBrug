@@ -10,27 +10,7 @@
     </parent>
     <groupId>nl.haarlem.translations</groupId>
     <artifactId>zds-to-zgw</artifactId>
-    <!--  
-        Releases:
-            For all changes we use the changes we use pull-requests and merge them into the masterbranche.
-            Making the new release is performed by doing commands directly on the master branche
-            
-            1 - Change the version in the POM from x-SNAPSHOT to a new version
-                -> Edit this file below, remove the "-SNAPSHOT"
-                
-            2 - Transform the SCM (git) information in the POM to include the final destination of the tag
-            
-            3 - Commit the modified POM
-            
-            4 - Tag the code in the SCM with a version name
-                ->    Add the tag: git push origin tag release-1.0.0
-            
-            5 - Bump the version in the POM to a new value y-SNAPSHOT
-                -> Edit this file below, change the number to the new number, add the "-SNAPSHOT"
-            
-            6 - Commit the modified POM
-     -->
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <name>zds-to-zgw</name>
     <description>StUF ZDS 1.2 to ZGW API 1.0 translator</description>
 
@@ -39,6 +19,11 @@
     </properties>
 
     <dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>    
+    
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

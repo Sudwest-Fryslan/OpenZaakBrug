@@ -1,37 +1,40 @@
 name: Maven CI/CD
 
 on:
- push:
-    branches: [ master ]
- pull_request:
-    branches: [ master ]
+  push:
+    branches:
+      - master
+      - release-*
+  pull_request:
+    branches:
+      - master
+      - release-*
 
 jobs:
   build_and_test:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
 
-    - name: Cache the Maven packages to speed up build
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2      
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
-    - name: Setup timezone    
-      uses: zcong1993/setup-timezone@master
-      with:
-        timezone: Europe/Amsterdam
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Europe/Amsterdam
 
-    - name: Build project with Maven
-      run: mvn -B package --file pom.xml
+      - name: Build project with Maven
+        run: mvn -B package --file pom.xml
 
   start_docker_container_and_publish_image:
     needs: build_and_test
@@ -43,35 +46,32 @@ jobs:
       WAIT_INTERVAL: 3
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Login to Docker Hub
+        if: ${{ github.event_name == 'push'}}
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - name: Cache the Maven packages to speed up build
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
-    - name: start container
-      run: |
-        chmod +x docker_start.sh
-        ./docker_start.sh
+      - name: start container
+        run: |
+          chmod +x docker_start.sh
+          ./docker_start.sh
 
-    - name: Get Previous tag
-      id: previoustag
-      if: ${{ github.event_name == 'push'}}
-      uses: "WyriHaximus/github-action-get-previous-tag@master"
-
-    - name: publish image
-      if: ${{ github.event_name == 'push'}}
-      run: | 
-        chmod +x docker_push.sh
-        export tag_name=${{steps.previoustag.outputs.tag}}
-        ./docker_push.sh
+      - name: publish image
+        if: ${{ github.event_name == 'push'}}
+        run: |
+          chmod +x docker_push.sh
+          export BRANCH_NAME=${GITHUB_REF##*/}
+          export EVENT_TYPE=push
+          ./docker_push.sh

@@ -8,25 +8,40 @@ First of all the CI tool will build the application and run the unit tests.
 Afterwards, it will start the application in docker container (this step might be redundant however 
 we had some problems in the past that the application was not working properly in docker container)
 Just to see that the OZB performs well in docker container, ci tool (using curl) will ask OZB to generate zaak identification.
-Then, if the CI tool is triggered for a commit to the master it will create a docker image and push it to docker hub. 
+Afterwards, if the event type is 'push' to master or release-* branches the docker image will be pushed to docker hub.
 (https://hub.docker.com/repository/docker/openzaakbrug/openzaakbrug)
 
 ## Versioning
 
-We use github tags to specify the version of the image.(https://github.com/Sudwest-Fryslan/OpenZaakBrug/tags)
-CI tool will look for the latest created tag and use that for the docker image version.
-In case there is no new tag created then the existing version will be overwritten.
-Just before accepting the PR create a git tag and push the tag to the origin.
+master and the release-* branches have a branch protection rule and require a pull request review to be able to merge.
+Pull request merge action will result in a 'push' event.
+ - Any push event to master will update the 'latest' tagged version in docker hub.
+ - Any push event to release-{version} branch will create/update {version}-latest tagged image in docker hub.
 
-	git tag <tagname>			//will create a local tag
-	git push origin <tagname>	//will push the created tag to origin
+Creating releases will result in a new version in the repository. (For creating releases in github see https://docs.github.com/en/github/administering-a-repository/releasing-projects-on-github/managing-releases-in-a-repository).
+
+### Making Releases
+
+To have a new version in docker hub registry it is required to create a release. A release can be created in both master and release-* branches.
+'create release' event will trigger the release workflow. Basically, release workflow will push an image to docker hub by using the given name to the tag while creating a release as the version number. Tag name can be in the following format MAJOR.MINOR.PATCH. (See https://semver.org/ for more information).
+
+### Examples
+
+| Branch                                    | Github Event     | Release Tag   | Docker image Tag | 
+| ----------------------------------------- | ---------------- | ------------- | ---------------- |
+| master                                    | push 			   | Not effective | latest  	      | 
+| master                                    | release          | 1.2.1         | 1.2.1            | 
+| release-1.2                               | push             | Not effective | 1.2-latest       | 
+| release-1.2                               | release 		   | 1.2.5         | 1.2.5  		  | 
+
+Basically to have an independent version creating release is mandatory. Other actions will only overwrite the existing versions.(Containing 'latest' naming convention.)
 
 ## Configuration update
 In OZB, there are two configuration files which may require changes for the deployment. Namely, _application.properties_ and _config.json_. These files are located in _/root/config_ folder and mounted to the docker container.
 Analyze PR to check whether the deployment requires changes in one of these files or not. Then, do the change.
 
 ## Deployment
-Time to update the docker image. There is a script called update_ozb.sh in the _/root_ folder of the **root** user.
+Time to update the docker image. There is a script called update_ozb.sh in the _/root_ folder of the **root** user. An example of the file is also present in github.
 Run 
 
 	./update_ozb.sh <version>
