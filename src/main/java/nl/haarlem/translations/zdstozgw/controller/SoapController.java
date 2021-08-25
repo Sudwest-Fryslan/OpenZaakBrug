@@ -62,24 +62,8 @@ public class SoapController {
 	}
 
 
-	/*
-	@GetMapping(path = { "/" }, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<?> HandleRequest() {
-		var response = "=== Open Zaakbrug ===\n\n";
-
-		response += "Application name:\t\t" + ai.name + "\n";
-		response += "Application version:\t\t" + ai.version + "\n\n";
-
-		response += "Supported translations:" + this.configService.getConfiguration().getTranslationsString();		
-		response += "\n\nDebugging:\n\t(not-persistent) request-log can be found at path './debug/'\n\tpersistent (error-)log in de database";
-		
-		return new  ResponseEntity<>(response, HttpStatus.OK);
-	}
-	*/
     /**
-     * Does not handle any requests, returns a list of available endpoints
-     *
-     * @return List of available endpoints
+     * Give some basic information about the application
      */
 	@RequestMapping("/")
     public String index(Model model ) {
