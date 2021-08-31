@@ -97,7 +97,8 @@ public class SoapController {
 		// used by the ladybug-tests
 		if (referentienummer == null)  referentienummer = "ozb-" + java.util.UUID.randomUUID().toString();
 		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;
-		log.info("Processing request for path: /" + path + "/ with soapaction: " + soapAction + " with referentienummer:" + referentienummer);
+		var msg = "Processing: " + referentienummer + " with path: /" + path + "/ and soapaction: " + soapAction; 
+		log.info(msg);
 
 
 		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);
@@ -118,10 +119,12 @@ public class SoapController {
 			handler.save(session);
 		} catch(Throwable t) {
 			debug.abortpoint(session.getReportName(), t.toString());
+			log.warn("Unhandled exception while processing:" + msg);
 			throw t;
 		} finally {
 			debug.close();
 		}
+		log.info("Finished: "+ referentienummer + " with:" + response.getStatusCode());
 		return response;
 	}
 }
