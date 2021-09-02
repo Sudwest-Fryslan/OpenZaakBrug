@@ -132,7 +132,6 @@ public class Debugger {
 
 		var message = "Soapaction: " + session.getClientSoapAction() + " took " + session.getDurationInMilliseconds() + " milliseconds";
 		this.infopoint("Total duration", message);
-		this.endpoint(session.getReportName(), response.getBody().toString());
 
 		if(response.getStatusCode() == HttpStatus.OK) {
 			this.endpoint(session.getReportName(), response.getBody().toString());
