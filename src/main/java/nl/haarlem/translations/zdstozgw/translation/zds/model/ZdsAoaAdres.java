@@ -9,7 +9,7 @@ import static nl.haarlem.translations.zdstozgw.translation.zds.model.namespace.N
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class ZdsAoaAdres extends ZdsObject {
-	@XmlElement(namespace = BG, name = "aoa.identificatie")
+	@XmlElement(namespace = BG, name = "identificatie")
 	public String identificatie;
 
 	@XmlElement(namespace = BG)
