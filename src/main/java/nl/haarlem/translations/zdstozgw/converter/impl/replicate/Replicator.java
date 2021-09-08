@@ -173,15 +173,15 @@ public class Replicator {
             ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(zaakdocumentidentificatie);
             if (zgwEnkelvoudigInformatieObject == null) {
             	debug.infopoint("replicatie", "document not found, copying document with identificatie #" + zaakdocumentidentificatie);
-            	try {
+//            	try {
             		copyDocument(zaakdocumentidentificatie, rsin);
             		var adg = this.converter.getSession().getAantalDocumentenGerepliceerd();
             		this.converter.getSession().setAantalDocumentenGerepliceerd(adg + 1);
-            	}
-            	catch(ConverterException ce) {
-            		// ignore the error, since everything else works, big change that there are inconsistent things
-            		debug.infopoint("Warning", "zaakdocumentidentificatie #" + zaakdocumentidentificatie + " error:" + ce.toString());
-            	}
+//            	}
+//            	catch(ConverterException ce) {
+//            		// ignore the error, since everything else works, big change that there are inconsistent things
+//            		debug.infopoint("Warning", "zaakdocumentidentificatie #" + zaakdocumentidentificatie + " error:" + ce.toString());
+//            	}
             }
             else {
             	// maybe it needs to be attached to the zaak

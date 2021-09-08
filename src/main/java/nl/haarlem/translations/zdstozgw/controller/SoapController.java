@@ -23,11 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -39,7 +42,7 @@ import nl.haarlem.translations.zdstozgw.debug.Debugger;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestHandlerFactory;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 
-@RestController
+@Controller
 public class SoapController {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -62,20 +65,16 @@ public class SoapController {
 
 
     /**
-     * Does not handle any requests, returns a list of available endpoints
-     *
-     * @return List of available endpoints
+     * Give some basic information about the application
      */
-	@GetMapping(path = { "/" }, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<?> HandleRequest() {
-		var response = "=== Open Zaakbrug ===\n\n";
-		response += "Application name:\t\t" + applicationInformation.getName() + "\n";
-		response += "Application version:\t\t" + applicationInformation.getVersion() + "\n\n";
-
-		response += "Supported translations:" + this.configService.getConfiguration().getTranslationsString();
-		response += "\n\nDebugging:\n\t(not-persistent) request-log can be found at path './debug/'\n\tpersistent (error-)log in de database";
-
-		return new  ResponseEntity<>(response, HttpStatus.OK);
+	@RequestMapping("/")
+    public String index(Model model ) {
+		model.addAttribute("applicationname", applicationInformation.getName());
+        model.addAttribute("applicationversion", applicationInformation.getVersion());       
+        model.addAttribute("translations", this.configService.getConfiguration().getTranslations());        
+        model.addAttribute("ladybugpath", "./debug");
+        model.addAttribute("databasepath", "./h2-console");
+        return "index";
 	}
 
     /**

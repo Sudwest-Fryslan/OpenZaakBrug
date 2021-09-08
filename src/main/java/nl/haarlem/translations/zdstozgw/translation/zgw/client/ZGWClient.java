@@ -775,7 +775,8 @@ public class ZGWClient {
 		for (String found : zaaktype.informatieobjecttypen ) {
 			ZgwInformatieObjectType ziot = getZgwInformatieObjectTypeByUrl(found);
 			log.debug("gevonden ZgwInformatieObjectType met omschrijving: '" + ziot.omschrijving + "'");
-			if (omschrijving.equals(ziot.omschrijving)) {
+			//if (omschrijving.equals(ziot.omschrijving)) {
+			if (omschrijving.equalsIgnoreCase(ziot.omschrijving)) {
 				return ziot;
 			}
 		}

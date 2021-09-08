@@ -354,6 +354,11 @@ public class ModelMapperConfig {
 		if (stufDateTime.length() == 8) {
 			stufDateTime = stufDateTime + StringUtils.repeat("0", 16 - stufDateTime.length());
 		}
+		if (stufDateTime.length() == 14) {
+			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of 14 characters:"
+						+ stufDateTime + " will be expanded to 16");
+			stufDateTime = stufDateTime + "00";
+		}
 		if (stufDateTime.length() == 17) {
 			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of 17 characters:"
 						+ stufDateTime + " will be trimmed to 16");

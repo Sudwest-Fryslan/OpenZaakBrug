@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="ISO-8859-1">
+<title>Open Zaakbrug</title>
+<style>
+table td {
+	vertical-align: top;
+	border: solid 1px #888;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<h1>Open Zaakbrug</h1>
+	<h2>Information over the application:</h2>
+	<img src="open-zaakbrug.png" />
+	<table>
+		<tr>
+			<td>Application name:</td>
+			<td th:text="${applicationname}" />
+		</tr>
+		<tr>
+			<td>Application version:</td>
+			<td th:text="${applicationversion}" />
+		</tr>
+	</table>
+	<h2>Additional information:</h2>
+	<p>
+		Debugging: (not-persistent) request-log can be found at <a th:href="${ladybugpath}">ladybug</a>.
+	<br>
+		Persistent (error-)log in the <a th:href="${databasepath}">database</a>.
+	</p>
+	<h2>The active Translations:</h2>
+	<table>
+		<tr>
+			<th>Translation</th>
+			<th>Path</th>
+			<th>Soapaction</th>
+			<th>Implementation</th>
+			<th>Legacy service</th>
+		</tr>
+		<tr th:each="translation : ${translations}">
+			<td th:text="${translation.translation}" />
+			<td th:text="${translation.path}" />
+			<td th:text="${translation.soapAction}" />
+			<td th:text="${translation.implementation}" />
+			<td th:text="${translation.legacyservice}" />
+		</tr>
+	</table>
+</body>
+</html>

@@ -139,11 +139,11 @@ public class ZaakService {
 		if(zdsZaak.heeftBetrekkingOpAndere != null) {
 			for(ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere: zdsZaak.heeftBetrekkingOpAndere) {
 				if(heeftBetrekkingOpAndere.gerelateerde != null  && "ZAK".equals(heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
-					ZgwZaak zgwChildZaak= this.zgwClient.getZaakByIdentificatie(heeftBetrekkingOpAndere.gerelateerde.identificatie);
-					if (zgwChildZaak == null) {
+					ZgwZaak zgwParentZaak= this.zgwClient.getZaakByIdentificatie(heeftBetrekkingOpAndere.gerelateerde.identificatie);
+					if (zgwParentZaak == null) {
 							throw new RuntimeException("Zaak with identification " + heeftBetrekkingOpAndere.gerelateerde.identificatie + " not found in ZGW");
 					}
-					zgwClient.addChildZaakToZaak(zgwZaak, zgwChildZaak);
+					zgwClient.addChildZaakToZaak(zgwParentZaak, zgwZaak);
 				}		
 			}
 		}
@@ -537,7 +537,7 @@ public class ZaakService {
 
 		ZgwInformatieObjectType zgwInformatieObjectType = this.zgwClient.getZgwInformatieObjectTypeByOmschrijving(zgwZaakType, zdsInformatieObject.omschrijving);
 		if (zgwInformatieObjectType == null) {
-			throw new RuntimeException("Documenttype not found for omschrijving: " + zdsInformatieObject.omschrijving);
+			throw new RuntimeException("Documenttype not found for omschrijving: " + zdsInformatieObject.omschrijving + " in zaaktype:" + zgwZaakType.identificatie + " (" + zgwZaakType.omschrijving + ")");
 		}
 
 
