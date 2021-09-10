@@ -46,16 +46,9 @@ public class GeefZaakDetailsReplicator extends GeefZaakDetailsTranslator {
     @Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
-
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		if (legacyresponse.getStatusCode() != HttpStatus.OK) {
-			log.warn("Service:" + this.getTranslation().getLegacyservice() + " SoapAction: "
-					+ this.getSession().getClientSoapAction());
-			return legacyresponse;
-		}
 		replicator.replicateZaak(zdsZakLv01.gelijk.identificatie);
-		//return super.execute();
 		return legacyresponse;
 	}
 }

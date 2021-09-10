@@ -24,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
+import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.converter.impl.translate.VoegZaakdocumentToeTranslator;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsEdcLk01;
@@ -47,14 +48,8 @@ public class VoegZaakdocumentToeReplicator extends VoegZaakdocumentToeTranslator
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsEdcLk01 = (ZdsEdcLk01) this.getZdsDocument();
-
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		if (legacyresponse.getStatusCode() != HttpStatus.OK) {
-			log.warn("Service:" + this.getTranslation().getLegacyservice() + " SoapAction: "
-					+ this.getSession().getClientSoapAction());
-			return legacyresponse;
-		}
 		replicator.replicateZaak(zdsEdcLk01.objects.get(0).identificatie);
 		return super.execute();
 	}

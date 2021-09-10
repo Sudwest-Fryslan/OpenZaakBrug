@@ -27,6 +27,12 @@ public class ConverterException extends RuntimeException {
 		super(omschrijving);
 	}
 
+	public ConverterException(String omschrijving, String details) {
+		super(omschrijving);
+		this.details = details;
+	}
+
+	
 	public ConverterException(String omschrijving, Throwable cause) {
 		super(omschrijving, cause);
 		log.error(cause.getStackTrace().toString());
