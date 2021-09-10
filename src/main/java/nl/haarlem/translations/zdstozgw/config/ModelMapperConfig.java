@@ -1,9 +1,9 @@
 /*
  * Copyright 2020-2021 The Open Zaakbrug Contributors
  *
- * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
  * European Commission - subsequent versions of the EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
@@ -15,7 +15,6 @@
  */
 package nl.haarlem.translations.zdstozgw.config;
 
-import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +25,6 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.AbstractConverter;
@@ -35,6 +33,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -69,15 +68,21 @@ public class ModelMapperConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+	private final ApplicationInformation applicationInformation;
+
 	@Value("${nl.haarlem.translations.zdstozgw.timeoffset.minutes}")
 	public String timeoffset;
 	public static ModelMapperConfig singleton;
 
-	@Bean
+	@Autowired
+    public ModelMapperConfig(ApplicationInformation applicationInformation) {
+        this.applicationInformation = applicationInformation;
+    }
+
+    @Bean
 	public ModelMapper modelMapper() {
-		var ai = ApplicationInformation.getApplicationInformation();
-		log.info("Application name:\t\t" + ai.name);
-		log.info("Application version:\t" + ai.version);
+		log.info("Application name:\t\t" + applicationInformation.getName());
+		log.info("Application version:\t" + applicationInformation.getVersion());
 		log.info("nl.haarlem.translations.zdstozgw.timeoffset.minutes: " + this.timeoffset);
 		ModelMapper modelMapper = new ModelMapper();
 		ModelMapperConfig.singleton = this;

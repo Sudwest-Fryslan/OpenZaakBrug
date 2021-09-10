@@ -1,9 +1,9 @@
 /*
  * Copyright 2020-2021 The Open Zaakbrug Contributors
  *
- * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
  * European Commission - subsequent versions of the EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
@@ -52,14 +52,16 @@ public class SoapController {
 	private final ConverterFactory converterFactory;
 	private final ConfigService configService;
 	private final RequestHandlerFactory requestHandlerFactory;
+    private final ApplicationInformation applicationInformation;
 
 	@Autowired
 	public SoapController(ConverterFactory converterFactory, ConfigService configService,
-			RequestHandlerFactory requestHandlerFactory) {
+                          RequestHandlerFactory requestHandlerFactory, ApplicationInformation applicationInformation) {
 		this.converterFactory = converterFactory;
 		this.configService = configService;
 		this.requestHandlerFactory = requestHandlerFactory;
-	}
+        this.applicationInformation = applicationInformation;
+    }
 
 
     /**
@@ -67,14 +69,13 @@ public class SoapController {
      */
 	@RequestMapping("/")
     public String index(Model model ) {
-		var ai = ApplicationInformation.getApplicationInformation();		        
-		model.addAttribute("applicationname", ai.name);
-        model.addAttribute("applicationversion", ai.version);       
+		model.addAttribute("applicationname", applicationInformation.getName());
+        model.addAttribute("applicationversion", applicationInformation.getVersion());       
         model.addAttribute("translations", this.configService.getConfiguration().getTranslations());        
         model.addAttribute("ladybugpath", "./debug");
         model.addAttribute("databasepath", "./h2-console");
         return "index";
-    }	
+	}
 
     /**
      * Receives the SOAP requests. Based on the configuration and path variables, the correct translation implementation is used.

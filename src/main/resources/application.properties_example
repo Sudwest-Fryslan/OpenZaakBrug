@@ -55,7 +55,10 @@ spring.h2.console.path=/h2-console
 spring.h2.console.settings.trace=true
 spring.h2.console.settings.web-allow-others=true
 
-version=@version@ 
+version=@version@
+info.app.version=@project.version@
+info.app.name=@project.name@
+
 ladybug.maxCheckpoints=2500
 ladybug.maxMemoryUsage=100000000
 ladybug.maxMessageLength=1000000

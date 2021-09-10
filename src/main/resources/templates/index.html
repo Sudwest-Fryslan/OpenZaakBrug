@@ -13,6 +13,7 @@ table td {
 </head>
 <body>
 	<h1>Open Zaakbrug</h1>
+
 	<h2>Information over the application:</h2>
 	<table>
 		<tr>
@@ -24,6 +25,9 @@ table td {
 			<td th:text="${applicationversion}" />
 		</tr>
 	</table>
+
+	<img th:src="@{img/open-zaakbrug.png}"/>
+
 	<h2>Additional information:</h2>
 	<p>
 		Debugging: (not-persistent) request-log can be found at <a th:href="${ladybugpath}">ladybug</a>.
