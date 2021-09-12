@@ -41,7 +41,7 @@ Hierbij hebben we de volgende uitgangspunten:
 - 2021-02-05 [Fieldlab DOiT video](https://vimeo.com/512518040/2284537066)
 - 2021-02-05 [Powerpoint Fieldlab DOiT](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210205-FieldLab2021-Eduard-Open%20Zaakbrug,%20commonground%20in%20de%20praktijk.pptx?raw=true)
 - 2021-07-09 [Powerpoint DemoDam](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210709-DemoDam-OpenZaak%20en%20Open%20Zaakbrug-Commonground%20in%20de%20praktijk.pptx?raw=true)
-- - 2021-09-09 [Powerpoint Zaakgericht werken voor de Overheid](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210909-Zaakgericht%20werken%20voor%20de%20Overheid-Open%20Zaak%20bij%20S%C3%BAdwest-Frysl%C3%A2n-van%20idee%20naar%20implementatie.pptx?raw=true)
+- 2021-09-09 [Powerpoint Zaakgericht werken voor de Overheid](https://github.com/Sudwest-Fryslan/OpenZaakBrug/blob/master/docs/powerpoint/20210909-Zaakgericht%20werken%20voor%20de%20Overheid-Open%20Zaak%20bij%20S%C3%BAdwest-Frysl%C3%A2n-van%20idee%20naar%20implementatie.pptx?raw=true)
 
 ## Continue implementatie / continue  levering
 
