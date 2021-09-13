@@ -15,9 +15,12 @@
  */
 package nl.haarlem.translations.zdstozgw.debug;
 
+import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.RequestAttributes;
@@ -35,6 +38,8 @@ import nl.nn.testtool.TestTool;
  * @author Jaco de Groot
  */
 public class Debugger {
+	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	
 	private static Map<Class<?>, Debugger> debuggers = new HashMap<Class<?>, Debugger>();
 	private TestTool testTool;
 	private String sourceClassName;
@@ -130,14 +135,16 @@ public class Debugger {
 		this.outputpoint("statusCode", response.getStatusCodeValue());
 		this.outputpoint("kenmerk", session.getKenmerk());
 
-		var message = "Soapaction: " + session.getClientSoapAction() + " took " + session.getDurationInMilliseconds() + " milliseconds";
+		var message = "Soapaction: " + session.getClientSoapAction() + " with kenmerk: '" + session.getKenmerk() + "' returned statuscode:" + response.getStatusCode() + " and took " + session.getDurationInMilliseconds() + " milliseconds";
+
 		this.infopoint("Total duration", message);
 
 		if(response.getStatusCode() == HttpStatus.OK) {
-			this.endpoint(session.getReportName(), response.getBody().toString());
+			this.endpoint(session.getReportName(), response.getBody().toString());			
 		}
 		else {
 			this.abortpoint(session.getReportName(), response.getBody().toString());
+			log.warn(message);
 		}
 	}
 }

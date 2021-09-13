@@ -46,14 +46,8 @@ public class ActualiseerZaakStatusReplicator extends ActualiseerZaakStatusTransl
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsZakLk01ActualiseerZaakstatus = (ZdsZakLk01ActualiseerZaakstatus) this.getZdsDocument();
-
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		if (legacyresponse.getStatusCode() != HttpStatus.OK) {
-			log.warn("Service:" + this.getTranslation().getLegacyservice() + " SoapAction: "
-					+ this.getSession().getClientSoapAction());
-			return legacyresponse;
-		}
 		replicator.replicateZaak(zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
 		return super.execute();
 	}

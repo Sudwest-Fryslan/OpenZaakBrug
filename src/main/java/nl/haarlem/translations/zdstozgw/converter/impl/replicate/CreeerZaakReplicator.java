@@ -46,14 +46,8 @@ public class CreeerZaakReplicator extends CreeerZaakTranslator {
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
-
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		if (legacyresponse.getStatusCode() != HttpStatus.OK) {
-			log.warn("Service:" + this.getTranslation().getLegacyservice() + " SoapAction: "
-					+ this.getSession().getClientSoapAction());
-			return legacyresponse;
-		}
 		return super.execute();
 	}
 }

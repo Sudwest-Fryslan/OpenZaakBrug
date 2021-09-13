@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
+import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.converter.impl.translate.GeefZaakdocumentBewerkenTranslator;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
@@ -38,6 +39,6 @@ public class GeefZaakdocumentBewerkenReplicator extends GeefZaakdocumentBewerken
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		throw new RuntimeException("not imlemented");
+		throw new ConverterException("not imlemented");
 	}
 }

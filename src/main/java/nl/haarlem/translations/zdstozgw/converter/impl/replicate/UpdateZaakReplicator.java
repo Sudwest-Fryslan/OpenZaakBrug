@@ -49,11 +49,6 @@ public class UpdateZaakReplicator extends UpdateZaakTranslator {
 
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		if (legacyresponse.getStatusCode() != HttpStatus.OK) {
-			log.warn("Service:" + this.getTranslation().getLegacyservice() + " SoapAction: "
-					+ this.getSession().getClientSoapAction());
-			return legacyresponse;
-		}
 		replicator.replicateZaak(zdsZakLk01.objects.get(0).identificatie);
 		return super.execute();
 	}

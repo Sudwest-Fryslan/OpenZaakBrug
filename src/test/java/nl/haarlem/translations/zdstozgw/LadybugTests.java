@@ -96,10 +96,10 @@ public class LadybugTests {
 			fail(e.getMessage());
 		}
 		assertTrue("No reports found", reports.size() > 0);
-		Collections.sort(reports, new ReportNameComparator());
+		Collections.sort(reports, new ReportFullPathComparator());
 		if (filter != null) {
 			reports.removeIf(filter);
-			assertEquals(1, reports.size());
+			// assertEquals(1, reports.size(), "Multiple test-reports:" + reports.size() + " after applying the filter");
 		}
 		long totalTime = 0;
 		ReportRunner reportRunner = new ReportRunner();
@@ -151,7 +151,7 @@ public class LadybugTests {
 	}
 }
 
-class ReportNameComparator implements Comparator<Report> {
+class ReportFullPathComparator implements Comparator<Report> {
 
 	@Override
 	public int compare(Report o1, Report o2) {
