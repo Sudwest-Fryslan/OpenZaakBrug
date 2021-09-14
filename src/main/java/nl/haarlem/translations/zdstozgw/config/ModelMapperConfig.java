@@ -461,7 +461,11 @@ public class ModelMapperConfig {
 
 			@Override
 			protected String convert(String archiefNominatie) {
-				var result = archiefNominatie.toUpperCase().equals("J") ? "vernietigen" : "blijvend_bewaren";
+			    String result = null;
+			    if(archiefNominatie != null){
+                    result =  archiefNominatie.toUpperCase().equals("J") ? "blijvend_bewaren" : "vernietigen";
+                }
+
 				log.debug("getZGWArchiefNominatie: " + archiefNominatie + " --> " + result);
 				return result;
 			}
