@@ -820,6 +820,11 @@ public class ZGWClient {
 
 	public void addChildZaakToZaak(ZgwZaak zgwZaak, ZgwZaakPatch zgwChildZaak) {
 		zgwChildZaak.hoofdzaak = zgwZaak.url;
+		if(zgwChildZaak.verlenging != null) {
+			if(zgwChildZaak.verlenging.duur == null) {
+				zgwChildZaak.verlenging = null;
+			}
+		}
 		this.patchZaak(zgwChildZaak.uuid, zgwChildZaak);
 	}
 }
