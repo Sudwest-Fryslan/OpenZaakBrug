@@ -138,4 +138,5 @@ Omdat het een standaard is die wordt vertaald, zullen vervolg applicaties steeds
 - [Gemeente Utrecht](https://www.utrecht.nl/), Lazo Bozarov
 - [WeAreFrank!](https://blog.wearefrank.nl/borging-openzaakbrug-integratie-vng), Jaco de Groot 
 
-Om ons te bereiken kunt u een email versturen naar e.witteveen@sudwestfryslan.nl of stel gewoon een vraag in onze [slack](https://samenorganiseren.slack.com/archives/C01FDA71Y4V) 
+Om ons te bereiken kunt u een email versturen naar e.witteveen@sudwestfryslan.nl of stel gewoon een vraag in onze [slack](https://samenorganiseren.slack.com/archives/C01FDA71Y4V)
+
