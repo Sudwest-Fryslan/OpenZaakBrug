@@ -50,6 +50,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatusType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPatch;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
@@ -400,7 +401,7 @@ public class ZGWClient {
 	}
 
 	
-	public void patchZaak(String zaakUuid, ZgwZaak zaak) {
+	public void patchZaak(String zaakUuid, ZgwZaakPut zaak) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zaak);
 		this.patch(this.baseUrl + this.endpointZaak + "/" + zaakUuid, json);
@@ -817,7 +818,7 @@ public class ZGWClient {
 		debug.infopoint("Warning", message);
 	}
 
-	public void addChildZaakToZaak(ZgwZaak zgwZaak, ZgwZaak zgwChildZaak) {
+	public void addChildZaakToZaak(ZgwZaak zgwZaak, ZgwZaakPatch zgwChildZaak) {
 		zgwChildZaak.hoofdzaak = zgwZaak.url;
 		this.patchZaak(zgwChildZaak.uuid, zgwChildZaak);
 	}
