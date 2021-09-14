@@ -80,16 +80,16 @@ public class ZgwZaakPut {
 	public String zaakgeometrie;
 	@SerializedName("verlenging")
 	@Expose
-	public ZgwVerlenging verlenging;
+	public ZgwVerlenging verlenging = null;
 	@SerializedName("opschorting")
 	@Expose
-	public ZgwOpschorting opschorting;
+	public ZgwOpschorting opschorting = null;
 	@SerializedName("selectielijstklasse")
 	@Expose
 	public String selectielijstklasse;
 	@SerializedName("hoofdzaak")
 	@Expose
-	public String hoofdzaak;
+	public String hoofdzaak  = null;
 	@SerializedName("relevanteAndereZaken")
 	@Expose
 	public List<Object> relevanteAndereZaken = null;
@@ -98,13 +98,13 @@ public class ZgwZaakPut {
 	public List<ZgwKenmerk> kenmerk = null;
 	@SerializedName("archiefnominatie")
 	@Expose
-	public String archiefnominatie;
+	public String archiefnominatie  = null;
 	@SerializedName("archiefstatus")
 	@Expose
 	public String archiefstatus;
 	@SerializedName("archiefactiedatum")
 	@Expose
-	public String archiefactiedatum;
+	public String archiefactiedatum  = null;
 
 	public static ZgwZaakPut merge(ZgwZaak original, ZgwZaakPut changes) {
 		var result = new ZgwZaakPut();
