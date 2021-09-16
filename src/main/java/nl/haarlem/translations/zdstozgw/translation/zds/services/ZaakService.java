@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.translation.zds.services;
 
 import java.lang.invoke.MethodHandles;
@@ -61,7 +76,8 @@ public class ZaakService {
 	}
 
 	public ZgwZaak creeerZaak(String rsin, ZdsZaak zdsZaak) {
-		log.debug("creeerZaak:" + zdsZaak.identificatie);
+	    zgwClient.caseCreationStatusOk = true;
+        log.debug("creeerZaak:" + zdsZaak.identificatie);
 		ZgwZaak zgwZaak = this.modelMapper.map(zdsZaak, ZgwZaak.class);
 
 		var zaaktypecode = zdsZaak.isVan.gerelateerde.code;
@@ -90,17 +106,23 @@ public class ZaakService {
 		log.debug("Created a ZGW Zaak with UUID: " + zgwZaak.getUuid());
 
 		// rollen
-		ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
+    	ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftBetrekkingOp, zgwRolOmschrijving.getHeeftBetrekkingOp());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsBelanghebbende, zgwRolOmschrijving.getHeeftAlsBelanghebbende());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsInitiator, zgwRolOmschrijving.getHeeftAlsInitiator());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsUitvoerende, zgwRolOmschrijving.getHeeftAlsUitvoerende());
-		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsVerantwoordelijke, zgwRolOmschrijving.getHeeftAlsVerantwoordelijke());
+        addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsVerantwoordelijke, zgwRolOmschrijving.getHeeftAlsVerantwoordelijke());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsGemachtigde, zgwRolOmschrijving.getHeeftAlsGemachtigde());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsOverigBetrokkene, zgwRolOmschrijving.getHeeftAlsOverigBetrokkene());
 
 		setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);
 
+        if(!zgwClient.caseCreationStatusOk){
+            //Not all roltype and status data could be added to the new zgw Zaak, thus the zaak is deleted before replying with a SOAP fault
+            zgwClient.deleteZaak(zgwZaak.getUuid());
+            debugWarning("Niet alle rollen en/of statussen konden worden toegevoegd. Zaak: " + zgwZaak.getIdentificatie() + " is niet aangemaakt.");
+            throw new ConverterException("Niet alle rollen en/of statussen konden worden toegevoegd. Zaak: " + zgwZaak.getIdentificatie()+" is niet aangemaakt.");
+        }
 		return zgwZaak;
 	}
 
@@ -334,10 +356,8 @@ public class ZaakService {
 		ZgwRol zgwRol = new ZgwRol();
 		zgwRol.roltoelichting = typeRolOmschrijving + ": ";
 		if (zdsRol.gerelateerde.medewerker != null) {
-			zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.medewerker,
-					ZgwBetrokkeneIdentificatie.class);
-			// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/118
-			zgwRol.roltoelichting += zdsRol.gerelateerde.medewerker.achternaam;
+			zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.medewerker, ZgwBetrokkeneIdentificatie.class);
+			zgwRol.roltoelichting += zdsRol.gerelateerde.medewerker.achternaam != null ? zdsRol.gerelateerde.medewerker.achternaam : zdsRol.gerelateerde.medewerker.identificatie;
 			zgwRol.betrokkeneType = BetrokkeneType.MEDEWERKER.getDescription();
 		}
 		if (zdsRol.gerelateerde.natuurlijkPersoon != null) {
@@ -457,12 +477,16 @@ public class ZaakService {
 		var roltype = this.zgwClient.getRolTypeByZaaktypeAndOmschrijving(zgwZaakType, typeRolOmschrijving);
 		if (roltype == null) {
 			var zaaktype = this.zgwClient.getZaakTypeByUrl(createdZaak.zaaktype);
-			throw new ConverterException(
-					"Rol: " + typeRolOmschrijving + " niet gevonden bij Zaaktype: " + zaaktype.identificatie);
+			debugWarning("Rol: " + typeRolOmschrijving + " niet gevonden bij Zaaktype: " + zaaktype.identificatie);
+            zgwClient.caseCreationStatusOk = false;
+			return;
 		}
 		zgwRol.roltype = roltype.url;
 		zgwRol.zaak = createdZaak.getUrl();
-		this.zgwClient.addZgwRol(zgwRol);
+		ZgwRol zgwROl = this.zgwClient.addZgwRol(zgwRol);
+		if(zgwROl.uuid.isEmpty()){
+		    zgwClient.caseCreationStatusOk = false;
+        }
 	}
 
 	public List<ZdsHeeftRelevant> geefLijstZaakdocumenten(String zaakidentificatie) {
@@ -570,6 +594,16 @@ public class ZaakService {
 
 		zgwEnkelvoudigInformatieObject.indicatieGebruiksrecht = "false";
 
+		if(zgwEnkelvoudigInformatieObject.status != null) {
+			/*
+			in_bewerking - (In bewerking) Aan het informatieobject wordt nog gewerkt.
+			ter_vaststelling - (Ter vaststelling) Informatieobject gereed maar moet nog vastgesteld worden.
+			definitief - (Definitief) Informatieobject door bevoegd iets of iemand vastgesteld dan wel ontvangen.
+			gearchiveerd - (Gearchiveerd) Informatieobject duurzaam bewaarbaar gemaakt; een gearchiveerd informatie-element.
+			*/
+			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.replace(" ", "_");
+			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.toLowerCase();
+		}
 		zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(zgwEnkelvoudigInformatieObject);
 		ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
 

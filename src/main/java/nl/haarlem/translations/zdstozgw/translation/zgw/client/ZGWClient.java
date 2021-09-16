@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
 import java.lang.invoke.MethodHandles;
@@ -69,6 +84,8 @@ public class ZGWClient {
 
 	@Value("${zgw.endpoint.informatieobjecttype:/catalogi/api/v1/informatieobjecttypen}")
 	private String endpointInformatieobjecttype;
+
+	public boolean caseCreationStatusOk = true;
 
 	@Value("${zgw.endpoint.zaakobject:/zaken/api/v1/zaakobjecten}")
     private String endpointZaakObject;
@@ -239,6 +256,46 @@ public class ZGWClient {
 		}
 	}
 
+
+	private String patch(String url, String json) {
+		String debugName = "ZGWClient PATCH";
+		json = debug.startpoint(debugName, json);
+		url = debug.inputpoint("url", url);
+		log.debug("PATCH: " + url + ", json: " + json);
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.restTemplateService.getHeaders());
+		try {
+			long startTime = System.currentTimeMillis();
+			long[] exchangeDuration = new long[2];
+			String finalUrl = url;
+			String zgwResponse = (String) debug.endpoint(debugName, () -> {
+				exchangeDuration[0] = System.currentTimeMillis();
+				ResponseEntity<String> response = this.restTemplateService.getRestTemplate().exchange(finalUrl,
+						HttpMethod.PATCH, entity, String.class);
+				exchangeDuration[1] = System.currentTimeMillis();
+				return response.getBody();
+			});
+			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
+			long endTime = System.currentTimeMillis();
+			var duration = endTime - startTime;
+			var message = "PATCH to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			log.debug(message);
+			debug.infopoint("Duration", message);
+			log.debug("PATCH response: " + zgwResponse);
+			return zgwResponse;
+		} catch (HttpStatusCodeException hsce) {
+			json = json.replace("{", "{\n").replace("\",", "\",\n").replace("\"}", "\"\n}");
+			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
+					"\"\n}");
+			var details = "--------------PATCH:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			log.warn("PATCH naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("PATCH naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+					hsce);
+		} catch (org.springframework.web.client.ResourceAccessException rae) {
+			log.warn("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
+			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
+		}
+	}
+
 	private String getUrlWithParameters(String url, Map<String, String> parameters) {
 		for (String key : parameters.keySet()) {
 			url += !url.contains("?") ? "?" + key + "=" + parameters.get(key) : "&" + key + "=" + parameters.get(key);
@@ -335,6 +392,12 @@ public class ZGWClient {
 		return gson.fromJson(response, ZgwZaak.class);
 	}
 
+
+	public void patchZaak(String zaakUuid, ZgwZaakPut zaak) {
+		Gson gson = new Gson();
+		String json = gson.toJson(zaak);
+		this.patch(this.baseUrl + this.endpointZaak + "/" + zaakUuid, json);
+	}
 	public ZgwRol addZgwRol(ZgwRol zgwRol) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwRol);
@@ -523,6 +586,13 @@ public class ZGWClient {
 		}
 		delete(this.baseUrl + this.endpointRol + "/" + uuid);
 	}
+
+    public void deleteZaak(String uuid) {
+        if (uuid == null) {
+            throw new ConverterException("zaak uuid may not be null");
+        }
+        delete(this.baseUrl + this.endpointZaak + "/" + uuid);
+    }
 
 	public void deleteZaakResultaat(String uuid) {
 		if (uuid == null) {
