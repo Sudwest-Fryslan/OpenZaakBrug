@@ -462,7 +462,7 @@ public class ModelMapperConfig {
 			@Override
 			protected String convert(String archiefNominatie) {
 			    String result = null;
-			    if(archiefNominatie != null){
+			    if(archiefNominatie != null && !archiefNominatie.equals("")){
                     result =  archiefNominatie.toUpperCase().equals("J") ? "blijvend_bewaren" : "vernietigen";
                 }
 
