@@ -20,22 +20,19 @@ import java.lang.invoke.MethodHandles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import nl.haarlem.translations.zdstozgw.config.ApplicationInformation;
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
 import nl.haarlem.translations.zdstozgw.converter.ConverterFactory;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
@@ -52,15 +49,15 @@ public class SoapController {
 	private final ConverterFactory converterFactory;
 	private final ConfigService configService;
 	private final RequestHandlerFactory requestHandlerFactory;
-    private final ApplicationInformation applicationInformation;
-
+	private final BuildProperties buildProperties;
+    
 	@Autowired
 	public SoapController(ConverterFactory converterFactory, ConfigService configService,
-                          RequestHandlerFactory requestHandlerFactory, ApplicationInformation applicationInformation) {
+                          RequestHandlerFactory requestHandlerFactory, BuildProperties buildProperties) {
 		this.converterFactory = converterFactory;
 		this.configService = configService;
 		this.requestHandlerFactory = requestHandlerFactory;
-        this.applicationInformation = applicationInformation;
+        this.buildProperties = buildProperties;
     }
 
 
@@ -69,9 +66,9 @@ public class SoapController {
      */
 	@RequestMapping("/")
     public String index(Model model ) {
-		model.addAttribute("applicationname", applicationInformation.getName());
-        model.addAttribute("applicationversion", applicationInformation.getVersion());       
-        model.addAttribute("translations", this.configService.getConfiguration().getTranslations());        
+		model.addAttribute("applicationname", buildProperties.getName());
+        model.addAttribute("applicationversion", buildProperties.getVersion());
+        model.addAttribute("translations", this.configService.getConfiguration().getTranslations());
         model.addAttribute("ladybugpath", "./debug");
         model.addAttribute("databasepath", "./h2-console");
         return "index";

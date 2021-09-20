@@ -17,13 +17,11 @@ package nl.haarlem.translations.zdstozgw;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import nl.haarlem.translations.zdstozgw.config.ApplicationInformation;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -34,7 +32,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInfo
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {ModelMapperConfig.class, ApplicationInformation.class})
+@SpringBootTest(classes = {ModelMapperConfig.class, BuildProperties.class})
 public class ModelMapperTests {
 
     @Autowired
