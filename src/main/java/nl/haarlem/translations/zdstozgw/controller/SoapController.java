@@ -68,6 +68,7 @@ public class SoapController {
     public String index(Model model ) {
 		model.addAttribute("applicationname", buildProperties.getName());
         model.addAttribute("applicationversion", buildProperties.getVersion());
+        model.addAttribute("applicationtime", buildProperties.getTime());
         model.addAttribute("translations", this.configService.getConfiguration().getTranslations());
         model.addAttribute("ladybugpath", "./debug");
         model.addAttribute("databasepath", "./h2-console");
