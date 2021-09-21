@@ -29,15 +29,13 @@
 	"beeindigZaakWanneerEinddatum": [
 		{
 			"zaakType": "B1026",
-			"coalesceStatus":"Afgehandeld",
 			"coalesceResultaat":"Toegekend"
 		},
 		{
-			"zaakType": "B1184",
-			"coalesceStatus":"Afgehandeld",
-			"coalesceResultaat":"Verwerkt"
+			"zaakType": "B9999",
+			"coalesceResultaat":"Onbekend"
 		}
-	],	
+	],
 	"replication": {
 		"geefZaakdetails": {
 			"soapaction": "http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01",

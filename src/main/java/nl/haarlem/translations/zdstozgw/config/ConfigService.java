@@ -81,7 +81,6 @@ public class ConfigService {
 		log.debug("=== beeindigZaakWanneerEinddatum ===");
 		for (BeeindigZaakWanneerEinddatum beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
 			log.debug("zaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
-			log.debug("coalesceStatus:" + beeindigZaakWanneerEinddatum.getCoalesceStatus());
 			log.debug("coalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
 		}
 		

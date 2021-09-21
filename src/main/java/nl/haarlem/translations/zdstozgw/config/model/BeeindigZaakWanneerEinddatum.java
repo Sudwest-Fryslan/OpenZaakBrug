@@ -25,7 +25,5 @@ public class BeeindigZaakWanneerEinddatum {
 	@Expose
 	public String zaakType;
 	@Expose
-	public String coalesceStatus;
-	@Expose
 	public String coalesceResultaat;
 }

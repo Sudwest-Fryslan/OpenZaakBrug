@@ -645,6 +645,18 @@ public class ZGWClient {
 		List<ZgwStatusType> statustypes = this.getStatusTypes(parameters);
 		return statustypes;
 	}
+	
+	
+	public ZgwStatusType getLastStatusTypeByZaakType(ZgwZaakType zgwZaakType) {
+		Map<String, String> parameters = new HashMap();
+		parameters.put("zaaktype", zgwZaakType.url);
+		for(ZgwStatusType statustype : this.getStatusTypes(parameters)) {
+			if("true".equals(statustype.isEindstatus)) {
+				return statustype;
+			}			
+		}		
+		return null;
+	}	
 
 	public ZgwStatusType getStatusTypeByZaakTypeAndOmschrijving(ZgwZaakType zaakType, String statusOmschrijving, String verwachteVolgnummer) {
 		Map<String, String> parameters = new HashMap();
