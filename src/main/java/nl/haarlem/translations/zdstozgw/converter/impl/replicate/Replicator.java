@@ -46,7 +46,10 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocument;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLa01GeefZaakDetails;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLa01LijstZaakdocumenten;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 @Service
@@ -73,14 +76,19 @@ public class Replicator {
 		if (zgwZaak == null) {
 			debug.infopoint("replicatie", "zaak not found, copying zaak with identificatie #" + zaakidentificatie);
             copyZaak(zaakidentificatie, rsin);
-        } else {
-        	debug.infopoint("replicatie", "zaak already found, no need to copy zaak with identificatie #" + zaakidentificatie);
+        } else if (zgwZaak.getStatus() == "")  {
+        	debug.infopoint("replicatie", "zaak without status, copying status and resultaat for zaak with identificatie #" + zaakidentificatie);
+        	copyStatusAndResultaat(zgwZaak);
+        }
+        else 
+        {
+        	debug.infopoint("replicatie", "zaak already found (with a status) , no need to copy zaak with identificatie #" + zaakidentificatie);
 		}
         List<ZdsHeeftRelevant> relevanteDocumenten = getLijstZaakdocumenten(zaakidentificatie);
         checkVoegZaakDocumentToe(zaakidentificatie, rsin, relevanteDocumenten);
     }
 
-    private void copyZaak(String zaakidentificatie, String rsin) {
+	private ZdsZaak getLegacyZaak(String zaakidentificatie) {
         var zdsUrl = this.converter.getZaakService().configService.getConfiguration().getReplication().getGeefZaakdetails().getUrl();
         var zdsSoapAction = this.converter.getZaakService().configService.getConfiguration().getReplication().getGeefZaakdetails().getSoapaction();
         var zdsRequest = new ZdsReplicateGeefZaakdetailsLv01();
@@ -101,8 +109,26 @@ public class Replicator {
         // fetch the zaak details
         log.debug("GeefZaakDetails response:" + zdsResponse);
         ZdsZakLa01GeefZaakDetails zakLa01 = (ZdsZakLa01GeefZaakDetails) XmlUtils.getStUFObject(zdsResponse.getBody().toString(), ZdsZakLa01GeefZaakDetails.class);
-        var zdsZaak = zakLa01.antwoord.zaak.get(0);
+        return zakLa01.antwoord.zaak.get(0);		
+	}
+	
+    private void copyStatusAndResultaat(ZgwZaak zgwZaak) {
+    	var zdsZaak = getLegacyZaak(zgwZaak.identificatie);
+    	debug.infopoint("replicatie", "received zaak-data from zds-zaaksysteem for zaak:" + zgwZaak.identificatie + ", now copying the status and resultaat in zgw-zaaksysteem");
+        
+    	// there is no status, so no need to remove
+    	// we need to remove any existing resultaten
+    	var zgwClient = this.converter.getZaakService().zgwClient;
+    	var resultaten = zgwClient.getResultatenByZaakUrl(zgwZaak.url);
+		for (ZgwResultaat resultaat : resultaten) {
+			zgwClient.deleteZaakResultaat(resultaat.uuid);
+		}
+    	var zgwZaakType = zgwClient.getZaakTypeByZaak(zgwZaak);
+    	this.converter.getZaakService().setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);    	    	
+    }
 
+	private void copyZaak(String zaakidentificatie, String rsin) {
+		var zdsZaak = getLegacyZaak(zaakidentificatie);
         debug.infopoint("replicatie", "received zaak-data from zds-zaaksysteem for zaak:" + zaakidentificatie + ", now storing in zgw-zaaksysteem");
         this.converter.getZaakService().creeerZaak(rsin, zdsZaak);
 		var azg = this.converter.getSession().getAantalZakenGerepliceerd();
@@ -141,7 +167,6 @@ public class Replicator {
 
 	public void replicateDocument(String documentidentificatie) {
 		debug.infopoint("replicatie", "Start repliceren van document met identificatie:" + documentidentificatie);
-
 		String rsin = this.converter.getZaakService().getRSIN(this.converter.getZdsDocument().stuurgegevens.zender.organisatie);
 
 		var zgwDocument = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(documentidentificatie);

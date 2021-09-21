@@ -268,7 +268,7 @@ public class ZaakService {
 		return zgwStatusDatumTijd;
 	}
 	
-	private boolean setResultaatAndStatus(ZdsZaak zdsZaak, ZgwZaak zgwZaak, ZgwZaakType zgwZaakType) {
+	public boolean setResultaatAndStatus(ZdsZaak zdsZaak, ZgwZaak zgwZaak, ZgwZaakType zgwZaakType) {
 		var changed = false;
 		var beeindigd = false;
 
@@ -575,7 +575,7 @@ public class ZaakService {
 		var zaakIdentificatie = zdsInformatieObject.isRelevantVoor.gerelateerde.identificatie;
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zaakIdentificatie);
 		if (zgwZaak == null) {
-			throw new RuntimeException("Zaak not found for identificatie: " + zaakIdentificatie);
+			throw new ConverterException("Zaak not found for identificatie: " + zaakIdentificatie);
 		}
 		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
 
