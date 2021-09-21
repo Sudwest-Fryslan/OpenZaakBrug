@@ -226,7 +226,7 @@ public class Replicator {
 
     public ResponseEntity<?> proxy() {
 		var url = this.converter.getTranslation().getLegacyservice();
-		var soapaction = this.converter.getTranslation().getSoapAction();
+		var soapaction = this.converter.getTranslation().getSoapaction();
 		var request = this.converter.getSession().getClientRequestBody();
 		debug.infopoint("proxy", "relaying request to url: " + url + " with soapaction: " + soapaction + " request-size:" + request.length());
 

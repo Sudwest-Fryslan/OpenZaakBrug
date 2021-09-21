@@ -22,14 +22,11 @@ import lombok.Data;
 
 @Data
 public class Organisatie {
-	@SerializedName("gemeenteNaam")
 	@Expose
 	public String gemeenteNaam;
-	@SerializedName("gemeenteCode")
 	@Expose
 	public String gemeenteCode;
-	@SerializedName("RSIN")
 	@Expose
-	public String rSIN;
+	public String RSIN;
 
 }

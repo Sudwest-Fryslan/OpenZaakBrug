@@ -21,12 +21,11 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class Replication {
+public class BeeindigZaakWanneerEinddatum {
 	@Expose
-	public Service geefZaakdetails;
+	public String zaakType;
 	@Expose
-	public Service geefLijstZaakdocumenten;
+	public String coalesceStatus;
 	@Expose
-	public Service geefZaakdocumentLezen;
-
+	public String coalesceResultaat;
 }

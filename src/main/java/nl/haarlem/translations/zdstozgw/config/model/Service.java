@@ -22,10 +22,8 @@ import lombok.Data;
 
 @Data
 public class Service {
-	@SerializedName("soapaction")
 	@Expose
 	public String soapaction;
-	@SerializedName("url")
 	@Expose
 	public String url;
 }

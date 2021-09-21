@@ -22,25 +22,18 @@ import lombok.Data;
 
 @Data
 public class Translation {
-	@SerializedName("translation")
 	@Expose
 	public String translation;
-	@SerializedName("path")
 	@Expose
 	public String path;
-	@SerializedName("soapaction")
 	@Expose
-	public String soapAction;
-	@SerializedName("applicatie")
+	public String soapaction;
 	@Expose
 	public String applicatie;
-	@SerializedName("template")
 	@Expose
 	public String template;
-	@SerializedName("implementation")
 	@Expose
 	public String implementation;
-	@SerializedName("legacyservice")
 	@Expose
 	public String legacyservice;
 }
