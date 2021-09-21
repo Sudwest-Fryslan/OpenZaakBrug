@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -68,21 +69,21 @@ public class ModelMapperConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	private final ApplicationInformation applicationInformation;
+	private final BuildProperties buildProperties;
 
 	@Value("${nl.haarlem.translations.zdstozgw.timeoffset.minutes}")
 	public String timeoffset;
 	public static ModelMapperConfig singleton;
 
 	@Autowired
-    public ModelMapperConfig(ApplicationInformation applicationInformation) {
-        this.applicationInformation = applicationInformation;
+    public ModelMapperConfig(BuildProperties buildProperties) {
+        this.buildProperties = buildProperties;
     }
 
     @Bean
 	public ModelMapper modelMapper() {
-		log.info("Application name:\t\t" + applicationInformation.getName());
-		log.info("Application version:\t" + applicationInformation.getVersion());
+		log.info("Application name:\t\t" + buildProperties.getName());
+		log.info("Application version:\t" + buildProperties.getVersion());
 		log.info("nl.haarlem.translations.zdstozgw.timeoffset.minutes: " + this.timeoffset);
 		ModelMapper modelMapper = new ModelMapper();
 		ModelMapperConfig.singleton = this;
