@@ -26,6 +26,16 @@
 		"heeftAlsGemachtigde": "Gemachtigde",
 		"heeftAlsOverigBetrokkene": "OverigeBetrokkene"
 	},
+	"beeindigZaakWanneerEinddatum": [
+		{
+			"zaakType": "B1026",
+			"coalesceResultaat":"Toegekend"
+		},
+		{
+			"zaakType": "B9999",
+			"coalesceResultaat":"Onbekend"
+		}
+	],	
 	"replication": {	
 		"geefZaakdetails" : {
 			"soapaction" : "http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01",
