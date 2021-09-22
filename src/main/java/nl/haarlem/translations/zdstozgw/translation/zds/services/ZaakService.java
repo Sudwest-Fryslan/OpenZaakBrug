@@ -27,6 +27,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionException;
 import org.springframework.stereotype.Service;
 
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
@@ -140,7 +141,7 @@ public class ZaakService {
 				if(heeftBetrekkingOpAndere.gerelateerde != null  && "ZAK".equals(heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
 					ZgwZaak zgwParentZaak= this.zgwClient.getZaakByIdentificatie(heeftBetrekkingOpAndere.gerelateerde.identificatie);
 					if (zgwParentZaak == null) {
-							throw new RuntimeException("Zaak with identification " + heeftBetrekkingOpAndere.gerelateerde.identificatie + " not found in ZGW");
+							throw new ConverterException("Zaak with identification '" + heeftBetrekkingOpAndere.gerelateerde.identificatie + "' not found in ZGW");
 					}
 					zgwClient.addChildZaakToZaak(zgwParentZaak, zgwZaak);
 				}		
@@ -157,7 +158,7 @@ public class ZaakService {
 		log.debug("updateZaak:" + zdsWordtZaak.identificatie);
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zdsWordtZaak.identificatie);
 		if (zgwZaak == null) {
-			throw new RuntimeException("Zaak with identification " + zdsWordtZaak.identificatie + " not found in ZGW");
+			throw new ConverterException("Zaak with identification: '" + zdsWordtZaak.identificatie + "' not found in ZGW");
 		}
 		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
 
@@ -581,7 +582,7 @@ public class ZaakService {
 
 		ZgwInformatieObjectType zgwInformatieObjectType = this.zgwClient.getZgwInformatieObjectTypeByOmschrijving(zgwZaakType, zdsInformatieObject.omschrijving);
 		if (zgwInformatieObjectType == null) {
-			throw new RuntimeException("Documenttype not found for omschrijving: " + zdsInformatieObject.omschrijving + " in zaaktype:" + zgwZaakType.identificatie + " (" + zgwZaakType.omschrijving + ")");
+			throw new ConverterException("Documenttype not found for: '" + zdsInformatieObject.omschrijving + "' in zaaktype:" + zgwZaakType.identificatie + " (" + zgwZaakType.omschrijving + ")");
 		}
 
 
@@ -995,7 +996,7 @@ public class ZaakService {
 
 		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(zdsWasInformatieObject.identificatie);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
-			throw new RuntimeException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed");
+			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed");
 		}
 
 
