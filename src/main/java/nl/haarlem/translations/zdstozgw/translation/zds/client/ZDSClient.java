@@ -71,6 +71,7 @@ public class ZDSClient {
 
 			String debugName = "ZDSClient POST";
 			debug.startpoint(debugName, zdsRequestBody);
+			debug.infopoint("url", zdsUrl);
 			int responsecode = (Integer) debug.outputpoint("statusCode", () -> {
 				return httpclient.executeMethod(method);
 			}, (IOException)null);

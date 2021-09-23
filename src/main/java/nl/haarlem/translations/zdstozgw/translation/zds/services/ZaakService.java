@@ -27,6 +27,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionException;
 import org.springframework.stereotype.Service;
 
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
@@ -134,19 +135,21 @@ public class ZaakService {
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsGemachtigde, zgwRolOmschrijving.getHeeftAlsGemachtigde());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsOverigBetrokkene, zgwRolOmschrijving.getHeeftAlsOverigBetrokkene());
 
-		setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);
 		// subzaak ( eigenlijk heeftBetrekkingOpAndere )
 		if(zdsZaak.heeftBetrekkingOpAndere != null) {
 			for(ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere: zdsZaak.heeftBetrekkingOpAndere) {
 				if(heeftBetrekkingOpAndere.gerelateerde != null  && "ZAK".equals(heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
 					ZgwZaak zgwParentZaak= this.zgwClient.getZaakByIdentificatie(heeftBetrekkingOpAndere.gerelateerde.identificatie);
 					if (zgwParentZaak == null) {
-							throw new RuntimeException("Zaak with identification " + heeftBetrekkingOpAndere.gerelateerde.identificatie + " not found in ZGW");
+							throw new ConverterException("Zaak with identification '" + heeftBetrekkingOpAndere.gerelateerde.identificatie + "' not found in ZGW");
 					}
 					zgwClient.addChildZaakToZaak(zgwParentZaak, zgwZaak);
 				}		
 			}
 		}
+
+		// last, the resultaat and status (lastly, since it things go wrong, it is often over here) 
+		setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);		
 		
 		return zgwZaak;
 	}
@@ -155,7 +158,7 @@ public class ZaakService {
 		log.debug("updateZaak:" + zdsWordtZaak.identificatie);
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zdsWordtZaak.identificatie);
 		if (zgwZaak == null) {
-			throw new RuntimeException("Zaak with identification " + zdsWordtZaak.identificatie + " not found in ZGW");
+			throw new ConverterException("Zaak with identification: '" + zdsWordtZaak.identificatie + "' not found in ZGW");
 		}
 		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
 
@@ -238,13 +241,47 @@ public class ZaakService {
 		}
 	}
 
-	private boolean setResultaatAndStatus(ZdsZaak zdsZaak, ZgwZaak zgwZaak, ZgwZaakType zgwZaakType) {
-		var changed = false;
+	private String convertZdsStatusDatumtoZgwDateTime(ZgwZaak zgwZaak, String zdsStatusDatum) {
+		var formatter = new SimpleDateFormat("yyyyMMdd00000000");
+		var dagstart = formatter.format(new Date());
+		formatter = new SimpleDateFormat("yyyyMMddHHmmssSS");
+		if(zdsStatusDatum == null || zdsStatusDatum.length() == 0) {
+			debugWarning("no statusdatetime provided, using now()");
+			zdsStatusDatum = formatter.format(new Date());
+		}
+		else if(zdsStatusDatum.length() < 16) {
+			// maken it length of 16
+			zdsStatusDatum = zdsStatusDatum + StringUtils.repeat("0", 16 - zdsStatusDatum.length());
+		}
 
+		if(dagstart.startsWith(zdsStatusDatum)) {
+			debugWarning("statusdatetime contains no time, using now() (DatumGezet, has to be unique)");
+			zdsStatusDatum = formatter.format(new Date());
+		}
+
+		var zgwStatusDatumTijd = (ModelMapperConfig.convertStufDateTimeToZgwDateTime(zdsStatusDatum));
+		if(zgwStatusDatumTijd.endsWith("T00:00:00.000000Z")) {
+			// The combination of zaak-uuid with datetime should be unique...
+			// We only do this, when we have a datetime, thus when time without seconds
+			int index = this.zgwClient.getStatussenByZaakUrl(zgwZaak.url).size();
+			zgwStatusDatumTijd = (ModelMapperConfig.convertStufDateTimeToZgwDateTime(zdsStatusDatum, index));
+		}
+		return zgwStatusDatumTijd;
+	}
+	
+	public boolean setResultaatAndStatus(ZdsZaak zdsZaak, ZgwZaak zgwZaak, ZgwZaakType zgwZaakType) {
+		var changed = false;
+		var beeindigd = false;
+
+		// if there is a resultaat		
 		if (zdsZaak.resultaat != null && zdsZaak.resultaat.omschrijving != null && zdsZaak.resultaat.omschrijving.length() > 0) {
 			var resultaatomschrijving = zdsZaak.resultaat.omschrijving;
 			log.debug("Update of zaakid:" + zdsZaak.identificatie + " wants resultaat to be changed to:" + resultaatomschrijving );
 			var zgwResultaatType = this.zgwClient.getResultaatTypeByZaakTypeAndOmschrijving(zgwZaakType, resultaatomschrijving);
+			if(zgwResultaatType == null) {
+				throw new ConverterException("Resultaattype: " + resultaatomschrijving + " niet gevonden bij Zaaktype: " + zgwZaakType.identificatie);							
+			}
+			
 			var resultaten = this.zgwClient.getResultatenByZaakUrl(zgwZaak.url);
 
 			// remove any existing resultaten (we only want to have 1)
@@ -257,6 +294,7 @@ public class ZaakService {
 			zgwResultaat.resultaattype = zgwResultaatType.url;
 			zgwResultaat.toelichting = zdsZaak.resultaat.omschrijving;
 			this.zgwClient.addZaakResultaat(zgwResultaat);
+			changed = true;			
 		}
 
 		// if there is a status
@@ -283,35 +321,9 @@ public class ZaakService {
 						// in ZGW:
 						//	- resultaat an reference and status has to be set to the one with the highest volgnummer
 						zdsStatusDatum = zdsZaak.einddatum;
+						beeindigd = true;
 					}
-
-
-					var formatter = new SimpleDateFormat("yyyyMMdd00000000");
-					var dagstart = formatter.format(new Date());
-					formatter = new SimpleDateFormat("yyyyMMddHHmmssSS");
-					if(zdsStatusDatum == null || zdsStatusDatum.length() == 0) {
-						debugWarning("no statusdatetime provided, using now()");
-						zdsStatusDatum = formatter.format(new Date());
-					}
-					else if(zdsStatusDatum.length() < 16) {
-						// maken it length of 16
-						zdsStatusDatum = zdsStatusDatum + StringUtils.repeat("0", 16 - zdsStatusDatum.length());
-					}
-
-					if(dagstart.startsWith(zdsStatusDatum)) {
-						debugWarning("statusdatetime contains no time, using now() (DatumGezet, has to be unique)");
-						zdsStatusDatum = formatter.format(new Date());
-					}
-
-					var zgwStatusDatumTijd = (ModelMapperConfig.convertStufDateTimeToZgwDateTime(zdsStatusDatum));
-					if(zgwStatusDatumTijd.endsWith("T00:00:00.000000Z")) {
-						// The combination of zaak-uuid with datetime should be unique...
-						// We only do this, when we have a datetime, thus when time without seconds
-						int index = this.zgwClient.getStatussenByZaakUrl(zgwZaak.url).size();
-						zgwStatusDatumTijd = (ModelMapperConfig.convertStufDateTimeToZgwDateTime(zdsStatusDatum, index));
-					}
-
-					zgwStatus.setDatumStatusGezet(zgwStatusDatumTijd);
+					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsStatusDatum));
 					this.zgwClient.addZaakStatus(zgwStatus);
 					changed = true;
 				}
@@ -320,6 +332,39 @@ public class ZaakService {
 				}
 			}
 		}
+		
+		// beeindigZaakWanneerEinddatum logica
+		if(zdsZaak.einddatum != null && zdsZaak.einddatum.length() > 0 && !beeindigd) {
+			for(var beeindig : this.configService.getConfiguration().getBeeindigZaakWanneerEinddatum() ) {
+				if(beeindig.zaakType.equals(zgwZaakType.getIdentificatie())) {
+					// is the result also missing?
+					var resultaten = this.zgwClient.getResultatenByZaakUrl(zgwZaak.url);
+					if(resultaten.size() == 0) {
+						var zgwResultaatType = this.zgwClient.getResultaatTypeByZaakTypeAndOmschrijving(zgwZaakType, beeindig.coalesceResultaat);
+						if(zgwResultaatType == null) {
+							throw new ConverterException("Resultaattype: '" + beeindig.coalesceResultaat + "' niet gevonden bij Zaaktype:'" + zgwZaakType.identificatie + "'");							
+						}
+						ZgwResultaat zgwResultaat = new ZgwResultaat();
+						zgwResultaat.zaak = zgwZaak.url;
+						zgwResultaat.resultaattype = zgwResultaatType.url;
+						zgwResultaat.toelichting = zgwResultaatType.omschrijving;
+						debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no resultaat, zaak will get resultaat:'" + zgwResultaatType.getOmschrijving() + "'");
+						this.zgwClient.addZaakResultaat(zgwResultaat);						
+					}
+								
+					var zgwStatusType = this.zgwClient.getLastStatusTypeByZaakType(zgwZaakType);					
+					ZgwStatus zgwStatus = new ZgwStatus();
+					zgwStatus.zaak = zgwZaak.url;
+					zgwStatus.statustype = zgwStatusType.url;
+					zgwStatus.statustoelichting = zgwStatusType.omschrijving;
+					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsZaak.einddatum));
+					debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no eindstatus, zaak will get status:'" + zgwStatusType.getOmschrijving() + "' with time:" + zgwStatus.getDatumStatusGezet());
+					this.zgwClient.addZaakStatus(zgwStatus);
+					beeindigd = true;
+					changed = true;
+				}
+			}
+		}		
 		return changed;
 	}
 
@@ -531,13 +576,13 @@ public class ZaakService {
 		var zaakIdentificatie = zdsInformatieObject.isRelevantVoor.gerelateerde.identificatie;
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zaakIdentificatie);
 		if (zgwZaak == null) {
-			throw new RuntimeException("Zaak not found for identificatie: " + zaakIdentificatie);
+			throw new ConverterException("Zaak not found for identificatie: " + zaakIdentificatie);
 		}
 		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
 
 		ZgwInformatieObjectType zgwInformatieObjectType = this.zgwClient.getZgwInformatieObjectTypeByOmschrijving(zgwZaakType, zdsInformatieObject.omschrijving);
 		if (zgwInformatieObjectType == null) {
-			throw new RuntimeException("Documenttype not found for omschrijving: " + zdsInformatieObject.omschrijving + " in zaaktype:" + zgwZaakType.identificatie + " (" + zgwZaakType.omschrijving + ")");
+			throw new ConverterException("Documenttype not found for: '" + zdsInformatieObject.omschrijving + "' in zaaktype:" + zgwZaakType.identificatie + " (" + zgwZaakType.omschrijving + ")");
 		}
 
 
@@ -578,9 +623,13 @@ public class ZaakService {
 			ter_vaststelling - (Ter vaststelling) Informatieobject gereed maar moet nog vastgesteld worden.
 			definitief - (Definitief) Informatieobject door bevoegd iets of iemand vastgesteld dan wel ontvangen.
 			gearchiveerd - (Gearchiveerd) Informatieobject duurzaam bewaarbaar gemaakt; een gearchiveerd informatie-element.
-			*/
+			*/			
 			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.replace(" ", "_");
-			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.toLowerCase();							
+			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.toLowerCase();
+			if(!List.of("in_bewerking", "ter_vaststelling", "definitief", "gearchiveerd").contains(zgwEnkelvoudigInformatieObject.status)) {
+				debugWarning("document-status: '" + zgwEnkelvoudigInformatieObject.status + "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
+				zgwEnkelvoudigInformatieObject.status = null;
+			}
 		}			
 		zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(zgwEnkelvoudigInformatieObject);
 		ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
@@ -947,7 +996,7 @@ public class ZaakService {
 
 		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(zdsWasInformatieObject.identificatie);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
-			throw new RuntimeException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed");
+			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed");
 		}
 
 

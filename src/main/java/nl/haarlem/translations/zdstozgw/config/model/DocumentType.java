@@ -22,11 +22,8 @@ import lombok.Data;
 
 @Data
 public class DocumentType {
-
-	@SerializedName("documentType")
 	@Expose
 	public String documentType;
-	@SerializedName("omschrijving")
 	@Expose
 	public String omschrijving;
 }

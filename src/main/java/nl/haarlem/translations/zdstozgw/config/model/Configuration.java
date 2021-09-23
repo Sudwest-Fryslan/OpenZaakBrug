@@ -24,30 +24,23 @@ import lombok.Data;
 
 @Data
 public class Configuration {
-	@SerializedName("requestHandlerImplementation")
 	@Expose
 	public String requestHandlerImplementation = null;
-
-	@SerializedName("organisaties")
 	@Expose
 	public List<Organisatie> organisaties = null;
-
-	@SerializedName("zgwRolOmschrijving")
 	@Expose
 	public ZgwRolOmschrijving zgwRolOmschrijving = null;
-
-	@SerializedName("replication")
+	@Expose
+	public List<BeeindigZaakWanneerEinddatum> beeindigZaakWanneerEinddatum = null;	
 	@Expose
 	public Replication replication = null;
-
-	@SerializedName("translations")
 	@Expose
 	public List<Translation> translations = null;
-
+	
 	public String getTranslationsString() {
 		String combinations = "";
 		for (Translation t : this.getTranslations()) {
-			combinations += "\n\tpath: './" + t.getPath() + "' soapaction: '" + t.getSoapAction() + "'";
+			combinations += "\n\tpath: './" + t.getPath() + "' soapaction: '" + t.getSoapaction() + "'";
 		}
 		return combinations;
 	}

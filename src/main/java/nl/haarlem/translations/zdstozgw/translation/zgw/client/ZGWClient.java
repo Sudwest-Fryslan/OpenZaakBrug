@@ -117,10 +117,9 @@ public class ZGWClient {
 				exchangeDuration[1] = System.currentTimeMillis();
 				return response;
 			});
-			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
-			var message = "POST to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			var message = "POST to: " + url + " took " + duration + " milliseconds";
 			log.debug(message);
 			debug.infopoint("Duration", message);
 			log.debug("POST response: " + zgwResponse);
@@ -166,10 +165,9 @@ public class ZGWClient {
 				exchangeDuration[1] = System.currentTimeMillis();
 				return response.getBody();
 			});
-			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
-			var message = "GET to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			var message = "GET to: " + url + " took " + duration + " milliseconds";
 			log.debug(message);
 			debug.infopoint("Duration", message);
 			log.debug("GET response: " + zgwResponse);
@@ -204,10 +202,9 @@ public class ZGWClient {
 				exchangeDuration[1] = System.currentTimeMillis();
 				return response.getBody();
 			});
-			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
-			var message = "DELETE to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			var message = "DELETE to: " + url + " took " + duration + " milliseconds";
 			log.debug(message);
 			debug.infopoint("Duration", message);
 			log.debug("DELETE response: " + zgwResponse);
@@ -242,10 +239,9 @@ public class ZGWClient {
 				exchangeDuration[1] = System.currentTimeMillis();
 				return response.getBody();
 			});
-			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
-			var message = "PUT to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			var message = "PUT to: " + url + " took " + duration + " milliseconds";
 			log.debug(message);
 			debug.infopoint("Duration", message);
 			log.debug("PUT response: " + zgwResponse);
@@ -282,10 +278,9 @@ public class ZGWClient {
 				exchangeDuration[1] = System.currentTimeMillis();
 				return response.getBody();
 			});
-			var innerDuration = exchangeDuration[1] - exchangeDuration[0];
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
-			var message = "PATCH to: " + url + " took " + innerDuration + "/" + duration + " milliseconds";
+			var message = "PATCH to: " + url + " took " + duration + " milliseconds";
 			log.debug(message);
 			debug.infopoint("Duration", message);
 			log.debug("PATCH response: " + zgwResponse);
@@ -359,11 +354,15 @@ public class ZGWClient {
 		log.debug("GET(BASE64): " + url);
 		HttpEntity entity = new HttpEntity(this.restTemplateService.getHeaders());
 		try {
+			long startTime = System.currentTimeMillis();
 			String finalUrl = url;
 			byte[] data = (byte[]) debug.endpoint(debugName, () -> {
 				return this.restTemplateService.getRestTemplate()
 						.exchange(finalUrl, HttpMethod.GET, entity, byte[].class).getBody();
 			});
+			long endTime = System.currentTimeMillis();
+			var duration = endTime - startTime;
+			var message = "GET from: " + url + " took " + duration + " milliseconds";			
 			log.debug("BASE64 INHOUD DOWNLOADED:" + (data == null ? "[null], is openzaak dms-broken?" : data.length + " bytes"));
 			return java.util.Base64.getEncoder().encodeToString(data);
 
@@ -645,6 +644,18 @@ public class ZGWClient {
 		List<ZgwStatusType> statustypes = this.getStatusTypes(parameters);
 		return statustypes;
 	}
+	
+	
+	public ZgwStatusType getLastStatusTypeByZaakType(ZgwZaakType zgwZaakType) {
+		Map<String, String> parameters = new HashMap();
+		parameters.put("zaaktype", zgwZaakType.url);
+		for(ZgwStatusType statustype : this.getStatusTypes(parameters)) {
+			if("true".equals(statustype.isEindstatus)) {
+				return statustype;
+			}			
+		}		
+		return null;
+	}	
 
 	public ZgwStatusType getStatusTypeByZaakTypeAndOmschrijving(ZgwZaakType zaakType, String statusOmschrijving, String verwachteVolgnummer) {
 		Map<String, String> parameters = new HashMap();

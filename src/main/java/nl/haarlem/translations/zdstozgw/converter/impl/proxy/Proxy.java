@@ -47,7 +47,7 @@ public class Proxy extends Converter {
 	@Override
 	public ResponseEntity<?> execute() throws ConverterException {
 		var url = this.getTranslation().getLegacyservice();
-		var soapaction = this.getTranslation().getSoapAction();
+		var soapaction = this.getTranslation().getSoapaction();
 		var request = this.getSession().getClientRequestBody();
 
 		this.getSession().setFunctie("Proxy");

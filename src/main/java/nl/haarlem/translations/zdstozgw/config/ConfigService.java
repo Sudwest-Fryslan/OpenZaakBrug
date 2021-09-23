@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
 import lombok.Data;
+import nl.haarlem.translations.zdstozgw.config.model.BeeindigZaakWanneerEinddatum;
 import nl.haarlem.translations.zdstozgw.config.model.Configuration;
 import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
@@ -76,6 +77,13 @@ public class ConfigService {
 		log.debug("heeftAlsGemachtigde:" + rolomschrijving.getHeeftAlsGemachtigde());
 		log.debug("heeftAlsOverigeBetrokkene:" + rolomschrijving.getHeeftAlsOverigBetrokkene());
 
+		this.configuration.getBeeindigZaakWanneerEinddatum().size();
+		log.debug("=== beeindigZaakWanneerEinddatum ===");
+		for (BeeindigZaakWanneerEinddatum beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
+			log.debug("zaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
+			log.debug("coalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
+		}
+		
 		var replicatie = this.configuration.getReplication();
 		log.debug("=== replicatie ===");
 		log.debug("geefZaakDetailsAction:" + replicatie.getGeefZaakdetails().getSoapaction());
@@ -90,7 +98,7 @@ public class ConfigService {
 		for (Translation translation : this.configuration.getTranslations()) {
 			log.debug("translation:" + translation.getTranslation());
 			log.debug("path:" + translation.getPath());
-			log.debug("soapAction:" + translation.getSoapAction());
+			log.debug("soapAction:" + translation.getSoapaction());
 			log.debug("template:" + translation.getTemplate());
 			log.debug("implementation:" + translation.getImplementation());
 			log.debug("legacyservice:" + translation.getLegacyservice());
@@ -100,9 +108,9 @@ public class ConfigService {
 	public Translation getTranslationByPathAndSoapAction(String path, String soapAction) {
 		log.debug("searching first translaton for : /" + path + "/ with soapaction: " + soapAction);
 		for (Translation translation : this.configuration.getTranslations()) {
-			log.debug("\t checking path '" + translation.getPath() + "' with action: '" + translation.getSoapAction()
+			log.debug("\t checking path '" + translation.getPath() + "' with action: '" + translation.getSoapaction()
 					+ "'");
-			if (path.equals(translation.getPath()) && soapAction.equals(translation.getSoapAction())) {
+			if (path.equals(translation.getPath()) && soapAction.equals(translation.getSoapaction())) {
 				return translation;
 			}
 		}
