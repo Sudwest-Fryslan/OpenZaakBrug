@@ -521,10 +521,10 @@ public class ZaakService {
 				.getZaakInformatieObjectenByZaak(zgwZaak.url)) {
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
 					.getZaakDocumentByUrl(zgwZaakInformatieObject.informatieobject);
-			if (zgwEnkelvoudigInformatieObject == null) {
+			if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
 				throw new ConverterException("could not get the zaakdocument: "
 						+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);
-			}
+			}			
 			ZgwInformatieObjectType documenttype = this.zgwClient
 					.getZgwInformatieObjectTypeByUrl(zgwEnkelvoudigInformatieObject.informatieobjecttype);
 			if (documenttype == null) {
