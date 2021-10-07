@@ -21,21 +21,17 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class ZgwZaakInformatieObject {
+public class ZgwObjectInformatieObject {
 	@Expose
-	public String url;
+	public String url;	
 	@Expose
 	public String uuid;
 	@Expose
-	public String informatieobject;
+	public String informatieobject;	
 	@Expose
-	public String zaak;
+	public String object;
 	@Expose
 	public String aardRelatieWeergave;
 	@Expose
-	public String titel;
-	@Expose
-	public String beschrijving;
-	@Expose
-	public String registratiedatum;
+	public String objectType;
 }
