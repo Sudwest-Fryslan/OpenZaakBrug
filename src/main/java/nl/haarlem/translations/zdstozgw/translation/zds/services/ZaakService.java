@@ -57,6 +57,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInfo
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwKenmerk;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwObjectInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
@@ -517,8 +518,13 @@ public class ZaakService {
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zaakidentificatie);
 
 		var relevanteDocumenten = new ArrayList<ZdsHeeftRelevant>();
-		for (ZgwZaakInformatieObject zgwZaakInformatieObject : this.zgwClient
-				.getZaakInformatieObjectenByZaak(zgwZaak.url)) {
+		var zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(zgwZaak.url);
+		if(this.zgwClient.additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching && zgwZaakInformatieObjecten.size() > 0) {
+			// fill the cache in the drc if needed 
+			var zgwObjectInformatieObjecten = this.zgwClient.getObjectInformatieObjectByObject(zgwZaak.url);
+			debugWarning("Retrieved ObjectInformatieObjecten to fill the cache on the (CMIS-)DRC (call not needed for ZdsToZgw)");
+		}	
+		for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
 					.getZaakDocumentByUrl(zgwZaakInformatieObject.informatieobject);
 			if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
@@ -531,41 +537,13 @@ public class ZaakService {
 				throw new ConverterException("getZgwInformatieObjectType #"
 						+ zgwEnkelvoudigInformatieObject.informatieobjecttype + " could not be found");
 			}
-			/*
-			 * if(zgwEnkelvoudigInformatieObject == null) { throw new
-			 * ConverterException("ZgwEnkelvoudigInformatieObject #" + documentIdentificatie
-			 * + " could not be found"); } ZgwInformatieObjectType documenttype =
-			 * zgwClient.getZgwInformatieObjectTypeByÙrl(zgwEnkelvoudigInformatieObject.
-			 * informatieobjecttype); if(documenttype == null) { throw new
-			 * ConverterException("getZgwInformatieObjectType #" +
-			 * zgwEnkelvoudigInformatieObject.informatieobjecttype + " could not be found");
-			 * } var zgwZaakInformatieObject =
-			 * zgwClient.getZgwZaakInformatieObjectByEnkelvoudigInformatieObjectUrl(
-			 * zgwEnkelvoudigInformatieObject.getUrl()); if(zgwZaakInformatieObject == null)
-			 * { throw new ConverterException("getZgwZaakInformatieObjectByUrl #" +
-			 * zgwEnkelvoudigInformatieObject.getUrl() + " could not be found"); } var
-			 * zgwZaak = zgwClient.getZaakByUrl(zgwZaakInformatieObject.getZaak());
-			 * if(zgwZaak == null) { throw new ConverterException("getZaakByUrl #" +
-			 * zgwZaakInformatieObject.getZaak() + " could not be found"); } String inhoud =
-			 * zgwClient.getBas64Inhoud(zgwEnkelvoudigInformatieObject.getInhoud());
-			 * if(inhoud == null) { throw new ConverterException("getBas64Inhoud #" +
-			 * zgwEnkelvoudigInformatieObject.getInhoud() + " could not be found"); }
-			 *
-			 *
-			 * ZdsZaakDocumentInhoud result =
-			 * modelMapper.map(zgwEnkelvoudigInformatieObject, ZdsZaakDocumentInhoud.class);
-			 * result.inhoud = new ZdsInhoud(); var mimeType =
-			 * URLConnection.guessContentTypeFromName(zgwEnkelvoudigInformatieObject.
-			 * bestandsnaam); // documenttype result.omschrijving =
-			 * documenttype.omschrijving;
-			 *
-			 */
 			ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject,
 					ZdsZaakDocument.class);
 			zdsZaakDocument.omschrijving = documenttype.omschrijving;
 			ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
 			heeftRelevant.gerelateerde = zdsZaakDocument;
 			relevanteDocumenten.add(heeftRelevant);
+
 		}
 		return relevanteDocumenten;
 	}

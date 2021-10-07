@@ -42,6 +42,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.QueryResult;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwObjectInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaatType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
@@ -92,12 +93,18 @@ public class ZGWClient {
 	@Value("${zgw.endpoint.enkelvoudiginformatieobject:/documenten/api/v1/enkelvoudiginformatieobjecten}")
 	private String endpointEnkelvoudiginformatieobject;
 
+	@Value("${zgw.endpoint.objectinformatieobject:/documenten/api/v1/objectinformatieobjecten}")
+	private String endpointObjectinformatieobject;
+
 	@Value("${zgw.endpoint.zaak:/zaken/api/v1/zaken}")
 	private String endpointZaak;
 
 	@Value("${zgw.endpoint.informatieobjecttype:/catalogi/api/v1/informatieobjecttypen}")
 	private String endpointInformatieobjecttype;
 
+	@Value("${nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching:true}")
+	public Boolean additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching;
+	
 	@Autowired
 	RestTemplateService restTemplateService;
 
@@ -837,5 +844,21 @@ public class ZGWClient {
 			}
 		}
 		this.patchZaak(zgwChildZaak.uuid, zgwChildZaak);
+	}
+
+	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(Map<String, String> parameters) {
+		// Fetch ObjectInformatieObject
+		var objectInformatieObjectJson = get(this.baseUrl + this.endpointObjectinformatieobject, parameters);
+
+		Gson gson = new Gson();
+		Type documentList = new TypeToken<ArrayList<ZgwObjectInformatieObject>>() {
+		}.getType();
+		return gson.fromJson(objectInformatieObjectJson, documentList);
+	}	
+	
+	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(String objecturl) {
+		Map<String, String> parameters = new HashMap();
+		parameters.put("object", objecturl);
+		return this.getObjectInformatieObjectByObject(parameters);
 	}
 }
