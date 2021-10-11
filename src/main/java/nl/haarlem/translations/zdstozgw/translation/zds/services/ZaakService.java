@@ -136,18 +136,21 @@ public class ZaakService {
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsGemachtigde, zgwRolOmschrijving.getHeeftAlsGemachtigde());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsOverigBetrokkene, zgwRolOmschrijving.getHeeftAlsOverigBetrokkene());
 
-		// subzaak ( eigenlijk heeftBetrekkingOpAndere )
+		// parent-zaak
 		if(zdsZaak.heeftBetrekkingOpAndere != null) {
 			for(ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere: zdsZaak.heeftBetrekkingOpAndere) {
 				if(heeftBetrekkingOpAndere.gerelateerde != null  && "ZAK".equals(heeftBetrekkingOpAndere.gerelateerde.entiteittype)) {
 					ZgwZaak zgwParentZaak= this.zgwClient.getZaakByIdentificatie(heeftBetrekkingOpAndere.gerelateerde.identificatie);
 					if (zgwParentZaak == null) {
-							throw new ConverterException("Zaak with identification '" + heeftBetrekkingOpAndere.gerelateerde.identificatie + "' not found in ZGW");
+							// throw new ConverterException("Zaak with identification '" + heeftBetrekkingOpAndere.gerelateerde.identificatie + "' not found in ZGW");
+						debugWarning("Setting relation to parent-zaak with identification '" + heeftBetrekkingOpAndere.gerelateerde.identificatie + "' not found in ZGW (referenced from within zaak:" + zdsZaak.identificatie + ")");
 					}
 					zgwClient.addChildZaakToZaak(zgwParentZaak, zgwZaak);
 				}		
 			}
 		}
+		
+		// todo: child-zaak
 
 		// last, the resultaat and status (lastly, since it things go wrong, it is often over here) 
 		setResultaatAndStatus(zdsZaak, zgwZaak, zgwZaakType);		
