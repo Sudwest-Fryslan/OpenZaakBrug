@@ -136,6 +136,63 @@ public class ZaakService {
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsGemachtigde, zgwRolOmschrijving.getHeeftAlsGemachtigde());
 		addRolToZgw(zgwZaak, zgwZaakType, zdsZaak.heeftAlsOverigBetrokkene, zgwRolOmschrijving.getHeeftAlsOverigBetrokkene());
 
+		
+		/*
+            <object StUF:sleutelVerzendend="184105" StUF:entiteittype="ZAK">
+               <identificatie>1900207494</identificatie>
+				....
+               <heeftAlsHoofdzaak xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKZAKHFD"/>
+               <heeftBetrekkingOpAndere StUF:entiteittype="ZAKZAKBTR">
+                  <gerelateerde StUF:entiteittype="ZAK">
+                     <identificatie>1900242904</identificatie>
+                     <omschrijving>Aanvraag Begeleiding ind.</omschrijving>
+                     <isVan StUF:entiteittype="ZAKZKT">
+                        <gerelateerde StUF:entiteittype="ZKT">
+                           <omschrijving>Aanvraag Begeleiding individueel</omschrijving>
+                           <code>B1577</code>
+                        </gerelateerde>
+                     </isVan>
+                  </gerelateerde>
+               </heeftBetrekkingOpAndere>
+               <heeftBetrekkingOpAndere StUF:entiteittype="ZAKZAKBTR">
+                  <gerelateerde StUF:entiteittype="ZAK">
+                     <identificatie>1900330334</identificatie>
+                     <omschrijving>Aanvraag Begeleiding ind.</omschrijving>
+                     <isVan StUF:entiteittype="ZAKZKT">
+                        <gerelateerde StUF:entiteittype="ZKT">
+                           <omschrijving>Aanvraag Begeleiding individueel</omschrijving>
+                           <code>B1577</code>
+                        </gerelateerde>
+                     </isVan>
+                  </gerelateerde>
+               </heeftBetrekkingOpAndere>
+				....
+              </object>
+            
+            
+            <object StUF:sleutelVerzendend="215427" StUF:entiteittype="ZAK">
+               <identificatie>1900242904</identificatie>
+				....
+               <heeftAlsHoofdzaak xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKZAKHFD"/>
+               <heeftBetrekkingOpAndere StUF:entiteittype="ZAKZAKBTR">
+                  <gerelateerde StUF:entiteittype="ZAK">
+                     <identificatie>1900207494</identificatie>
+                     <omschrijving>Ondersteuningsplan D009757</omschrijving>
+                     <isVan StUF:entiteittype="ZAKZKT">
+                        <gerelateerde StUF:entiteittype="ZKT">
+                           <omschrijving>Planzaak</omschrijving>
+                           <code>B1647</code>
+                        </gerelateerde>
+                     </isVan>
+                  </gerelateerde>
+               </heeftBetrekkingOpAndere>
+               ....
+			   
+            </object>
+            
+            
+		 */
+		
 		// parent-zaak
 		if(zdsZaak.heeftBetrekkingOpAndere != null) {
 			for(ZdsHeeftBetrekkingOpAndere heeftBetrekkingOpAndere: zdsZaak.heeftBetrekkingOpAndere) {
