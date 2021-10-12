@@ -125,7 +125,7 @@ public class ZaakService {
 		}
 
 		zgwZaak = this.zgwClient.addZaak(zgwZaak);
-		log.debug("When d a ZGW Zaak with UUID: " + zgwZaak.getUuid());
+		log.debug("Created a ZGW Zaak with UUID: " + zgwZaak.getUuid());
 
 		// rollen
 		ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
