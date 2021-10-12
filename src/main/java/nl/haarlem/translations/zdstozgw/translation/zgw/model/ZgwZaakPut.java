@@ -92,7 +92,7 @@ public class ZgwZaakPut {
 	public String hoofdzaak  = null;
 	@SerializedName("relevanteAndereZaken")
 	@Expose
-	public List<Object> relevanteAndereZaken = null;
+	public List<ZgwAndereZaak> relevanteAndereZaken = null;
 	@SerializedName("kenmerken")
 	@Expose
 	public List<ZgwKenmerk> kenmerk = null;

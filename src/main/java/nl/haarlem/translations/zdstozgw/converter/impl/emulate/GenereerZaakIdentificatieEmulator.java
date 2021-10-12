@@ -45,6 +45,12 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ConverterException {
+		/*
+ 			zaakidentificatie, hiervoor gelden de volgende regels (genomen uit RGBZ):
+			1e 4 posities: gemeentecode van de gemeente die verantwoordelijk is voor de behandeling van de zaak;
+			pos. 5 – 40: alle alfanumerieke tekens m.u.v. diacrieten  
+		 */
+		
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
 		var prefixparam = repository.getOne("ZaakIdentificatiePrefix");
 		var idparam = repository.getOne("ZaakIdentificatieHuidige");
