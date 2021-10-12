@@ -39,6 +39,7 @@ import com.google.gson.reflect.TypeToken;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.QueryResult;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAndereZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
@@ -846,6 +847,21 @@ public class ZGWClient {
 		this.patchZaak(zgwChildZaak.uuid, zgwChildZaak);
 	}
 
+	public void addRelevanteAndereZaakToZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie) {
+		if(zgwZaak.verlenging != null) {
+			if(zgwZaak.verlenging.duur == null) {
+				zgwZaak.verlenging = null;
+			}
+		}
+		var relevanteAndereZaak = new ZgwAndereZaak();
+		relevanteAndereZaak.url = andereZaak.url;
+		// https://www.gemmaonline.nl/index.php/Imztc_2.2/doc/enumeration/aardrelatie
+		// 	Moet dus zijn: bijdrage / onderwerp / vervolg
+		relevanteAndereZaak.aardRelatie = aardRelatie;
+		zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
+		this.patchZaak(zgwZaak.uuid, zgwZaak);
+	}	
+	
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(Map<String, String> parameters) {
 		// Fetch ObjectInformatieObject
 		var objectInformatieObjectJson = get(this.baseUrl + this.endpointObjectinformatieobject, parameters);
