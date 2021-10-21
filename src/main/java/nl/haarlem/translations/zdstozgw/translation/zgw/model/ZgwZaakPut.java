@@ -133,6 +133,7 @@ public class ZgwZaakPut {
 		result.archiefstatus = changes.archiefstatus != null ? changes.archiefstatus : original.archiefstatus;
 		result.archiefactiedatum = changes.archiefactiedatum != null ? changes.archiefactiedatum
 				: original.archiefactiedatum;
+        result.omschrijving = changes.omschrijving != null ? changes.omschrijving : original.omschrijving;
 		return result;
 	}
 }
