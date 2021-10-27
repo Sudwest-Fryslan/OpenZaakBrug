@@ -269,7 +269,20 @@ public class ZaakService {
 		if (wasVsWordtFieldChanges.size() > 0) {
 			log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + wasVsWordtFieldChanges.size() + " field changes");
 			for (Change change : wasVsWordtFieldChanges.keySet()) {
-				log.debug("\tchange:" + change.getField().getName());
+				// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
+				// 		Move code to the ModelMapperConfig.java
+				if("verlenging".equals(change.getField().getName())) {
+					if(change.getCurrentValue() != null) {
+						var verlenging  = (nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging) change.getCurrentValue();
+						verlenging.duur = "P" + verlenging.duur + "D";
+					}
+					if(change.getNewValue() != null) {
+						var verlenging  = (nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging) change.getNewValue();
+						verlenging.duur = "P" + verlenging.duur + "D";
+					}
+				}
+					
+				log.debug("\tchange:" + change.getField().getName());				
 			}
 			ZgwZaakPut zgwWordtZaak = this.modelMapper.map(zdsWordtZaak, ZgwZaakPut.class);
 			ZgwZaakPut updatedZaak = ZgwZaakPut.merge(zgwZaak, zgwWordtZaak);
@@ -882,7 +895,11 @@ public class ZaakService {
 		zaak.verlenging = zgwZaak.getVerlenging() != null
 				? this.modelMapper.map(zgwZaak.getVerlenging(), ZdsVerlenging.class)
 				: null;
-
+		
+		if(zaak.verlenging != null && zaak.verlenging.duur != null) {
+			zaak.verlenging.duur = zaak.verlenging.duur.replace("P", "").replace("Y", "").replace("M", "").replace("D", "");
+		}
+		
 		// heefd deze zaak ook een hoofdzaak
 		var hoofdzaak = zgwZaak.getHoofdzaak();
 		if(hoofdzaak != null) {
