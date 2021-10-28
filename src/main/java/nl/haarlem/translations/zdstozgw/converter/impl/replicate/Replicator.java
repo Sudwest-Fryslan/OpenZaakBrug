@@ -189,9 +189,21 @@ public class Replicator {
             ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(zaakdocumentidentificatie);
             if (zgwEnkelvoudigInformatieObject == null) {
             	debug.infopoint("replicatie", "document not found, copying document with identificatie #" + zaakdocumentidentificatie);
-        		copyDocument(zaakdocumentidentificatie, rsin);
-        		var adg = this.converter.getSession().getAantalDocumentenGerepliceerd();
-        		this.converter.getSession().setAantalDocumentenGerepliceerd(adg + 1);
+            	try {
+            		copyDocument(zaakdocumentidentificatie, rsin);
+                	var adg = this.converter.getSession().getAantalDocumentenGerepliceerd();
+            		this.converter.getSession().setAantalDocumentenGerepliceerd(adg + 1);
+            	}
+            	catch(ConverterException ex) {
+            		debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error" + ex.toString());
+            		// ignore some errors, TODO: make it configureable
+            		if(ex.details.startsWith("Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message: ")) {
+            			debug.infopoint("converter exception", "ignoring:" + ex.details);
+            		}
+            		else {
+            			throw ex;
+            		}
+            	}
             }
             else {
             	// maybe it needs to be attached to the zaak
