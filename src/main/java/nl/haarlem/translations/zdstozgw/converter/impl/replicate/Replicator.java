@@ -76,13 +76,13 @@ public class Replicator {
 		if (zgwZaak == null) {
 			debug.infopoint("replicatie", "zaak not found, copying zaak with identificatie #" + zaakidentificatie);
             copyZaak(zaakidentificatie, rsin);
-        } else if (zgwZaak.getStatus() == "")  {
-        	debug.infopoint("replicatie", "zaak without status, copying status and resultaat for zaak with identificatie #" + zaakidentificatie);
-        	copyStatusAndResultaat(zgwZaak);
+        } else if (zgwZaak.getStatus() != null && zgwZaak.getStatus().length() > 0)  {
+        	debug.infopoint("replicatie", "zaak already found (with status:'" + zgwZaak.getStatus() + "') , no need to copy zaak with identificatie #" + zaakidentificatie);
         }
         else 
         {
-        	debug.infopoint("replicatie", "zaak already found (with a status) , no need to copy zaak with identificatie #" + zaakidentificatie);
+        	debug.infopoint("replicatie", "zaak without status, copying status and resultaat for zaak with identificatie #" + zaakidentificatie);
+        	copyStatusAndResultaat(zgwZaak);
 		}
         List<ZdsHeeftRelevant> relevanteDocumenten = getLijstZaakdocumenten(zaakidentificatie);
         checkVoegZaakDocumentToe(zaakidentificatie, rsin, relevanteDocumenten);
