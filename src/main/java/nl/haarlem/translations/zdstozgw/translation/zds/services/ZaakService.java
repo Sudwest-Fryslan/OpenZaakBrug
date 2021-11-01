@@ -120,13 +120,15 @@ public class ZaakService {
 		}
 
 		// alleen een verlenging meenemen als er echt waarden in staan
-		if(zgwZaak.verlenging != null && (zgwZaak.verlenging.reden == null || zgwZaak.verlenging.reden.length() == 0)) {
-			zgwZaak.verlenging = null;
-		}
-		else {
-			// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
-			// 		Move code to the ModelMapperConfig.java
-			zgwZaak.verlenging.duur = "P" + zgwZaak.verlenging.duur + "D";
+		if(zgwZaak.verlenging != null) {
+			if (zgwZaak.verlenging.reden == null || zgwZaak.verlenging.reden.length() == 0) {
+				zgwZaak.verlenging = null;
+			}
+			else {
+				// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
+				// 		Move code to the ModelMapperConfig.java
+				zgwZaak.verlenging.duur = "P" + zgwZaak.verlenging.duur + "D";
+			}
 		}
 
 		zgwZaak = this.zgwClient.addZaak(zgwZaak);
