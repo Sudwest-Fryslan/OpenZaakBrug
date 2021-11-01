@@ -33,6 +33,7 @@ import nl.haarlem.translations.zdstozgw.config.model.BeeindigZaakWanneerEinddatu
 import nl.haarlem.translations.zdstozgw.config.model.Configuration;
 import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
+import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 
 @Service
 @Data
@@ -57,51 +58,63 @@ public class ConfigService {
 
 	private void validateConfiguration() throws Exception {
 		log.debug("validateConfiguration");
-		log.debug("requestHandlerImplementation:" + this.configuration.getRequestHandlerImplementation());
+		var section = "";
+		try {
+			section = "requestHandlerImplementation";
+			log.debug("=== " + section + " ===");			
+			log.debug("\trequestHandlerImplementation:" + this.configuration.getRequestHandlerImplementation());
 
-		this.configuration.getOrganisaties().size();
-		log.debug("=== organisaties ===");
-		for (Organisatie organisatie : this.configuration.getOrganisaties()) {
-			log.debug("gemeentenaam:" + organisatie.getGemeenteNaam());
-			log.debug("gemeentecode:" + organisatie.getGemeenteCode());
-			log.debug("rsin:" + organisatie.getRSIN());
+			section = "organisaties";
+			log.debug("=== " + section + " #" + this.configuration.getOrganisaties().size() + " ===");
+			for (Organisatie organisatie : this.configuration.getOrganisaties()) {
+				log.debug("\t===>\tgemeentenaam:" + organisatie.getGemeenteNaam());
+				log.debug("\t\tgemeentecode:" + organisatie.getGemeenteCode());
+				log.debug("\t\trsin:" + organisatie.getRSIN());
+			}
+
+			section = "zgwRolOmschrijving";
+			log.debug("=== " + section + " ===");
+			var rolomschrijving = this.configuration.getZgwRolOmschrijving();
+			log.debug("\theeftBetrekkingOp:" + rolomschrijving.getHeeftBetrekkingOp());
+			log.debug("\theeftAlsBelanghebbende:" + rolomschrijving.getHeeftAlsBelanghebbende());
+			log.debug("\theeftAlsInitiator:" + rolomschrijving.getHeeftAlsInitiator());
+			log.debug("\theeftAlsUitvoerende:" + rolomschrijving.getHeeftAlsUitvoerende());
+			log.debug("\theeftAlsVerantwoordelijke:" + rolomschrijving.getHeeftAlsVerantwoordelijke());
+			log.debug("\theeftAlsGemachtigde:" + rolomschrijving.getHeeftAlsGemachtigde());
+			log.debug("\theeftAlsOverigeBetrokkene:" + rolomschrijving.getHeeftAlsOverigBetrokkene());
+	
+			section = "beeindigZaakWanneerEinddatum";
+			log.debug("=== " + section + " #" + this.configuration.getBeeindigZaakWanneerEinddatum().size() + " ===");			
+			for (BeeindigZaakWanneerEinddatum beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
+				log.debug("\t===>\tzaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
+				log.debug("\t\tcoalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
+			}
+
+			section = "replicatie";
+			log.debug("=== " + section + " ===");
+			var replicatie = this.configuration.getReplication();
+			log.debug("\tgeefZaakDetailsAction:" + replicatie.getGeefZaakdetails().getSoapaction());
+			log.debug("\tgeefZaakDetailsUrl:" + replicatie.getGeefZaakdetails().getUrl());
+			log.debug("\tgeefLijstZaakdocumentenAction:" + replicatie.getGeefLijstZaakdocumenten().getSoapaction());
+			log.debug("\tgeefLijstZaakdocumentenUrl:" + replicatie.getGeefLijstZaakdocumenten().getUrl());
+			log.debug("\tgeefZaakDocumentLezenAction:" + replicatie.getGeefZaakdocumentLezen().getSoapaction());
+			log.debug("\tgeefZaakDocumentLezenUrl:" + replicatie.getGeefZaakdocumentLezen().getUrl());
+	
+			section = "translations";
+			log.debug("=== " + section + " #" + this.configuration.getTranslations().size() +  " ===");
+			for (Translation translation : this.configuration.getTranslations()) {
+				log.debug("\t===>\ttranslation:" + translation.getTranslation());
+				log.debug("\t\tpath:" + translation.getPath());
+				log.debug("\t\tsoapAction:" + translation.getSoapaction());
+				log.debug("\t\ttemplate:" + translation.getTemplate());
+				log.debug("\t\timplementation:" + translation.getImplementation());
+				log.debug("\t\tlegacyservice:" + translation.getLegacyservice());
+			}
 		}
-
-		var rolomschrijving = this.configuration.getZgwRolOmschrijving();
-		log.debug("=== rol omschrijvingen ===");
-		log.debug("heeftBetrekkingOp:" + rolomschrijving.getHeeftBetrekkingOp());
-		log.debug("heeftAlsBelanghebbende:" + rolomschrijving.getHeeftAlsBelanghebbende());
-		log.debug("heeftAlsInitiator:" + rolomschrijving.getHeeftAlsInitiator());
-		log.debug("heeftAlsUitvoerende:" + rolomschrijving.getHeeftAlsUitvoerende());
-		log.debug("heeftAlsVerantwoordelijke:" + rolomschrijving.getHeeftAlsVerantwoordelijke());
-		log.debug("heeftAlsGemachtigde:" + rolomschrijving.getHeeftAlsGemachtigde());
-		log.debug("heeftAlsOverigeBetrokkene:" + rolomschrijving.getHeeftAlsOverigBetrokkene());
-
-		this.configuration.getBeeindigZaakWanneerEinddatum().size();
-		log.debug("=== beeindigZaakWanneerEinddatum ===");
-		for (BeeindigZaakWanneerEinddatum beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
-			log.debug("zaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
-			log.debug("coalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
-		}
-		
-		var replicatie = this.configuration.getReplication();
-		log.debug("=== replicatie ===");
-		log.debug("geefZaakDetailsAction:" + replicatie.getGeefZaakdetails().getSoapaction());
-		log.debug("geefZaakDetailsUrl:" + replicatie.getGeefZaakdetails().getUrl());
-		log.debug("geefLijstZaakdocumentenAction:" + replicatie.getGeefLijstZaakdocumenten().getSoapaction());
-		log.debug("geefLijstZaakdocumentenUrl:" + replicatie.getGeefLijstZaakdocumenten().getUrl());
-		log.debug("geefZaakDocumentLezenAction:" + replicatie.getGeefZaakdocumentLezen().getSoapaction());
-		log.debug("geefZaakDocumentLezenUrl:" + replicatie.getGeefZaakdocumentLezen().getUrl());
-
-		this.configuration.getTranslations().size();
-		log.debug("=== translaties ===");
-		for (Translation translation : this.configuration.getTranslations()) {
-			log.debug("translation:" + translation.getTranslation());
-			log.debug("path:" + translation.getPath());
-			log.debug("soapAction:" + translation.getSoapaction());
-			log.debug("template:" + translation.getTemplate());
-			log.debug("implementation:" + translation.getImplementation());
-			log.debug("legacyservice:" + translation.getLegacyservice());
+		catch(Exception e) {
+			var msg = "Invalid config.json, error in section: '" + section + "'";
+			log.error(msg, e);
+			throw new ConverterException(msg, e);
 		}
 	}
 
