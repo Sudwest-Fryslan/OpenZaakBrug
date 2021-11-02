@@ -17,23 +17,17 @@ package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class ZgwZaak extends ZgwZaakPatch {
+public class ZgwZaakGeometrie {
 	@Expose
-	public String einddatum;
+	public String type;
 	@Expose
-	public String betalingsindicatieWeergave;
-	@Expose
-	public List<String> deelzaken = null;
-	@Expose
-	public List<Object> eigenschappen = null;
-	@Expose
-	public String status;
-	@Expose
-	public Object resultaat;
+	public List<Double>  coordinates;
 }

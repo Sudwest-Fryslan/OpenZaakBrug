@@ -26,83 +26,58 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class ZgwZaakPut {
-
-	@SerializedName("identificatie")
 	@Expose
 	public String identificatie;
-	@SerializedName("bronorganisatie")
 	@Expose
 	public String bronorganisatie;
-	@SerializedName("omschrijving")
 	@Expose
 	public String omschrijving;
-	@SerializedName("toelichting")
 	@Expose
 	public String toelichting;
-	@SerializedName("zaaktype")
 	@Expose
 	public String zaaktype;
-	@SerializedName("registratiedatum")
 	@Expose
 	public String registratiedatum;
-	@SerializedName("verantwoordelijkeOrganisatie")
 	@Expose
 	public String verantwoordelijkeOrganisatie;
-	@SerializedName("startdatum")
 	@Expose
 	public String startdatum;
-	@SerializedName("einddatumGepland")
 	@Expose
 	public String einddatumGepland;
-	@SerializedName("uiterlijkeEinddatumAfdoening")
 	@Expose
 	public String uiterlijkeEinddatumAfdoening;
-	@SerializedName("publicatiedatum")
 	@Expose
 	public String publicatiedatum;
-	@SerializedName("communicatiekanaal")
 	@Expose
 	public String communicatiekanaal;
-	@SerializedName("productenOfDiensten")
 	@Expose
 	public List<Object> productenOfDiensten = null;
-	@SerializedName("vertrouwelijkheidaanduiding")
 	@Expose
 	public String vertrouwelijkheidaanduiding;
-	@SerializedName("betalingsindicatie")
 	@Expose
 	public String betalingsindicatie;
 //    @SerializedName("laatsteBetaaldatum")
 //    @Expose
 //    public String laatsteBetaaldatum = null;
-	@SerializedName("zaakgeometrie")
 	@Expose
-	public String zaakgeometrie;
-	@SerializedName("verlenging")
+	public ZgwZaakGeometrie zaakgeometrie;
 	@Expose
 	public ZgwVerlenging verlenging = null;
 	@SerializedName("opschorting")
 	@Expose
 	public ZgwOpschorting opschorting = null;
-	@SerializedName("selectielijstklasse")
 	@Expose
 	public String selectielijstklasse;
-	@SerializedName("hoofdzaak")
 	@Expose
 	public String hoofdzaak  = null;
-	@SerializedName("relevanteAndereZaken")
 	@Expose
 	public List<ZgwAndereZaak> relevanteAndereZaken = null;
-	@SerializedName("kenmerken")
 	@Expose
 	public List<ZgwKenmerk> kenmerk = null;
-	@SerializedName("archiefnominatie")
 	@Expose
 	public String archiefnominatie  = null;
-	@SerializedName("archiefstatus")
 	@Expose
 	public String archiefstatus;
-	@SerializedName("archiefactiedatum")
 	@Expose
 	public String archiefactiedatum  = null;
 
