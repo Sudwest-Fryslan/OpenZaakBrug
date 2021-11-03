@@ -197,7 +197,8 @@ public class Replicator {
             	catch(ConverterException ex) {
             		debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error" + ex.toString());
             		// ignore some errors, TODO: make it configureable
-            		if(ex.details.startsWith("Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message: ")) {
+            		//if(ex.details.startsWith("Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message: ")) {
+            		if(ex.toString().contains("Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message: ")) {
             			debug.infopoint("converter exception", "ignoring:" + ex.toString());
             		}
             		else {
