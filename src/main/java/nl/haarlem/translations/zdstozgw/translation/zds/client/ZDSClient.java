@@ -88,7 +88,7 @@ public class ZDSClient {
 				debugName = "Invalid response code";
 				debug.startpoint(debugName, responsecode);
 				debug.abortpoint(debugName, message);
-				throw new ConverterException(message);
+				throw new ConverterException(message, zdsResponseBody);
 			}
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;

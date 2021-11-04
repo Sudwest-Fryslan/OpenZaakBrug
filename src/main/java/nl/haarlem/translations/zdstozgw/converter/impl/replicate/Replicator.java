@@ -202,10 +202,11 @@ public class Replicator {
             		var sw = new java.io.StringWriter();
             		var pw = new java.io.PrintWriter(sw);
             		ex.printStackTrace(pw);
-            		debug.infopoint("converter exception-stacktrace", pw.toString());
+            		debug.infopoint("converter exception-stacktrace", sw.toString());
             		
-            		if(ex.toString().contains("Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message: ")) {
-            			debug.infopoint("converter exception: enkelvouding document", "ignoring:" + ex.toString());
+            		var IGNORE_ERROR1 = "Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message:";
+            		if(ex.details != null && ex.details.indexOf(IGNORE_ERROR1) !=-1) {
+            			debug.infopoint("converter exception: ignore exception", "ignoring:" + IGNORE_ERROR1);
             		}
             		else {
             			throw ex;
