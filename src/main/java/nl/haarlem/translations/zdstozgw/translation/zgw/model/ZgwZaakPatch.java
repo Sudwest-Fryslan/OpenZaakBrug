@@ -26,10 +26,8 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class ZgwZaakPatch extends ZgwZaakPut {
-	@SerializedName("url")
 	@Expose
 	public String url;
-	@SerializedName("uuid")
 	@Expose
 	public String uuid;	
 }
