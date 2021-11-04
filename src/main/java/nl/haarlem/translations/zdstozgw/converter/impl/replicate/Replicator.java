@@ -197,9 +197,6 @@ public class Replicator {
             	catch(ConverterException ex) {
             		debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error:" + ex.toString());
             		if(ex.details != null) {
-            			debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error:" + ex.toString());
-            		}           		
-            		if(ex.details != null) {
             			debug.infopoint("converter exception-details", ex.details);
             		}
             		var sw = new java.io.StringWriter();
