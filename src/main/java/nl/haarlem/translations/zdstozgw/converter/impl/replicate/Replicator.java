@@ -195,11 +195,20 @@ public class Replicator {
             		this.converter.getSession().setAantalDocumentenGerepliceerd(adg + 1);
             	}
             	catch(ConverterException ex) {
-            		debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error" + ex.toString());
-            		// ignore some errors, TODO: make it configurable
-
+            		debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error:" + ex.toString());
+            		if(ex.details != null) {
+            			debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error:" + ex.toString());
+            		}           		
+            		if(ex.details != null) {
+            			debug.infopoint("converter exception-details", ex.details);
+            		}
+            		var sw = new java.io.StringWriter();
+            		var pw = new java.io.PrintWriter(sw);
+            		ex.printStackTrace(pw);
+            		debug.infopoint("converter exception-stacktrace", pw.toString());
+            		
             		if(ex.toString().contains("Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message: ")) {
-            			debug.infopoint("converter exception", "ignoring:" + ex.toString());
+            			debug.infopoint("converter exception: enkelvouding document", "ignoring:" + ex.toString());
             		}
             		else {
             			throw ex;
