@@ -204,7 +204,7 @@ public class Replicator {
             		ex.printStackTrace(pw);
             		debug.infopoint("converter exception-stacktrace", sw.toString());
             		
-            		var IGNORE_ERROR1 = "Fout tijdens het selecteren van een enkelvouding document. cmis exception: filterNotValid, message:";
+            		var IGNORE_ERROR1 = "Fout tijdens het selecteren van een enkelvouding document.";
             		if(ex.details != null && ex.details.indexOf(IGNORE_ERROR1) !=-1) {
             			debug.infopoint("converter exception: ignore exception", "ignoring:" + IGNORE_ERROR1);
             		}
