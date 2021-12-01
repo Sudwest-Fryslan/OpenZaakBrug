@@ -310,9 +310,9 @@ public class ZaakService {
 		if (wasVsWordtRolChanges.size() > 0) {
 			log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + wasVsWordtRolChanges.size() + " rol changes:");
 
-			for(ChangeDetector.Change change : wasVsWordtRolChanges.keySet()) {
-				log.info("Rol field:" + change.getField().getName() + " changetype:" + change.getChangeType() + " currentvalue:" + change.getCurrentValue() + " newvalue:" + change.getNewValue());				
-			}
+//			for(ChangeDetector.Change change : wasVsWordtRolChanges.keySet()) {
+//				log.info("Rol field:" + change.getField().getName() + " changetype:" + change.getChangeType() + " currentvalue:" + change.getCurrentValue() + " newvalue:" + change.getNewValue());				
+//			}
 			
 			changeDetector.filterChangesByType(wasVsWordtRolChanges, ChangeDetector.ChangeType.NEW)
 					.forEach((change, changeType) -> {
