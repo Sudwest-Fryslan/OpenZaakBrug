@@ -12,3 +12,4 @@ WHERE ( SELECT COUNT(*) FROM emulate_parameter WHERE parameter_name = 'DocumentI
 INSERT INTO emulate_parameter (parameter_name, parameter_description, parameter_value)  
 SELECT 'DocumentIdentificatieHuidige', 'Het laatste volgnummer dat is gebruikt voor de documentidentificatie in nl.haarlem.translations.zdstozgw.convertor.impl.GenereerDocumentIdentificatie', '1'
 WHERE ( SELECT COUNT(*) FROM emulate_parameter WHERE parameter_name = 'DocumentIdentificatieHuidige') = 0;
+

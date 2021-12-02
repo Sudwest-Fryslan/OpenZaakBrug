@@ -92,7 +92,7 @@ public class ZdsZaak extends ZdsZaakIdentificatie {
 	public String deelzakenIdicatie;
 
 	@XmlElement(namespace = ZKN)
-	public ZdsRol isVan;
+	public ZdsVan isVan;
 
 	@XmlElement(namespace = ZKN)
 	public ZdsRol heeftBetrekkingOp;
