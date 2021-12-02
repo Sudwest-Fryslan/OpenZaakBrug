@@ -106,9 +106,9 @@ public class ConfigService {
 				log.debug("\t===>\ttranslation:" + translation.getTranslation());
 				log.debug("\t\tpath:" + translation.getPath());
 				log.debug("\t\tsoapAction:" + translation.getSoapaction());
-				log.debug("\t\ttemplate:" + translation.getTemplate());
 				log.debug("\t\timplementation:" + translation.getImplementation());
 				log.debug("\t\tlegacyservice:" + translation.getLegacyservice());
+				log.debug("\t\tparameters:" + translation.getParameters());
 			}
 		}
 		catch(Exception e) {
