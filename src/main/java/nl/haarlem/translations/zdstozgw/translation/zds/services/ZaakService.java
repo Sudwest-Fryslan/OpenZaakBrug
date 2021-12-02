@@ -28,7 +28,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionException;
 import org.springframework.stereotype.Service;
 
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
@@ -60,7 +59,6 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInfo
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwKenmerk;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwObjectInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
@@ -71,7 +69,6 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.Change;
-import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.ChangeType;
 
 @Service
 public class ZaakService {
@@ -492,7 +489,7 @@ public class ZaakService {
 	}
 
 	private void addRolToZgw(ZgwZaak createdZaak, ZgwZaakType zgwZaakType, ZdsRol zdsRol, String typeRolOmschrijving) {
-		log.debug("addRolToZgw Rol: '" + typeRolOmschrijving + "");
+		log.debug("addRolToZgw Rol: '" + typeRolOmschrijving + "'");
 		if (zdsRol == null) {
 			return;
 		}
