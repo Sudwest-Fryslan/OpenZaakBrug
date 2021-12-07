@@ -292,10 +292,16 @@ public class ZaakService {
 					}
 					if(change.getNewValue() != null) {
 						var verlenging  = (nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging) change.getNewValue();
-						verlenging.duur = "P" + verlenging.duur + "D";
+						if (verlenging.reden == null || verlenging.reden.length() == 0) {
+							debugWarning("verlenging.reden = null, setting the newvalue to null");
+							change.setNewValue(null);
+						}
+						else {
+							verlenging.duur = "P" + verlenging.duur + "D";
+						}
 					}
 				}
-					
+				
 				log.debug("\tchange:" + change.getField().getName());				
 			}
 			ZgwZaakPut zgwWordtZaak = this.modelMapper.map(zdsWordtZaak, ZgwZaakPut.class);
