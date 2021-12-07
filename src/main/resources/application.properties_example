@@ -38,6 +38,7 @@ zgw.endpoint.objectinformatieobject = /documenten/api/v1/objectinformatieobjecte
 #spring.jpa.hibernate.ddl-auto=create
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.open-in-view=true
+spring.datasource.platform=h2
 
 ## Postgresql
 #	spring.datasource.driverClassName=org.postgresql.Driver
@@ -45,6 +46,7 @@ spring.jpa.open-in-view=true
 #	spring.datasource.url= jdbc:postgresql://localhost/openzaakbrug
 #	spring.datasource.username=openzaakbrug
 #	spring.datasource.password=openzaakbrug
+# spring.datasource.platform=postgresql
 
 ## H2
 spring.datasource.driverClassName=org.h2.Driver
