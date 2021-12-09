@@ -64,7 +64,7 @@ Draaien van de service
 
 ```
 $ cd OpenZaakBrug
-$ mvn spring-boot:run
+$ mvn -Dhttps.protocols=TLSv1.2 spring-boot:run
 ```
 
 Update en draaien van de applicatie
@@ -124,7 +124,8 @@ Onderstaand stappenplan kan gebruikt worden voor een schone installatie met Spri
 ## Troubleshooting Spring Tool Suite installatie
 ### Self extracting van de Spring Tool Suite installatie werkt niet
 Als de self extracting installatie van de Spring Tool Suite niet werkt, kan de download ook met [7-Zip](https://www.7-zip.org/) geopend worden en de contents.zip die in de .jar zit kan uitgepakt worden op een locatie naar keuze. Winzip kan de contents.zip NIET uitpakken!p
-## Lombok installer start niet
+
+## Lombok installer start niet
 Als de Lombok-installer niet lijkt te starten, probeer deze dan te starten met `java.exe -jar <pad/naar/lombok.jar>`
 
 ## Lombok-installer kan Spring Tool Suite niet vinden
