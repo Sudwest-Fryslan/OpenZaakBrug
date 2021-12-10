@@ -69,6 +69,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.Change;
+import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.Changes;
 
 @Service
 public class ZaakService {
@@ -289,12 +290,16 @@ public class ZaakService {
 					}
 					if(change.getNewValue() != null) {
 						var verlenging  = (nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging) change.getNewValue();
-						verlenging.duur = "P" + verlenging.duur + "D";
-					}
-				}
-					
+						if(verlenging.reden == null || verlenging.reden.length() == 0) {
+							zdsWordtZaak.verlenging = null;
+						}
+						else {
+							verlenging.duur = "P" + verlenging.duur + "D";
+						}
+					}				
+				}					
 				log.debug("\tchange:" + change.getField().getName());				
-			}
+			}			
 			ZgwZaakPut zgwWordtZaak = this.modelMapper.map(zdsWordtZaak, ZgwZaakPut.class);
 			ZgwZaakPut updatedZaak = ZgwZaakPut.merge(zgwZaak, zgwWordtZaak);
 			this.zgwClient.updateZaak(zgwZaak.uuid, updatedZaak);
