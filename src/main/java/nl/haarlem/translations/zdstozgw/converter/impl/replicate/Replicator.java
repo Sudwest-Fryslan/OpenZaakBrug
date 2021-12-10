@@ -108,7 +108,7 @@ public class Replicator {
         var response = new String(bytes, StandardCharsets.UTF_8);
         log.debug("GeefZaakDetails response:" + response);
         ZdsZakLa01GeefZaakDetails zakLa01 = (ZdsZakLa01GeefZaakDetails) XmlUtils.getStUFObject(response, ZdsZakLa01GeefZaakDetails.class);
-        return zakLa01.antwoord.zaak.get(0);		
+        return zakLa01.antwoord.zaak.get(0);
 	}
 	
 	private void createZaak(ZdsZaak zdsZaak, String rsin) {
