@@ -490,6 +490,42 @@ public class ZaakService {
 				}
 			}
 		}		
+		
+		// einddatumEnResultaatWanneerLastStatus logica
+		/*
+		if(zdsZaak.einddatum != null && zdsZaak.einddatum.length() > 0 && !beeindigd) {
+			for(var beeindig : this.configService.getConfiguration().getBeeindigZaakWanneerEinddatum() ) {
+				if(beeindig.zaakType.equals(zgwZaakType.getIdentificatie())) {
+					// is the result also missing?
+					var resultaten = this.zgwClient.getResultatenByZaakUrl(zgwZaak.url);
+					if(resultaten.size() == 0) {
+						var zgwResultaatType = this.zgwClient.getResultaatTypeByZaakTypeAndOmschrijving(zgwZaakType, beeindig.coalesceResultaat);
+						if(zgwResultaatType == null) {
+							throw new ConverterException("Resultaattype: '" + beeindig.coalesceResultaat + "' niet gevonden bij Zaaktype:'" + zgwZaakType.identificatie + "'");							
+						}
+						ZgwResultaat zgwResultaat = new ZgwResultaat();
+						zgwResultaat.zaak = zgwZaak.url;
+						zgwResultaat.resultaattype = zgwResultaatType.url;
+						zgwResultaat.toelichting = zgwResultaatType.omschrijving;
+						debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no resultaat, zaak will get resultaat:'" + zgwResultaatType.getOmschrijving() + "'");
+						this.zgwClient.addZaakResultaat(zgwResultaat);						
+					}
+								
+					var zgwStatusType = this.zgwClient.getLastStatusTypeByZaakType(zgwZaakType);					
+					ZgwStatus zgwStatus = new ZgwStatus();
+					zgwStatus.zaak = zgwZaak.url;
+					zgwStatus.statustype = zgwStatusType.url;
+					zgwStatus.statustoelichting = zgwStatusType.omschrijving;
+					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsZaak.einddatum));
+					debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no eindstatus, zaak will get status:'" + zgwStatusType.getOmschrijving() + "' with time:" + zgwStatus.getDatumStatusGezet());
+					this.zgwClient.addZaakStatus(zgwStatus);
+					beeindigd = true;
+					changed = true;
+				}
+			}
+		}		
+		*/
+		
 		return changed;
 	}
 
