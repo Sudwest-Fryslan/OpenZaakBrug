@@ -417,8 +417,8 @@ public class ZaakService {
 					zgwStatus.zaak = zgwZaak.url;
 					zgwStatus.statustype = zgwStatusType.url;
 					zgwStatus.statustoelichting = zgwStatusType.omschrijving;
-
 					String zdsStatusDatum = zdsHeeftIterator.getDatumStatusGezet();
+					
 					if("true".equals(zgwStatusType.getIsEindstatus())) {
 						// Difference between ZDS --> ZGW the behaviour of ending a zaak has changed.
 						// (more info at: https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/index#zrc-007 )
@@ -433,6 +433,7 @@ public class ZaakService {
 						beeindigd = true;
 					}
 					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsStatusDatum));
+
 					// check if the status doesnt exist yet
 					var statusexists = false;
 					for(ZgwStatus s : statussen) {
@@ -444,6 +445,11 @@ public class ZaakService {
 								throw new ConverterException("found status on exact same timestamp with an different type. Got statustype" + s.statustype + " found:" + zgwStatus.statustype);
 							}
 							// already exist	
+							statusexists = true;
+						}
+						else if(beeindigd && s.statustype.equals(zgwZaakType.url)) {
+							// laatste status hoeft ook maar één keer
+							// TODO: dit moet toch slimmer kunnen?
 							statusexists = true;
 						}
 					}
