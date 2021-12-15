@@ -16,6 +16,7 @@
 package nl.haarlem.translations.zdstozgw.converter.impl.replicate;
 
 import java.lang.invoke.MethodHandles;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,9 +103,12 @@ public class Replicator {
         var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction, zdsRequest);
 
         // fetch the zaak details
-        log.debug("GeefZaakDetails response:" + zdsResponse);
-        ZdsZakLa01GeefZaakDetails zakLa01 = (ZdsZakLa01GeefZaakDetails) XmlUtils.getStUFObject(zdsResponse.getBody().toString(), ZdsZakLa01GeefZaakDetails.class);
-        return zakLa01.antwoord.zaak.get(0);		
+        String rawResponse = zdsResponse.getBody().toString();
+        byte[] bytes = rawResponse.getBytes();
+        var response = new String(bytes, StandardCharsets.UTF_8);
+        log.debug("GeefZaakDetails response:" + response);
+        ZdsZakLa01GeefZaakDetails zakLa01 = (ZdsZakLa01GeefZaakDetails) XmlUtils.getStUFObject(response, ZdsZakLa01GeefZaakDetails.class);
+        return zakLa01.antwoord.zaak.get(0);
 	}
 	
 	private void createZaak(ZdsZaak zdsZaak, String rsin) {

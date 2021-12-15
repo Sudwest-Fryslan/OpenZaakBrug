@@ -417,8 +417,8 @@ public class ZaakService {
 					zgwStatus.zaak = zgwZaak.url;
 					zgwStatus.statustype = zgwStatusType.url;
 					zgwStatus.statustoelichting = zgwStatusType.omschrijving;
-
 					String zdsStatusDatum = zdsHeeftIterator.getDatumStatusGezet();
+					
 					if("true".equals(zgwStatusType.getIsEindstatus())) {
 						// Difference between ZDS --> ZGW the behaviour of ending a zaak has changed.
 						// (more info at: https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/index#zrc-007 )
@@ -433,6 +433,7 @@ public class ZaakService {
 						beeindigd = true;
 					}
 					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsStatusDatum));
+
 					// check if the status doesnt exist yet
 					var statusexists = false;
 					for(ZgwStatus s : statussen) {
@@ -444,6 +445,11 @@ public class ZaakService {
 								throw new ConverterException("found status on exact same timestamp with an different type. Got statustype" + s.statustype + " found:" + zgwStatus.statustype);
 							}
 							// already exist	
+							statusexists = true;
+						}
+						else if(beeindigd && s.statustype.equals(zgwZaakType.url)) {
+							// laatste status hoeft ook maar één keer
+							// TODO: dit moet toch slimmer kunnen?
 							statusexists = true;
 						}
 					}
@@ -490,6 +496,42 @@ public class ZaakService {
 				}
 			}
 		}		
+		
+		// einddatumEnResultaatWanneerLastStatus logica
+		/*
+		if(zdsZaak.einddatum != null && zdsZaak.einddatum.length() > 0 && !beeindigd) {
+			for(var beeindig : this.configService.getConfiguration().getBeeindigZaakWanneerEinddatum() ) {
+				if(beeindig.zaakType.equals(zgwZaakType.getIdentificatie())) {
+					// is the result also missing?
+					var resultaten = this.zgwClient.getResultatenByZaakUrl(zgwZaak.url);
+					if(resultaten.size() == 0) {
+						var zgwResultaatType = this.zgwClient.getResultaatTypeByZaakTypeAndOmschrijving(zgwZaakType, beeindig.coalesceResultaat);
+						if(zgwResultaatType == null) {
+							throw new ConverterException("Resultaattype: '" + beeindig.coalesceResultaat + "' niet gevonden bij Zaaktype:'" + zgwZaakType.identificatie + "'");							
+						}
+						ZgwResultaat zgwResultaat = new ZgwResultaat();
+						zgwResultaat.zaak = zgwZaak.url;
+						zgwResultaat.resultaattype = zgwResultaatType.url;
+						zgwResultaat.toelichting = zgwResultaatType.omschrijving;
+						debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no resultaat, zaak will get resultaat:'" + zgwResultaatType.getOmschrijving() + "'");
+						this.zgwClient.addZaakResultaat(zgwResultaat);						
+					}
+								
+					var zgwStatusType = this.zgwClient.getLastStatusTypeByZaakType(zgwZaakType);					
+					ZgwStatus zgwStatus = new ZgwStatus();
+					zgwStatus.zaak = zgwZaak.url;
+					zgwStatus.statustype = zgwStatusType.url;
+					zgwStatus.statustoelichting = zgwStatusType.omschrijving;
+					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsZaak.einddatum));
+					debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no eindstatus, zaak will get status:'" + zgwStatusType.getOmschrijving() + "' with time:" + zgwStatus.getDatumStatusGezet());
+					this.zgwClient.addZaakStatus(zgwStatus);
+					beeindigd = true;
+					changed = true;
+				}
+			}
+		}		
+		*/
+		
 		return changed;
 	}
 
