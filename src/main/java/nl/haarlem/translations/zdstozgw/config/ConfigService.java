@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
 import lombok.Data;
-import nl.haarlem.translations.zdstozgw.config.model.BeeindigZaakWanneerEinddatum;
+import nl.haarlem.translations.zdstozgw.config.model.ZaaktypeMetCoalesceResultaat;
 import nl.haarlem.translations.zdstozgw.config.model.Configuration;
 import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
@@ -85,11 +85,18 @@ public class ConfigService {
 	
 			section = "beeindigZaakWanneerEinddatum";
 			log.debug("=== " + section + " #" + this.configuration.getBeeindigZaakWanneerEinddatum().size() + " ===");			
-			for (BeeindigZaakWanneerEinddatum beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
+			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
 				log.debug("\t===>\tzaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
 				log.debug("\t\tcoalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
 			}
 
+			section = "einddatumEnResultaatWanneerLastStatus";
+			log.debug("=== " + section + " #" + this.configuration.getEinddatumEnResultaatWanneerLastStatus().size() + " ===");			
+			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration.getEinddatumEnResultaatWanneerLastStatus()) {
+				log.debug("\t===>\tzaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
+				log.debug("\t\tcoalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
+			}
+			
 			section = "replicatie";
 			log.debug("=== " + section + " ===");
 			var replicatie = this.configuration.getReplication();

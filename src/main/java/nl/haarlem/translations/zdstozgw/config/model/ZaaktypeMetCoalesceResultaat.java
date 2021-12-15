@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class BeeindigZaakWanneerEinddatum {
+public class ZaaktypeMetCoalesceResultaat {
 	@Expose
 	public String zaakType;
 	@Expose

@@ -31,7 +31,9 @@ public class Configuration {
 	@Expose
 	public ZgwRolOmschrijving zgwRolOmschrijving = null;
 	@Expose
-	public List<BeeindigZaakWanneerEinddatum> beeindigZaakWanneerEinddatum = null;	
+	public List<ZaaktypeMetCoalesceResultaat> beeindigZaakWanneerEinddatum = null;	
+	@Expose
+	public List<ZaaktypeMetCoalesceResultaat> einddatumEnResultaatWanneerLastStatus = null;	
 	@Expose
 	public Replication replication = null;
 	@Expose
