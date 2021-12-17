@@ -69,7 +69,6 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.Change;
-import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.Changes;
 
 @Service
 public class ZaakService {
@@ -436,21 +435,21 @@ public class ZaakService {
 
 					// check if the status doesnt exist yet
 					var statusexists = false;
-					for(ZgwStatus s : statussen) {
-						var foundDateTime = ZonedDateTime.parse(s.datumStatusGezet);
-						var newDateTime =  ZonedDateTime.parse(zgwStatus.datumStatusGezet);
-						if(foundDateTime.equals(newDateTime)) {
-							// throw an exception when the status descr
-							if(!s.statustype.equals((zgwStatus.statustype))) {
-								throw new ConverterException("found status on exact same timestamp with an different type. Got statustype" + s.statustype + " found:" + zgwStatus.statustype);
+					if(beeindigd) { // check if last status already exists
+						statusexists = statussen.stream().anyMatch(s -> s.statustype.equals(zgwStatus.statustype) ? true : false);
+						log.debug("last status ["+zgwStatus.statustoelichting+"] is already registered: "+statusexists);
+					} else {
+						for(ZgwStatus s : statussen) {
+							var foundDateTime = ZonedDateTime.parse(s.datumStatusGezet);
+							var newDateTime =  ZonedDateTime.parse(zgwStatus.datumStatusGezet);
+							if(foundDateTime.equals(newDateTime)) {
+								// throw an exception when the status descr
+								if(!s.statustype.equals((zgwStatus.statustype))) {
+									throw new ConverterException("found status on exact same timestamp with an different type. Got statustype" + s.statustype + " found:" + zgwStatus.statustype);
+								}
+								// already exist	
+								statusexists = true;
 							}
-							// already exist	
-							statusexists = true;
-						}
-						else if(beeindigd && s.statustype.equals(zgwZaakType.url)) {
-							// laatste status hoeft ook maar één keer
-							// TODO: dit moet toch slimmer kunnen?
-							statusexists = true;
 						}
 					}
 					if(!statusexists) {
