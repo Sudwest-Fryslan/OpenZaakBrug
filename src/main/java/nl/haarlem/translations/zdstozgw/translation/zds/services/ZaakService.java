@@ -20,8 +20,11 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
@@ -482,12 +485,27 @@ public class ZaakService {
 						this.zgwClient.addZaakResultaat(zgwResultaat);						
 					}
 								
-					var zgwStatusType = this.zgwClient.getLastStatusTypeByZaakType(zgwZaakType);					
+					var zgwStatusType = this.zgwClient.getLastStatusTypeByZaakType(zgwZaakType);
 					ZgwStatus zgwStatus = new ZgwStatus();
 					zgwStatus.zaak = zgwZaak.url;
 					zgwStatus.statustype = zgwStatusType.url;
 					zgwStatus.statustoelichting = zgwStatusType.omschrijving;
-					zgwStatus.setDatumStatusGezet(convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsZaak.einddatum));
+
+					var formatter = new SimpleDateFormat("yyyyMMddHHmmssSS");
+					String now = formatter.format(new Date());
+					String zdsZaakEindDatum = convertZdsStatusDatumtoZgwDateTime(zgwZaak, zdsZaak.einddatum);
+					// Check if zds einddatum is in the future
+					if(zdsZaakEindDatum.compareTo(now) > 0 ) {
+						log.debug("ZdsZaak has an einddatum in future ["+zdsZaakEindDatum+"]. Ordering the status dates");
+						var statussen = this.zgwClient.getStatussenByZaakUrl(zgwZaak.url);
+						Collections.sort(statussen, (s1, s2) -> ZonedDateTime.parse(s1.datumStatusGezet).
+								compareTo(ZonedDateTime.parse(s2.datumStatusGezet)));
+						log.debug("found last status ["+statussen.get(0).getUrl()+"] with date: "+statussen.get(0).datumStatusGezet);
+						zgwStatus.setDatumStatusGezet(statussen.get(0).datumStatusGezet);
+					} else {
+						zgwStatus.setDatumStatusGezet(zdsZaakEindDatum);
+					}
+					log.debug("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no eindstatus, zaak will get status:'" + zgwStatusType.getOmschrijving() + "' with time:" + zgwStatus.getDatumStatusGezet());
 					debugWarning("BeeindigZaakWanneerEinddatum was defined for zaaktype:'" + zgwZaakType.identificatie + "' and an einddatum was provided, no eindstatus, zaak will get status:'" + zgwStatusType.getOmschrijving() + "' with time:" + zgwStatus.getDatumStatusGezet());
 					this.zgwClient.addZaakStatus(zgwStatus);
 					beeindigd = true;
