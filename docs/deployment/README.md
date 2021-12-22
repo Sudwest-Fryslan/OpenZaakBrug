@@ -106,7 +106,6 @@ Do not forget to restart nginx after making changes (```systemctl restart nginx`
 
 ## Step by step summary
 
-
 #### Repeat until stable version
 
 - Login to T and execute the following commands as root
