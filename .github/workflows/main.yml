@@ -75,3 +75,25 @@ jobs:
           export BRANCH_NAME=${GITHUB_REF##*/}
           export EVENT_TYPE=push
           ./docker_push.sh
+
+  publish_package_to_github_packages:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Setup timezone
+        uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Europe/Amsterdam
+
+      - name: Build project with Maven
+        run: mvn -B package -P build-as-library --file pom.xml
+
+      - name: Publish package
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
