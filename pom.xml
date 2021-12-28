@@ -176,6 +176,14 @@
 		</repository>
 	</repositories>
 
+	<distributionManagement>
+		<repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Sudwest-Fryslan/OpenZaakBrug</url>
+        </repository>
+	</distributionManagement>
+
 	<profiles>
 		<profile>
 			<id>build-spring-boot</id>
@@ -203,7 +211,7 @@
 		<profile>
 			<id>build-as-library</id>
 			<build>
-				<finalName>zds-to-zgw-lib</finalName>
+				<finalName>zds-to-zgw</finalName>
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
