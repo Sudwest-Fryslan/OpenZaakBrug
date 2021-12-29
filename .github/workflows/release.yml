@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  publish_image:
+  publish_docker_release_image:
 
     runs-on: ubuntu-latest
 
@@ -26,3 +26,25 @@ jobs:
           export TAG_NAME=${{ github.event.release.tag_name}}
           export EVENT_TYPE=${{ github.event_name}}
           ./docker_push.sh
+
+  publish_release_github_package:
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Publish to Github Packages
+        run: mvn --batch-mode deploy -P build-as-library --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
