@@ -95,7 +95,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Publish package
-        if: ${{ github.event_name == 'push'}}
         run: mvn --batch-mode deploy -P build-as-library --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
