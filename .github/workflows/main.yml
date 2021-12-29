@@ -79,7 +79,9 @@ jobs:
   publish_package_to_github_packages:
     needs: build_and_test
     runs-on: ubuntu-latest
-
+    permissions: 
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v2
         with:
