@@ -87,10 +87,12 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Setup timezone
-        uses: zcong1993/setup-timezone@master
+      - name: Cache the Maven packages to speed up build
+        uses: actions/cache@v1
         with:
-          timezone: Europe/Amsterdam
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: Publish package
         if: ${{ github.event_name == 'push'}}
