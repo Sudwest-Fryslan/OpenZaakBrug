@@ -90,10 +90,7 @@ jobs:
         with:
           timezone: Europe/Amsterdam
 
-      - name: Build project with Maven
-        run: mvn -B package -P build-as-library --file pom.xml
-
       - name: Publish package
-        run: mvn --batch-mode deploy
+        run: mvn --batch-mode deploy -P build-as-library --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
