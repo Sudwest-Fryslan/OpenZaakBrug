@@ -95,6 +95,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Publish package
-        run: mvn --batch-mode deploy -P build-as-library --file pom.xml
+        run: mvn -X --batch-mode deploy -P build-as-library --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
