@@ -181,6 +181,9 @@
             <id>github</id>
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/Sudwest-Fryslan/OpenZaakBrug</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
         </repository>
 	</distributionManagement>
 
