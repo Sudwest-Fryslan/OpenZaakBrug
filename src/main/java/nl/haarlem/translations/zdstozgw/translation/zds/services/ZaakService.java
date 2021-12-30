@@ -502,7 +502,7 @@ public class ZaakService {
 		}
 
 		// beeindigZaakWanneerEinddatum logica
-		if(zdsZaak.einddatum != null && zdsZaak.einddatum.length() > 0 && endStatus.isEmpty()) {
+		if(zdsZaak.einddatum != null && zdsZaak.einddatum.length() > 0 && !beeindigd) {
 			for(var beeindig : this.configService.getConfiguration().getBeeindigZaakWanneerEinddatum() ) {
 				if(beeindig.zaakType.equals(zgwZaakType.getIdentificatie())) {
 					// is the result also missing?
