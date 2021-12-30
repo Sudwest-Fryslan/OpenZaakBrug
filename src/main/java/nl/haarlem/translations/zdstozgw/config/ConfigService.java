@@ -20,19 +20,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 
+import com.google.gson.Gson;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
-
 import lombok.Data;
-import nl.haarlem.translations.zdstozgw.config.model.ZaaktypeMetCoalesceResultaat;
 import nl.haarlem.translations.zdstozgw.config.model.Configuration;
 import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
+import nl.haarlem.translations.zdstozgw.config.model.ZaaktypeMetCoalesceResultaat;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 
 @Service
@@ -113,9 +113,9 @@ public class ConfigService {
 				log.debug("\t===>\ttranslation:" + translation.getTranslation());
 				log.debug("\t\tpath:" + translation.getPath());
 				log.debug("\t\tsoapAction:" + translation.getSoapaction());
-				log.debug("\t\ttemplate:" + translation.getTemplate());
 				log.debug("\t\timplementation:" + translation.getImplementation());
 				log.debug("\t\tlegacyservice:" + translation.getLegacyservice());
+				log.debug("\t\tparameters:" + translation.getParameters());
 			}
 		}
 		catch(Exception e) {
