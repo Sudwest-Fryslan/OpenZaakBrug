@@ -382,17 +382,23 @@ public class ZaakService {
 		var changed = false;
 		var beeindigd = false;
 
-		// if there is a status
 		var newStatuses = new ArrayList<ZgwStatus>();
-		var statusTypes = new ArrayList<ZgwStatusType>();
+		
+		// Check if zaak already has the endstatus set (updateZaak can happen after zaak is closed)
+		var statusTypes = this.zgwClient.getStatusTypesByZaakType(zgwZaakType);
+		var endStatusType = statusTypes.stream()
+				.filter(statusType -> "true".equals(statusType.getIsEindstatus()))
+				.findFirst();
+		
+		var presentStatuses = this.zgwClient.getStatussenByZaakUrl(zgwZaak.url);
+		beeindigd = presentStatuses.stream().anyMatch(s -> s.statustype.equals(endStatusType.get().url) ? true : false);
+		
 		if (zdsZaak.heeft != null) {
-			var statussen = this.zgwClient.getStatussenByZaakUrl(zgwZaak.url);
 			for (ZdsHeeft zdsHeeftIterator : zdsZaak.heeft) {
 				ZdsGerelateerde zdsStatus = zdsHeeftIterator.gerelateerde;
 				if(zdsStatus != null && zdsStatus.omschrijving != null && zdsStatus.omschrijving.length() > 0) {
 					log.debug("Update of zaakid:" + zdsZaak.identificatie + " wants status to be changed to:" + zdsStatus.omschrijving);
 					ZgwStatusType zgwStatusType = this.zgwClient.getStatusTypeByZaakTypeAndOmschrijving(zgwZaakType, zdsStatus.omschrijving, zdsStatus.volgnummer);
-					statusTypes.add(zgwStatusType);
 					ZgwStatus zgwStatus = this.modelMapper.map(zdsHeeftIterator, ZgwStatus.class);
 					zgwStatus.zaak = zgwZaak.url;
 					zgwStatus.statustype = zgwStatusType.url;
@@ -417,10 +423,10 @@ public class ZaakService {
 					// check if the status doesnt exist yet
 					var statusexists = false;
 					if(beeindigd) { // check if last status already exists
-						statusexists = statussen.stream().anyMatch(s -> s.statustype.equals(zgwStatus.statustype) ? true : false);
+						statusexists = presentStatuses.stream().anyMatch(s -> s.statustype.equals(zgwStatus.statustype) ? true : false);
 						log.debug("last status ["+zgwStatus.statustoelichting+"] is already registered: "+statusexists);
 					} else {
-						for(ZgwStatus s : statussen) {
+						for(ZgwStatus s : presentStatuses) {
 							var foundDateTime = ZonedDateTime.parse(s.datumStatusGezet);
 							var newDateTime =  ZonedDateTime.parse(zgwStatus.datumStatusGezet);
 							if(foundDateTime.equals(newDateTime)) {
@@ -468,20 +474,15 @@ public class ZaakService {
 			changed = true;			
 		}
 		
-		// Check for presence of endStatus
-		var endStatusType = statusTypes.stream()
-				.filter(statusType -> "true".equals(statusType.getIsEindstatus()))
-				.findFirst();
-		
-		Optional<ZgwStatus> endStatus = Optional.empty();
+		// Use-case of the current action closing a zaak and no resultaat being present
+		Optional<ZgwStatus> newEndStatus = Optional.empty();
 		if(endStatusType.isPresent()) {
-			endStatus = newStatuses.stream()
+			newEndStatus = newStatuses.stream()
 					.filter(newStatus -> newStatus.statustype.equals(endStatusType.get().url))
 					.findFirst();
-		}
-				
-		// Use-case of the current action closing a zaak and no resultaat being present
-		if(endStatus.isPresent()) {
+		}	
+		
+		if(newEndStatus.isPresent()) {
 			var resultaten = this.zgwClient.getResultatenByZaakUrl(zgwZaak.url);
 			if(resultaten.isEmpty()) {
 				for(var beeindig : this.configService.getConfiguration().getBeeindigZaakWanneerEinddatum() ) {
