@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.haarlem.translations</groupId>
     <artifactId>zds-to-zgw</artifactId>
-    <version>1.2.7-SNAPSHOT</version>
+    <version>1.2.8-SNAPSHOT</version>
     <name>zds-to-zgw</name>
     <description>StUF ZDS 1.2 to ZGW API 1.0 translator</description>
 
