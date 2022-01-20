@@ -27,11 +27,8 @@ jobs:
           export EVENT_TYPE=${{ github.event_name}}
           ./docker_push.sh
 
-  publish_release_github_package:
+  publish_release_to_nexus:
     runs-on: ubuntu-latest
-    permissions: 
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -44,7 +41,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Publish to Github Packages
+      - name: Publish to Nexus
         run: mvn --batch-mode deploy -P build-as-library --file pom.xml
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.nexus_username }}
+          MAVEN_PASSWORD: ${{ secrets.nexus_password }}

@@ -178,9 +178,9 @@
 
 	<distributionManagement>
 		<repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Sudwest-Fryslan/OpenZaakBrug</url>
+            <id>openzaakbrug-nexus</id>
+            <name>OpenZaakBrug Nexus</name>
+            <url>https://nexus.frankframework.org/content/repositories/OpenZaakBrug</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
