@@ -77,7 +77,7 @@ jobs:
           ./docker_push.sh
 
   publish_package_to_nexus:
-    needs: build_and_test
+    needs: start_docker_container_and_publish_image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
