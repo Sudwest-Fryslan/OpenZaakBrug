@@ -44,5 +44,5 @@ jobs:
       - name: Publish to Nexus
         run: mvn --batch-mode deploy -P build-as-library --file pom.xml
         env:
-          MAVEN_USERNAME: ${{ secrets.nexus_username }}
-          MAVEN_PASSWORD: ${{ secrets.nexus_password }}
+          MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
