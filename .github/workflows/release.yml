@@ -28,6 +28,7 @@ jobs:
           ./docker_push.sh
 
   publish_release_to_nexus:
+    needs: publish_docker_release_image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
