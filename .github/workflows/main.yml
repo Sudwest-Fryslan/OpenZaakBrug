@@ -90,10 +90,17 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-          
+
+      - uses: s4u/maven-settings-action@v2.4.1
+        if: ${{ github.event_name == 'push'}}
+        with:
+          servers: |
+              [{
+                "id": "openzaakbrug-nexus",
+                "username": "${{ secrets.NEXUS_USERNAME }}",
+                "password": "${{ secrets.NEXUS_PASSWORD }}"
+              }]
+
       - name: Publish to Nexus
         if: ${{ github.event_name == 'push'}}
         run: mvn --batch-mode deploy -P build-as-library --file pom.xml
-        env:
-          MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
