@@ -34,7 +34,6 @@ jobs:
           timezone: Europe/Amsterdam
 
       - uses: s4u/maven-settings-action@v2.4.1
-        if: ${{ github.event_name == 'push'}}
         with:
           servers: |
               [{
