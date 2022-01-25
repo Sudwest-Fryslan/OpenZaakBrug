@@ -31,12 +31,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>nl.sudwestfryslan.translations</groupId>
-			<artifactId>ozb-extensions</artifactId>
-			<version>1.0.0-20220120.165100-1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -180,11 +174,6 @@
 			<name>Ibissource</name>
 			<url>https://nexus.frankframework.org/content/repositories/public</url>
 		</repository>
-		<repository>
-            <id>openzaakbrugextensions-nexus</id>
-            <name>OpenZaakBrug Extensions Nexus</name>
-            <url>https://nexus.frankframework.org/content/repositories/OpenZaakBrugExtensions</url>
-        </repository>
 	</repositories>
 
 	<distributionManagement>
