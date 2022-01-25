@@ -33,6 +33,15 @@ jobs:
         with:
           timezone: Europe/Amsterdam
 
+      - uses: s4u/maven-settings-action@v2.4.1
+        with:
+          servers: |
+              [{
+                "id": "openzaakbrugextensions-nexus",
+                "username": "${{ secrets.NEXUS_EXTENSIONS_USERNAME }}",
+                "password": "${{ secrets.NEXUS_EXTENSIONS_PASSWORD }}"
+              }]
+
       - name: Build project with Maven
         run: mvn -B package --file pom.xml
 
