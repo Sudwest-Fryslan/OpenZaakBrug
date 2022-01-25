@@ -39,11 +39,11 @@ public class Endpoint extends ZdsObject {
 	private Endpoint() {
 	}
 
-	public Endpoint(Endpoint zender) {
-		if(zender != null) {
-			this.applicatie = zender.applicatie;
-			this.organisatie = zender.organisatie;
-			this.gebruiker = zender.gebruiker;
+	public Endpoint(Endpoint endpoint) {
+		if(endpoint != null) {
+			this.applicatie = endpoint.applicatie;
+			this.organisatie = endpoint.organisatie;
+			this.gebruiker = endpoint.gebruiker;
 		}
 	}
 }
