@@ -56,8 +56,12 @@ public class ZdsStuurgegevens extends ZdsObject {
 	}
 
 	public ZdsStuurgegevens(ZdsStuurgegevens stuurgegevens, String referentienummer) {
-		this.zender = new Endpoint(stuurgegevens.ontvanger);
-		this.ontvanger = new Endpoint(stuurgegevens.zender);
+		if(stuurgegevens.ontvanger != null) {
+			this.zender = new Endpoint(stuurgegevens.ontvanger);
+		}
+		if(stuurgegevens.zender != null) {
+			this.ontvanger = new Endpoint(stuurgegevens.zender);
+		}
 		this.referentienummer = referentienummer;
 		this.crossRefnummer = stuurgegevens.referentienummer;
 		this.tijdstipBericht = StufUtils.getStufDateTime();
