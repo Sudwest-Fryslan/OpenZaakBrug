@@ -50,7 +50,10 @@ public class SoapController {
 	private final ConfigService configService;
 	private final RequestHandlerFactory requestHandlerFactory;
 	private final BuildProperties buildProperties;
-    
+
+	@Autowired
+	private org.springframework.core.env.Environment enviroment;	
+	
 	@Autowired
 	public SoapController(ConverterFactory converterFactory, ConfigService configService,
                           RequestHandlerFactory requestHandlerFactory, BuildProperties buildProperties) {
@@ -71,7 +74,21 @@ public class SoapController {
         model.addAttribute("applicationtime", buildProperties.getTime());
         model.addAttribute("translations", this.configService.getConfiguration().getTranslations());
         model.addAttribute("ladybugpath", "./debug");
-        model.addAttribute("databasepath", "./h2-console");
+        if("org.h2.Driver".equals(enviroment.getProperty("spring.datasource.driverClassName"))) {
+        	if(enviroment.getProperty("spring.h2.console.path") != null) {
+        		model.addAttribute("databasepath", enviroment.getProperty("spring.h2.console.path"));        		
+        	}
+        	else {
+        		model.addAttribute("databasepath", "./h2-console");
+        	}
+        }
+        else if ("org.postgresql.Driver".equals(enviroment.getProperty("spring.datasource.driverClassName")))  {
+    		model.addAttribute("databasepath", "http://127.0.0.1:64386/browser/");        	
+        }
+        else {
+        	// unknown
+        	model.addAttribute("databasepath", "/");
+        }
         return "index";
 	}
 
