@@ -56,6 +56,7 @@
 			"coalesceResultaat": "Onbekend"
 		}
 	],
+	"translateVerblijfsadresForZaaktype": [],
 	"translations": [
 		{
 			"translation": "Translate ZDS 1.1 Generic genereerZaakIdentificatie_Di02",

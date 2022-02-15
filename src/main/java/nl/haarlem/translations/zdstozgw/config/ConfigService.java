@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 import lombok.Data;
 import nl.haarlem.translations.zdstozgw.config.model.Configuration;
 import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
+import nl.haarlem.translations.zdstozgw.config.model.TranslateVerblijfsadresForZaaktype;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.config.model.ZaaktypeMetCoalesceResultaat;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
@@ -95,6 +96,13 @@ public class ConfigService {
 			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration.getEinddatumEnResultaatWanneerLastStatus()) {
 				log.debug("\t===>\tzaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
 				log.debug("\t\tcoalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
+			}
+
+			section = "translateVerblijfsadresForZaaktype";
+			log.debug("=== " + section + " #" + this.configuration.getTranslateVerblijfsadresForZaaktype().size() + " ===");			
+			for (TranslateVerblijfsadresForZaaktype translateVerblijfsadresForZaaktype : this.configuration.getTranslateVerblijfsadresForZaaktype()) {
+				log.debug("\t===>\tzaakType:" + translateVerblijfsadresForZaaktype.getZaakType());
+				log.debug("\t\tuseOpenbareRuimteNaam:" + translateVerblijfsadresForZaaktype.getUseOpenbareRuimteNaam());
 			}
 			
 			section = "replicatie";

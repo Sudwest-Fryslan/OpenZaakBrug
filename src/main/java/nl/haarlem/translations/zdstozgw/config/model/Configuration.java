@@ -35,6 +35,8 @@ public class Configuration {
 	@Expose
 	public List<ZaaktypeMetCoalesceResultaat> einddatumEnResultaatWanneerLastStatus = null;	
 	@Expose
+	public List<TranslateVerblijfsadresForZaaktype> translateVerblijfsadresForZaaktype = null;
+	@Expose
 	public Replication replication = null;
 	@Expose
 	public List<Translation> translations = null;
