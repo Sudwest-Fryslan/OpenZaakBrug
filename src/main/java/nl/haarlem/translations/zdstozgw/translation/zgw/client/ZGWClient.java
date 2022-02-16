@@ -36,6 +36,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import lombok.Getter;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.QueryResult;
@@ -65,43 +66,43 @@ public class ZGWClient {
 	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
 
 	@Value("${openzaak.baseUrl}")
-	private String baseUrl;
+	private @Getter String baseUrl;
 
 	@Value("${zgw.endpoint.roltype:/catalogi/api/v1/roltypen}")
-	private String endpointRolType;
+	private @Getter String endpointRolType;
 
 	@Value("${zgw.endpoint.rol:/zaken/api/v1/rollen}")
-	private String endpointRol;
+	private @Getter String endpointRol;
 
 	@Value("${zgw.endpoint.zaaktype:/catalogi/api/v1/zaaktypen}")
-	private String endpointZaaktype;
+	private @Getter String endpointZaaktype;
 
 	@Value("${zgw.endpoint.status:/zaken/api/v1/statussen}")
-	private String endpointStatus;
+	private @Getter String endpointStatus;
 
 	@Value("${zgw.endpoint.resultaat:/zaken/api/v1/resultaten}")
-	private String endpointResultaat;
+	private @Getter String endpointResultaat;
 
 	@Value("${zgw.endpoint.statustype:/catalogi/api/v1/statustypen}")
-	private String endpointStatustype;
+	private @Getter String endpointStatustype;
 
 	@Value("${zgw.endpoint.resultaattype:/catalogi/api/v1/resultaattypen}")
-	private String endpointResultaattype;
+	private @Getter String endpointResultaattype;
 
 	@Value("${zgw.endpoint.zaakinformatieobject:/zaken/api/v1/zaakinformatieobjecten}")
-	private String endpointZaakinformatieobject;
+	private @Getter String endpointZaakinformatieobject;
 
 	@Value("${zgw.endpoint.enkelvoudiginformatieobject:/documenten/api/v1/enkelvoudiginformatieobjecten}")
-	private String endpointEnkelvoudiginformatieobject;
+	private @Getter String endpointEnkelvoudiginformatieobject;
 
 	@Value("${zgw.endpoint.objectinformatieobject:/documenten/api/v1/objectinformatieobjecten}")
-	private String endpointObjectinformatieobject;
+	private @Getter String endpointObjectinformatieobject;
 
 	@Value("${zgw.endpoint.zaak:/zaken/api/v1/zaken}")
-	private String endpointZaak;
+	private @Getter String endpointZaak;
 
 	@Value("${zgw.endpoint.informatieobjecttype:/catalogi/api/v1/informatieobjecttypen}")
-	private String endpointInformatieobjecttype;
+	private @Getter String endpointInformatieobjecttype;
 
 	@Value("${nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching:true}")
 	public Boolean additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching;
