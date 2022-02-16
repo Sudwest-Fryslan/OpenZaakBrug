@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>nl.sudwestfryslan.translations</groupId>
 			<artifactId>ozb-extensions</artifactId>
-			<version>1.0.1-20220214.131251-3</version>
+			<version>1.0.1-20220216.114447-4</version>
 		</dependency>
 
 		<dependency>
