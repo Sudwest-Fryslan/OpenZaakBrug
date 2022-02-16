@@ -579,10 +579,21 @@ public class ZaakService {
 						zgwRol.betrokkeneIdentificatie.verblijfsadres = this.modelMapper.map(zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres, ZgwAdres.class);
 						// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
 						// 		Move code to the ModelMapperConfig.java
+
+						// Default behaviour uses straatnaam to fill the gorOpenbareRuimteNaam. Config allows for using openbareRuimteNaam instead for a specific zaaktype
+						var openbareRuimteNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.straatnaam;
+						for(var translateVerblijfsadresForZaaktype : this.configService.getConfiguration().getTranslateVerblijfsadresForZaaktype()){
+							if(translateVerblijfsadresForZaaktype.getZaakType().equals(zgwZaakType.getIdentificatie())){
+								if(translateVerblijfsadresForZaaktype.getUseOpenbareRuimteNaam()){
+									openbareRuimteNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.openbareRuimteNaam;
+								}
+							}
+						}			
+
 						zgwRol.betrokkeneIdentificatie.verblijfsadres = new ZgwAdres();
 						zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaIdentificatie = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.identificatie;
 						zgwRol.betrokkeneIdentificatie.verblijfsadres.wplWoonplaatsNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.woonplaatsnaam;
-						zgwRol.betrokkeneIdentificatie.verblijfsadres.gorOpenbareRuimteNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.straatnaam;
+						zgwRol.betrokkeneIdentificatie.verblijfsadres.gorOpenbareRuimteNaam = openbareRuimteNaam;
 						zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaPostcode = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.postcode;
 						zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaHuisnummer = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.huisnummer;
 						zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaHuisletter = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.huisletter;

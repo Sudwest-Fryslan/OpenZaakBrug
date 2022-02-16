@@ -41,7 +41,8 @@
 			"zaakType": "B9999",
 			"coalesceResultaat": "Onbekend"
 		}
-	],		
+	],	
+	"translateVerblijfsadresForZaaktype": [],	
 	"replication": {
 		"geefZaakdetails": {
 			"soapaction": "http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01",
