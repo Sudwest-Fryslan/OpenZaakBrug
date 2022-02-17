@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mv ./src/main/resources/application-ci.properties_example ./src/main/resources/application-ci.properties
+mv ./src/main/resources/application.properties_example ./src/main/resources/application.properties
 mv ./src/main/resources/config.json_example ./src/main/resources/config.json
 
 mvn install -Dmaven.javadoc.skip=true -B -V -DskipTests

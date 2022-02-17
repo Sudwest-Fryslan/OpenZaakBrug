@@ -6,7 +6,7 @@ services:
     ports:
      - "8080:8080"
     environment:
-      - "SPRING_PROFILES_ACTIVE=ci"
+      - "SPRING_PROFILES_ACTIVE=travis-ci"
     depends_on:
       - "db"
   db:
