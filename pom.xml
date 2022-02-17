@@ -204,6 +204,9 @@
 					<plugin>
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<layout>ZIP</layout> <!-- to be able to access resources outside the fat jar -->
+						</configuration>
 						<executions>
 							<execution>
 								<goals>
