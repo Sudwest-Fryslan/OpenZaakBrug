@@ -20,4 +20,6 @@ public class Namespace {
 	public static final String STUF = "http://www.egem.nl/StUF/StUF0301";
 	public static final String BG = "http://www.egem.nl/StUF/sector/bg/0310";
 	public static final String MIME = "http://www.w3.org/2005/05/xmlmime";
+	public static final String GML = "http://www.opengis.net/gml";
+
 }

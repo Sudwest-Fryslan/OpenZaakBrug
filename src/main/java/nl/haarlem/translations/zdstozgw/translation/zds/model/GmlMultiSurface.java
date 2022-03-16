@@ -25,15 +25,19 @@ import javax.xml.bind.annotation.XmlElement;
 
 import lombok.Data;
 
+import static nl.haarlem.translations.zdstozgw.translation.zds.model.namespace.Namespace.GML;
+
+
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ZdsAnderZaakObject {
-	@XmlElement(namespace = ZKN)
-	public String omschrijving;
+public class GmlMultiSurface {
+
+	@XmlAttribute(namespace = GML)
+	public String srsDimension;	
 	
-	@XmlElement(namespace = ZKN)
-	public String aanduiding;
+	@XmlAttribute(namespace = GML)
+	public String srsName;	
 	
-	@XmlElement(namespace = ZKN)
-	public ZdsLokatie lokatie;	
+	@XmlElement(namespace = GML)
+	public GmlSurfaceMembers surfaceMembers;	
 }
