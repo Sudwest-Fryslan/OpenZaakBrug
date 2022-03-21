@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.invoke.MethodHandles;
+import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -263,7 +264,7 @@ public class XmlUtils {
 			if(body.startsWith(WRITE_XML_DECLARATION)) {
 				body = body.substring(WRITE_XML_DECLARATION.length());
 			}
-			var inputstream = new ByteArrayInputStream(body.getBytes());
+			var inputstream = new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
 			var message = MessageFactory.newInstance().createMessage(null, inputstream);
 			var document = message.getSOAPBody().extractContentAsDocument();
 			var unmarshaller = JAXBContext.newInstance(c).createUnmarshaller();

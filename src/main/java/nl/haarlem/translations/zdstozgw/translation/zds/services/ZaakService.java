@@ -1177,45 +1177,68 @@ public class ZaakService {
 
 		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(zdsWasInformatieObject.identificatie);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
-			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed");
+			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " has status 'defintief ' and cannot be locked and then changed");
 		}
 
-
+		
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
 		// 		Move code to the ModelMapperConfig.java
 		//		Also merge, we shouldnt overwrite the old values this hard
 		var zgwWordtEnkelvoudigInformatieObject = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObject.class);
+		zgwWordtEnkelvoudigInformatieObject.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
+		zgwWordtEnkelvoudigInformatieObject.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;
+		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
+		// 		Move code to the ModelMapperConfig.java
 		if(zgwWordtEnkelvoudigInformatieObject.verzenddatum != null && zgwWordtEnkelvoudigInformatieObject.verzenddatum.length() == 0) {
 			zgwWordtEnkelvoudigInformatieObject.verzenddatum = null;
 		}
-		//zgwEnkelvoudigInformatieObject.indicatieGebruiksrecht = "false";
-		zgwWordtEnkelvoudigInformatieObject.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
-		zgwWordtEnkelvoudigInformatieObject.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;
-
-		//	"in_bewerking" "ter_vaststelling" "definitief" "gearchiveerd"
-		zgwWordtEnkelvoudigInformatieObject.status = zgwWordtEnkelvoudigInformatieObject.status.toLowerCase();
+		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
+		// 		Move code to the ModelMapperConfig.java
+		if(zgwWordtEnkelvoudigInformatieObject.taal != null && zgwWordtEnkelvoudigInformatieObject.taal.length() == 2) {
+			debugWarning("taal only had 2, expected 3 characted, trying to convert: '" + zgwWordtEnkelvoudigInformatieObject.taal  + "'");
+			// https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes
+			switch (zgwWordtEnkelvoudigInformatieObject.taal.toLowerCase()) {
+			case "fy":
+				// Fryslân boppe!
+				zgwWordtEnkelvoudigInformatieObject.taal = "fry";
+				break;
+			case "nl":
+				zgwWordtEnkelvoudigInformatieObject.taal = "nld";
+				break;
+			case "en":
+				zgwWordtEnkelvoudigInformatieObject.taal = "eng";
+				break;
+			default:
+				debugWarning("could not convert: '" + zgwWordtEnkelvoudigInformatieObject.taal.toLowerCase()  + "', this will possible result in an error");
+			}
+		}
+		zgwWordtEnkelvoudigInformatieObject.indicatieGebruiksrecht = "false";
+		if(zgwWordtEnkelvoudigInformatieObject.status != null) {
+			/*			
+			in_bewerking - (In bewerking) Aan het informatieobject wordt nog gewerkt.
+			ter_vaststelling - (Ter vaststelling) Informatieobject gereed maar moet nog vastgesteld worden.
+			definitief - (Definitief) Informatieobject door bevoegd iets of iemand vastgesteld dan wel ontvangen.
+			gearchiveerd - (Gearchiveerd) Informatieobject duurzaam bewaarbaar gemaakt; een gearchiveerd informatie-element.
+			*/			
+			zgwWordtEnkelvoudigInformatieObject.status = zgwWordtEnkelvoudigInformatieObject.status.replace(" ", "_");
+			zgwWordtEnkelvoudigInformatieObject.status = zgwWordtEnkelvoudigInformatieObject.status.toLowerCase();
+			if(!List.of("in_bewerking", "ter_vaststelling", "definitief", "gearchiveerd").contains(zgwWordtEnkelvoudigInformatieObject.status)) {
+				debugWarning("document-status: '" + zgwWordtEnkelvoudigInformatieObject.status + "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
+				zgwWordtEnkelvoudigInformatieObject.status = null;
+			}
+		}		
+		
 		zgwWordtEnkelvoudigInformatieObject.lock = lock;
 		zgwWordtEnkelvoudigInformatieObject.url = zgwWasEnkelvoudigInformatieObject.url;
 		zgwWasEnkelvoudigInformatieObject = this.zgwClient.putZaakDocument(zgwWordtEnkelvoudigInformatieObject);
 		//ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zdsInformatieObject.isRelevantVoor.gerelateerde.identificatie);
 		//ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
+		
+		
 		ZgwLock zgwLock = new ZgwLock();
 		zgwLock.lock = lock;
 		this.zgwClient.getZgwInformatieObjectUnLock(zgwWordtEnkelvoudigInformatieObject, zgwLock);
 
-		// status
-		//if (zdsInformatieObject.isRelevantVoor.volgnummer != null
-		//		&& zdsInformatieObject.isRelevantVoor.omschrijving != null
-		//		&& zdsInformatieObject.isRelevantVoor.datumStatusGezet != null) {
-		//	log.debug("Update of zaakid:" + zgwZaak.identificatie + " has  status changes");
-		//	var zgwStatusType = this.zgwClient.getStatusTypeByZaakTypeAndOmschrijving(zgwZaak.zaaktype,
-		//			zdsInformatieObject.isRelevantVoor.omschrijving, zdsInformatieObject.isRelevantVoor.volgnummer);
-		//	// ZgwStatus zgwStatus = modelMapper.map(zdsHeeft, ZgwStatus.class);
-		//	ZgwStatus zgwStatus = new ZgwStatus();
-		//	zgwStatus.zaak = zgwZaak.url;
-		//	zgwStatus.statustype = zgwStatusType.url;
-		//	this.zgwClient.actualiseerZaakStatus(zgwStatus);
-		//}
 		return zgwWasEnkelvoudigInformatieObject;
 	}
 
