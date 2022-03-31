@@ -36,6 +36,7 @@ zgw.endpoint.objectinformatieobject = /documenten/api/v1/objectinformatieobjecte
 #spring.jpa.generate-ddl=true
 #spring.jpa.show-sql=true
 #spring.jpa.hibernate.ddl-auto=create
+spring.jpa.defer-datasource-initialization=true
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.open-in-view=true
 spring.datasource.platform=h2
