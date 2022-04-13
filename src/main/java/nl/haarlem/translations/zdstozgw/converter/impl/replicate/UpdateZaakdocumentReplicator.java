@@ -26,7 +26,7 @@ import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.converter.impl.translate.UpdateZaakdocumentTranslator;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
-import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.services.ZaakService;
 
 public class UpdateZaakdocumentReplicator extends UpdateZaakdocumentTranslator {
 

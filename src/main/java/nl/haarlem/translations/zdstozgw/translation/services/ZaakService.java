@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
-package nl.haarlem.translations.zdstozgw.translation.zds.services;
+package nl.haarlem.translations.zdstozgw.translation.services;
 
 import java.lang.invoke.MethodHandles;
 import java.net.URLConnection;
@@ -37,7 +37,7 @@ import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.ZgwRolOmschrijving;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
-import nl.haarlem.translations.zdstozgw.translation.BetrokkeneType;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsBetrokkeneType;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGerelateerde;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeft;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeftGerelateerde;
@@ -558,7 +558,7 @@ public class ZaakService {
 		if (zdsRol.gerelateerde.medewerker != null) {
 			zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.medewerker, ZgwBetrokkeneIdentificatie.class);
 			zgwRol.roltoelichting += zdsRol.gerelateerde.medewerker.achternaam != null ? zdsRol.gerelateerde.medewerker.achternaam : zdsRol.gerelateerde.medewerker.identificatie; 
-			zgwRol.betrokkeneType = BetrokkeneType.MEDEWERKER.getDescription();
+			zgwRol.betrokkeneType = ZdsBetrokkeneType.MEDEWERKER.getDescription();
 		}
 		if (zdsRol.gerelateerde.natuurlijkPersoon != null) {
 			if (zgwRol.betrokkeneIdentificatie == null) {
@@ -602,7 +602,7 @@ public class ZaakService {
 					}
 				}
 			}
-			zgwRol.betrokkeneType = BetrokkeneType.NATUURLIJK_PERSOON.getDescription();
+			zgwRol.betrokkeneType = ZdsBetrokkeneType.NATUURLIJK_PERSOON.getDescription();
 		}
 		if (zdsRol.gerelateerde.nietNatuurlijkPersoon != null) {
 			if (zgwRol.betrokkeneIdentificatie == null) {
@@ -664,7 +664,7 @@ public class ZaakService {
 			}
 			//zgwRol.betrokkeneIdentificatie.bezoekadres;
 			zgwRol.roltoelichting  += zdsRol.gerelateerde.nietNatuurlijkPersoon.statutaireNaam;
-			zgwRol.betrokkeneType = BetrokkeneType.NIET_NATUURLIJK_PERSOON.getDescription();
+			zgwRol.betrokkeneType = ZdsBetrokkeneType.NIET_NATUURLIJK_PERSOON.getDescription();
 
 		}
 		if (zdsRol.gerelateerde.vestiging != null) {
@@ -679,7 +679,7 @@ public class ZaakService {
 
 			//zgwRol.betrokkeneIdentificatie.bezoekadres;
 			zgwRol.roltoelichting  += zdsRol.gerelateerde.vestiging.handelsnaam;
-			zgwRol.betrokkeneType = BetrokkeneType.VESTIGING.getDescription();
+			zgwRol.betrokkeneType = ZdsBetrokkeneType.VESTIGING.getDescription();
 
 		}
 		if (zgwRol.betrokkeneIdentificatie == null) {

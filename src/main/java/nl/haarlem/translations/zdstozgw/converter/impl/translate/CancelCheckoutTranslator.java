@@ -24,7 +24,7 @@ import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsBv02;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsCancelCheckoutDi02;
-import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.services.ZaakService;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class CancelCheckoutTranslator extends Converter {

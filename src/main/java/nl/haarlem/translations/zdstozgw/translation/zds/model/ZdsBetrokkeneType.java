@@ -13,15 +13,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
-package nl.haarlem.translations.zdstozgw.translation;
+package nl.haarlem.translations.zdstozgw.translation.zds.model;
 
-public enum BetrokkeneType {
+public enum ZdsBetrokkeneType {
 	NATUURLIJK_PERSOON("natuurlijk_persoon"), NIET_NATUURLIJK_PERSOON("niet_natuurlijk_persoon"),
 	VESTIGING("vestiging"), ORGANISATORISCHE_EENHEID("organisatorische_eenheid"), MEDEWERKER("medewerker");
 
 	String description;
 
-	BetrokkeneType(String description) {
+	ZdsBetrokkeneType(String description) {
 		this.description = description;
 	}
 
