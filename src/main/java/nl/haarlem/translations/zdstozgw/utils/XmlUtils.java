@@ -63,6 +63,7 @@ import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 
 public class XmlUtils {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	private static final String transformerFactoryClass = "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl";
 
 	public static Document convertStringToDocument(String xmlStr) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -88,31 +89,32 @@ public class XmlUtils {
 		return soapMessage;
 	}
 
-	public static String xmlToString(Document xml) {
-		String result = "";
+//	public static String xmlToString(Document xml) {
+//		String result = "";
+//
+//		// Explicitly use Xalan and not make it depend on (transitive) dependencies in pom.xml
+//		// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
+//		TransformerFactory tf = new TransformerFactoryImpl();
+//
+//		Transformer transformer;
+//		try {
+//			transformer = tf.newTransformer();
+//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+//			StringWriter writer = new StringWriter();
+//			transformer.transform(new DOMSource(xml), new StreamResult(writer));
+//
+//			result = writer.getBuffer().toString();
+//			result = result.replaceAll("xmlns=\"\" ", "");
+//		} catch (Exception e) {
+//			log.error(e.getMessage());
+//		}
+//
+//		return result;
+//	}
 
-		// Explicitly use Xalan and not make it depend on (transitive) dependencies in pom.xml
-		// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
-		TransformerFactory tf = new org.apache.xalan.processor.TransformerFactoryImpl();
-
-		Transformer transformer;
-		try {
-			transformer = tf.newTransformer();
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			StringWriter writer = new StringWriter();
-			transformer.transform(new DOMSource(xml), new StreamResult(writer));
-
-			result = writer.getBuffer().toString();
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
-
-		return result;
-	}
-
-	public static String getSoapMessageAsString(Document document) {
-		return XmlUtils.xmlToString(document);
-	}
+//	public static String getSoapMessageAsString(Document document) {
+//		return XmlUtils.xmlToString(document);
+//	}
 
 	public static Document xmlNodesToDocument(NodeList nodes, String rootName) {
 		Document result = null;
@@ -172,11 +174,9 @@ public class XmlUtils {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(new InputSource(new StringReader(unformattedxml)));
+			doc.setXmlStandalone(true);
 
-			// Explicitly use Xalan to prevent Saxon-HE being used (depending on (transitive) dependencies in pom.xml).
-			// Saxon-HE is causing some of the SOAP response messages to become invalid by adding xmlns="".
-			// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
-			Transformer transformer = new org.apache.xalan.processor.TransformerFactoryImpl().newTransformer();
+			Transformer transformer = TransformerFactory.newInstance(transformerFactoryClass, null).newTransformer();
 
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
