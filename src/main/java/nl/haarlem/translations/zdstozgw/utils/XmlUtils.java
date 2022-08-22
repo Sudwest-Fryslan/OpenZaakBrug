@@ -176,6 +176,9 @@ public class XmlUtils {
 			Document doc = builder.parse(new InputSource(new StringReader(unformattedxml)));
 			doc.setXmlStandalone(true);
 
+			// Explicitly use JDK internal TransformerFactory to prevent Saxon-HE being used (depending on (transitive) dependencies in pom.xml).
+			// Saxon-HE is causing some of the SOAP response messages to become invalid by adding xmlns="".
+			// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
 			Transformer transformer = TransformerFactory.newInstance(transformerFactoryClass, null).newTransformer();
 
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
