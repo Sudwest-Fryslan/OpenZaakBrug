@@ -628,7 +628,7 @@ public class ZGWClient {
 		// stead of null.
 		// This will cause issues when response of getzaakdetails is used for
 		// updatezaak.
-		if (zgwZaak.getVerlenging().getDuur() == null || zgwZaak.getVerlenging().getReden().equals("")) {
+		if (zgwZaak.getVerlenging() == null || zgwZaak.getVerlenging().getDuur() == null || zgwZaak.getVerlenging().getReden().equals("")) {
 			zgwZaak.setVerlenging(null);
 		}
 		if (zgwZaak.getOpschorting().getReden().equals("")) {
