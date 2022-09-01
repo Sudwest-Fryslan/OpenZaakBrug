@@ -255,8 +255,8 @@ public class ZaakService {
 		ChangeDetector changeDetector = new ChangeDetector();
 
 		// check if the zdsWasZaak is equal to the one stored inside OpenZaak
-		// this should be the case
-		ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
+		// this way we know how bad the information is from the provided system ;-)
+		ZdsZaak zdsStored = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
 		if(zdsWasZaak != null) {
 			var storedVsWasChanges = changeDetector.detect(zdsStored, zdsWasZaak);
 			var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
@@ -265,16 +265,17 @@ public class ZaakService {
 				for (Change change : storedVsWasFieldsChanges.keySet()) {
 					debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
 				}
-				// ZgwZaakPut zgwWordtZaak = this.modelMapper.map(zdsWordtZaak, ZgwZaakPut.class);
-				// ZgwZaakPut updatedZaak = ZgwZaakPut.merge(zgwZaak, zgwWordtZaak);
-				// this.zgwClient.updateZaak(zgwZaak.uuid, updatedZaak);
-				// changed = true;
+			}					
+			var storedVsWordtRolChanges = storedVsWasChanges.getAllChangesByFieldType(ZdsRol.class);
+			if (storedVsWordtRolChanges.size() > 0) {
+				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWordtRolChanges.size() + " rol changes between stored and was");
+				for (Change change : storedVsWordtRolChanges.keySet()) {
+					debugWarning("The role: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
+				}
 			}
 		}
-		else {
-			// when there was no "was" provided
-			zdsWasZaak = zdsStored;
-		}
+		// always compare to what is used in the database
+		zdsWasZaak = zdsStored;
 
 		// attributen
 		var wasVsWordtChanges = changeDetector.detect(zdsWasZaak, zdsWordtZaak);
@@ -282,29 +283,24 @@ public class ZaakService {
 		if (wasVsWordtFieldChanges.size() > 0) {
 			log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + wasVsWordtFieldChanges.size() + " field changes");
 			for (Change change : wasVsWordtFieldChanges.keySet()) {
-				// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
-				// 		Move code to the ModelMapperConfig.java
-				if("verlenging".equals(change.getField().getName())) {
-					if(change.getCurrentValue() != null) {
-						var verlenging  = (nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging) change.getCurrentValue();
-						verlenging.duur = "P" + verlenging.duur + "D";
-					}
-					if(change.getNewValue() != null) {
-						var verlenging  = (nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging) change.getNewValue();
-						if(verlenging.reden == null || verlenging.reden.length() == 0) {
-							zdsWordtZaak.verlenging = null;
-						}
-						else {
-							verlenging.duur = "P" + verlenging.duur + "D";
-						}
-					}				
-				}					
 				log.debug("\tchange:" + change.getField().getName());				
 			}			
 			ZgwZaakPut zgwWordtZaak = this.modelMapper.map(zdsWordtZaak, ZgwZaakPut.class);
 			ZgwZaakPut updatedZaak = ZgwZaakPut.merge(zgwZaak, zgwWordtZaak);
+			// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
+			// 		Move code to the ModelMapperConfig.java
+			if(updatedZaak.verlenging != null) {
+				if(updatedZaak.verlenging.reden == null || updatedZaak.verlenging.reden.length() == 0) {
+					updatedZaak.verlenging = null;
+				}
+				else if(updatedZaak.verlenging.duur == null || updatedZaak.verlenging.duur.length() == 0) {
+					updatedZaak.verlenging = null;
+				}									
+				else if(!(updatedZaak.verlenging.duur.startsWith("P") && updatedZaak.verlenging.duur.endsWith("D")))  {				
+					updatedZaak.verlenging.duur = "P" + updatedZaak.verlenging.duur + "D";
+				}
+			}			
 			this.zgwClient.updateZaak(zgwZaak.uuid, updatedZaak);
-
 			changed = true;
 		}
 
