@@ -789,7 +789,11 @@ public class ZaakService {
 				debugWarning("document-status: '" + zgwEnkelvoudigInformatieObject.status + "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
 				zgwEnkelvoudigInformatieObject.status = null;
 			}
-		}			
+		}
+		if(StringUtils.isEmpty(zgwEnkelvoudigInformatieObject.titel)) {
+			debugWarning("Titel is empty, using the bestandsnaam ["+zgwEnkelvoudigInformatieObject.bestandsnaam+"] as titel");
+			zgwEnkelvoudigInformatieObject.titel = zgwEnkelvoudigInformatieObject.bestandsnaam;
+		}
 		zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(zgwEnkelvoudigInformatieObject);
 		ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
 
