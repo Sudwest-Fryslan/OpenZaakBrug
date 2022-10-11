@@ -791,7 +791,7 @@ public class ZaakService {
 			}
 		}
 		if(StringUtils.isEmpty(zgwEnkelvoudigInformatieObject.titel)) {
-			debugWarning("Titel is empty using the bestandsnaam as titel");
+			debugWarning("Titel is empty, using the bestandsnaam ["+zgwEnkelvoudigInformatieObject.bestandsnaam+"] as titel");
 			zgwEnkelvoudigInformatieObject.titel = zgwEnkelvoudigInformatieObject.bestandsnaam;
 		}
 		zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(zgwEnkelvoudigInformatieObject);
