@@ -1138,6 +1138,8 @@ public class ZaakService {
 			return zgwRolOmschrijving.getHeeftAlsGemachtigde();
 		case "heeftalsoverigBetrokkene":
 			return zgwRolOmschrijving.getHeeftAlsOverigBetrokkene();
+		case "heeftbetrekkingop":
+			return zgwRolOmschrijving.getHeeftBetrekkingOp();
 		default:
 			return null;
 		}
