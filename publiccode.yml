@@ -134,10 +134,10 @@ nl:
     spid: false
 landingURL: 'https://sudwest-fryslan.github.io/OpenZaakBrug/'
 legal:
-  license: 0BSD
+  license: EUPL
 localisation:
   availableLanguages:
-    - en
+    - nl
   localisationReady: false
 logo: |-
   https://raw.githubusercontent.com/Sudwest-Fryslan/OpenZaakBrug/master/src/main/resources/static/img/open-zaakbrug.png
