@@ -61,7 +61,6 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjec
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwKenmerk;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaatType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatusType;
@@ -877,6 +876,10 @@ public class ZaakService {
 		if (result.status.length() == 0) {
 			result.status = null;
 		}
+		if(result.vertrouwelijkAanduiding.length()==0) {
+			result.vertrouwelijkAanduiding=null;
+		}
+		
 
 		result.formaat = zgwEnkelvoudigInformatieObject.bestandsnaam
 				.substring(zgwEnkelvoudigInformatieObject.bestandsnaam.lastIndexOf(".") + 1);
