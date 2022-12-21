@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import lombok.Data;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsRol;
 
 @Data
 public class ChangeDetector {
@@ -88,25 +89,42 @@ public class ChangeDetector {
 	public Changes detect(Object currentState, Object newState) throws ConverterException {
 		try {
 			var changes = new Changes();
-			for (Field field : List.of(currentState.getClass().getDeclaredFields())) {
+			for (Field field : List.of(newState.getClass().getDeclaredFields())) {
 				Object currentValue = field.get(currentState);
 				Object newValue = field.get(newState);
 				ChangeType changeType = null;
 
 				log.debug("looking for changes in current: '" + currentValue + "' into: '" + field + "'");
 
-				if (currentValue == null && newValue != null) {
-					changeType = ChangeType.NEW;
-				}
-				else if (currentValue != null && newValue == null) {
-					changeType = ChangeType.DELETED;
-				}
-				else if (currentValue != null && !currentValue.equals(newValue)) {
-					changeType = ChangeType.CHANGED;
-				}
+				if(newValue instanceof ZdsRol) {
+					String verwerkingsoort = ((ZdsRol) newValue).getVerwerkingssoort();
+					switch(verwerkingsoort) {
+						case "W":
+							changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.CHANGED);
+							break;
+						case "T":
+							if(!currentValue.equals(newValue)) {
+								changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.NEW);
+							}
+							break;
+						case "V":
+							changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.DELETED);
+							break;
+					}
+				} else {
+					if (currentValue == null && newValue != null) {
+						changeType = ChangeType.NEW;
+					}
+					else if (currentValue != null && newValue == null) {
+						changeType = ChangeType.DELETED;
+					}
+					else if (currentValue != null && !currentValue.equals(newValue)) {
+						changeType = ChangeType.CHANGED;
+					}
 
-				if (changeType != null) {
-					changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), changeType);
+					if (changeType != null) {
+						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), changeType);
+					}
 				}
 			}
 			return changes;

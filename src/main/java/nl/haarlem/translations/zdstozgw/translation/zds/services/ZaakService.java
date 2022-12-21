@@ -253,29 +253,32 @@ public class ZaakService {
 		var changed = false;
 		ChangeDetector changeDetector = new ChangeDetector();
 
-		// check if the zdsWasZaak is equal to the one stored inside OpenZaak
-		// this way we know how bad the information is from the provided system ;-)
-		ZdsZaak zdsStored = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
-		if(zdsWasZaak != null) {
-			var storedVsWasChanges = changeDetector.detect(zdsStored, zdsWasZaak);
-			var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
-			if (storedVsWasFieldsChanges.size() > 0) {
-				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWasFieldsChanges.size() + " field changes between stored and was");
-				for (Change change : storedVsWasFieldsChanges.keySet()) {
-					debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
-				}
-			}					
-			var storedVsWordtRolChanges = storedVsWasChanges.getAllChangesByFieldType(ZdsRol.class);
-			if (storedVsWordtRolChanges.size() > 0) {
-				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWordtRolChanges.size() + " rol changes between stored and was");
-				for (Change change : storedVsWordtRolChanges.keySet()) {
-					debugWarning("The role: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
-				}
-			}
-		}
-		// always compare to what is used in the database
-		zdsWasZaak = zdsStored;
+//		// check if the zdsWasZaak is equal to the one stored inside OpenZaak
+//		// this way we know how bad the information is from the provided system ;-)
+//		ZdsZaak zdsStored = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
+//		if(zdsWasZaak != null) {
+//			var storedVsWasChanges = changeDetector.detect(zdsStored, zdsWasZaak);
+//			var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
+//			if (storedVsWasFieldsChanges.size() > 0) {
+//				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWasFieldsChanges.size() + " field changes between stored and was");
+//				for (Change change : storedVsWasFieldsChanges.keySet()) {
+//					debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
+//				}
+//			}					
+//			var storedVsWordtRolChanges = storedVsWasChanges.getAllChangesByFieldType(ZdsRol.class);
+//			if (storedVsWordtRolChanges.size() > 0) {
+//				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWordtRolChanges.size() + " rol changes between stored and was");
+//				for (Change change : storedVsWordtRolChanges.keySet()) {
+//					debugWarning("The role: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
+//				}
+//			}
+//		} 
+//		if(zdsWasZaak == null) {
+//			// if only one object is present in the request
+//			zdsWasZaak = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
+//		}
 
+//		zdsWordtZaak.get
 		// attributen
 		var wasVsWordtChanges = changeDetector.detect(zdsWasZaak, zdsWordtZaak);
 		var wasVsWordtFieldChanges = wasVsWordtChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
@@ -541,6 +544,9 @@ public class ZaakService {
 	private void addRolToZgw(ZgwZaak createdZaak, ZgwZaakType zgwZaakType, ZdsRol zdsRol, String typeRolOmschrijving) {
 		log.debug("addRolToZgw Rol: '" + typeRolOmschrijving + "'");
 		if (zdsRol == null) {
+			return;
+		}
+		if(!zdsRol.verwerkingssoort.equals("T")) {
 			return;
 		}
 		if (zdsRol.gerelateerde == null) {
