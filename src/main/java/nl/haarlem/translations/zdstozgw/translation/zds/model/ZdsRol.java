@@ -31,6 +31,9 @@ public class ZdsRol extends ZdsObject {
 	@XmlAttribute(namespace = STUF)
 	public String entiteittype;
 
+	@XmlAttribute(namespace = STUF)
+	public String verwerkingssoort;
+
 	@XmlElement(namespace = ZKN)
 	public ZdsGerelateerde gerelateerde;
 
