@@ -103,7 +103,7 @@ public class ChangeDetector {
 							changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.CHANGED);
 							break;
 						case "T":
-							if(!currentValue.equals(newValue)) {
+							if(!newValue.equals(currentValue)) {
 								changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.NEW);
 							}
 							break;
