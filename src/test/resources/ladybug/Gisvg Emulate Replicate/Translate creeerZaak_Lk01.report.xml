@@ -314,7 +314,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-20210518.202847--66e4055:18534331b93:-7fd8</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847--4a961ccd:1859c6d72eb:-7fd3</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -458,12 +458,10 @@
   },
   &quot;heeftBetrekkingOp&quot;: {
     &quot;entiteittype&quot;: &quot;ZAKOBJ&quot;,
-    &quot;verwerkingssoort&quot;: &quot;T&quot;,
     &quot;gerelateerde&quot;: {}
   },
   &quot;heeftAlsInitiator&quot;: {
     &quot;entiteittype&quot;: &quot;ZAKBTRINI&quot;,
-    &quot;verwerkingssoort&quot;: &quot;T&quot;,
     &quot;gerelateerde&quot;: {
       &quot;natuurlijkPersoon&quot;: {
         &quot;entiteittype&quot;: &quot;NPS&quot;,
@@ -906,7 +904,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>POST to: http://localhost:8000/zaken/api/v1/zaken took 0 milliseconds</string>
+      <string>POST to: http://localhost:8000/zaken/api/v1/zaken took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1503,7 +1501,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/a6c94395-f9d1-4d50-a8d9-9a6af6ff98a2 took 1 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/a6c94395-f9d1-4d50-a8d9-9a6af6ff98a2 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1753,7 +1751,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/a6c94395-f9d1-4d50-a8d9-9a6af6ff98a2 took 1 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/a6c94395-f9d1-4d50-a8d9-9a6af6ff98a2 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1953,7 +1951,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/a6c94395-f9d1-4d50-a8d9-9a6af6ff98a2 took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/a6c94395-f9d1-4d50-a8d9-9a6af6ff98a2 took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -2153,7 +2151,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/e121da0f-0053-4fa8-914a-7e0124d211dd took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/e121da0f-0053-4fa8-914a-7e0124d211dd took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -2378,7 +2376,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/zaken/api/v1/resultaten?zaak=http://localhost:8000/zaken/api/v1/zaken/e121da0f-0053-4fa8-914a-7e0124d211dd took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/zaken/api/v1/resultaten?zaak=http://localhost:8000/zaken/api/v1/zaken/e121da0f-0053-4fa8-914a-7e0124d211dd took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -2606,7 +2604,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/zaken/api/v1/resultaten?zaak=http://localhost:8000/zaken/api/v1/zaken/e121da0f-0053-4fa8-914a-7e0124d211dd took 1 milliseconds</string>
+      <string>GET to: http://localhost:8000/zaken/api/v1/resultaten?zaak=http://localhost:8000/zaken/api/v1/zaken/e121da0f-0053-4fa8-914a-7e0124d211dd took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -2897,7 +2895,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01 with kenmerk: &apos;zaakidentificatie:190097&apos; returned statuscode:200 OK and took 187 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01 with kenmerk: &apos;zaakidentificatie:190097&apos; returned statuscode:200 OK and took 285 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -2936,8 +2934,8 @@
           &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
           &lt;applicatie&gt;GISVG&lt;/applicatie&gt;&#13;
         &lt;/ontvanger&gt;&#13;
-        &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--66e4055:18534331b93:-7fd8&lt;/referentienummer&gt;&#13;
-        &lt;tijdstipBericht&gt;20221221112130&lt;/tijdstipBericht&gt;&#13;
+        &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--4a961ccd:1859c6d72eb:-7fd3&lt;/referentienummer&gt;&#13;
+        &lt;tijdstipBericht&gt;20230110171049&lt;/tijdstipBericht&gt;&#13;
         &lt;crossRefnummer&gt;eec1fd96-0e0a-4c88-a24d-ff9e807e7bf4&lt;/crossRefnummer&gt;&#13;
       &lt;/stuurgegevens&gt;&#13;
     &lt;/Bv03Bericht&gt;&#13;
@@ -2964,10 +2962,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-20210518.202847--66e4055:18534331b93:-7fd8</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847--4a961ccd:1859c6d72eb:-7fd3</string>
   </void>
   <void property="endTime">
-   <long>1671618090714</long>
+   <long>1673367049046</long>
   </void>
   <void property="name">
    <string>Translate creeerZaak_Lk01</string>
@@ -2976,10 +2974,10 @@
    <string>/Gisvg Emulate Replicate/</string>
   </void>
   <void property="startTime">
-   <long>1671618090526</long>
+   <long>1673367048761</long>
   </void>
   <void property="storageId">
-   <int>678</int>
+   <int>774</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>

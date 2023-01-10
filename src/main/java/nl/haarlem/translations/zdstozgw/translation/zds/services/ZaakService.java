@@ -253,40 +253,32 @@ public class ZaakService {
 		var changed = false;
 		ChangeDetector changeDetector = new ChangeDetector();
 
-//		// check if the zdsWasZaak is equal to the one stored inside OpenZaak
-//		// this way we know how bad the information is from the provided system ;-)
-//		ZdsZaak zdsStored = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
-//		if(zdsWasZaak != null) {
-//			var storedVsWasChanges = changeDetector.detect(zdsStored, zdsWasZaak);
-//			var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
-//			if (storedVsWasFieldsChanges.size() > 0) {
-//				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWasFieldsChanges.size() + " field changes between stored and was");
-//				for (Change change : storedVsWasFieldsChanges.keySet()) {
-//					debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
-//				}
-//			}					
-//			var storedVsWordtRolChanges = storedVsWasChanges.getAllChangesByFieldType(ZdsRol.class);
-//			if (storedVsWordtRolChanges.size() > 0) {
-//				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWordtRolChanges.size() + " rol changes between stored and was");
-//				for (Change change : storedVsWordtRolChanges.keySet()) {
-//					debugWarning("The role: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
-//				}
-//			}
-//		} 
-//		if(zdsWasZaak == null) {
-//			// if only one object is present in the request
-//			zdsWasZaak = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
-//		}
+		// check if the zdsWasZaak is equal to the one stored inside OpenZaak
+		// this should be the case
+		ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
+		if(zdsWasZaak != null) {
+			var storedVsWasChanges = changeDetector.detect(zdsStored, zdsWasZaak);
+			var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
+			if (storedVsWasFieldsChanges.size() > 0) {
+				log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWasFieldsChanges.size() + " field changes between stored and was");
+				for (Change change : storedVsWasFieldsChanges.keySet()) {
+					debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
+				}
+			}
+		}
+		else {
+			// when there was no "was" provided
+			zdsWasZaak = zdsStored;
+		}
 
-//		zdsWordtZaak.get
 		// attributen
 		var wasVsWordtChanges = changeDetector.detect(zdsWasZaak, zdsWordtZaak);
 		var wasVsWordtFieldChanges = wasVsWordtChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
 		if (wasVsWordtFieldChanges.size() > 0) {
 			log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + wasVsWordtFieldChanges.size() + " field changes");
 			for (Change change : wasVsWordtFieldChanges.keySet()) {
-				log.debug("\tchange:" + change.getField().getName());				
-			}			
+				log.debug("\tchange:" + change.getField().getName());
+			}
 			ZgwZaakPut zgwWordtZaak = this.modelMapper.map(zdsWordtZaak, ZgwZaakPut.class);
 			ZgwZaakPut updatedZaak = ZgwZaakPut.merge(zgwZaak, zgwWordtZaak);
 			// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
@@ -298,10 +290,10 @@ public class ZaakService {
 				else if(updatedZaak.verlenging.duur == null || updatedZaak.verlenging.duur.length() == 0) {
 					updatedZaak.verlenging = null;
 				}									
-				else if(!(updatedZaak.verlenging.duur.startsWith("P") && updatedZaak.verlenging.duur.endsWith("D")))  {				
+				else if(!(updatedZaak.verlenging.duur.startsWith("P") && updatedZaak.verlenging.duur.endsWith("D"))) {
 					updatedZaak.verlenging.duur = "P" + updatedZaak.verlenging.duur + "D";
 				}
-			}			
+			}
 			this.zgwClient.updateZaak(zgwZaak.uuid, updatedZaak);
 			changed = true;
 		}
@@ -314,12 +306,27 @@ public class ZaakService {
 //			for(ChangeDetector.Change change : wasVsWordtRolChanges.keySet()) {
 //				log.info("Rol field:" + change.getField().getName() + " changetype:" + change.getChangeType() + " currentvalue:" + change.getCurrentValue() + " newvalue:" + change.getNewValue());				
 //			}
-			
+
 			changeDetector.filterChangesByType(wasVsWordtRolChanges, ChangeDetector.ChangeType.NEW)
 					.forEach((change, changeType) -> {
 						var rolnaam = getRolOmschrijvingGeneriekByRolName(change.getField().getName());
-						log.debug("[CHANGE ROL] New Rol:" + rolnaam);
-						addRolToZgw(zgwZaak, zgwZaakType, (ZdsRol) change.getNewValue(), rolnaam);
+						// Special case since Initiator may occur once in open-zaak
+						boolean initiatorExists=false;
+						if("Initiator".equals(rolnaam)) {
+							ZdsZaak storedZaak = getZaakDetailsByIdentificatie(zdsWordtZaak.identificatie);
+							if(storedZaak.heeftAlsInitiator != null) {
+								initiatorExists=true;
+							}
+						}
+
+						if(initiatorExists) {
+							log.debug("[CHANGE ROL] Update Rol:" + rolnaam);
+							debugWarning("Rol [Initiator] already exists updating the existing");
+							updateRolInZgw(zgwZaak, zgwZaakType, rolnaam, (ZdsRol) change.getNewValue());
+						} else {
+							log.debug("[CHANGE ROL] New Rol:" + rolnaam);
+							addRolToZgw(zgwZaak, zgwZaakType, (ZdsRol) change.getNewValue(), rolnaam);
+						}
 					});
 
 			changeDetector.filterChangesByType(wasVsWordtRolChanges, ChangeDetector.ChangeType.DELETED)
@@ -327,7 +334,6 @@ public class ZaakService {
 						var rolnaam = getRolOmschrijvingGeneriekByRolName(change.getField().getName());
 						if(rolnaam != null) {
 							log.debug("[CHANGE ROL] Deleted Rol:" + rolnaam);
-
 							deleteRolFromZgw(zgwZaak, zgwZaakType, rolnaam);
 						}
 					});
@@ -389,7 +395,7 @@ public class ZaakService {
 				.findFirst();
 		
 		var presentStatuses = this.zgwClient.getStatussenByZaakUrl(zgwZaak.url);
-		beeindigd = presentStatuses.stream().anyMatch(s -> s.statustype.equals(endStatusType.get().url) ? true : false);
+		beeindigd = presentStatuses!=null && presentStatuses.stream().anyMatch(s -> s.statustype.equals(endStatusType.get().url) ? true : false);
 		
 		if (zdsZaak.heeft != null) {
 			for (ZdsHeeft zdsHeeftIterator : zdsZaak.heeft) {
@@ -544,9 +550,6 @@ public class ZaakService {
 	private void addRolToZgw(ZgwZaak createdZaak, ZgwZaakType zgwZaakType, ZdsRol zdsRol, String typeRolOmschrijving) {
 		log.debug("addRolToZgw Rol: '" + typeRolOmschrijving + "'");
 		if (zdsRol == null) {
-			return;
-		}
-		if(!zdsRol.verwerkingssoort.equals("T")) {
 			return;
 		}
 		if (zdsRol.gerelateerde == null) {
