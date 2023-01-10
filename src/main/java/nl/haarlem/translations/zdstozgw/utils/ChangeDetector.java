@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,35 +91,21 @@ public class ChangeDetector {
 		try {
 			var changes = new Changes();
 			for (Field field : List.of(newState.getClass().getDeclaredFields())) {
-				Object currentValue = field.get(currentState);
+				Object storedValue = field.get(currentState);
 				Object newValue = field.get(newState);
 				ChangeType changeType = null;
 
-				log.debug("looking for changes in current: '" + currentValue + "' into: '" + field + "'");
+				log.debug("looking for changes in current: '" + storedValue + "' into: '" + field + "'");
 
-				if(newValue instanceof ZdsRol) {
-					String verwerkingsoort = ((ZdsRol) newValue).getVerwerkingssoort();
-					switch(verwerkingsoort) {
-						case "W":
-							changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.CHANGED);
-							break;
-						case "T":
-							if(!newValue.equals(currentValue)) {
-								changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.NEW);
-							}
-							break;
-						case "V":
-							changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.DELETED);
-							break;
+				if(newValue instanceof ZdsRol && ((ZdsRol) newValue).tijdvakGeldigheid != null && StringUtils.isNotBlank(((ZdsRol) newValue).tijdvakGeldigheid.eindGeldigheid)) {
+					// eindGeldigheid would imply that the role will be no longer valid so delete the role
+					if(currentState != null) {
+						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.DELETED);
 					}
 				} else {
-					if (currentValue == null && newValue != null) {
+					if (storedValue == null && newValue != null) {
 						changeType = ChangeType.NEW;
-					}
-					else if (currentValue != null && newValue == null) {
-						changeType = ChangeType.DELETED;
-					}
-					else if (currentValue != null && !currentValue.equals(newValue)) {
+					} else if (storedValue != null && !storedValue.equals(newValue)) {
 						changeType = ChangeType.CHANGED;
 					}
 

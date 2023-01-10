@@ -16,28 +16,21 @@
 package nl.haarlem.translations.zdstozgw.translation.zds.model;
 
 import static nl.haarlem.translations.zdstozgw.translation.zds.model.namespace.Namespace.STUF;
-import static nl.haarlem.translations.zdstozgw.translation.zds.model.namespace.Namespace.ZKN;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 import lombok.Data;
 
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ZdsRol extends ZdsObject {
-	@XmlAttribute(namespace = STUF)
-	public String entiteittype;
-
-//	@XmlAttribute(namespace = STUF)
-//	public String verwerkingssoort;
-
-	@XmlElement(namespace = ZKN)
-	public ZdsGerelateerde gerelateerde;
+public class ZdsTijdvakGeldigheid extends ZdsObject {
 
 	@XmlElement(namespace = STUF)
-	public ZdsTijdvakGeldigheid tijdvakGeldigheid;
+	public String beginGeldigheid;
+
+	@XmlElement(namespace = STUF)
+	public String eindGeldigheid;
 
 }

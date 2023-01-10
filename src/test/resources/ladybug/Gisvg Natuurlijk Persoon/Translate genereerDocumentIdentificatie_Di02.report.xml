@@ -20,8 +20,8 @@
 					&lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;
 					&lt;StUF:applicatie&gt;ZDS&lt;/StUF:applicatie&gt;
 				&lt;/StUF:ontvanger&gt;
-				&lt;StUF:referentienummer&gt;ddafc28f-9551-4737-929e-2fb0b3b3d88e&lt;/StUF:referentienummer&gt;
-				&lt;StUF:tijdstipBericht&gt;20220905140143496&lt;/StUF:tijdstipBericht&gt;
+				&lt;StUF:referentienummer&gt;f2399f5d-37bb-47ad-a109-0f99f9756eb3&lt;/StUF:referentienummer&gt;
+				&lt;StUF:tijdstipBericht&gt;20230110180853292&lt;/StUF:tijdstipBericht&gt;
 				&lt;StUF:functie&gt;genereerDocumentidentificatie&lt;/StUF:functie&gt;
 			&lt;/stuurgegevens&gt;
 		&lt;/genereerDocumentIdentificatie_Di02&gt;
@@ -38,7 +38,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -63,7 +63,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -88,7 +88,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -113,7 +113,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -138,7 +138,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -163,7 +163,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -176,7 +176,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>ozb-76d66699-0b89-4b93-9c02-f175dca63d32</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f07</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -188,7 +188,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -213,7 +213,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -238,7 +238,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -263,7 +263,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -298,7 +298,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -311,7 +311,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>documentidentificatie:190030</string>
+      <string>documentidentificatie:1900236</string>
      </void>
      <void property="name">
       <string>kenmerk</string>
@@ -323,7 +323,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -336,7 +336,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02 with kenmerk: &apos;documentidentificatie:190030&apos; returned statuscode:200 OK and took 59 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02 with kenmerk: &apos;documentidentificatie:1900236&apos; returned statuscode:200 OK and took 43 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -348,7 +348,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -375,13 +375,13 @@
           &lt;ns1:organisatie&gt;1900&lt;/ns1:organisatie&gt;&#13;
           &lt;ns1:applicatie&gt;GISVG&lt;/ns1:applicatie&gt;&#13;
         &lt;/ns1:ontvanger&gt;&#13;
-        &lt;ns1:referentienummer&gt;ozb-76d66699-0b89-4b93-9c02-f175dca63d32&lt;/ns1:referentienummer&gt;&#13;
-        &lt;ns1:tijdstipBericht&gt;20220905140143&lt;/ns1:tijdstipBericht&gt;&#13;
-        &lt;ns1:crossRefnummer&gt;ddafc28f-9551-4737-929e-2fb0b3b3d88e&lt;/ns1:crossRefnummer&gt;&#13;
+        &lt;ns1:referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f07&lt;/ns1:referentienummer&gt;&#13;
+        &lt;ns1:tijdstipBericht&gt;20230110181340&lt;/ns1:tijdstipBericht&gt;&#13;
+        &lt;ns1:crossRefnummer&gt;f2399f5d-37bb-47ad-a109-0f99f9756eb3&lt;/ns1:crossRefnummer&gt;&#13;
         &lt;ns1:functie&gt;genereerDocumentidentificatie&lt;/ns1:functie&gt;&#13;
       &lt;/ns2:stuurgegevens&gt;&#13;
       &lt;ns2:document ns1:entiteittype=&quot;EDC&quot; ns1:functie=&quot;entiteit&quot;&gt;&#13;
-        &lt;ns2:identificatie&gt;190030&lt;/ns2:identificatie&gt;&#13;
+        &lt;ns2:identificatie&gt;1900236&lt;/ns2:identificatie&gt;&#13;
       &lt;/ns2:document&gt;&#13;
     &lt;/ns2:genereerDocumentIdentificatie_Du02&gt;&#13;
   &lt;/SOAP-ENV:Body&gt;&#13;
@@ -398,7 +398,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>http-nio-8080-exec-2</string>
+      <string>Thread-45</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -407,10 +407,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>ozb-76d66699-0b89-4b93-9c02-f175dca63d32</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f07</string>
   </void>
   <void property="endTime">
-   <long>1662379303562</long>
+   <long>1673370820680</long>
   </void>
   <void property="name">
    <string>Translate genereerDocumentIdentificatie_Di02</string>
@@ -419,10 +419,10 @@
    <string>/Gisvg Natuurlijk Persoon/</string>
   </void>
   <void property="startTime">
-   <long>1662379303503</long>
+   <long>1673370820637</long>
   </void>
   <void property="storageId">
-   <int>612</int>
+   <int>813</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>
