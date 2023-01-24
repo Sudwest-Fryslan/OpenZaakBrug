@@ -990,11 +990,11 @@ public class ZaakService {
 	}
 
     private String getFileSize(String base64Inhoud){
-        if (base64Inhoud == null || base64Inhoud.isEmpty()) { return "0"; }
+        if (base64Inhoud == null || base64Inhoud.isEmpty() || base64Inhoud.length() < 3) { return "0"; }
 
         var characterCount = base64Inhoud.length();
         var paddingCount = 0;
-        var endOfString = base64Inhoud.substring(characterCount -2, 2);
+        var endOfString = base64Inhoud.substring(characterCount - 3);
         var chars = endOfString.toCharArray();
         for (int i = 0; i < chars.length; i++){
             if(Character.toString(chars[0])=="="){
