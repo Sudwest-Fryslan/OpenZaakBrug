@@ -914,7 +914,7 @@ public class ZaakService {
 			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie not found for identificatie: " + documentIdentificatie);
 		}
 		if(zgwEnkelvoudigInformatieObject.locked) {
-			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zgwEnkelvoudigInformatieObject.identificatie + " cannot be locked and then changed");
+			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zgwEnkelvoudigInformatieObject.identificatie + " cannot be locked and then changed. Object is allready locked");
 		}
 
 		ZgwLock lock = this.zgwClient.getZgwInformatieObjectLock(zgwEnkelvoudigInformatieObject);
@@ -941,7 +941,7 @@ public class ZaakService {
 
 		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(zdsWasInformatieObject.identificatie);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
-			throw new RuntimeException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed");
+			throw new RuntimeException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zdsWasInformatieObject.identificatie + " cannot be locked and then changed. Document status is 'definitief'");
 		}
 
 
@@ -989,8 +989,8 @@ public class ZaakService {
 		debug.infopoint("Warning", message);
 	}
 
-    private String getFileSize(String base64Inhoud){
-        if (base64Inhoud == null || base64Inhoud.isEmpty() || base64Inhoud.length() < 3) { return "0"; }
+    private Long getFileSize(String base64Inhoud){
+        if (base64Inhoud == null || base64Inhoud.isEmpty() || base64Inhoud.length() < 3) { return 0L; }
 
         var characterCount = base64Inhoud.length();
         var paddingCount = 0;
@@ -1002,6 +1002,6 @@ public class ZaakService {
             }
         }
 
-        return Integer.toString((3 * (characterCount / 4)) - paddingCount);
+        return (long) ((3 * (characterCount / 4)) - paddingCount);
     }
 }

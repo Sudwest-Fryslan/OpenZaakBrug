@@ -90,5 +90,5 @@ public class ZgwEnkelvoudigInformatieObject {
 
     @SerializedName("bestandsomvang")
     @Expose
-    public String bestandsomvang;
+    public Long bestandsomvang;
 }
