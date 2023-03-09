@@ -828,7 +828,7 @@ public class ZGWClient {
 	}
 
 	public ZgwEnkelvoudigInformatieObject putZaakDocument(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
 		String response = this.put(zgwEnkelvoudigInformatieObject.url, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
