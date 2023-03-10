@@ -37,7 +37,7 @@ public class ConverterFactory {
 		if (translation == null) {
 			String combinations = "";
 			for (Translation t : this.configService.getConfiguration().getTranslations()) {
-				combinations += "\n\tpath: '" + t.getPath() + "' soapaction: '" + t.getSoapAction() + "'";
+				combinations += "\n\tpath: '" + t.getPath() + "' soapaction: '" + t.getSoapaction() + "'";
 			}
 			log.error("Could not load a convertor for path: '" + session.getClientUrl() + "' with soapaction: '"
 					+ session.getClientSoapAction() + "'");
@@ -48,8 +48,8 @@ public class ConverterFactory {
 		String classname = translation.implementation;
 		session.setConverterImplementation(classname);
 		try {
-			Class<?> c = Class.forName(classname);				
-			java.lang.reflect.Constructor<?> ctor = c.getConstructor(RequestResponseCycle.class, Translation.class, ZaakService.class);			
+			Class<?> c = Class.forName(classname);
+			java.lang.reflect.Constructor<?> ctor = c.getConstructor(RequestResponseCycle.class, Translation.class, ZaakService.class);
 			Object object = ctor.newInstance(new Object[] { session, translation, this.zaakService });
 
 			var converter = (Converter) object;

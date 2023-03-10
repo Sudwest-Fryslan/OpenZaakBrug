@@ -338,7 +338,7 @@ public class ZaakService {
     }
 
     private void addRolToZgw(ZgwZaak createdZaak, ZgwZaakType zgwZaakType, ZdsRol zdsRol, String typeRolOmschrijving) {
-        log.debug("addRolToZgw Rol:" + typeRolOmschrijving);
+        log.debug("addRolToZgw Rol: '" + typeRolOmschrijving + "'");
         if (zdsRol == null) {
             return;
         }
@@ -362,33 +362,47 @@ public class ZaakService {
             }
             zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.natuurlijkPersoon, ZgwBetrokkeneIdentificatie.class);
             // https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/118
-            zgwRol.roltoelichting += zdsRol.gerelateerde.natuurlijkPersoon.geslachtsnaam;
-            if (zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres != null) {
-                if (zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres != null) {
-                    if (zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.identificatie == null || zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.identificatie.length() == 0) {
+            zgwRol.roltoelichting  += zdsRol.gerelateerde.natuurlijkPersoon.geslachtsnaam;
+            if(zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres != null) {
+                if(zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres != null) {
+                    if(zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.identificatie == null || zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.identificatie.length() == 0) {
                         // https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/55
                         debugWarning("No aoaIdentificatie found for zaak with id: " + createdZaak.identificatie + " in rol: " + typeRolOmschrijving + " for natuurlijkPersoon");
-                    } else {
+                    }
+                    else {
                         zgwRol.betrokkeneIdentificatie.verblijfsadres = this.modelMapper.map(zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres, ZgwAdres.class);
                         // https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
                         // 		Move code to the ModelMapperConfig.java
+
+                        // Default behaviour uses straatnaam to fill the gorOpenbareRuimteNaam. Config allows for using openbareRuimteNaam instead for a specific zaaktype
+                        var openbareRuimteNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.straatnaam;
+                        for(var translateVerblijfsadresForZaaktype : this.configService.getConfiguration().getTranslateVerblijfsadresForZaaktype()){
+                            if(translateVerblijfsadresForZaaktype.getZaakType().equals(zgwZaakType.getIdentificatie())){
+                                if(translateVerblijfsadresForZaaktype.getUseOpenbareRuimteNaam()){
+                                    openbareRuimteNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.openbareRuimteNaam;
+                                }
+                            }
+                        }
+
                         zgwRol.betrokkeneIdentificatie.verblijfsadres = new ZgwAdres();
                         zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaIdentificatie = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.identificatie;
                         zgwRol.betrokkeneIdentificatie.verblijfsadres.wplWoonplaatsNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.woonplaatsnaam;
-                        zgwRol.betrokkeneIdentificatie.verblijfsadres.gorOpenbareRuimteNaam = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.straatnaam;
+                        zgwRol.betrokkeneIdentificatie.verblijfsadres.gorOpenbareRuimteNaam = openbareRuimteNaam;
                         zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaPostcode = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.postcode;
                         zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaHuisnummer = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.huisnummer;
                         zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaHuisletter = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.huisletter;
                         zgwRol.betrokkeneIdentificatie.verblijfsadres.aoaHuisnummertoevoeging = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.huisnummertoevoeging;
-                        zgwRol.betrokkeneIdentificatie.verblijfsadres.inpLocatiebeschrijving = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.locatiebeschrijving;
+                        zgwRol.betrokkeneIdentificatie.verblijfsadres.inpLocatiebeschrijving  = zdsRol.gerelateerde.natuurlijkPersoon.verblijfsadres.locatiebeschrijving;
                     }
                 }
             }
             zgwRol.betrokkeneType = BetrokkeneType.NATUURLIJK_PERSOON.getDescription();
         }
         if (zdsRol.gerelateerde.nietNatuurlijkPersoon != null) {
-            if (zgwRol.betrokkeneIdentificatie != null) {
-                throw new ConverterException("Rol: " + typeRolOmschrijving + " wordt al gebruikt voor medewerker of natuurlijk persoon");
+            if (zgwRol.betrokkeneIdentificatie == null) {
+                if (zgwRol.betrokkeneIdentificatie != null) {
+                    throw new ConverterException("Rol: " + typeRolOmschrijving + " wordt al gebruikt voor medewerker of natuurlijk persoon");
+                }
             }
             zgwRol.betrokkeneIdentificatie = this.modelMapper.map(zdsRol.gerelateerde.nietNatuurlijkPersoon, ZgwBetrokkeneIdentificatie.class);
             // https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/118
@@ -396,46 +410,46 @@ public class ZaakService {
             //zgwRol.betrokkeneIdentificatie.annIdentificatie = zdsRol.gerelateerde.nietNatuurlijkPersoon.annIdentificatie;
             zgwRol.betrokkeneIdentificatie.statutaireNaam = zdsRol.gerelateerde.nietNatuurlijkPersoon.statutaireNaam;
 
-            var rechtsvorm = (zdsRol.gerelateerde.nietNatuurlijkPersoon.innRechtsvorm != null) ? zdsRol.gerelateerde.nietNatuurlijkPersoon.innRechtsvorm.toLowerCase() : null;
-            if (rechtsvorm == null || rechtsvorm.length() == 0) {
+            var rechtsvorm = zdsRol.gerelateerde.nietNatuurlijkPersoon.innRechtsvorm.toLowerCase();
+            if(rechtsvorm == null || rechtsvorm.length() == 0 ) {
                 // do nothing
-            } else if (rechtsvorm.contains("vennootschap")) {
+            } else if(rechtsvorm.contains("vennootschap")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "besloten_vennootschap";
-            } else if (rechtsvorm.contains("economische")) {
+            } else if(rechtsvorm.contains("economische")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "cooperatie_europees_economische_samenwerking";
-            } else if (rechtsvorm.contains("cooperatieve")) {
+            } else if(rechtsvorm.contains("cooperatieve")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "europese_cooperatieve_venootschap";
-            } else if (rechtsvorm.contains("europese")) {
+            } else if(rechtsvorm.contains("europese")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "europese_naamloze_vennootschap";
-            } else if (rechtsvorm.contains("kerkelijke")) {
+            } else if(rechtsvorm.contains("kerkelijke")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "kerkelijke_organisatie";
-            } else if (rechtsvorm.contains("vennootschap")) {
+            } else if(rechtsvorm.contains("vennootschap")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "naamloze_vennootschap";
-            } else if (rechtsvorm.contains("waarborg")) {
+            } else if(rechtsvorm.contains("waarborg")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "onderlinge_waarborg_maatschappij";
-            } else if (rechtsvorm.contains("privaatrechtelijke")) {
+            } else if(rechtsvorm.contains("privaatrechtelijke")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "overig_privaatrechtelijke_rechtspersoon";
-            } else if (rechtsvorm.contains("stichting")) {
+            } else if(rechtsvorm.contains("stichting")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "stichting";
-            } else if (rechtsvorm.contains("vereniging")) {
+            } else if(rechtsvorm.contains("vereniging")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "vereniging";
-            } else if (rechtsvorm.contains("eigenaars")) {
+            } else if(rechtsvorm.contains("eigenaars")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "vereniging_van_eigenaars";
-            } else if (rechtsvorm.contains("publiekrechtelijke")) {
+            } else if(rechtsvorm.contains("publiekrechtelijke")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "publiekrechtelijke_rechtspersoon";
-            } else if (rechtsvorm.contains("firma")) {
+            } else if(rechtsvorm.contains("firma")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "vennootschap_onder_firma";
-            } else if (rechtsvorm.contains("maatschap")) {
+            } else if(rechtsvorm.contains("maatschap")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "maatschap";
-            } else if (rechtsvorm.contains("rederij")) {
+            } else if(rechtsvorm.contains("rederij")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "rederij";
-            } else if (rechtsvorm.contains("commanditaire")) {
+            } else if(rechtsvorm.contains("commanditaire")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "commanditaire_vennootschap";
-            } else if (rechtsvorm.contains("binnen")) {
+            } else if(rechtsvorm.contains("binnen")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "kapitaalvennootschap_binnen_eer";
-            } else if (rechtsvorm.contains("buitenlandse")) {
+            } else if(rechtsvorm.contains("buitenlandse")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "overige_buitenlandse_rechtspersoon_vennootschap";
-            } else if (rechtsvorm.contains("buiten")) {
+            } else if(rechtsvorm.contains("buiten")) {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "kapitaalvennootschap_buiten_eer";
             } else {
                 // maybe a good default?
@@ -443,7 +457,7 @@ public class ZaakService {
                 zgwRol.betrokkeneIdentificatie.innRechtsvorm = "overig_privaatrechtelijke_rechtspersoon";
             }
             //zgwRol.betrokkeneIdentificatie.bezoekadres;
-            zgwRol.roltoelichting += zdsRol.gerelateerde.nietNatuurlijkPersoon.statutaireNaam;
+            zgwRol.roltoelichting  += zdsRol.gerelateerde.nietNatuurlijkPersoon.statutaireNaam;
             zgwRol.betrokkeneType = BetrokkeneType.NIET_NATUURLIJK_PERSOON.getDescription();
 
         }
@@ -458,28 +472,24 @@ public class ZaakService {
             zgwRol.betrokkeneIdentificatie.handelsnaam = new String[]{zdsRol.gerelateerde.vestiging.handelsnaam};
 
             //zgwRol.betrokkeneIdentificatie.bezoekadres;
-            zgwRol.roltoelichting += zdsRol.gerelateerde.vestiging.handelsnaam;
+            zgwRol.roltoelichting  += zdsRol.gerelateerde.vestiging.handelsnaam;
             zgwRol.betrokkeneType = BetrokkeneType.VESTIGING.getDescription();
 
         }
         if (zgwRol.betrokkeneIdentificatie == null) {
             //throw new ConverterException("Rol: " + typeRolOmschrijving + " zonder Natuurlijkpersoon or Medewerker");
-            debugWarning("Rol: " + typeRolOmschrijving + " zonder (NIET) Natuurlijkpersoon or Medewerker");
+            debugWarning("Rol: '" + typeRolOmschrijving + "' zonder (NIET) Natuurlijkpersoon or Medewerker");
             return;
         }
         var roltype = this.zgwClient.getRolTypeByZaaktypeAndOmschrijving(zgwZaakType, typeRolOmschrijving);
         if (roltype == null) {
             var zaaktype = this.zgwClient.getZaakTypeByUrl(createdZaak.zaaktype);
-            debugWarning("Rol: " + typeRolOmschrijving + " niet gevonden bij Zaaktype: " + zaaktype.identificatie);
-            zgwClient.caseCreationStatusOk = false;
-            return;
+            throw new ConverterException(
+                "Rol: '" + typeRolOmschrijving + "' niet gevonden bij Zaaktype: '" + zaaktype.identificatie + "'");
         }
         zgwRol.roltype = roltype.url;
         zgwRol.zaak = createdZaak.getUrl();
-        ZgwRol zgwROl = this.zgwClient.addZgwRol(zgwRol);
-        if (zgwROl.uuid.isEmpty()) {
-            zgwClient.caseCreationStatusOk = false;
-        }
+        this.zgwClient.addZgwRol(zgwRol);
     }
 
     public List<ZdsHeeftRelevant> geefLijstZaakdocumenten(String zaakidentificatie) {

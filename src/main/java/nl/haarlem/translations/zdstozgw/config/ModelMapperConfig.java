@@ -287,32 +287,32 @@ public class ModelMapperConfig {
 				.addMapping(src -> src.getInhoud().getBestandsnaam(), ZgwEnkelvoudigInformatieObject::setBestandsnaam);
 	}
 
-	static public String convertStufDateToZgwDate(String stufDate) {
-		if (stufDate == null || stufDate.length() == 0) {
-			return null;
-		}
-		var zdsDateFormatter = new SimpleDateFormat("yyyyMMdd");
-		var zgwDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			if (stufDate.contains("-")) {
-				throw new ConverterException("stuf date: " + stufDate + " may not contain the character '-'");
-			}
-			var date = zdsDateFormatter.parse(stufDate);
+    static public String convertStufDateToZgwDate(String stufDate) {
+        if (stufDate == null || stufDate.length() == 0) {
+            return null;
+        }
+        var zdsDateFormatter = new SimpleDateFormat("yyyyMMdd");
+        var zgwDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            if (stufDate.contains("-")) {
+                throw new ConverterException("stuf date: " + stufDate + " may not contain the character '-'");
+            }
+            var date = zdsDateFormatter.parse(stufDate);
 
-			// errors when 0001-01-01 was used to store documents
-			if (date.before(zdsDateFormatter.parse("19000101"))){
-				return null;
-			}
+            // errors when 0001-01-01 was used to store documents
+            if (date.before(zdsDateFormatter.parse("19000101"))){
+                return null;
+            }
 
-			var zgwDate = zgwDateFormatter.format(date);
-			log.debug("convertStufDateToZgwDate: " + stufDate + " (amsterdam) --> " + zgwDate
-					+ "(gmt) with offset minutes:" + ModelMapperConfig.singleton.timeoffset  + "(date:" + date + ")");
-			return zgwDate;
+            var zgwDate = zgwDateFormatter.format(date);
+            log.debug("convertStufDateToZgwDate: " + stufDate + " (amsterdam) --> " + zgwDate
+                + "(gmt) with offset minutes:" + ModelMapperConfig.singleton.timeoffset  + "(date:" + date + ")");
+            return zgwDate;
 
-		} catch (ParseException e) {
-			throw new ConverterException("ongeldige stuf-datetime: '" + stufDate + "'");
-		}
-	}
+        } catch (ParseException e) {
+            throw new ConverterException("ongeldige stuf-datetime: '" + stufDate + "'");
+        }
+    }
 
 	static public String convertStufDateTimeToZgwDateTime(String stufDateTime) {
 		log.debug("convertStufDateTimeToZgwDateTime:" + stufDateTime);
@@ -422,17 +422,22 @@ public class ModelMapperConfig {
 
 			@Override
 			protected String convert(String stufDate) {
-				return ModelMapperConfig.convertStufDateToZgwDate(stufDate);
+
+                log.info("Convert stuf date: {}",stufDate);
+                return ModelMapperConfig.convertStufDateToZgwDate(stufDate);
 			}
 		};
 	}
 
 	private AbstractConverter<String, String> convertStufDateTimeToZgwDateTime() {
+
 		return new AbstractConverter<>() {
 
 			@Override
 			protected String convert(String stufDateTime) {
-				return ModelMapperConfig.convertStufDateTimeToZgwDateTime(stufDateTime);
+
+                log.info("Convert StufDateTime: {}", stufDateTime);
+                return ModelMapperConfig.convertStufDateTimeToZgwDateTime(stufDateTime);
 			}
 		};
 	}

@@ -15,35 +15,15 @@
  */
 package nl.haarlem.translations.zdstozgw.config.model;
 
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
 @Data
-public class Translation {
+public class KeyValuePair {
     @Expose
-    public String translation;
+    public String key;
     @Expose
-    public String path;
-    @Expose
-    public String soapaction;
-    @Expose
-    public String applicatie;
-    @Expose
-    public String implementation;
-    @Expose
-    public String legacyservice;
-    @Expose
-    public List<KeyValuePair> parameters;
-
-    public String getParameterValue(String key) {
-        for(KeyValuePair kvp : parameters) {
-            if(kvp.key.equals(key)) {
-                return kvp.value;
-            }
-        }
-        return null;
-    }
+    public String value;
 }

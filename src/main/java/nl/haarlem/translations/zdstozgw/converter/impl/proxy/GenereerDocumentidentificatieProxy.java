@@ -33,7 +33,7 @@ public class GenereerDocumentidentificatieProxy extends Converter {
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
         var url = this.getTranslation().getLegacyservice();
-        var soapaction = this.getTranslation().getSoapAction();
+        var soapaction = this.getTranslation().getSoapaction();
         var request = XmlUtils.getSOAPMessageFromObject(this.zdsDocument);
 
         this.getSession().setFunctie("Proxy");
