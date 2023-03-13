@@ -42,7 +42,7 @@ public class ConverterFactoryTests {
                 .getResourceAsStream("zds1.1/VoegZaakDocumentToe"), "UTF-8");
 
         Translation translation = new Translation()
-                .setSoapAction(soapAction)
+                .setSoapaction(soapAction)
                 .setImplementation(implementation);
         doReturn(translation).when(configService).getTranslationByPathAndSoapAction(any(), any());
 
