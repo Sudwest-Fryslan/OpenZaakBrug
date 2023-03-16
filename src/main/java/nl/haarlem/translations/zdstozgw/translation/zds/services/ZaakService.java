@@ -576,7 +576,7 @@ public class ZaakService {
         }
         // https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
         // 		Move code to the ModelMapperConfig.java
-        if (zgwEnkelvoudigInformatieObject.taal != null && zgwEnkelvoudigInformatieObject.taal.length() == 2) {
+        if (zgwEnkelvoudigInformatieObject.taal != null && zgwEnkelvoudigInformatieObject.taal.length() > 1) {
             debugWarning("taal only had 2, expected 3 characted, trying to convert: '" + zgwEnkelvoudigInformatieObject.taal + "'");
             // https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes
             switch (zgwEnkelvoudigInformatieObject.taal.toLowerCase()) {
@@ -589,6 +589,9 @@ public class ZaakService {
                     break;
                 case "en":
                     zgwEnkelvoudigInformatieObject.taal = "eng";
+                    break;
+                case "nl-nl" :
+                    zgwEnkelvoudigInformatieObject.taal = "nld";
                     break;
                 default:
                     debugWarning("could not convert: '" + zgwEnkelvoudigInformatieObject.taal.toLowerCase() + "', this will possible result in an error");
