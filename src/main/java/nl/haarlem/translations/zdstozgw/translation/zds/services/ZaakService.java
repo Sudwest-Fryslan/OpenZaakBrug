@@ -952,7 +952,14 @@ public class ZaakService {
         // 		Move code to the ModelMapperConfig.java
         //		Also merge, we shouldnt overwrite the old values this hard
         var zgwWordtEnkelvoudigInformatieObject = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObject.class);
-        zgwWordtEnkelvoudigInformatieObject.bestandsomvang = getFileSize(zgwWordtEnkelvoudigInformatieObject.inhoud);
+
+        //Temporary fix for bug in Openzaak
+        //Add calculated file Size, but only if it's > 0
+        //This will add it if the document itself is updated, but won't add it if only metadata is changed
+        var bestandsomvang = getFileSize(zgwWordtEnkelvoudigInformatieObject.inhoud);
+        if(bestandsomvang > 0){
+            zgwWordtEnkelvoudigInformatieObject.bestandsomvang = bestandsomvang;
+        }
         if (zgwWordtEnkelvoudigInformatieObject.verzenddatum != null && zgwWordtEnkelvoudigInformatieObject.verzenddatum.length() == 0) {
             zgwWordtEnkelvoudigInformatieObject.verzenddatum = null;
         }
