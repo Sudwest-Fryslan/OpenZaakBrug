@@ -811,10 +811,10 @@ public class ZGWClient {
 			return;
 	}
 
-	public ZgwEnkelvoudigInformatieObject putZaakDocument(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
+	public ZgwEnkelvoudigInformatieObject patchZaakDocument(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
-		String response = this.put(zgwEnkelvoudigInformatieObject.url, json);
+		String response = this.patch(zgwEnkelvoudigInformatieObject.url, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
 	}
 
