@@ -955,7 +955,7 @@ public class ZaakService {
         // 		Move code to the ModelMapperConfig.java
         //		Also merge, we shouldnt overwrite the old values this hard
         var zgwWordtEnkelvoudigInformatieObject = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObject.class);
-        zgwWordtEnkelvoudigInformatieObject.bestandsomvang = getFileSize(zgwWordtEnkelvoudigInformatieObject.inhoud);
+
         if (zgwWordtEnkelvoudigInformatieObject.verzenddatum != null && zgwWordtEnkelvoudigInformatieObject.verzenddatum.length() == 0) {
             zgwWordtEnkelvoudigInformatieObject.verzenddatum = null;
         }
@@ -995,10 +995,4 @@ public class ZaakService {
         debug.infopoint("Warning", message);
     }
 
-    private Long getFileSize(String base64Inhoud) {
-        if (base64Inhoud == null || base64Inhoud.isEmpty() || base64Inhoud.length() < 3) {
-            return 0L;
-        }
-        return (long) Base64.getDecoder().decode(base64Inhoud).length;
-    }
 }

@@ -28,11 +28,11 @@ public class VoegZaakdocumentToeTranslator extends Converter {
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		var zdsEdcLk01 = (ZdsEdcLk01) this.getZdsDocument();
 		var zdsInformatieObject = zdsEdcLk01.objects.get(0);
-		var zdsZaakObject = zdsInformatieObject.isRelevantVoor.gerelateerde; 
-		
-		this.getSession().setFunctie("VoegZaakdocumentToe");				
-		this.getSession().setKenmerk("zaakidentificatie:" + zdsZaakObject.identificatie + " documentidentificatie:" + zdsInformatieObject.identificatie);			
-		
+        var zdsZaakObject = zdsInformatieObject.isRelevantVoor.gerelateerde;
+
+		this.getSession().setFunctie("VoegZaakdocumentToe");
+		this.getSession().setKenmerk("zaakidentificatie:" + zdsZaakObject.identificatie + " documentidentificatie:" + zdsInformatieObject.identificatie);
+
 		this.getZaakService().voegZaakDocumentToe(
 				this.getZaakService().getRSIN(zdsEdcLk01.stuurgegevens.zender.organisatie), zdsInformatieObject);
 		var bv03 = new ZdsBv03(zdsEdcLk01.stuurgegevens, this.getSession().getReferentienummer());
