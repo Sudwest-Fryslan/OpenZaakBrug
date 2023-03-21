@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import nl.haarlem.translations.zdstozgw.translation.zds.model.*;
-
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
 
 import org.apache.commons.lang.StringUtils;
@@ -407,52 +406,6 @@ public class ZaakService {
             //zgwRol.betrokkeneIdentificatie.annIdentificatie = zdsRol.gerelateerde.nietNatuurlijkPersoon.annIdentificatie;
             zgwRol.betrokkeneIdentificatie.statutaireNaam = zdsRol.gerelateerde.nietNatuurlijkPersoon.statutaireNaam;
 
-            var rechtsvorm = zdsRol.gerelateerde.nietNatuurlijkPersoon.innRechtsvorm.toLowerCase();
-            if(rechtsvorm == null || rechtsvorm.length() == 0 ) {
-                // do nothing
-            } else if(rechtsvorm.contains("vennootschap")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "besloten_vennootschap";
-            } else if(rechtsvorm.contains("economische")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "cooperatie_europees_economische_samenwerking";
-            } else if(rechtsvorm.contains("cooperatieve")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "europese_cooperatieve_venootschap";
-            } else if(rechtsvorm.contains("europese")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "europese_naamloze_vennootschap";
-            } else if(rechtsvorm.contains("kerkelijke")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "kerkelijke_organisatie";
-            } else if(rechtsvorm.contains("vennootschap")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "naamloze_vennootschap";
-            } else if(rechtsvorm.contains("waarborg")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "onderlinge_waarborg_maatschappij";
-            } else if(rechtsvorm.contains("privaatrechtelijke")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "overig_privaatrechtelijke_rechtspersoon";
-            } else if(rechtsvorm.contains("stichting")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "stichting";
-            } else if(rechtsvorm.contains("vereniging")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "vereniging";
-            } else if(rechtsvorm.contains("eigenaars")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "vereniging_van_eigenaars";
-            } else if(rechtsvorm.contains("publiekrechtelijke")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "publiekrechtelijke_rechtspersoon";
-            } else if(rechtsvorm.contains("firma")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "vennootschap_onder_firma";
-            } else if(rechtsvorm.contains("maatschap")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "maatschap";
-            } else if(rechtsvorm.contains("rederij")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "rederij";
-            } else if(rechtsvorm.contains("commanditaire")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "commanditaire_vennootschap";
-            } else if(rechtsvorm.contains("binnen")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "kapitaalvennootschap_binnen_eer";
-            } else if(rechtsvorm.contains("buitenlandse")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "overige_buitenlandse_rechtspersoon_vennootschap";
-            } else if(rechtsvorm.contains("buiten")) {
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "kapitaalvennootschap_buiten_eer";
-            } else {
-                // maybe a good default?
-                debugWarning("Rechtsvorm:" + zdsRol.gerelateerde.nietNatuurlijkPersoon.innRechtsvorm + " kon niet worden geconverteerd, using default value: overig_privaatrechtelijke_rechtspersoon");
-                zgwRol.betrokkeneIdentificatie.innRechtsvorm = "overig_privaatrechtelijke_rechtspersoon";
-            }
             //zgwRol.betrokkeneIdentificatie.bezoekadres;
             zgwRol.roltoelichting  += zdsRol.gerelateerde.nietNatuurlijkPersoon.statutaireNaam;
             zgwRol.betrokkeneType = BetrokkeneType.NIET_NATUURLIJK_PERSOON.getDescription();
@@ -1005,4 +958,5 @@ public class ZaakService {
         }
         return (long) Base64.getDecoder().decode(base64Inhoud).length;
     }
+
 }
