@@ -19,6 +19,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
@@ -46,12 +49,20 @@ public class ConfigService {
 
     public ConfigService(@Value("${config.json.location:config.json}") String configPath) throws Exception {
         var cpr = new ClassPathResource(configPath);
+        String config = "";
 
         try(InputStream configStream = cpr.getInputStream()){
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(configStream));
-            Gson gson = new Gson();
-            this.configuration = gson.fromJson(bufferedReader, Configuration.class);
+            config = bufferedReader.lines().collect(Collectors.joining());
+        } catch (Exception ex){
+            log.info("No config found on classpath");
         }
+        if(config.equals("")){
+            config = Files.readString(Path.of(configPath));
+        }
+
+        Gson gson = new Gson();
+        this.configuration = gson.fromJson(config, Configuration.class);
 
         validateConfiguration();
         log.debug("ConfigService succesfully loaded");
