@@ -1,12 +1,12 @@
 **Replicatie**
 
-Als je als gemeente wil over schakelen van huidige naar nieuwe wereld en wil ik mijn risico&#39;s minimaliseren.
+Als je als gemeente wil over schakelen van huidige naar nieuwe wereld en wil je je risico&#39;s minimaliseren.
 
 Dit door het volgende proces te doorlopen:
 
-1. Plaatst de OpenZaakBrug tussen het bestaande zaaksysteem en de TSA's (taak specifieke applicaties), waarbij de replicatie-urls. 
+1. Plaatst de OpenZaakBrug tussen het bestaande zaaksysteem en de TSA's (taak specifieke applicaties), waarbij de proxy-urls moeten worden gebruikt.
 
-   Waarom: Hiermee wordt getest of het berichtenverkeer blijft lopen de OpenZaakBrug fungeert als een doorgeef luik.
+   Waarom: Hiermee wordt getest of het berichtenverkeer blijft lopen, de OpenZaakBrug fungeert als een doorgeef luik (een reverse proxy).
 
 2. Converteer de bestaande zaaktype-definities en laad deze in de ZTC van OpenZaak. Dit kan met bijvoorbeeld de INavigator-import-tool of met de hand. 
 

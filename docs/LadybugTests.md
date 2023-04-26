@@ -1,7 +1,7 @@
 # What to do if the LadybugTests fail? 
 ### How does it work
 
-The LadybugTests check if given a certain request, the same response is always created.
+The LadybugTests check if for an defined incoming request, the same response is created.
 Sometimes there are changes that make that this is wanted behaviour, so the validation will fail.
 Ladybug compares the result of Open Zaakbrug with the expected results, theset tests are stored in the src/test/resources/ladybug/*.xml files
 

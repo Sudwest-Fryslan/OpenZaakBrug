@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.utils;
 
 import java.io.ByteArrayInputStream;
@@ -7,6 +22,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.invoke.MethodHandles;
+import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -47,6 +63,7 @@ import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 
 public class XmlUtils {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	private static final String transformerFactoryClass = "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl";
 
 	public static Document convertStringToDocument(String xmlStr) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -72,31 +89,32 @@ public class XmlUtils {
 		return soapMessage;
 	}
 
-	public static String xmlToString(Document xml) {
-		String result = "";
+//	public static String xmlToString(Document xml) {
+//		String result = "";
+//
+//		// Explicitly use Xalan and not make it depend on (transitive) dependencies in pom.xml
+//		// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
+//		TransformerFactory tf = new TransformerFactoryImpl();
+//
+//		Transformer transformer;
+//		try {
+//			transformer = tf.newTransformer();
+//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+//			StringWriter writer = new StringWriter();
+//			transformer.transform(new DOMSource(xml), new StreamResult(writer));
+//
+//			result = writer.getBuffer().toString();
+//			result = result.replaceAll("xmlns=\"\" ", "");
+//		} catch (Exception e) {
+//			log.error(e.getMessage());
+//		}
+//
+//		return result;
+//	}
 
-		// Explicitly use Xalan and not make it depend on (transitive) dependencies in pom.xml
-		// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
-		TransformerFactory tf = new org.apache.xalan.processor.TransformerFactoryImpl();
-
-		Transformer transformer;
-		try {
-			transformer = tf.newTransformer();
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			StringWriter writer = new StringWriter();
-			transformer.transform(new DOMSource(xml), new StreamResult(writer));
-
-			result = writer.getBuffer().toString();
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
-
-		return result;
-	}
-
-	public static String getSoapMessageAsString(Document document) {
-		return XmlUtils.xmlToString(document);
-	}
+//	public static String getSoapMessageAsString(Document document) {
+//		return XmlUtils.xmlToString(document);
+//	}
 
 	public static Document xmlNodesToDocument(NodeList nodes, String rootName) {
 		Document result = null;
@@ -156,11 +174,12 @@ public class XmlUtils {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(new InputSource(new StringReader(unformattedxml)));
+			doc.setXmlStandalone(true);
 
-			// Explicitly use Xalan to prevent Saxon-HE being used (depending on (transitive) dependencies in pom.xml).
+			// Explicitly use JDK internal TransformerFactory to prevent Saxon-HE being used (depending on (transitive) dependencies in pom.xml).
 			// Saxon-HE is causing some of the SOAP response messages to become invalid by adding xmlns="".
 			// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
-			Transformer transformer = new org.apache.xalan.processor.TransformerFactoryImpl().newTransformer();
+			Transformer transformer = TransformerFactory.newInstance(transformerFactoryClass, null).newTransformer();
 
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
@@ -243,11 +262,28 @@ public class XmlUtils {
 	public static Object getStUFObject(String body, Class c) {
 		Object object = null;
 		try {
-			object = JAXBContext.newInstance(c).createUnmarshaller().unmarshal(
-					MessageFactory.newInstance().createMessage(null, new ByteArrayInputStream(body.getBytes()))
-							.getSOAPBody().extractContentAsDocument());
-		} catch (Exception e) {
-			e.printStackTrace();
+			// WORKAROUND [A] : replace header '﻿<?xml version="1.0" encoding="utf-8"?>' here
+			var WRITE_XML_DECLARATION = "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+			if(body.startsWith(WRITE_XML_DECLARATION)) {
+				body = body.substring(WRITE_XML_DECLARATION.length());
+			}
+			var inputstream = new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
+			var message = MessageFactory.newInstance().createMessage(null, inputstream);
+			var document = message.getSOAPBody().extractContentAsDocument();
+			var unmarshaller = JAXBContext.newInstance(c).createUnmarshaller();
+			// WORKAROUND [A] : otherwise here exception:
+			//	java.lang.RuntimeException: com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML declaration parsing failed
+			//	java.io.IOException: Unexpected characters before XML declaration
+			object = unmarshaller.unmarshal(document);
+		}
+		catch (SOAPException se) {
+			throw new ConverterException("create soapmessage from request:" + se.toString(), body, se);
+		}
+		catch (JAXBException jaxbe) {
+			throw new ConverterException("unmarshalllen request to class:" + c.getName() + " : " + jaxbe.toString(), jaxbe.getMessage(), jaxbe);
+		}
+		catch (Exception e) {
+			throw new ConverterException("fout bij parsen xml:" + e.toString(), e);
 		}
 		return object;
 	}

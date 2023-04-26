@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Open Zaakbrug errorpage</title>
+<link rel="stylesheet"	href="https://unpkg.com/@utrecht/component-library-css/dist/index.css" />
+<script async src="https://unpkg.com/@nl-design-system-unstable/theme-switcher"></script>
+<style>
+table td {
+	vertical-align: top;
+	border: solid 1px #888;
+	padding: 10px;
+}
+</style>
+
+</head>
+<body class="utrecht-html">
+	<!-- <nl-theme-switcher></nl-theme-switcher>  -->
+	<h1>Open Zaakbrug errorpage</h1>
+	<table>
+		<tr>
+			<td>Date</td>
+			<td th:text="${timestamp}" />
+		</tr>
+		<tr>
+			<td>Path</td>
+			<td th:text="${path}" />
+		</tr>
+		<tr>
+			<td>Error</td>
+			<td th:text="${error}" />
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td th:text="${status}" />
+		</tr>
+		<tr>
+			<td>Message</td>
+			<td th:text="${message}" />
+		</tr>
+		<tr>
+			<td>Exception</td>
+			<td th:text="${exception}" />
+		</tr>
+		<tr>
+			<td>Trace</td>
+			<td><pre th:text="${trace}" /></td>
+		</tr>
+	</table>
+</body>
+</html>

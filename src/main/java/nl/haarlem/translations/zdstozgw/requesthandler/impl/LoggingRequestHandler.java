@@ -1,24 +1,31 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.requesthandler.impl;
 
 import java.lang.invoke.MethodHandles;
-import java.time.Duration;
-import java.time.LocalDateTime;
-
-import javax.xml.soap.SOAPConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
 import nl.haarlem.translations.zdstozgw.config.SpringContext;
-import nl.haarlem.translations.zdstozgw.config.model.Configuration;
 import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestHandler;
-import nl.haarlem.translations.zdstozgw.requesthandler.impl.logging.RequestResponseCycle;
+import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.requesthandler.impl.logging.RequestResponseCycleService;
-import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class LoggingRequestHandler extends RequestHandler {
 
@@ -32,48 +39,7 @@ public class LoggingRequestHandler extends RequestHandler {
 	}
 
 	@Override
-	public ResponseEntity<?> execute() {
-		log.debug("Executing request with handler: " + this.getClass().getCanonicalName() + " and converter: "
-				+ this.converter.getClass().getCanonicalName());
-		Configuration configuration = this.configService.getConfiguration();
-
-		LocalDateTime start = LocalDateTime.now();
-		RequestResponseCycle session = new RequestResponseCycle().setTimestamp(start)
-				.setReferentienummer(this.getConverter().getContext().getReferentienummer())
-				.setKenmerk(this.getConverter().getContext().getKenmerk())
-				.setClientUrl(this.getConverter().getContext().getUrl())
-				.setClientSoapAction(this.getConverter().getContext().getSoapAction())
-				.setClientRequestBody(this.getConverter().getContext().getRequestBody())
-				.setConverterImplementation(this.getConverter().getTranslation().getImplementation())
-				.setConverterTemplate(this.getConverter().getTranslation().getTemplate());
+	public void save(RequestResponseCycle session) {
 		this.sessionService.save(session);
-
-		try {
-			this.converter.load();
-			
-			var response = this.converter.execute();
-			session.setKenmerk(this.getConverter().getContext().getKenmerk());
-			session.setClientResponseBody(response.getBody().toString());
-			session.setClientResponseCode(response.getStatusCodeValue());
-			session.setDurationInMilliseconds(Duration.between(start, LocalDateTime.now()).toMillis());
-			this.sessionService.save(session);
-
-			return response;
-		} catch (Exception ex) {
-			log.warn("Exception handling request with handler: " + this.getClass().getCanonicalName()
-					+ " and converter: " + this.converter.getClass().getCanonicalName(), ex);
-			var fo03 = getErrorZdsDocument(ex, this.getConverter());
-			var responseBody = XmlUtils.getSOAPFaultMessageFromObject(SOAPConstants.SOAP_RECEIVER_FAULT, ex.toString(),
-					fo03);
-			var response = new ResponseEntity<>(responseBody, HttpStatus.INTERNAL_SERVER_ERROR);
-			// log this error response
-			session.setKenmerk(this.getConverter().getContext().getKenmerk());
-			session.setClientResponseBody(response.getBody().toString());
-			session.setClientResponseCode(response.getStatusCodeValue());
-			session.setDurationInMilliseconds(Duration.between(start, LocalDateTime.now()).toMillis());
-			session.setStackTrace(getStacktrace(ex));
-			this.sessionService.save(session);
-			return response;
-		}
 	}
 }
