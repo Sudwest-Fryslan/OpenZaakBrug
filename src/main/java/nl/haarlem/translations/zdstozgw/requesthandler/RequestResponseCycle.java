@@ -108,11 +108,11 @@ public class RequestResponseCycle {
 		this.clientResponseBody  = response.getBody().toString();
 		this.clientResponseSize = this.clientResponseBody.length();
 
-		if(this.clientResponseCode == 200) {
-			// status = OK, message can be shortened
-			this.clientRequestBody = StringUtils.shortenLongString(this.clientRequestBody, StringUtils.MAX_MESSAGE_SIZE);
-			this.clientResponseBody = StringUtils.shortenLongString(this.clientResponseBody, StringUtils.MAX_MESSAGE_SIZE);
-		}
+//		if(this.clientResponseCode == 200) {
+//			// status = OK, message can be shortened
+//			this.clientRequestBody = StringUtils.shortenLongString(this.clientRequestBody, StringUtils.MAX_MESSAGE_SIZE);
+//			this.clientResponseBody = StringUtils.shortenLongString(this.clientResponseBody, StringUtils.MAX_MESSAGE_SIZE);
+//		}
 
 		this.stopdatetime = LocalDateTime.now();
 		this.durationInMilliseconds = Duration.between(startdatetime, stopdatetime).toMillis();
