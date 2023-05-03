@@ -2,6 +2,8 @@ package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +44,8 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieO
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
+
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class ZGWClient {
@@ -97,6 +101,7 @@ public class ZGWClient {
 	RestTemplateService restTemplateService;
 
 	private String post(String url, String json) {
+        url = rewriteBaseUrl(url);
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
@@ -137,6 +142,7 @@ public class ZGWClient {
 	}
 
 	private String get(String url, Map<String, String> parameters) {
+        url = rewriteBaseUrl(url);
 		if (parameters != null) {
 			url = getUrlWithParameters(url, parameters);
 		}
@@ -182,6 +188,7 @@ public class ZGWClient {
 	}
 
 	private String delete(String url) {
+        url = rewriteBaseUrl(url);
 		String debugName = "ZGWClient DELETE";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
@@ -219,6 +226,7 @@ public class ZGWClient {
 	}
 
 	private String put(String url, String json) {
+        url = rewriteBaseUrl(url);
 		String debugName = "ZGWClient PUT";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
@@ -258,6 +266,7 @@ public class ZGWClient {
 
 
 	private String patch(String url, String json) {
+        url = rewriteBaseUrl(url);
 		String debugName = "ZGWClient PATCH";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
@@ -295,6 +304,34 @@ public class ZGWClient {
 			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
 		}
 	}
+
+    /**
+     * Rewrite the url to use the same host as the baseUrl
+     * @param url
+     * @return
+     *
+     * Rewrites the url's returned by Open Zaak. This is needed when OpenZaak is behind a proxy.
+     *
+     * e.g. OpenZaak is running on https://openzaak.example.com yet Open Zaakbrug connects to it via a proxy on https://proxy.example.com/openzaak
+     */
+    private String rewriteBaseUrl(String url) {
+        try {
+            URI baseUrlUri = new URI(baseUrl);
+            URI uri = new URI(url);
+            if(uri.getHost().toString().equals(baseUrlUri.getHost().toString())) {
+                //Don't rewrite if already on the same host
+                return url;
+            }
+
+            //Rewrite url to use the same host as the baseUrl
+            uri = new URI(uri.getScheme().toLowerCase(), baseUrlUri.getHost(),
+                   baseUrlUri.getPath()+uri.getPath(), uri.getQuery(), uri.getFragment());
+            url = uri.toString();
+        } catch (URISyntaxException e) {
+            log.error("Error rewriting url", e);
+        }
+        return url;
+    }
 
 	private String getUrlWithParameters(String url, Map<String, String> parameters) {
 		for (String key : parameters.keySet()) {
@@ -345,6 +382,7 @@ public class ZGWClient {
 	}
 
 	public String getBas64Inhoud(String url) {
+        url = rewriteBaseUrl(url);
 		String debugName = "ZGWClient GET(BASE64)";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);

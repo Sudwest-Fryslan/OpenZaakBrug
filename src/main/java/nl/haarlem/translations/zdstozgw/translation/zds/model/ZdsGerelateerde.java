@@ -70,4 +70,7 @@ public class ZdsGerelateerde extends ZdsObject {
 
 	@XmlElement(namespace = ZKN)
     public ZdsAoaAdres adres;
+
+    @XmlElement(namespace = ZKN)
+    public ZdsOrganisatorischeEenheid organisatorischeEenheid;
 }

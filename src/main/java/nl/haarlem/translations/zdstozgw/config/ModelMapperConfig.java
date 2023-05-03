@@ -26,6 +26,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import nl.haarlem.translations.zdstozgw.translation.zds.model.*;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.enumeration.SoortRechtsvorm;
 
 import org.apache.commons.lang.StringUtils;
@@ -43,19 +44,6 @@ import org.springframework.context.annotation.Configuration;
 
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.translation.BetrokkeneType;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsAdres;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGerelateerde;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeft;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeftRelevant;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsMedewerker;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsNatuurlijkPersoon;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsNietNatuurlijkPersoon;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsOpschorting;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsRol;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVestiging;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocument;
-import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentInhoud;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAdres;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
@@ -598,6 +586,10 @@ public class ModelMapperConfig {
 					zdsRol.gerelateerde.medewerker = modelMapper().map(zgwRol.betrokkeneIdentificatie, ZdsMedewerker.class);
 					zdsRol.gerelateerde.medewerker.entiteittype = "MDW";
 				}
+                else if (zgwRol.getBetrokkeneType().equalsIgnoreCase(BetrokkeneType.ORGANISATORISCHE_EENHEID.getDescription())) {
+                    zdsRol.gerelateerde.organisatorischeEenheid = modelMapper().map(zgwRol.betrokkeneIdentificatie, ZdsOrganisatorischeEenheid.class);
+                    zdsRol.gerelateerde.organisatorischeEenheid.entiteittype = "OEE";
+                }
 				else {
 					throw new RuntimeException("Betrokkene type: " + zgwRol.getBetrokkeneType() + " nog niet geïmplementeerd");
 				}
