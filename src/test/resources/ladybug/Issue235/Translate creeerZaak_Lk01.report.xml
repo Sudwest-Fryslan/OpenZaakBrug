@@ -30,10 +30,10 @@
          &lt;ZKN:object StUF:sleutelVerzendend=&quot;190090&quot; StUF:entiteittype=&quot;ZAK&quot; StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
             &lt;ZKN:identificatie&gt;190090&lt;/ZKN:identificatie&gt;&#13;
             &lt;ZKN:omschrijving&gt;Aanvraag minimaregelingen (Z)&lt;/ZKN:omschrijving&gt;&#13;
-            
+
             &lt;ZKN:anderZaakObject xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;&#13;
                &lt;ZKN:omschrijving&gt;Woonhuis Snekerstraat 30 Bolsward&lt;/ZKN:omschrijving&gt;&#13;
-               &lt;ZKN:aanduiding&gt;Woonhuis Snekerstraat 30 Bolsward&lt;/ZKN:aanduiding&gt;&#13;              
+               &lt;ZKN:aanduiding&gt;Woonhuis Snekerstraat 30 Bolsward&lt;/ZKN:aanduiding&gt;&#13;
                &lt;ZKN:lokatie&gt;&#13;
                   &lt;gml:Polygon srsDimension=&quot;2&quot; srsName=&quot;urn:ogc:def:crs:EPSG::28992&quot; xmlns=&quot;http://www.opengis.net/gml&quot;&gt;&#13;
                      &lt;gml:exterior&gt;&#13;
@@ -42,10 +42,10 @@
                         &lt;/gml:LinearRing&gt;&#13;
                      &lt;/gml:exterior&gt;&#13;
                   &lt;/gml:Polygon&gt;&#13;
-               &lt;/ZKN:lokatie&gt;&#13;               
+               &lt;/ZKN:lokatie&gt;&#13;
                &lt;ZKN:registratie&gt;Woonhuis Snekerstraat 30 Bolsward&lt;/ZKN:registratie&gt;&#13;
             &lt;/ZKN:anderZaakObject&gt;&#13;
-            
+
             &lt;ZKN:startdatum&gt;20220905&lt;/ZKN:startdatum&gt;&#13;
             &lt;ZKN:registratiedatum&gt;20220905&lt;/ZKN:registratiedatum&gt;&#13;
             &lt;ZKN:einddatumGepland&gt;20210101&lt;/ZKN:einddatumGepland&gt;&#13;
@@ -368,7 +368,7 @@
   &quot;registratiedatum&quot;: &quot;2022-09-05&quot;,
   &quot;startdatum&quot;: &quot;2022-09-05&quot;,
   &quot;einddatumGepland&quot;: &quot;2021-01-01&quot;,
-  &quot;archiefnominatie&quot;: &quot;blijvend_bewaren&quot;
+  &quot;archiefnominatie&quot;: &quot;vernietigen&quot;
 }</string>
      </void>
      <void property="name">
@@ -544,7 +544,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>{&quot;identificatie&quot;:&quot;190090&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;archiefnominatie&quot;:&quot;blijvend_bewaren&quot;}</string>
+      <string>{&quot;identificatie&quot;:&quot;190090&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;archiefnominatie&quot;:&quot;vernietigen&quot;}</string>
      </void>
      <void property="name">
       <string>ZGWClient POST</string>
@@ -594,7 +594,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/c19d2b10-94fb-4eff-98a9-eed73ae9a0fc&quot;,&quot;uuid&quot;:&quot;c19d2b10-94fb-4eff-98a9-eed73ae9a0fc&quot;,&quot;identificatie&quot;:&quot;190090&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatum&quot;:null,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;&quot;,&quot;duur&quot;:null},&quot;opschorting&quot;:{&quot;indicatie&quot;:false,&quot;reden&quot;:&quot;&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:null,&quot;kenmerken&quot;:[],&quot;archiefnominatie&quot;:&quot;blijvend_bewaren&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:null,&quot;resultaat&quot;:null}</string>
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/c19d2b10-94fb-4eff-98a9-eed73ae9a0fc&quot;,&quot;uuid&quot;:&quot;c19d2b10-94fb-4eff-98a9-eed73ae9a0fc&quot;,&quot;identificatie&quot;:&quot;190090&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatum&quot;:null,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;&quot;,&quot;duur&quot;:null},&quot;opschorting&quot;:{&quot;indicatie&quot;:false,&quot;reden&quot;:&quot;&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:null,&quot;kenmerken&quot;:[],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:null,&quot;resultaat&quot;:null}</string>
      </void>
      <void property="name">
       <string>ZGWClient POST</string>

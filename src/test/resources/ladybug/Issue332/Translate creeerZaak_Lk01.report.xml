@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="11.0.9" class="java.beans.XMLDecoder">
+<java version="11.0.13" class="java.beans.XMLDecoder">
  <object class="nl.nn.testtool.Report" id="Report0">
   <void property="checkpoints">
    <void method="add">
@@ -87,7 +87,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -112,7 +112,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -137,7 +137,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -162,7 +162,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -187,7 +187,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -212,7 +212,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -225,7 +225,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f94</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847-34539f1:187e649fae8:-7fa1</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -237,7 +237,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -262,7 +262,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -287,7 +287,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -312,7 +312,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -344,6 +344,7 @@
   },
   &quot;heeftAlsInitiator&quot;: {
     &quot;entiteittype&quot;: &quot;ZAKBTRINI&quot;,
+    &quot;verwerkingssoort&quot;: &quot;T&quot;,
     &quot;gerelateerde&quot;: {
       &quot;natuurlijkPersoon&quot;: {
         &quot;entiteittype&quot;: &quot;NPS&quot;,
@@ -387,7 +388,7 @@
       <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -406,7 +407,7 @@
   &quot;registratiedatum&quot;: &quot;2022-09-05&quot;,
   &quot;startdatum&quot;: &quot;2022-09-05&quot;,
   &quot;einddatumGepland&quot;: &quot;2021-01-01&quot;,
-  &quot;archiefnominatie&quot;: &quot;blijvend_bewaren&quot;
+  &quot;archiefnominatie&quot;: &quot;vernietigen&quot;
 }</string>
      </void>
      <void property="name">
@@ -419,7 +420,7 @@
       <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -441,7 +442,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -454,7 +455,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/catalogi/api/v1/zaaktypen?identificatie=B1293&amp;status=definitief</string>
+      <string>https://openzaak.local/catalogi/api/v1/zaaktypen?identificatie=B1293&amp;status=definitief</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -466,7 +467,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -491,7 +492,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -516,7 +517,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -544,7 +545,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -557,7 +558,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/zaaktypen?identificatie=B1293&amp;status=definitief took 0 milliseconds</string>
+      <string>GET to: https://openzaak.local/catalogi/api/v1/zaaktypen?identificatie=B1293&amp;status=definitief took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -569,7 +570,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -582,7 +583,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>{&quot;identificatie&quot;:&quot;190074&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;archiefnominatie&quot;:&quot;blijvend_bewaren&quot;}</string>
+      <string>{&quot;identificatie&quot;:&quot;190074&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;archiefnominatie&quot;:&quot;vernietigen&quot;}</string>
      </void>
      <void property="name">
       <string>ZGWClient POST</string>
@@ -594,7 +595,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -607,7 +608,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/zaken/api/v1/zaken</string>
+      <string>https://openzaak.local/zaken/api/v1/zaken</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -619,7 +620,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -632,7 +633,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/32a92e66-8032-46d6-9581-b2c43f88c2f4&quot;,&quot;uuid&quot;:&quot;32a92e66-8032-46d6-9581-b2c43f88c2f4&quot;,&quot;identificatie&quot;:&quot;190074&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatum&quot;:null,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;&quot;,&quot;duur&quot;:null},&quot;opschorting&quot;:{&quot;indicatie&quot;:false,&quot;reden&quot;:&quot;&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:null,&quot;kenmerken&quot;:[],&quot;archiefnominatie&quot;:&quot;blijvend_bewaren&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:null,&quot;resultaat&quot;:null}</string>
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/32a92e66-8032-46d6-9581-b2c43f88c2f4&quot;,&quot;uuid&quot;:&quot;32a92e66-8032-46d6-9581-b2c43f88c2f4&quot;,&quot;identificatie&quot;:&quot;190074&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d&quot;,&quot;registratiedatum&quot;:&quot;2022-09-05&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2022-09-05&quot;,&quot;einddatum&quot;:null,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;&quot;,&quot;duur&quot;:null},&quot;opschorting&quot;:{&quot;indicatie&quot;:false,&quot;reden&quot;:&quot;&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:null,&quot;kenmerken&quot;:[],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:null,&quot;resultaat&quot;:null}</string>
      </void>
      <void property="name">
       <string>ZGWClient POST</string>
@@ -647,7 +648,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -660,7 +661,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>POST to: http://localhost:8000/zaken/api/v1/zaken took 0 milliseconds</string>
+      <string>POST to: https://openzaak.local/zaken/api/v1/zaken took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -672,7 +673,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -722,7 +723,7 @@
       <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -755,7 +756,7 @@
       <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -780,7 +781,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -802,7 +803,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -815,7 +816,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/catalogi/api/v1/roltypen/dfc71abd-9c0d-4fd3-bc60-6bcc936851a5</string>
+      <string>http://openzaak.local/catalogi/api/v1/roltypen/dfc71abd-9c0d-4fd3-bc60-6bcc936851a5</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -827,7 +828,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -855,7 +856,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -868,7 +869,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/roltypen/dfc71abd-9c0d-4fd3-bc60-6bcc936851a5 took 0 milliseconds</string>
+      <string>GET to: http://openzaak.local/catalogi/api/v1/roltypen/dfc71abd-9c0d-4fd3-bc60-6bcc936851a5 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -880,7 +881,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -902,7 +903,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -915,7 +916,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/catalogi/api/v1/roltypen/805f1519-b7b9-4897-910e-e09cee8dca6b</string>
+      <string>http://openzaak.local/catalogi/api/v1/roltypen/805f1519-b7b9-4897-910e-e09cee8dca6b</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -927,7 +928,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -955,7 +956,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -968,7 +969,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/roltypen/805f1519-b7b9-4897-910e-e09cee8dca6b took 1 milliseconds</string>
+      <string>GET to: http://openzaak.local/catalogi/api/v1/roltypen/805f1519-b7b9-4897-910e-e09cee8dca6b took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -980,7 +981,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -1005,7 +1006,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -1018,7 +1019,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/zaken/api/v1/rollen</string>
+      <string>https://openzaak.local/zaken/api/v1/rollen</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1030,7 +1031,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -1058,7 +1059,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -1071,7 +1072,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>POST to: http://localhost:8000/zaken/api/v1/rollen took 0 milliseconds</string>
+      <string>POST to: https://openzaak.local/zaken/api/v1/rollen took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1083,7 +1084,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -1105,7 +1106,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -1118,7 +1119,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d</string>
+      <string>https://openzaak.local/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1130,7 +1131,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -1155,7 +1156,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -1183,7 +1184,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -1196,7 +1197,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d took 0 milliseconds</string>
+      <string>GET to: https://openzaak.local/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/ee8345e3-d873-4320-841e-da0df09d220d took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1208,7 +1209,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -1230,7 +1231,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -1243,7 +1244,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/32a92e66-8032-46d6-9581-b2c43f88c2f4</string>
+      <string>https://openzaak.local/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/32a92e66-8032-46d6-9581-b2c43f88c2f4</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1255,7 +1256,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -1280,7 +1281,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -1308,7 +1309,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -1321,7 +1322,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/32a92e66-8032-46d6-9581-b2c43f88c2f4 took 1 milliseconds</string>
+      <string>GET to: https://openzaak.local/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/32a92e66-8032-46d6-9581-b2c43f88c2f4 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1333,7 +1334,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -1350,7 +1351,7 @@
      </void>
      <void property="message">
       <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;java version=&quot;11.0.9&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
+&lt;java version=&quot;11.0.13&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
  &lt;int&gt;200&lt;/int&gt;
 &lt;/java&gt;
 </string>
@@ -1368,7 +1369,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -1393,7 +1394,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -1406,7 +1407,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01 with kenmerk: &apos;zaakidentificatie:190074&apos; returned statuscode:200 OK and took 150 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01 with kenmerk: &apos;zaakidentificatie:190074&apos; returned statuscode:200 OK and took 51 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -1418,7 +1419,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -1431,27 +1432,27 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&#13;
-  &lt;SOAP-ENV:Header/&gt;&#13;
-  &lt;SOAP-ENV:Body&gt;&#13;
-    &lt;Bv03Bericht xmlns=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ns2=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&gt;&#13;
-      &lt;stuurgegevens&gt;&#13;
-        &lt;berichtcode&gt;Bv03&lt;/berichtcode&gt;&#13;
-        &lt;zender&gt;&#13;
-          &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
-          &lt;applicatie&gt;CDR&lt;/applicatie&gt;&#13;
-        &lt;/zender&gt;&#13;
-        &lt;ontvanger&gt;&#13;
-          &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
-          &lt;applicatie&gt;CLO&lt;/applicatie&gt;&#13;
-        &lt;/ontvanger&gt;&#13;
-        &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f94&lt;/referentienummer&gt;&#13;
-        &lt;tijdstipBericht&gt;20230110174129&lt;/tijdstipBericht&gt;&#13;
-        &lt;crossRefnummer&gt;f6b3f6d7-c74e-4add-b246-df64cb89a4d2&lt;/crossRefnummer&gt;&#13;
-      &lt;/stuurgegevens&gt;&#13;
-    &lt;/Bv03Bericht&gt;&#13;
-  &lt;/SOAP-ENV:Body&gt;&#13;
-&lt;/SOAP-ENV:Envelope&gt;&#13;
+      <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+  &lt;SOAP-ENV:Header/&gt;
+  &lt;SOAP-ENV:Body&gt;
+    &lt;Bv03Bericht xmlns=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ns2=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&gt;
+      &lt;stuurgegevens&gt;
+        &lt;berichtcode&gt;Bv03&lt;/berichtcode&gt;
+        &lt;zender&gt;
+          &lt;organisatie&gt;1900&lt;/organisatie&gt;
+          &lt;applicatie&gt;CDR&lt;/applicatie&gt;
+        &lt;/zender&gt;
+        &lt;ontvanger&gt;
+          &lt;organisatie&gt;1900&lt;/organisatie&gt;
+          &lt;applicatie&gt;CLO&lt;/applicatie&gt;
+        &lt;/ontvanger&gt;
+        &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847-34539f1:187e649fae8:-7fa1&lt;/referentienummer&gt;
+        &lt;tijdstipBericht&gt;20230504122446&lt;/tijdstipBericht&gt;
+        &lt;crossRefnummer&gt;f6b3f6d7-c74e-4add-b246-df64cb89a4d2&lt;/crossRefnummer&gt;
+      &lt;/stuurgegevens&gt;
+    &lt;/Bv03Bericht&gt;
+  &lt;/SOAP-ENV:Body&gt;
+&lt;/SOAP-ENV:Envelope&gt;
 </string>
      </void>
      <void property="name">
@@ -1464,7 +1465,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>http-nio-8080-exec-9</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -1473,10 +1474,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f94</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847-34539f1:187e649fae8:-7fa1</string>
   </void>
   <void property="endTime">
-   <long>1673368889770</long>
+   <long>1683195886658</long>
   </void>
   <void property="name">
    <string>Translate creeerZaak_Lk01</string>
@@ -1485,10 +1486,10 @@
    <string>/Issue332/</string>
   </void>
   <void property="startTime">
-   <long>1673368889619</long>
+   <long>1683195886607</long>
   </void>
   <void property="storageId">
-   <int>786</int>
+   <int>818</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>
