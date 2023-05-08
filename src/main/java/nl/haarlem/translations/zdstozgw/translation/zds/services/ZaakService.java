@@ -19,10 +19,7 @@ import java.lang.invoke.MethodHandles;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
@@ -1105,6 +1102,15 @@ public class ZaakService {
         // 		Move code to the ModelMapperConfig.java
         //		Also merge, we shouldnt overwrite the old values this hard
         var zgwWordtEnkelvoudigInformatieObject = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObject.class);
+
+        //Temporary fix for bug in Openzaak
+        //Add calculated file Size, but only if it's > 0
+        //This will add it if the document itself is updated, but won't add it if only metadata is changed
+        var bestandsomvang = getFileSize(zgwWordtEnkelvoudigInformatieObject.inhoud);
+        if(bestandsomvang > 0){
+            zgwWordtEnkelvoudigInformatieObject.bestandsomvang = bestandsomvang;
+        }
+
         zgwWordtEnkelvoudigInformatieObject.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
         zgwWordtEnkelvoudigInformatieObject.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;
         // https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
@@ -1165,5 +1171,12 @@ public class ZaakService {
     private void debugWarning(String message) {
         log.info("[processing warning] " + message);
         debug.infopoint("Warning", message);
+    }
+
+    private Long getFileSize(String base64Inhoud) {
+        if (base64Inhoud == null || base64Inhoud.isEmpty() || base64Inhoud.length() < 3) {
+            return 0L;
+        }
+        return (long) Base64.getDecoder().decode(base64Inhoud).length;
     }
 }
