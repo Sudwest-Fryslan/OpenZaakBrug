@@ -81,11 +81,11 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>org.ibissource</groupId>
-			<artifactId>ibis-ladybug</artifactId>
-			<version>2.2-20210518.202847</version>
-		</dependency>
+      <dependency>
+        <groupId>org.ibissource</groupId>
+        <artifactId>ibis-ladybug</artifactId>
+        <version>2.2</version>
+      </dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
@@ -156,19 +156,19 @@
 
 	</dependencies>
 
-	<repositories>
-		<repository>
-            <!-- Can be removed when Ladybug 2.0.16 is released and available on Maven central -->
-			<id>ibissource</id>
-			<name>Ibissource</name>
-			<url>https://nexus.frankframework.org/content/repositories/public</url>
-		</repository>
-		<repository>
-            <id>openzaakbrugextensions-nexus</id>
-            <name>OpenZaakBrug Extensions Nexus</name>
-            <url>https://nexus.frankframework.org/content/repositories/OpenZaakBrugExtensions</url>
-        </repository>
-	</repositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--            &lt;!&ndash; Can be removed when Ladybug 2.0.16 is released and available on Maven central &ndash;&gt;-->
+<!--			<id>ibissource</id>-->
+<!--			<name>Ibissource</name>-->
+<!--			<url>https://nexus.frankframework.org/content/repositories/public</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--            <id>openzaakbrugextensions-nexus</id>-->
+<!--            <name>OpenZaakBrug Extensions Nexus</name>-->
+<!--            <url>https://nexus.frankframework.org/content/repositories/OpenZaakBrugExtensions</url>-->
+<!--        </repository>-->
+<!--	</repositories>-->
 
 	<distributionManagement>
 		<repository>
@@ -216,7 +216,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-compiler-plugin</artifactId>
-					</plugin>       
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
