@@ -97,6 +97,10 @@ public class ZGWClient {
     public Boolean additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching;
 
 	public boolean caseCreationStatusOk = true;
+
+    @Value("${zgw.endpoint.zaakobject:/zaken/api/v1/zaakobjecten}")
+    private String endpointZaakObject;
+
 	@Autowired
 	RestTemplateService restTemplateService;
 
@@ -543,6 +547,13 @@ public class ZGWClient {
 		String response = this.post(this.baseUrl + this.endpointStatus, json);
 		return gson.fromJson(response, ZgwStatus.class);
 	}
+
+    public ZgwZaakObject addZaakObject(ZgwZaak zgwZaak, ZgwZaakObject zgwZaakObject){
+        Gson gson = new Gson();
+        String json = gson.toJson(zgwZaakObject);
+        String response = this.post(this.baseUrl + this.endpointZaakObject, json);
+        return gson.fromJson(response,ZgwZaakObject.class);
+    }
 
 	public ZgwResultaat addZaakResultaat(ZgwResultaat zgwResultaat) {
 		Gson gson = new Gson();

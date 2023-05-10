@@ -29,6 +29,8 @@ import java.time.format.DateTimeFormatter;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.*;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.enumeration.SoortRechtsvorm;
 
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
+
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Conditions;
@@ -44,15 +46,6 @@ import org.springframework.context.annotation.Configuration;
 
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.translation.BetrokkeneType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAdres;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwOpschorting;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 
 @Configuration
 public class ModelMapperConfig {
@@ -122,7 +115,7 @@ public class ModelMapperConfig {
 		addZdsZaakDocumentRelevantToZgwEnkelvoudigInformatieObjectTypeMapping(modelMapper);
 
 		addZgwZaakToGeefZaakDetailsTypeMappingTypeMapping(modelMapper);
-        addZdsAdresToZgwAdresTypeMapping(modelMapper);
+        addZdsAoaAdresToZgwZaakObjectAdres(modelMapper);
 
 		modelMapper.addConverter(convertZgwRolToZdsRol());
 
@@ -130,6 +123,13 @@ public class ModelMapperConfig {
 
 		return modelMapper;
 	}
+
+    private void addZdsAoaAdresToZgwZaakObjectAdres(ModelMapper modelMapper) {
+        modelMapper.typeMap(ZdsAoaAdres.class, ZgwZaakObjectObjectIdentificatieAdres.class)
+            .addMappings(mapper -> mapper.map(ZdsAoaAdres::getWoonplaatsnaam, ZgwZaakObjectObjectIdentificatieAdres::setWplWoonplaatsNaam));
+        modelMapper.typeMap(ZdsAoaAdres.class, ZgwZaakObjectObjectIdentificatieAdres.class)
+            .addMappings(mapper -> mapper.map(ZdsAoaAdres::getOpenbareRuimteNaam, ZgwZaakObjectObjectIdentificatieAdres::setGorOpenbareRuimteNaam));
+    }
 
 	private void addZdsAdresToZgwAdresTypeMapping(ModelMapper modelMapper) {
 		modelMapper.typeMap(ZdsAdres.class, ZgwAdres.class);

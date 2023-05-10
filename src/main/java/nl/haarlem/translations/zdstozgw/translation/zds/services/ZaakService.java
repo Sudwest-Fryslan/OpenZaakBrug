@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
+
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -50,21 +52,6 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocument;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentInhoud;
 import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAdres;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAndereZaak;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwKenmerk;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatusType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector;
 import nl.haarlem.translations.zdstozgw.utils.ChangeDetector.Change;
 
@@ -195,7 +182,7 @@ public class ZaakService {
         log.debug("updateZaak:" + zdsWordtZaak.identificatie);
         ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zdsWordtZaak.identificatie);
         if (zgwZaak == null) {
-            throw new ConverterException("Zaak with identification: '" + zdsWordtZaak.identificatie + "' not found in ZGW");
+            throw new RuntimeException("Zaak with identification " + zdsWordtZaak.identificatie + " not found in ZGW");
         }
         ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
 
@@ -205,17 +192,17 @@ public class ZaakService {
         // check if the zdsWasZaak is equal to the one stored inside OpenZaak
         // this should be the case
         ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
-        if(zdsWasZaak != null) {
+        if (zdsWasZaak != null) {
             var storedVsWasChanges = changeDetector.detect(zdsStored, zdsWasZaak);
             var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
             if (storedVsWasFieldsChanges.size() > 0) {
                 log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + storedVsWasFieldsChanges.size() + " field changes between stored and was");
                 for (Change change : storedVsWasFieldsChanges.keySet()) {
-                    debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
+                    debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue() + "' , was-value:'" + change.getNewValue() + "'");
                 }
             }
-        }
-        else {
+
+        } else {
             // when there was no "was" provided
             zdsWasZaak = zdsStored;
         }
@@ -244,6 +231,7 @@ public class ZaakService {
                 }
             }
             this.zgwClient.updateZaak(zgwZaak.uuid, updatedZaak);
+
             changed = true;
         }
 
@@ -252,13 +240,10 @@ public class ZaakService {
         if (wasVsWordtRolChanges.size() > 0) {
             log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + wasVsWordtRolChanges.size() + " rol changes:");
 
-//			for(ChangeDetector.Change change : wasVsWordtRolChanges.keySet()) {
-//				log.info("Rol field:" + change.getField().getName() + " changetype:" + change.getChangeType() + " currentvalue:" + change.getCurrentValue() + " newvalue:" + change.getNewValue());
-//			}
-
             changeDetector.filterChangesByType(wasVsWordtRolChanges, ChangeDetector.ChangeType.NEW)
                 .forEach((change, changeType) -> {
                     var rolnaam = getRolOmschrijvingGeneriekByRolName(change.getField().getName());
+
                     // Special case since Initiator may occur once in open-zaak
                     boolean initiatorExists=false;
                     if("Initiator".equals(rolnaam)) {
@@ -272,6 +257,9 @@ public class ZaakService {
                         log.debug("[CHANGE ROL] Update Rol:" + rolnaam);
                         debugWarning("Rol [Initiator] already exists updating the existing");
                         updateRolInZgw(zgwZaak, zgwZaakType, rolnaam, (ZdsRol) change.getNewValue());
+                    } else  if (change.getField().getName().equals("heeftBetrekkingOp")) {
+                        log.debug("ADD ZAAKOBKJECT");
+                        addOrUpdateZaakObjectToZgw(zgwZaak, (ZdsRol) change.getNewValue());
                     } else {
                         log.debug("[CHANGE ROL] New Rol:" + rolnaam);
                         addRolToZgw(zgwZaak, zgwZaakType, (ZdsRol) change.getNewValue(), rolnaam);
@@ -281,24 +269,34 @@ public class ZaakService {
             changeDetector.filterChangesByType(wasVsWordtRolChanges, ChangeDetector.ChangeType.DELETED)
                 .forEach((change, changeType) -> {
                     var rolnaam = getRolOmschrijvingGeneriekByRolName(change.getField().getName());
-                    if(rolnaam != null) {
+                    if (rolnaam != null) {
                         log.debug("[CHANGE ROL] Deleted Rol:" + rolnaam);
-                        deleteRolFromZgw(zgwZaak, zgwZaakType, rolnaam);
+                        if (change.getField().getName().equals("heeftBetrekkingOp")) {
+                            log.debug("DELETE ZAAKOBKJECT");
+                        } else {
+                            deleteRolFromZgw(zgwZaak, zgwZaakType, rolnaam);
+                        }
                     }
                 });
 
             changeDetector.filterChangesByType(wasVsWordtRolChanges, ChangeDetector.ChangeType.CHANGED)
                 .forEach((change, changeType) -> {
                     var rolnaam = getRolOmschrijvingGeneriekByRolName(change.getField().getName());
-                    log.debug("[CHANGE ROL] Update Rol:" + rolnaam);
-                    updateRolInZgw(zgwZaak, zgwZaakType, rolnaam, (ZdsRol) change.getNewValue());
+                    log.debug("[CHANGE ROL] Update Rol: " + rolnaam);
+                    if (change.getField().getName().equals("heeftBetrekkingOp")) {
+                        log.debug("UPDATE ZAAKOBJECT");
+                        addOrUpdateZaakObjectToZgw(zgwZaak, (ZdsRol) change.getNewValue());
+                    } else {
+                        updateRolInZgw(zgwZaak, zgwZaakType, rolnaam, (ZdsRol) change.getNewValue());
+                    }
+
                 });
             changed = true;
         }
 
         boolean hasChanged = setResultaatAndStatus(zdsWordtZaak, zgwZaak, zgwZaakType);
 
-        if (!changed && ! hasChanged) {
+        if (!changed && !hasChanged) {
             debugWarning("Update of zaakid:" + zdsWasZaak.identificatie + " without any changes");
         }
     }
@@ -494,6 +492,34 @@ public class ZaakService {
         }
 
         return changed;
+    }
+
+    private void addZaakObjectToZGW(ZgwZaak zgwZaak, ZdsRol zdsRol) {
+        if (zdsRol.getGerelateerde().getAdres() != null) {
+            addZaakObjectAdresToZGW(zgwZaak, zdsRol);
+        }
+    }
+
+    private void addZaakObjectAdresToZGW(ZgwZaak zgwZaak, ZdsRol zdsRol) {
+        ZgwZaakObjectAdres zgwZaakObjectAdres = new ZgwZaakObjectAdres();
+        zgwZaakObjectAdres.setObjectIdentificatie(modelMapper.map(zdsRol.getGerelateerde().getAdres(), ZgwZaakObjectObjectIdentificatieAdres.class));
+        zgwZaakObjectAdres.setZaak(zgwZaak.getUrl());
+        zgwZaakObjectAdres.setObjectType("adres");
+
+        this.zgwClient.addZaakObject(zgwZaak, zgwZaakObjectAdres);
+    }
+
+    private void addOrUpdateZaakObjectToZgw(ZgwZaak zgwZaak, ZdsRol zdsRol) {
+        if (zdsRol.getVerwerkingssoort().equalsIgnoreCase("T") && zdsRol.getGerelateerde().adres != null) {
+            log.debug("Add addres");
+            addZaakObjectToZGW(zgwZaak, zdsRol);
+        }
+        if (zdsRol.getVerwerkingssoort().equalsIgnoreCase("W") && zdsRol.getGerelateerde().adres != null) {
+            log.debug("Update addres");
+        }
+        if (zdsRol.getVerwerkingssoort().equalsIgnoreCase("V") && zdsRol.getGerelateerde().adres != null) {
+            log.debug("Remove addres");
+        }
     }
 
     private void addRolToZgw(ZgwZaak createdZaak, ZgwZaakType zgwZaakType, ZdsRol zdsRol, String typeRolOmschrijving) {
@@ -1051,7 +1077,7 @@ public class ZaakService {
                 return zgwRolOmschrijving.getHeeftAlsVerantwoordelijke();
             case "heeftalsgemachtigde":
                 return zgwRolOmschrijving.getHeeftAlsGemachtigde();
-            case "heeftalsoverigBetrokkene":
+            case "heeftalsoverigbetrokkene":
                 return zgwRolOmschrijving.getHeeftAlsOverigBetrokkene();
             case "heeftbetrekkingop":
                 return zgwRolOmschrijving.getHeeftBetrekkingOp();
