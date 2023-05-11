@@ -636,6 +636,10 @@ public class ZaakService {
         ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zaakidentificatie);
 
         var relevanteDocumenten = new ArrayList<ZdsHeeftRelevant>();
+        if(zgwZaak == null) {
+            debugWarning("Zaak niet gevonden in ZGW: " + zaakidentificatie);
+            return relevanteDocumenten;
+        }
         var zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(zgwZaak.url);
         if(this.zgwClient.additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching && zgwZaakInformatieObjecten.size() > 0) {
             // fill the cache in the drc if needed
