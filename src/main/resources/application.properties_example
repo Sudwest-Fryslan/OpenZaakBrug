@@ -77,3 +77,7 @@ ladybug.maximumFileSize=10485760
 ladybug.maximumBackupIndex=9
 ladybug.regexFilter=.*
 ladybug.reportTransformation=transform-ladybug-report.xslt
+
+## Credentials for logging API
+api.username=ozb
+api.password=ozb
