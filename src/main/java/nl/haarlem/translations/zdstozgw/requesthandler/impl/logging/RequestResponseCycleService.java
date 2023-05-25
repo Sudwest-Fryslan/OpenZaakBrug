@@ -46,9 +46,11 @@ public class RequestResponseCycleService {
 	}
 
     public List<RequestResponseCycle> getById(String id) {
-        var logEntries = this.requestResponseCycleRepository.findByKenmerk("zaakidentificatie:" + id);
+
+        var logEntries = requestResponseCycleRepository.findByKenmerkStartsWith("zaakidentificatie:"+id);
+
         if(logEntries.isEmpty())
-            logEntries = this.requestResponseCycleRepository.findByKenmerk("documentidentificatie:" + id);
+            logEntries = this.requestResponseCycleRepository.findByKenmerkStartsWith("documentidentificatie:" + id);
         return logEntries;
     }
 }
