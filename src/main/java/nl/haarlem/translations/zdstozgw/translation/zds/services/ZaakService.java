@@ -230,9 +230,40 @@ public class ZaakService {
                     updatedZaak.verlenging.duur = "P" + updatedZaak.verlenging.duur + "D";
                 }
             }
+
             this.zgwClient.updateZaak(zgwZaak.uuid, updatedZaak);
 
             changed = true;
+        }
+
+        // heeftBetrekkingOpAndere
+        if(zdsWordtZaak.heeftBetrekkingOpAndere != null){
+            log.debug("Update of zaakid:" + zdsWasZaak.identificatie + " has # " + zdsWordtZaak.heeftBetrekkingOpAndere.size() + " related cases");
+
+            //Add new related cases
+            zdsWordtZaak.heeftBetrekkingOpAndere.forEach(betrekkingOpAndere -> {
+                if("ZAKZAKBTR".equals(betrekkingOpAndere.entiteittype) && "T".equals(betrekkingOpAndere.verwerkingssoort) && betrekkingOpAndere.gerelateerde != null){
+                    ZgwZaak zgwAndereZaak= this.zgwClient.getZaakByIdentificatie(betrekkingOpAndere.gerelateerde.identificatie);
+                    if(zgwAndereZaak != null){
+                        log.info("Related case found in ZGW:" + zgwAndereZaak.identificatie);
+                        // we need to make the relation to both sides (to get the expected behaviour)
+                        zgwClient.addRelevanteAndereZaakToZaak(zgwZaak, zgwAndereZaak, "onderwerp");
+                        zgwClient.addRelevanteAndereZaakToZaak(zgwAndereZaak, zgwZaak, "onderwerp");
+                    } else {
+                        log.error("Related case not found in ZGW:" + betrekkingOpAndere.gerelateerde.identificatie);
+                    }
+                }
+            });
+
+            //Remove old related cases
+            zdsWasZaak.heeftBetrekkingOpAndere.forEach(betrekkingOpAndere -> {
+                if("ZAKZAKBTR".equals(betrekkingOpAndere.entiteittype) && "E".equals(betrekkingOpAndere.verwerkingssoort)) {
+                    log.info("Related case removed:" + betrekkingOpAndere.gerelateerde.identificatie);
+                    ZgwZaak zgwAndereZaak= this.zgwClient.getZaakByIdentificatie(betrekkingOpAndere.gerelateerde.identificatie);
+                    zgwClient.deleteRelevanteAndereZaakFromZaak(zgwZaak, zgwAndereZaak, "onderwerp");
+                    zgwClient.deleteRelevanteAndereZaakFromZaak(zgwAndereZaak, zgwZaak, "onderwerp");
+                }
+            });
         }
 
         // rollen

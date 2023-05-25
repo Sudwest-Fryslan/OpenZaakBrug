@@ -4,11 +4,8 @@ import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
 
@@ -44,8 +41,6 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieO
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
-
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class ZGWClient {
@@ -893,19 +888,55 @@ public class ZGWClient {
 		this.patchZaak(zgwChildZaak.uuid, zgwChildZaak);
 	}
 
-	public void addRelevanteAndereZaakToZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie) {
+    public void deleteRelevanteAndereZaakFromZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie){
+        if(zgwZaak.verlenging != null) {
+            if(zgwZaak.verlenging.duur == null) {
+                zgwZaak.verlenging = null;
+            }
+        }
+
+        List<ZgwAndereZaak> relevanteAndereZaken = removeZaakFromListRelevanteAndereZaken(zgwZaak, andereZaak, aardRelatie);
+        zgwZaak.relevanteAndereZaken = relevanteAndereZaken;
+        this.patchZaak(zgwZaak.uuid, zgwZaak);
+    }
+
+    private static List<ZgwAndereZaak> removeZaakFromListRelevanteAndereZaken(ZgwZaakPatch zgwZaak, ZgwZaak andereZaak, String aardRelatie) {
+        List<ZgwAndereZaak> relevanteAndereZaken = zgwZaak.relevanteAndereZaken;
+        var index =0;
+        for(var i=0;i < relevanteAndereZaken.size(); i++){
+            if(relevanteAndereZaken.get(i).url.equals(andereZaak.url) && relevanteAndereZaken.get(i).aardRelatie.equals(aardRelatie)){
+                index = i;
+            }
+        }
+        relevanteAndereZaken.remove(index);
+        return relevanteAndereZaken;
+    }
+
+    public void addRelevanteAndereZaakToZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie) {
 		if(zgwZaak.verlenging != null) {
 			if(zgwZaak.verlenging.duur == null) {
 				zgwZaak.verlenging = null;
 			}
 		}
-		var relevanteAndereZaak = new ZgwAndereZaak();
-		relevanteAndereZaak.url = andereZaak.url;
-		// https://www.gemmaonline.nl/index.php/Imztc_2.2/doc/enumeration/aardrelatie
-		// 	Moet dus zijn: bijdrage / onderwerp / vervolg
-		relevanteAndereZaak.aardRelatie = aardRelatie;
-		zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
-		this.patchZaak(zgwZaak.uuid, zgwZaak);
+        //Check if relation already exists
+        AtomicBoolean newRelation = new AtomicBoolean(true);
+        zgwZaak.relevanteAndereZaken.forEach(relevanteAndereZaak -> {
+            if (relevanteAndereZaak.url.equals(andereZaak.url) && relevanteAndereZaak.aardRelatie.equals(aardRelatie)) {
+                log.info("Relation already exists, skipping");
+                newRelation.set(false);
+            }
+        });
+
+        if(newRelation.get()){
+            var relevanteAndereZaak = new ZgwAndereZaak();
+            relevanteAndereZaak.url = andereZaak.url;
+            // https://www.gemmaonline.nl/index.php/Imztc_2.2/doc/enumeration/aardrelatie
+            // 	Moet dus zijn: bijdrage / onderwerp / vervolg
+            relevanteAndereZaak.aardRelatie = aardRelatie;
+            zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
+            this.patchZaak(zgwZaak.uuid, zgwZaak);
+        }
+
 	}
 
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(Map<String, String> parameters) {
