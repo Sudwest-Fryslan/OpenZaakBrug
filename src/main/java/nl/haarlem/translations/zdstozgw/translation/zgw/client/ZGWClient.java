@@ -878,10 +878,8 @@ public class ZGWClient {
                 zgwZaak.verlenging = null;
             }
         }
-        //remove any existing relation with same url and aardRelatie
-        zgwZaak.relevanteAndereZaken = zgwZaak.relevanteAndereZaken.stream()
-            .filter(zaak -> !andereZaak.url.equals(zaak.url) && !aardRelatie.equals(zaak.aardRelatie))
-            .collect(Collectors.toList());
+        zgwZaak.relevanteAndereZaken.removeIf(zaak -> (andereZaak.url.equals(zaak.url) && aardRelatie.equals(zaak.aardRelatie)));
+
         this.patchZaak(zgwZaak.uuid, zgwZaak);
     }
 
