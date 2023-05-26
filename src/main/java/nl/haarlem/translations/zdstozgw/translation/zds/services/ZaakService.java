@@ -257,7 +257,7 @@ public class ZaakService {
 
             //Remove old related cases
             zdsWasZaak.heeftBetrekkingOpAndere.forEach(betrekkingOpAndere -> {
-                if("ZAKZAKBTR".equals(betrekkingOpAndere.entiteittype) && "E".equals(betrekkingOpAndere.verwerkingssoort)) {
+                if("ZAKZAKBTR".equals(betrekkingOpAndere.entiteittype) && ("E".equals(betrekkingOpAndere.verwerkingssoort) || "V".equals(betrekkingOpAndere.verwerkingssoort))) {
                     log.info("Related case removed:" + betrekkingOpAndere.gerelateerde.identificatie);
                     ZgwZaak zgwAndereZaak= this.zgwClient.getZaakByIdentificatie(betrekkingOpAndere.gerelateerde.identificatie);
                     zgwClient.deleteRelevanteAndereZaakFromZaak(zgwZaak, zgwAndereZaak, "onderwerp");
