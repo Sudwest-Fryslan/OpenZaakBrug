@@ -1,24 +1,19 @@
 package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
+import lombok.Getter;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 
@@ -26,26 +21,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import lombok.Getter;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.QueryResult;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaatType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRolType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatusType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
-
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class ZGWClient {
@@ -893,19 +872,38 @@ public class ZGWClient {
 		this.patchZaak(zgwChildZaak.uuid, zgwChildZaak);
 	}
 
-	public void addRelevanteAndereZaakToZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie) {
+    public void deleteRelevanteAndereZaakFromZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie){
+        if(zgwZaak.verlenging != null) {
+            if(zgwZaak.verlenging.duur == null) {
+                zgwZaak.verlenging = null;
+            }
+        }
+        zgwZaak.relevanteAndereZaken.removeIf(zaak -> (andereZaak.url.equals(zaak.url) && aardRelatie.equals(zaak.aardRelatie)));
+
+        this.patchZaak(zgwZaak.uuid, zgwZaak);
+    }
+
+    public void addRelevanteAndereZaakToZaak(ZgwZaakPatch zgwZaak,  ZgwZaak andereZaak, String aardRelatie) {
 		if(zgwZaak.verlenging != null) {
 			if(zgwZaak.verlenging.duur == null) {
 				zgwZaak.verlenging = null;
 			}
 		}
-		var relevanteAndereZaak = new ZgwAndereZaak();
-		relevanteAndereZaak.url = andereZaak.url;
-		// https://www.gemmaonline.nl/index.php/Imztc_2.2/doc/enumeration/aardrelatie
-		// 	Moet dus zijn: bijdrage / onderwerp / vervolg
-		relevanteAndereZaak.aardRelatie = aardRelatie;
-		zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
-		this.patchZaak(zgwZaak.uuid, zgwZaak);
+        //Check if relation already exists
+        List<ZgwAndereZaak> relevanteAndereZaken = zgwZaak.relevanteAndereZaken.stream()
+            .filter(zaak -> zaak.url.equals(andereZaak.url) && zaak.aardRelatie.equals(aardRelatie))
+            .collect(Collectors.toList());
+
+        if(relevanteAndereZaken.size() == 0){
+            var relevanteAndereZaak = new ZgwAndereZaak();
+            relevanteAndereZaak.url = andereZaak.url;
+            // https://www.gemmaonline.nl/index.php/Imztc_2.2/doc/enumeration/aardrelatie
+            // 	Moet dus zijn: bijdrage / onderwerp / vervolg
+            relevanteAndereZaak.aardRelatie = aardRelatie;
+            zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
+            this.patchZaak(zgwZaak.uuid, zgwZaak);
+        }
+
 	}
 
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(Map<String, String> parameters) {

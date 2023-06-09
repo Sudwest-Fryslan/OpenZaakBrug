@@ -25,7 +25,5 @@ import java.util.List;
 
 @Repository
 public interface RequestResponseCycleRepository extends JpaRepository<RequestResponseCycle, Long> {
-
-    @Query("SELECT r FROM RequestResponseCycle r WHERE r.kenmerk = :kenmerk")
-    List<RequestResponseCycle> findByKenmerk(String kenmerk);
+    List<RequestResponseCycle> findByKenmerkStartsWith(String kenmerk);
 }
