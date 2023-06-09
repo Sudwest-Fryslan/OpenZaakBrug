@@ -1,0 +1,116 @@
+# Default values for OpenZaakBrug.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+config:
+  debug: ERROR
+  openzaak:
+    baseUrl: https://openzaak.local
+    jwt:
+      issuer: ""
+      secret: ""
+    endpoints:
+      rolTypen: /catalogi/api/v1/roltypen
+      rollen: /zaken/api/v1/rollen
+      zaakTypen: /catalogi/api/v1/zaaktypen
+      statussen: /zaken/api/v1/statussen
+      statusTypen: /catalogi/api/v1/statustypen
+      zaakInformatieObjecten: /zaken/api/v1/zaakinformatieobjecten
+      enkelvoudigInformatieObjecten: /documenten/api/v1/enkelvoudiginformatieobjecten
+      zaken: /zaken/api/v1/zaken
+  trustAllCertificates: false
+  enableJwtEndpoint: false
+
+image:
+  image: docker.io/openzaakbrug/openzaakbrug
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  class: "nginx"
+  hostname: openzaakbrug.local
+  path: /
+  pathType: ImplementationSpecific
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+#    - host: openzaakbrug-2.local
+#      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+postgresql:
+  enabled: true
+  imageTag: 11-alpine
+  # If bringing your own PostgreSQL, the full uri to use
+  url: "psql://a:b@example.com/c"
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "!ChangeMe!"
+  postgresqlDatabase: "postgres"
+  # Persistent Volume Storage configuration.
+  # ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+  persistence:
+    enabled: true
+  pullPolicy: IfNotPresent
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,10 +1,32 @@
 language: java
+
 jdk:
   - openjdk11
+services:
+  - docker
+cache:
+  directories:
+  - $HOME/.m2
+  
+install: echo 'Skipping separate install phase'
 
-before_install:
+before_script:
+ - mv ./src/main/resources/application.properties_example ./src/main/resources/application.properties
+ - mv ./src/main/resources/config.json_example ./src/main/resources/config.json
  - export TZ=Europe/Amsterdam
-#install: mvn dependency:go-offline
-script: mvn --fail-at-end -T 1C clean test install
-after_script:
- - bash <(curl -s https://codecov.io/bash)
+ - chmod +x docker_start.sh
+
+
+script:
+  - mvn install -Dmaven.javadoc.skip=true -B -V || travis_terminate 1;
+  - ./docker_start.sh || travis_terminate 1;
+  - docker-compose down --remove-orphans || travis_terminate 1;
+
+before_deploy:
+ - chmod +x docker_push.sh
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ./docker_push.sh
+  on:
+    branch: master

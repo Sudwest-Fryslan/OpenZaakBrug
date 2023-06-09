@@ -1,4 +1,29 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ *
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import nl.haarlem.translations.zdstozgw.config.ModelMapperConfig;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeft;
@@ -6,25 +31,8 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocument;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
 
-//import org.junit.Assert;
-//import org.junit.Test;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.ui.Model;
-
-import javax.validation.constraints.AssertTrue;
-import java.time.ZoneId;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ModelMapperConfig.class)
+@SpringBootTest(classes = {ModelMapperConfig.class, BuildProperties.class})
 public class ModelMapperTests {
 
     @Autowired
@@ -33,8 +41,8 @@ public class ModelMapperTests {
     @Test
     public void zgwEnkelvoudigInformatieObjectToZdsZaakDocument_shouldMapCorrectly(){
         //assign
-    	System.setProperty("user.timezone", "CET");        
-    	ModelMapperConfig.singleton.timeoffset = "0";    	        
+    	System.setProperty("user.timezone", "CET");
+    	ModelMapperConfig.singleton.timeoffset = "0";
         ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = new ZgwEnkelvoudigInformatieObject()
                 .setBestandsnaam("bestandsnaam")
                 .setInhoud("inhoud")
@@ -55,7 +63,7 @@ public class ModelMapperTests {
                 .setVerzenddatum("2020-05-09");
         // String expectedCreatieDatum = "20200230";
         // TODO: use gooed expectd values
-        String expectedCreatieDatum = "20200229";        
+        String expectedCreatieDatum = "20200229";
 
         //act
         ZdsZaakDocument zdsZaakDocument = modelMapper.map(zgwEnkelvoudigInformatieObject, ZdsZaakDocument.class);
@@ -71,7 +79,7 @@ public class ModelMapperTests {
     	ModelMapperConfig.singleton.timeoffset = "0";
         ZdsHeeft zdsHeeft = new ZdsHeeft().setDatumStatusGezet("20200904103404929");
         String expectedDatum = "2020-09-04T08:34:04.920000Z";
-        
+
         //act
         ZgwStatus zgwStatus =  modelMapper.map(zdsHeeft, ZgwStatus.class);
 

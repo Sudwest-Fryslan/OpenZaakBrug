@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.converter.impl.translate;
 
 import java.util.ArrayList;
@@ -9,7 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
-import nl.haarlem.translations.zdstozgw.requesthandler.RequestHandlerContext;
+import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsParameters;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsStuurgegevens;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
@@ -21,13 +36,13 @@ import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GeefZaakDetailsTranslator extends Converter {
 
-	public GeefZaakDetailsTranslator(RequestHandlerContext context, Translation translation, ZaakService zaakService) {
-		super(context, translation, zaakService);
+	public GeefZaakDetailsTranslator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
+		super(session, translation, zaakService);
 	}
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsZakLv01) XmlUtils.getStUFObject(this.getContext().getRequestBody(), ZdsZakLv01.class);
+		this.zdsDocument = (ZdsZakLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsZakLv01.class);
 	}
 
 	@Override
@@ -35,7 +50,7 @@ public class GeefZaakDetailsTranslator extends Converter {
 		var zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
 
 		ZdsZakLa01GeefZaakDetails zdsResponse = new ZdsZakLa01GeefZaakDetails();
-		zdsResponse.stuurgegevens = new ZdsStuurgegevens(zdsZakLv01.stuurgegevens, this.context.getReferentienummer());
+		zdsResponse.stuurgegevens = new ZdsStuurgegevens(zdsZakLv01.stuurgegevens, this.getSession().getReferentienummer());
 		zdsResponse.stuurgegevens.berichtcode = "La01";
 		zdsResponse.stuurgegevens.entiteittype = "ZAK";
 		zdsResponse.parameters = new ZdsParameters(zdsZakLv01.parameters);
@@ -43,7 +58,10 @@ public class GeefZaakDetailsTranslator extends Converter {
 
 		if (zdsZakLv01.gelijk != null && zdsZakLv01.gelijk.identificatie != null) {
 			zdsResponse.antwoord.zaak = new ArrayList<ZdsZaak>();
-			this.context.setKenmerk("zaakidentificatie:" + zdsZakLv01.gelijk.identificatie);
+
+			this.getSession().setFunctie("GeefZaakDetails-ZaakId");
+			this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLv01.gelijk.identificatie);
+
 			zdsResponse.antwoord.zaak
 					.add(this.getZaakService().getZaakDetailsByIdentificatie(zdsZakLv01.gelijk.identificatie));
 		} else if (zdsZakLv01.gelijk != null && zdsZakLv01.gelijk.heeftAlsInitiator != null
@@ -55,7 +73,10 @@ public class GeefZaakDetailsTranslator extends Converter {
 						+ "' moet beginnen met '11' gevolgd door het bsnnummer");
 			}
 			var bsn = gerelateerdeidentificatie.substring(2);
-			this.context.setKenmerk("bsn:" + bsn); 
+
+			this.getSession().setFunctie("GeefZaakDetails-Bsn");
+			this.getSession().setKenmerk("bsn:" + bsn);
+
 			zdsResponse.antwoord.zaak = this.getZaakService()
 					.getZaakDetailsByBsn(gerelateerdeidentificatie.substring(2));
 		} else {

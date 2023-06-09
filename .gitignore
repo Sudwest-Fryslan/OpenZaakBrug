@@ -1,5 +1,6 @@
 HELP.md
 target/
+bin/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -30,23 +31,7 @@ build/
 ### VS Code ###
 .vscode/
 
-src/main/resources/application.properties
-
-src/main/resources/config.json
-
-*.db
-
-src/main/resources/application.fieldlab.properties
-
-src/main/resources/application.local.properties
-
-src/main/resources/application.swf.properties
-
-src/main/resources/config.local.json
-
-src/main/resources/config.swf.json
-
-TODO.txt
-
-bouw.bat
-/schema/Zaak_DocumentServices_1_1_02
+/data/
+/src/main/resources/*.properties
+/src/main/resources/*.json
+*.DS_Store

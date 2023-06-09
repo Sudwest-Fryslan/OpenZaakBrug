@@ -1,0 +1,53 @@
+apiVersion: v1
+entries:
+  openzaakbrug:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-08-17T09:49:46.9657607+02:00"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.5.2
+    description: A Helm chart for Kubernetes
+    digest: 2d226571bc254e8b8d9fb2ea3b50301126f31c94e9c9b3e62c9327d8495d44e8
+    name: openzaakbrug
+    type: application
+    urls:
+    - openzaakbrug-0.1.0.tgz
+    version: 0.1.0
+  postgresql:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 11.12.0
+    created: "2021-08-17T09:49:46.9777147+02:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for PostgreSQL, an object-relational database management system
+      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: d4f3cc022e90c0abc17385a759b782ff637ed4b029a4d3c98182a13f3b787422
+    home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    - https://www.postgresql.org/
+    urls:
+    - charts/postgresql-10.5.2.tgz
+    version: 10.5.2
+generated: "2021-08-17T09:49:46.9552944+02:00"

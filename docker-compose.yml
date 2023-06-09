@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  web:
+    image: docker.io/openzaakbrug/openzaakbrug:latest
+    build: .
+    ports:
+     - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=travis-ci"
+    depends_on:
+      - "db"
+  db:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=openzaakbrug
+      - POSTGRES_USER=openzaakbrug
+      - POSTGRES_DB=openzaakbrug
+

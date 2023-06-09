@@ -1,0 +1,71 @@
+logging.level.nl.haarlem=INFO
+
+openzaak.jwt.secret=test
+openzaak.jwt.issuer=test
+openzaak.baseUrl = http://localhost:8000
+
+
+## config.json file location (allow it to be external resource out of jar)
+## e.g. 'file:./config/config.json' defaults to 'config.json'
+## config.json.location=
+
+nl.haarlem.translations.zdstozgw.trustAllCerts = false
+nl.haarlem.translations.zdstozgw.enableJWTEntpoint = false
+nl.haarlem.translations.zdstozgw.timeoffset.minutes = -5
+nl.haarlem.translations.zdstozgw.connectionRequestTimeout = 30000
+nl.haarlem.translations.zdstozgw.connectTimeout = 30000
+nl.haarlem.translations.zdstozgw.readTimeout = 600000
+nl.haarlem.translations.zdstozgw.maxConnPerRoute = 20
+nl.haarlem.translations.zdstozgw.maxConnTotal = 100
+nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching = true
+
+#openzaak endpoints
+zgw.endpoint.roltype = /catalogi/api/v1/roltypen
+zgw.endpoint.zaaktype = /catalogi/api/v1/zaaktypen
+zgw.endpoint.statustype = /catalogi/api/v1/statustypen
+zgw.endpoint.resultaattype = /catalogi/api/v1/resultaattypen
+zgw.endpoint.informatieobjecttype = /catalogi/api/v1/informatieobjecttypen
+zgw.endpoint.zaak = /zaken/api/v1/zaken
+zgw.endpoint.rol = /zaken/api/v1/rollen
+zgw.endpoint.status = /zaken/api/v1/statussen
+zgw.endpoint.resultaat = /zaken/api/v1/resultaten
+zgw.endpoint.zaakinformatieobject = /zaken/api/v1/zaakinformatieobjecten
+zgw.endpoint.enkelvoudiginformatieobject =/documenten/api/v1/enkelvoudiginformatieobjecten
+zgw.endpoint.objectinformatieobject = /documenten/api/v1/objectinformatieobjecten
+
+#spring.datasource.initialize=true
+#spring.jpa.generate-ddl=true
+#spring.jpa.show-sql=true
+#spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.open-in-view=true
+
+## Postgresql
+spring.datasource.driverClassName=org.postgresql.Driver
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.datasource.url= jdbc:postgresql://localhost/openzaakbrug
+spring.datasource.username=openzaakbrug
+spring.datasource.password=openzaakbrug
+spring.datasource.platform=postgresql
+
+## H2
+#spring.datasource.driverClassName=org.h2.Driver
+#spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+#spring.datasource.url=jdbc:h2:./data/OpenZaakBrug
+#spring.datasource.username=sa
+#spring.datasource.password=
+# Enabling H2 Console on http://localhost:8080/h2-console
+#spring.h2.console.enabled=true
+#spring.h2.console.path=/h2-console
+#spring.h2.console.settings.trace=true
+#spring.h2.console.settings.web-allow-others=true
+# spring.datasource.platform=h2
+version=@version@
+
+ladybug.maxCheckpoints=2500
+ladybug.maxMemoryUsage=100000000
+ladybug.maxMessageLength=1000000
+ladybug.maximumFileSize=10485760
+ladybug.maximumBackupIndex=9
+ladybug.regexFilter=.*
+ladybug.reportTransformation=transform-ladybug-report.xslt
