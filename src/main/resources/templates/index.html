@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Open Zaakbrug</title>
+<link rel="stylesheet"	href="https://unpkg.com/@utrecht/component-library-css/dist/index.css" />
+<script async src="https://unpkg.com/@nl-design-system-unstable/theme-switcher"></script>
+<style>
+table td {
+	vertical-align: top;
+	border: solid 1px #888;
+	padding: 10px;
+}
+</style>
+
+</head>
+<body class="utrecht-html">
+	<!-- <nl-theme-switcher></nl-theme-switcher>  -->
+
+	<h1>Open Zaakbrug</h1>
+	<p>
+		Project page: <a
+			href="https://sudwest-fryslan.github.io/OpenZaakBrug/">Open
+			Zaakbrug</a>, the translator from <a
+			href="https://www.gemmaonline.nl/index.php/Zaak-_en_Documentservices">zds</a>
+		to <a href="https://vng-realisatie.github.io/gemma-zaken/standaard/">zgw</a>.
+		<br />Errors and wishes can be reported here with an <a
+			href="https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/new">new
+			issue</a>
+	</p>
+	<img th:src="@{img/open-zaakbrug.png}" />
+	<h2>Information over this installation:</h2>
+	<table>
+		<tr>
+			<td>Application name:</td>
+			<td th:text="${applicationname}" />
+		</tr>
+		<tr>
+			<td>Application version:</td>
+			<td th:text="${applicationversion}" />
+		</tr>
+		<tr>
+			<td>Application build timestamp:</td>
+			<td th:text="${applicationtime}" />
+		</tr>
+	</table>
+	<h2>Additional information:</h2>
+	<p>
+		Debugging: (not-persistent) request-log can be found at <a
+			th:href="${ladybugpath}">ladybug</a>. <br>Persistent (error-)log
+		in the <a target="_blank" th:href="${databasepath}">database</a>.
+	</p>
+	<h2>The active Translations:</h2>
+	<table>
+		<tr>
+			<th>Translation</th>
+			<th>Path</th>
+			<th>Soapaction</th>
+			<th>Implementation</th>
+			<th>Legacy service</th>
+		</tr>
+		<tr th:each="translation : ${translations}">
+			<td th:text="${translation.translation}" />
+			<td th:text="${translation.path}" />
+			<td th:text="${translation.soapaction}" />
+			<td th:text="${translation.implementation}" />
+			<td th:text="${translation.legacyservice}" />
+		</tr>
+	</table>
+</body>
+</html>

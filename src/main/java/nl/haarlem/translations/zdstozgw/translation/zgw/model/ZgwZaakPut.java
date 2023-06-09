@@ -1,3 +1,18 @@
+/*
+ * Copyright 2020-2021 The Open Zaakbrug Contributors
+ *
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * European Commission - subsequent versions of the EUPL (the "Licence");
+ * 
+ * You may not use this work except in compliance with the Licence.
+ * You may obtain a copy of the Licence at:
+ *
+ * https://joinup.ec.europa.eu/software/page/eupl5
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the Licence for the specific language governing permissions and limitations under the Licence.
+ */
 package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
 import java.util.List;
@@ -11,85 +26,61 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class ZgwZaakPut {
-
-	@SerializedName("identificatie")
 	@Expose
 	public String identificatie;
-	@SerializedName("bronorganisatie")
 	@Expose
 	public String bronorganisatie;
-	@SerializedName("omschrijving")
 	@Expose
 	public String omschrijving;
-	@SerializedName("toelichting")
 	@Expose
 	public String toelichting;
-	@SerializedName("zaaktype")
 	@Expose
 	public String zaaktype;
-	@SerializedName("registratiedatum")
 	@Expose
 	public String registratiedatum;
-	@SerializedName("verantwoordelijkeOrganisatie")
 	@Expose
 	public String verantwoordelijkeOrganisatie;
-	@SerializedName("startdatum")
 	@Expose
 	public String startdatum;
-	@SerializedName("einddatumGepland")
 	@Expose
 	public String einddatumGepland;
-	@SerializedName("uiterlijkeEinddatumAfdoening")
 	@Expose
 	public String uiterlijkeEinddatumAfdoening;
-	@SerializedName("publicatiedatum")
 	@Expose
 	public String publicatiedatum;
-	@SerializedName("communicatiekanaal")
 	@Expose
 	public String communicatiekanaal;
-	@SerializedName("productenOfDiensten")
 	@Expose
 	public List<Object> productenOfDiensten = null;
-	@SerializedName("vertrouwelijkheidaanduiding")
 	@Expose
 	public String vertrouwelijkheidaanduiding;
-	@SerializedName("betalingsindicatie")
 	@Expose
 	public String betalingsindicatie;
 //    @SerializedName("laatsteBetaaldatum")
 //    @Expose
 //    public String laatsteBetaaldatum = null;
-	@SerializedName("zaakgeometrie")
 	@Expose
-	public String zaakgeometrie;
-	@SerializedName("verlenging")
+	public ZgwZaakGeometrie zaakgeometrie;
 	@Expose
-	public ZgwVerlenging verlenging;
+	public ZgwVerlenging verlenging = null;
 	@SerializedName("opschorting")
 	@Expose
-	public ZgwOpschorting opschorting;
-	@SerializedName("selectielijstklasse")
+	public ZgwOpschorting opschorting = null;
 	@Expose
 	public String selectielijstklasse;
-	@SerializedName("hoofdzaak")
 	@Expose
-	public Object hoofdzaak;
-	@SerializedName("relevanteAndereZaken")
+	public String hoofdzaak  = null;
 	@Expose
-	public List<Object> relevanteAndereZaken = null;
+	public List<ZgwAndereZaak> relevanteAndereZaken = null;
 	@SerializedName("kenmerken")
 	@Expose
 	public List<ZgwKenmerk> kenmerk = null;
-	@SerializedName("archiefnominatie")
 	@Expose
-	public String archiefnominatie;
-	@SerializedName("archiefstatus")
+	public String archiefnominatie  = null;
 	@Expose
 	public String archiefstatus;
-	@SerializedName("archiefactiedatum")
 	@Expose
-	public String archiefactiedatum;
+	public String archiefactiedatum  = null;
 
 	public static ZgwZaakPut merge(ZgwZaak original, ZgwZaakPut changes) {
 		var result = new ZgwZaakPut();
@@ -133,6 +124,7 @@ public class ZgwZaakPut {
 		result.archiefstatus = changes.archiefstatus != null ? changes.archiefstatus : original.archiefstatus;
 		result.archiefactiedatum = changes.archiefactiedatum != null ? changes.archiefactiedatum
 				: original.archiefactiedatum;
+        result.omschrijving = changes.omschrijving != null ? changes.omschrijving : original.omschrijving;
 		return result;
 	}
 }

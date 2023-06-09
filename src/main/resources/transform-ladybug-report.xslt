@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:cf="custom-functions">
 	<xsl:output method="xml" indent="yes" omit-xml-declaration="yes"/>
 	<xsl:strip-space elements="*"/>
 	
@@ -35,7 +35,10 @@
 			<xsl:apply-templates select="@*"/>
 			<xsl:choose>
 				<xsl:when test="string-length(.) > 10"><xsl:value-of select="'IGNORED'"/></xsl:when>
-				<xsl:otherwise><xsl:value-of select="concat('[', current-dateTime(), ' WRONG referentienummer: ', ., ']')"/></xsl:otherwise>
+				<xsl:otherwise>
+					<!-- Add timestamp to make test fail and inform user to adjust this xslt -->
+					<xsl:value-of select="concat('[', current-dateTime(), ' WRONG referentienummer or transform-ladybug-report.xslt needs to be adjusted for value: ', ., ']')"/>
+				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:copy>
 	</xsl:template>
@@ -46,7 +49,10 @@
 			<xsl:apply-templates select="@*"/>
 			<xsl:choose>
 				<xsl:when test="string-length(.) > 10"><xsl:value-of select="'IGNORED'"/></xsl:when>
-				<xsl:otherwise><xsl:value-of select="concat('[', current-dateTime(), ' WRONG referentienummer: ', ., ']')"/></xsl:otherwise>
+				<xsl:otherwise>
+					<!-- Add timestamp to make test fail and inform user to adjust this xslt -->
+					<xsl:value-of select="concat('[', current-dateTime(), ' WRONG referentienummer or transform-ladybug-report.xslt needs to be adjusted for value: ', ., ']')"/>
+				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:copy>
 	</xsl:template>
@@ -58,7 +64,10 @@
 			<xsl:choose>
 				<xsl:when test="string-length(.) = 0"/>
 				<xsl:when test="string-length(.) > 4"><xsl:value-of select="'IGNORED'"/></xsl:when>
-				<xsl:otherwise><xsl:value-of select="concat('[', current-dateTime(), ' WRONG identificatie: ', ., ']')"/></xsl:otherwise>
+				<xsl:otherwise>
+					<!-- Add timestamp to make test fail and inform user to adjust this xslt -->
+					<xsl:value-of select="concat('[', current-dateTime(), ' WRONG identificatie or transform-ladybug-report.xslt needs to be adjusted for value: ', ., ']')"/>
+				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:copy>
 	</xsl:template>
@@ -78,7 +87,7 @@
 	<xsl:template match="*[local-name()='Checkpoint' and @Name='url' and @Type='Inputpoint' and @Level='2']">
 		<xsl:copy>
 			<xsl:apply-templates select="@*"/>
-			<xsl:value-of select="replace(replace(replace(., 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'openzaak.local', 'IGNORED')"/>
+			<xsl:value-of select="replace(replace(replace(replace(replace(replace(replace(., 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'openzaak.local', 'IGNORED'), 'test.openzaak.nl', 'IGNORED'), 'localhost:8000', 'IGNORED'), 'localhost', 'IGNORED'), 'https://', 'http://')"/>
 		</xsl:copy>
 	</xsl:template>
 	
@@ -110,12 +119,29 @@
 	<xsl:template match="*[local-name()='Checkpoint' and @Name='kenmerk' and @Type='Outputpoint' and @Level='1']">
 		<xsl:copy>
 			<xsl:apply-templates select="@*"/>
-			<xsl:value-of select="concat(substring-before(., ':'), ':')"/>
+			<xsl:if test="contains(.,':')">
+				<xsl:value-of select="concat(substring-before(., ':'), ':')"/>
+			</xsl:if>
 			<xsl:choose>
 				<xsl:when test="substring-before(., ':') = 'zaakidentificatie'"><xsl:value-of select="'IGNORED'"/></xsl:when>
 				<xsl:when test="substring-before(., ':') = 'bsn'"><xsl:value-of select="'IGNORED'"/></xsl:when>
 				<xsl:when test="substring-before(., ':') = 'documentidentificatie'"><xsl:value-of select="'IGNORED'"/></xsl:when>
-				<xsl:otherwise><xsl:value-of select="concat('[', current-dateTime(), ' WRONG kenmerk: ', ., ']')"/></xsl:otherwise>
+				<xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+			</xsl:choose>
+		</xsl:copy>
+	</xsl:template>
+
+	<!-- IGNORE datumStatusGezet-->
+	<xsl:template match="*[local-name()='Checkpoint' and @Name='ZGWClient POST' and @Type='Startpoint']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*"/>
+			<xsl:choose>
+				<xsl:when test="contains(.,'datumStatusGezet') and contains(., 'statustoelichting')">
+					<xsl:value-of select="concat(substring-before(., 'datumStatusGezet'), 'datumStatusGezet&quot;: &quot;IGNORED&quot;,', '&quot;statustoelichting&quot;', substring-after(., 'statustoelichting'))"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="."/>
+				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:copy>
 	</xsl:template>
@@ -127,6 +153,25 @@
 			<xsl:apply-templates select="node() | @*[local-name() != 'version']"/>
 		</xsl:copy>
 	</xsl:template>
+
+	<!-- Ignore line numbers and Windows newlines in stacktrace -->
+	<xsl:template match="*[local-name()='details']">
+		<xsl:copy>
+			<!-- Shorten to 900 because RequestHandler shortens to 1000 which will give different last chars on Windows as Windows uses two chars for newlines -->
+			<xsl:value-of select="substring(cf:ignoreHelpfulNpeMessage(replace(replace(., '\r', ''), '.java:.*\)', '.java:IGNORED)')), 0, 900)"/>
+		</xsl:copy>
+	</xsl:template>
+
+	<!--  Ignore difference in NPE message between java versions before version 14 and version 14 and onwards -->
+	<xsl:template match="*[local-name()='faultstring' or local-name()='omschrijving']">
+		<xsl:copy>
+			<xsl:value-of select="cf:ignoreHelpfulNpeMessage(.)"/>
+		</xsl:copy>
+	</xsl:template>
+	<xsl:function name="cf:ignoreHelpfulNpeMessage">
+			<xsl:param name="message"/>
+			<xsl:value-of select="replace($message, 'java.lang.NullPointerException.*', 'java.lang.NullPointerExceptionIGNORED')"/>
+	</xsl:function>
 
 	<!-- General template -->
 	<xsl:template match="node()|@*">

@@ -1,6 +1,7 @@
 version: '3.4'
 services:
   web:
+    image: docker.io/openzaakbrug/openzaakbrug:latest
     build: .
     ports:
      - "8080:8080"

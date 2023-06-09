@@ -1,5 +1,10 @@
 #!/bin/sh
 
+mv ./src/main/resources/application.properties_example ./src/main/resources/application.properties
+mv ./src/main/resources/config.json_example ./src/main/resources/config.json
+
+mvn install -Dmaven.javadoc.skip=true -B -V -DskipTests
+
 sudo docker-compose -f docker-compose.yml up --build -d
 
 # start the counter from 5 seconds
