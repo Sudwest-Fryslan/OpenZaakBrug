@@ -290,7 +290,7 @@ public class ZaakService {
                         updateRolInZgw(zgwZaak, zgwZaakType, rolnaam, (ZdsRol) change.getNewValue());
                     } else  if (change.getField().getName().equals("heeftBetrekkingOp")) {
                         log.debug("ADD ZAAKOBKJECT");
-                        addOrUpdateZaakObjectToZgw(zgwZaak, (ZdsRol) change.getNewValue());
+                        addOrUpdateZaakObjectToZgw(zgwZaak, change);
                     } else {
                         log.debug("[CHANGE ROL] New Rol:" + rolnaam);
                         addRolToZgw(zgwZaak, zgwZaakType, (ZdsRol) change.getNewValue(), rolnaam);
@@ -316,7 +316,7 @@ public class ZaakService {
                     log.debug("[CHANGE ROL] Update Rol: " + rolnaam);
                     if (change.getField().getName().equals("heeftBetrekkingOp")) {
                         log.debug("UPDATE ZAAKOBJECT");
-                        addOrUpdateZaakObjectToZgw(zgwZaak, (ZdsRol) change.getNewValue());
+                        addOrUpdateZaakObjectToZgw(zgwZaak, change);
                     } else {
                         updateRolInZgw(zgwZaak, zgwZaakType, rolnaam, (ZdsRol) change.getNewValue());
                     }
@@ -531,24 +531,63 @@ public class ZaakService {
         }
     }
 
-    private void addZaakObjectAdresToZGW(ZgwZaak zgwZaak, ZdsRol zdsRol) {
-        ZgwZaakObjectAdres zgwZaakObjectAdres = new ZgwZaakObjectAdres();
-        zgwZaakObjectAdres.setObjectIdentificatie(modelMapper.map(zdsRol.getGerelateerde().getAdres(), ZgwZaakObjectObjectIdentificatieAdres.class));
-        zgwZaakObjectAdres.setZaak(zgwZaak.getUrl());
-        zgwZaakObjectAdres.setObjectType("adres");
+//    private void updateZaakObjectInZGW(ZgwZaak zgwZaak, ZdsRol zdsRol) {
+//        if (zdsRol.getGerelateerde().getAdres() != null) {
+//            removeOrUpdateZaakObjectAdresFromZGW(zgwZaak, zdsRol);
+//        }
+//    }
 
-        this.zgwClient.addZaakObject(zgwZaak, zgwZaakObjectAdres);
+    private void removeOrUpdateZaakObjectFromZGW(ZgwZaak zgwZaak, ZdsRol zdsRolNewValue, ZdsRol zdsRolOldValue) {
+        if(zdsRolNewValue.getGerelateerde().getAdres() != null){
+            removeOrUpdateZaakObjectAdresFromZGW(zgwZaak, zdsRolNewValue, zdsRolOldValue);
+        }
     }
 
-    private void addOrUpdateZaakObjectToZgw(ZgwZaak zgwZaak, ZdsRol zdsRol) {
-        if (zdsRol.getVerwerkingssoort().equalsIgnoreCase("T") && zdsRol.getGerelateerde().adres != null) {
+    private void removeOrUpdateZaakObjectAdresFromZGW(ZgwZaak zgwZaak, ZdsRol zdsRolNewValue, ZdsRol zdsRolCurrentValue){
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("zaak", zgwZaak.getUrl());
+        parameters.put("objectType", "adres");
+
+        var zaakObjecten = this.zgwClient.getZaakObjecten(parameters);
+
+        zaakObjecten.forEach(zaakObject -> {
+            ZgwZaakObjectObjectIdentificatieAdres zgwZaakObjectObjectIdentificatieAdres = (ZgwZaakObjectObjectIdentificatieAdres) zaakObject.getObjectIdentificatie();
+            if(zdsRolNewValue.getVerwerkingssoort().equalsIgnoreCase("v") && zgwZaakObjectObjectIdentificatieAdres.getIdentificatie().equals(zdsRolNewValue.getGerelateerde().getAdres().getIdentificatie())){
+                log.debug("Deleting zaakObject with uuid: " + zaakObject.getUuid());;
+                this.zgwClient.deleteZaakObject(zaakObject);
+            }
+            if(zdsRolNewValue.getVerwerkingssoort().equalsIgnoreCase("w")
+                && zgwZaakObjectObjectIdentificatieAdres.getIdentificatie().equals(zdsRolCurrentValue.getGerelateerde().getAdres().getIdentificatie())){
+                log.debug("Updating zaakObject with uuid: " + zaakObject.getUuid());
+                zaakObject.setObjectIdentificatie(modelMapper.map(zdsRolNewValue.getGerelateerde().getAdres(), ZgwZaakObjectObjectIdentificatieAdres.class));
+                this.zgwClient.updateZaakObject(zaakObject);
+            }
+        });
+    }
+
+    private void addZaakObjectAdresToZGW(ZgwZaak zgwZaak, ZdsRol zdsRol) {
+        ZgwZaakObject zgwZaakObject = new ZgwZaakObject();
+        zgwZaakObject.setObjectIdentificatie(modelMapper.map(zdsRol.getGerelateerde().getAdres(), ZgwZaakObjectObjectIdentificatieAdres.class));
+        zgwZaakObject.setZaak(zgwZaak.getUrl());
+        zgwZaakObject.setObjectType("adres");
+
+        this.zgwClient.addZaakObject(zgwZaak, zgwZaakObject);
+    }
+
+    private void addOrUpdateZaakObjectToZgw(ZgwZaak zgwZaak, Change change) {
+        var newValue =(ZdsRol) change.getNewValue();
+        var currentValue = (ZdsRol) change.getCurrentValue();
+
+        if (newValue.getVerwerkingssoort().equalsIgnoreCase("T") && newValue.getGerelateerde() != null && newValue.getGerelateerde().adres != null) {
             log.debug("Add addres");
-            addZaakObjectToZGW(zgwZaak, zdsRol);
+            addZaakObjectToZGW(zgwZaak, newValue);
         }
-        if (zdsRol.getVerwerkingssoort().equalsIgnoreCase("W") && zdsRol.getGerelateerde().adres != null) {
-            log.debug("Update addres");
+        if (newValue.getVerwerkingssoort().equalsIgnoreCase("W") && newValue.getGerelateerde() != null && newValue.getGerelateerde().adres != null) {
+            log.error("Update addres is not implemented");
+            removeOrUpdateZaakObjectAdresFromZGW(zgwZaak, newValue, currentValue);
         }
-        if (zdsRol.getVerwerkingssoort().equalsIgnoreCase("V") && zdsRol.getGerelateerde().adres != null) {
+        if (newValue.getVerwerkingssoort().equalsIgnoreCase("V") && currentValue.getGerelateerde() != null && currentValue.getGerelateerde().adres != null) {
+            removeOrUpdateZaakObjectFromZGW(zgwZaak, currentValue, null);
             log.debug("Remove addres");
         }
     }
@@ -646,11 +685,16 @@ public class ZaakService {
             zgwRol.betrokkeneType = BetrokkeneType.VESTIGING.getDescription();
 
         }
+        if (typeRolOmschrijving.equalsIgnoreCase("betrekkingop")){
+            log.debug("Adding HeeftBetrekkingOp");
+            addBetrekkingOp(createdZaak, zdsRol);
+        }
         if (zgwRol.betrokkeneIdentificatie == null) {
             //throw new ConverterException("Rol: " + typeRolOmschrijving + " zonder Natuurlijkpersoon or Medewerker");
             debugWarning("Rol: '" + typeRolOmschrijving + "' zonder (NIET) Natuurlijkpersoon or Medewerker");
             return;
         }
+
         var roltype = this.zgwClient.getRolTypeByZaaktypeAndOmschrijving(zgwZaakType, typeRolOmschrijving);
         if (roltype == null) {
             var zaaktype = this.zgwClient.getZaakTypeByUrl(createdZaak.zaaktype);
@@ -660,6 +704,21 @@ public class ZaakService {
         zgwRol.roltype = roltype.url;
         zgwRol.zaak = createdZaak.getUrl();
         this.zgwClient.addZgwRol(zgwRol);
+    }
+
+    private void addBetrekkingOp(ZgwZaak createdZaak, ZdsRol zdsRol) {
+        ZgwZaakObject zgwZaakObject = new ZgwZaakObject().setZaak(createdZaak.getUrl());
+
+        if(zdsRol.getGerelateerde() !=null && zdsRol.getGerelateerde().getAdres() != null){
+            zgwZaakObject
+                .setObjectType("adres")
+                .setRelatieomschrijving("Heeft betrekking op")
+                .setObjectIdentificatie(modelMapper.map(zdsRol.gerelateerde.getAdres(), ZgwZaakObjectObjectIdentificatieAdres.class));
+            log.info("Adding BetrekkingOp adres");
+            this.zgwClient.addZaakObject(createdZaak, zgwZaakObject);
+            return;
+        }
+        log.error("Adding BetrekkingOp is not implemented for: {}",zdsRol.gerelateerde);
     }
 
     public List<ZdsHeeftRelevant> geefLijstZaakdocumenten(String zaakidentificatie) {

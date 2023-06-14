@@ -34,4 +34,7 @@ public class ZgwZaakObject {
     @Expose
     private String relatieomschrijving = "Heeft betrekking op";
 
+    @SerializedName("objectIdentificatie")
+    @Expose
+    private Object objectIdentificatie;
 }
