@@ -654,12 +654,16 @@ public class ZaakService {
         var roltype = this.zgwClient.getRolTypeByZaaktypeAndOmschrijving(zgwZaakType, typeRolOmschrijving);
         if (roltype == null) {
             var zaaktype = this.zgwClient.getZaakTypeByUrl(createdZaak.zaaktype);
-            throw new ConverterException(
-                "Rol: '" + typeRolOmschrijving + "' niet gevonden bij Zaaktype: '" + zaaktype.identificatie + "'");
+            debugWarning("Rol: " + typeRolOmschrijving + " niet gevonden bij Zaaktype: " + zaaktype.identificatie);
+            zgwClient.caseCreationStatusOk = false;
+            return;
         }
         zgwRol.roltype = roltype.url;
         zgwRol.zaak = createdZaak.getUrl();
-        this.zgwClient.addZgwRol(zgwRol);
+        zgwRol = this.zgwClient.addZgwRol(zgwRol);
+        if(zgwRol == null || zgwRol.uuid.isEmpty()) {
+            zgwClient.caseCreationStatusOk = false;
+        }
     }
 
     public List<ZdsHeeftRelevant> geefLijstZaakdocumenten(String zaakidentificatie) {
