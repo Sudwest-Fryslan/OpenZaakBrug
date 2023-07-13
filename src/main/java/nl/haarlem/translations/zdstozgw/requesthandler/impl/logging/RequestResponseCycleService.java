@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 The Open Zaakbrug Contributors
+ * Copyright 2020-2023 The Open Zaakbrug Contributors
  *
  * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
  * European Commission - subsequent versions of the EUPL (the "Licence");
@@ -26,12 +26,15 @@ import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 public class RequestResponseCycleService {
 
 	private final RequestResponseCycleRepository requestResponseCycleRepository;
+	private final ZgwRequestResponseCycleRepository zgwRequestResponseCycleRepository;
 	private final ZdsRequestResponseCycleRepository zdsRequestResponseCycleRepository;
 
 	@Autowired
 	public RequestResponseCycleService(RequestResponseCycleRepository requestResponseCycleRepository,
+			ZgwRequestResponseCycleRepository zgwRequestResponseCycleRepository,
 			ZdsRequestResponseCycleRepository zdsRequestResponseCycleRepository) {
 		this.requestResponseCycleRepository = requestResponseCycleRepository;
+		this.zgwRequestResponseCycleRepository = zgwRequestResponseCycleRepository;
 		this.zdsRequestResponseCycleRepository = zdsRequestResponseCycleRepository;
 	}
 
@@ -41,5 +44,9 @@ public class RequestResponseCycleService {
 
 	public ZdsRequestResponseCycle add(ZdsRequestResponseCycle interimRequestResponseCycle) {
 		return this.zdsRequestResponseCycleRepository.save(interimRequestResponseCycle);
+	}
+
+	public ZgwRequestResponseCycle add(ZgwRequestResponseCycle interimRequestResponseCycle) {
+		return this.zgwRequestResponseCycleRepository.save(interimRequestResponseCycle);
 	}
 }
