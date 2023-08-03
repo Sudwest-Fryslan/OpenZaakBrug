@@ -32,7 +32,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer",
 				RequestAttributes.SCOPE_REQUEST);
 		this.currentInterimRequestResponseCycle = new ZgwRequestResponseCycle(referentienummer, request, body);
-		//this.requestResponseCycleService.add(this.currentInterimRequestResponseCycle);
+		this.requestResponseCycleService.add(this.currentInterimRequestResponseCycle);
 	}
 
 	private void addResponseToDatabase(ClientHttpResponse response) throws IOException {
@@ -42,11 +42,11 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		//		was altered from 133274 to 133275; nested exception is org.hibernate.HibernateException: 
 		//		identifier of an instance of nl.haarlem.translations.zdstozgw.requesthandler.impl.logging.ZgwRequestResponseCycle 
 		//		was altered from 133274 to 133275
-		//ZgwRequestResponseCycle existingRecordRef = this.requestResponseCycleService
-		//		.getZgwRequestResponseCycleRepository()
-		//		.findById(this.currentInterimRequestResponseCycle.getId())
-		//		.orElse(this.currentInterimRequestResponseCycle);
+		ZgwRequestResponseCycle existingRecordRef = this.requestResponseCycleService
+				.getZgwRequestResponseCycleRepository()
+				.findById(this.currentInterimRequestResponseCycle.getId())
+				.orElse(this.currentInterimRequestResponseCycle);
 		currentInterimRequestResponseCycle.setResponse(response);
-		this.requestResponseCycleService.add(currentInterimRequestResponseCycle);
+		this.requestResponseCycleService.add(existingRecordRef);
 	}
 }
