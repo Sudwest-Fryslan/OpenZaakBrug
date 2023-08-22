@@ -28,6 +28,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
@@ -60,6 +61,9 @@ public class ZaakService {
 
     private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
+
+    @Value("${nl.haarlem.translations.zdstozgw.updatezaakstatustimeoffset:0}")
+    private Integer updateZaakStatusDateTimeOffset;
 
     public final ZGWClient zgwClient;
 
@@ -337,8 +341,8 @@ public class ZaakService {
         var dagstart = formatter.format(new Date());
         formatter = new SimpleDateFormat("yyyyMMddHHmmssSS");
         if(zdsStatusDatum == null || zdsStatusDatum.length() == 0) {
-            debugWarning("no statusdatetime provided, using now()");
-            zdsStatusDatum = formatter.format(new Date());
+            zdsStatusDatum = formatter.format(getCurrentDate(updateZaakStatusDateTimeOffset));
+            debugWarning("no statusdatetime provided, using now(): " + zdsStatusDatum);
         }
         else if(zdsStatusDatum.length() < 16) {
             // maken it length of 16
@@ -347,7 +351,7 @@ public class ZaakService {
 
         if(dagstart.startsWith(zdsStatusDatum)) {
             debugWarning("statusdatetime contains no time, using now() (DatumGezet, has to be unique)");
-            zdsStatusDatum = formatter.format(new Date());
+            zdsStatusDatum = formatter.format(getCurrentDate(updateZaakStatusDateTimeOffset));
         }
 
         var zgwStatusDatumTijd = (ModelMapperConfig.convertStufDateTimeToZgwDateTime(zdsStatusDatum));
@@ -358,6 +362,14 @@ public class ZaakService {
             zgwStatusDatumTijd = (ModelMapperConfig.convertStufDateTimeToZgwDateTime(zdsStatusDatum, index));
         }
         return zgwStatusDatumTijd;
+    }
+
+    private static Date getCurrentDate(Integer offsetSeconds) {
+        //Add seconds timeOffset to correct for transient ZGW error "Datum mag niet in de toekomst zijn"
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.SECOND,(calendar.get(Calendar.SECOND) + offsetSeconds));
+        return calendar.getTime();
     }
 
     public boolean setResultaatAndStatus(ZdsZaak zdsZaak, ZgwZaak zgwZaak, ZgwZaakType zgwZaakType) {
@@ -698,12 +710,16 @@ public class ZaakService {
         var roltype = this.zgwClient.getRolTypeByZaaktypeAndOmschrijving(zgwZaakType, typeRolOmschrijving);
         if (roltype == null) {
             var zaaktype = this.zgwClient.getZaakTypeByUrl(createdZaak.zaaktype);
-            throw new ConverterException(
-                "Rol: '" + typeRolOmschrijving + "' niet gevonden bij Zaaktype: '" + zaaktype.identificatie + "'");
+            debugWarning("Rol: " + typeRolOmschrijving + " niet gevonden bij Zaaktype: " + zaaktype.identificatie);
+            zgwClient.caseCreationStatusOk = false;
+            return;
         }
         zgwRol.roltype = roltype.url;
         zgwRol.zaak = createdZaak.getUrl();
-        this.zgwClient.addZgwRol(zgwRol);
+        zgwRol = this.zgwClient.addZgwRol(zgwRol);
+        if(zgwRol == null || zgwRol.uuid.isEmpty()) {
+            zgwClient.caseCreationStatusOk = false;
+        }
     }
 
     private void addBetrekkingOp(ZgwZaak createdZaak, ZdsRol zdsRol) {

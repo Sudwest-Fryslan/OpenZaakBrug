@@ -433,8 +433,16 @@ public class ZGWClient {
 	public ZgwRol addZgwRol(ZgwRol zgwRol) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwRol);
-		String response = this.post(this.baseUrl + this.endpointRol, json);
-		return gson.fromJson(response, ZgwRol.class);
+        String response = "";
+        try {
+            response = this.post(this.baseUrl + this.endpointRol, json);
+            zgwRol = gson.fromJson(response, ZgwRol.class);
+        } catch (Exception e) {
+            log.error("Error adding rol: " + json, e);
+            return null;
+        }
+
+		return zgwRol;
 	}
 
 	public ZgwEnkelvoudigInformatieObject addZaakDocument(
