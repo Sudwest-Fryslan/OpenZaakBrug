@@ -24,6 +24,12 @@
 		<property name="maxMemoryUsage" value="${ladybug.maxMemoryUsage:100000000}"/>
 		<property name="maxMessageLength" value="${ladybug.maxMessageLength:1000000}"/>
 		<property name="regexFilter" value="${ladybug.regexFilter:.*}"/>
+		<property name="stubStrategies">
+			<list>
+				<value>Stub all external connection code</value>
+				<value>Never</value>
+			</list>
+		</property>
 	</bean>
 
 	<bean name="debugStorage" class="nl.nn.testtool.storage.file.Storage" autowire="byName" init-method="init" destroy-method="close">
