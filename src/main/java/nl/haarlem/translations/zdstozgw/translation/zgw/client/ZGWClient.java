@@ -65,44 +65,51 @@ public class ZGWClient {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
-
-	@Value("${openzaak.baseUrl}")
-	private @Getter String baseUrl;
-
-	@Value("${zgw.endpoint.roltype:/catalogi/api/v1/roltypen}")
+	
+	
+	@Value("${openzaak.zakenUrl}")
+	private @Getter String zakenUrl;
+	@Value("${openzaak.documentenUrl}")
+	private @Getter String documentenUrl;
+	@Value("${openzaak.catalogiUrl}")
+	private @Getter String catalogiUrl;
+	@Value("${openzaak.besluitenUrl}")
+	private @Getter String besluitenUrl;
+		
+	@Value("${zgw.endpoint.roltype:/api/v1/roltypen}")
 	private @Getter String endpointRolType;
 
-	@Value("${zgw.endpoint.rol:/zaken/api/v1/rollen}")
+	@Value("${zgw.endpoint.rol:/api/v1/rollen}")
 	private @Getter String endpointRol;
 
-	@Value("${zgw.endpoint.zaaktype:/catalogi/api/v1/zaaktypen}")
+	@Value("${zgw.endpoint.zaaktype:/api/v1/zaaktypen}")
 	private @Getter String endpointZaaktype;
 
-	@Value("${zgw.endpoint.status:/zaken/api/v1/statussen}")
+	@Value("${zgw.endpoint.status:/api/v1/statussen}")
 	private @Getter String endpointStatus;
 
-	@Value("${zgw.endpoint.resultaat:/zaken/api/v1/resultaten}")
+	@Value("${zgw.endpoint.resultaat:/api/v1/resultaten}")
 	private @Getter String endpointResultaat;
 
-	@Value("${zgw.endpoint.statustype:/catalogi/api/v1/statustypen}")
+	@Value("${zgw.endpoint.statustype:/api/v1/statustypen}")
 	private @Getter String endpointStatustype;
 
-	@Value("${zgw.endpoint.resultaattype:/catalogi/api/v1/resultaattypen}")
+	@Value("${zgw.endpoint.resultaattype:/api/v1/resultaattypen}")
 	private @Getter String endpointResultaattype;
 
-	@Value("${zgw.endpoint.zaakinformatieobject:/zaken/api/v1/zaakinformatieobjecten}")
+	@Value("${zgw.endpoint.zaakinformatieobject:/api/v1/zaakinformatieobjecten}")
 	private @Getter String endpointZaakinformatieobject;
 
-	@Value("${zgw.endpoint.enkelvoudiginformatieobject:/documenten/api/v1/enkelvoudiginformatieobjecten}")
+	@Value("${zgw.endpoint.enkelvoudiginformatieobject:/api/v1/enkelvoudiginformatieobjecten}")
 	private @Getter String endpointEnkelvoudiginformatieobject;
 
-	@Value("${zgw.endpoint.objectinformatieobject:/documenten/api/v1/objectinformatieobjecten}")
+	@Value("${zgw.endpoint.objectinformatieobject:/api/v1/objectinformatieobjecten}")
 	private @Getter String endpointObjectinformatieobject;
 
-	@Value("${zgw.endpoint.zaak:/zaken/api/v1/zaken}")
+	@Value("${zgw.endpoint.zaak:/api/v1/zaken}")
 	private @Getter String endpointZaak;
 
-	@Value("${zgw.endpoint.informatieobjecttype:/catalogi/api/v1/informatieobjecttypen}")
+	@Value("${zgw.endpoint.informatieobjecttype:/api/v1/informatieobjecttypen}")
 	private @Getter String endpointInformatieobjecttype;
 
 	@Value("${nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching:true}")
@@ -324,7 +331,7 @@ public class ZGWClient {
 		}
 
 		var documentJson = get(
-				this.baseUrl + this.endpointEnkelvoudiginformatieobject + "?identificatie=" + identificatie, null);
+				this.documentenUrl + this.endpointEnkelvoudiginformatieobject + "?identificatie=" + identificatie, null);
 		Type type = new TypeToken<QueryResult<ZgwEnkelvoudigInformatieObject>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -391,7 +398,7 @@ public class ZGWClient {
 
 	public ZgwZaak getZaak(Map<String, String> parameters) {
 		ZgwZaak result = null;
-		var zaakJson = get(this.baseUrl + this.endpointZaak, parameters);
+		var zaakJson = get(this.zakenUrl + this.endpointZaak, parameters);
 		Type type = new TypeToken<QueryResult<ZgwZaak>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -405,7 +412,7 @@ public class ZGWClient {
 	public ZgwZaak addZaak(ZgwZaak zgwZaak) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwZaak);
-		String response = this.post(this.baseUrl + this.endpointZaak, json);
+		String response = this.post(this.zakenUrl + this.endpointZaak, json);
 		return gson.fromJson(response, ZgwZaak.class);
 	}
 
@@ -413,12 +420,12 @@ public class ZGWClient {
 	public void patchZaak(String zaakUuid, ZgwZaakPut zaak) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zaak);
-		this.patch(this.baseUrl + this.endpointZaak + "/" + zaakUuid, json);
+		this.patch(this.zakenUrl + this.endpointZaak + "/" + zaakUuid, json);
 	}
 	public ZgwRol addZgwRol(ZgwRol zgwRol) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwRol);
-		String response = this.post(this.baseUrl + this.endpointRol, json);
+		String response = this.post(this.zakenUrl + this.endpointRol, json);
 		return gson.fromJson(response, ZgwRol.class);
 	}
 
@@ -426,20 +433,20 @@ public class ZGWClient {
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
-		String response = this.post(this.baseUrl + this.endpointEnkelvoudiginformatieobject, json);
+		String response = this.post(this.documentenUrl + this.endpointEnkelvoudiginformatieobject, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
 	}
 
 	public ZgwZaakInformatieObject addDocumentToZaak(ZgwZaakInformatieObject zgwZaakInformatieObject) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwZaakInformatieObject);
-		String response = this.post(this.baseUrl + this.endpointZaakinformatieobject, json);
+		String response = this.post(this.documentenUrl + this.endpointZaakinformatieobject, json);
 		return gson.fromJson(response, ZgwZaakInformatieObject.class);
 	}
 
 	public List<ZgwZaakInformatieObject> getZgwZaakInformatieObjects(Map<String, String> parameters) {
 		// Fetch EnkelvoudigInformatieObjects
-		var zaakInformatieObjectJson = get(this.baseUrl + this.endpointZaakinformatieobject, parameters);
+		var zaakInformatieObjectJson = get(this.zakenUrl + this.endpointZaakinformatieobject, parameters);
 
 		Gson gson = new Gson();
 		Type documentList = new TypeToken<ArrayList<ZgwZaakInformatieObject>>() {
@@ -458,7 +465,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwStatusType> getStatusTypes(Map<String, String> parameters) {
-		var statusTypeJson = get(this.baseUrl + this.endpointStatustype, parameters);
+		var statusTypeJson = get(this.zakenUrl + this.endpointStatustype, parameters);
 		Type type = new TypeToken<QueryResult<ZgwStatusType>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -470,7 +477,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwResultaatType> getResultaatTypes(Map<String, String> parameters) {
-		var restulaatTypeJson = get(this.baseUrl + this.endpointResultaattype, parameters);
+		var restulaatTypeJson = get(this.zakenUrl + this.endpointResultaattype, parameters);
 		Type type = new TypeToken<QueryResult<ZgwResultaatType>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -482,7 +489,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwResultaat> getResultaten(Map<String, String> parameters) {
-		var restulaatJson = get(this.baseUrl + this.endpointResultaat, parameters);
+		var restulaatJson = get(this.zakenUrl + this.endpointResultaat, parameters);
 		Type type = new TypeToken<QueryResult<ZgwResultaat>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -495,7 +502,7 @@ public class ZGWClient {
 
 
 	public List<ZgwStatus> getStatussen(Map<String, String> parameters) {
-		var statusTypeJson = get(this.baseUrl + this.endpointStatus, parameters);
+		var statusTypeJson = get(this.zakenUrl + this.endpointStatus, parameters);
 		Type type = new TypeToken<QueryResult<ZgwStatus>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -515,19 +522,19 @@ public class ZGWClient {
 	public ZgwStatus addZaakStatus(ZgwStatus zgwSatus) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwSatus);
-		String response = this.post(this.baseUrl + this.endpointStatus, json);
+		String response = this.post(this.zakenUrl + this.endpointStatus, json);
 		return gson.fromJson(response, ZgwStatus.class);
 	}
 
 	public ZgwResultaat addZaakResultaat(ZgwResultaat zgwResultaat) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwResultaat);
-		String response = this.post(this.baseUrl + this.endpointResultaat, json);
+		String response = this.post(this.zakenUrl + this.endpointResultaat, json);
 		return gson.fromJson(response, ZgwResultaat.class);
 	}
 
 	public List<ZgwZaakType> getZaakTypes(Map<String, String> parameters) {
-		var zaakTypeJson = get(this.baseUrl + this.endpointZaaktype, parameters);
+		var zaakTypeJson = get(this.catalogiUrl + this.endpointZaaktype, parameters);
 		Type type = new TypeToken<QueryResult<ZgwZaakType>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -551,7 +558,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwRol> getRollen(Map<String, String> parameters) {
-		var zaakTypeJson = get(this.baseUrl + this.endpointRol, parameters);
+		var zaakTypeJson = get(this.zakenUrl + this.endpointRol, parameters);
 		Type type = new TypeToken<QueryResult<ZgwRol>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -563,7 +570,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwRolType> getRolTypen(Map<String, String> parameters) {
-		var rolTypeJson = get(this.baseUrl + this.endpointRolType, parameters);
+		var rolTypeJson = get(this.catalogiUrl + this.endpointRolType, parameters);
 		Type type = new TypeToken<QueryResult<ZgwRolType>>() {
 		}.getType();
 		Gson gson = new Gson();
@@ -587,21 +594,21 @@ public class ZGWClient {
 	public void updateZaak(String zaakUuid, ZgwZaakPut zaak) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zaak);
-		this.put(this.baseUrl + this.endpointZaak + "/" + zaakUuid, json);
+		this.put(this.zakenUrl + this.endpointZaak + "/" + zaakUuid, json);
 	}
 
 	public void deleteRol(String uuid) {
 		if (uuid == null) {
 			throw new ConverterException("rol uuid may not be null");
 		}
-		delete(this.baseUrl + this.endpointRol + "/" + uuid);
+		delete(this.zakenUrl + this.endpointRol + "/" + uuid);
 	}
 
 	public void deleteZaakResultaat(String uuid) {
 		if (uuid == null) {
 			throw new ConverterException("zaakresultaat uuid may not be null");
 		}
-		delete(this.baseUrl + this.endpointResultaat + "/" + uuid);
+		delete(this.zakenUrl + this.endpointResultaat + "/" + uuid);
 	}
 
 	public List<ZgwZaakInformatieObject> getZaakInformatieObjectenByZaak(String zaakUrl) {
@@ -866,7 +873,7 @@ public class ZGWClient {
 	
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(Map<String, String> parameters) {
 		// Fetch ObjectInformatieObject
-		var objectInformatieObjectJson = get(this.baseUrl + this.endpointObjectinformatieobject, parameters);
+		var objectInformatieObjectJson = get(this.documentenUrl + this.endpointObjectinformatieobject, parameters);
 
 		Gson gson = new Gson();
 		Type documentList = new TypeToken<ArrayList<ZgwObjectInformatieObject>>() {

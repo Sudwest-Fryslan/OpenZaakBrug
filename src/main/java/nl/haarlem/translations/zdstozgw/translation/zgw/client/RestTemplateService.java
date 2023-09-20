@@ -98,7 +98,7 @@ public class RestTemplateService {
 		headers.set("Accept-Crs", "EPSG:4326");
 		headers.set("Content-Crs", "EPSG:4326");
 		headers.set("Authorization", "Bearer " + this.jwtService.getJWT());
-		log.debug("headers:" + headers);
+		log.info("headers:" + headers);
 
 		return headers;
 	}

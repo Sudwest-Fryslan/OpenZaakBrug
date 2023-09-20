@@ -17,8 +17,17 @@ package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
 import static java.time.ZonedDateTime.now;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.lang.invoke.MethodHandles;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.ZoneOffset;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -26,21 +35,57 @@ import io.fusionauth.jwt.Signer;
 import io.fusionauth.jwt.hmac.HMACSigner;
 
 @Service
-public class JWTService {
+public class JWTService {	
+	@Value("${openzaak.jwt.url}")
+	private String jwturl;
 
+	@Value("${openzaak.jwt.issuer}")
+	private String issuer;	
+	
 	@Value("${openzaak.jwt.secret}")
 	private String secret;
 
-	@Value("${openzaak.jwt.issuer}")
-	private String issuer;
-
+	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	
 	public String getJWT() {
-		Signer signer = HMACSigner.newSHA256Signer(this.secret);
+		try {			
+	        URL obj = new URL(jwturl);
+	        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-		io.fusionauth.jwt.domain.JWT jwt = new io.fusionauth.jwt.domain.JWT().setIssuer(this.issuer)
-				.setIssuedAt(now(ZoneOffset.UTC)).addClaim("client_id", this.issuer).addClaim("user_id", this.issuer)
-				.addClaim("user_reresentation", this.issuer).setExpiration(now(ZoneOffset.UTC).plusMinutes(10));
+	        con.setRequestMethod("POST");
+	        con.setRequestProperty("Content-Type", "application/json");
+	        con.setDoOutput(true);
 
-		return io.fusionauth.jwt.domain.JWT.getEncoder().encode(jwt, signer);
+	        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			//String json = "{\"clientIds'\":[\"" + issuer +  "\"],\"secret\": \"" + issuer + "\",\"label\": \"user\"heeftAlleAutorisaties': 'true','autorisaties': []}";
+	        String json =  "{\"clientIds\": [\"" + issuer + "\"],\"secret\": \"" + secret + "\" ,\"label\": \"user\",\"heeftAlleAutorisaties\": \"true\",\"autorisaties\": []}";
+	        log.info("Sending to: " + jwturl + " the following payload:"  + json);
+	        wr.writeBytes(json);
+	        wr.flush();
+	        wr.close();
+
+	        int responseCode = con.getResponseCode();
+	        if(responseCode != 200) {
+		        log.info("Response Code: " + responseCode + " Errormessage:" + con.getResponseMessage());
+	        	throw new RuntimeException("Error retrieving token:" + con.getResponseMessage());
+	        }
+
+	        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	        String inputLine;
+	        StringBuffer response = new StringBuffer();
+
+	        while ((inputLine = in.readLine()) != null) {
+	            response.append(inputLine);
+	        }
+	        in.close();
+
+		    log.info("Retrieved jwt-token:'" + response.toString() + "' from: " + jwturl);
+		    return response.toString();
+		}
+		catch(Exception ex) {
+			String message = "Could not get an jwt token from:" + jwturl;
+			log.warn(message, ex);			
+			throw new RuntimeException(message);
+		}
 	}
 }
