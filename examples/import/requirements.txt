@@ -1,0 +1,10 @@
+requests
+psycopg2
+#openapi3-parser
+#logging
+#xml.etree.ElementTree
+#xml.dom
+#datetime
+#time
+#requests>=2.18.4
+#base64
