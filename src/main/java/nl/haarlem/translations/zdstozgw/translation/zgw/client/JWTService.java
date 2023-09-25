@@ -47,6 +47,7 @@ public class JWTService {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	
+	/*
 	public String getJWT() {
 		try {			
 	        URL obj = new URL(jwturl);
@@ -88,4 +89,6 @@ public class JWTService {
 			throw new RuntimeException(message);
 		}
 	}
+	 */
+	
 }

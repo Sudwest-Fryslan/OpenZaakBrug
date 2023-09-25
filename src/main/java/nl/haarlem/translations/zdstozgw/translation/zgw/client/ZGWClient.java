@@ -15,8 +15,13 @@
  */
 package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,13 +33,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import lombok.Getter;
@@ -58,6 +66,9 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPatch;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
+
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONObject;
 
 @Service
 public class ZGWClient {
@@ -118,12 +129,80 @@ public class ZGWClient {
 	@Autowired
 	RestTemplateService restTemplateService;
 
+	@Value("${openzaak.jwt.url}")
+	private String jwturl;
+	@Value("${openzaak.jwt.issuer}")
+	private String issuer;		
+	@Value("${openzaak.jwt.secret}")
+	private String secret;
+
+	private HttpHeaders headers = null;
+	private HttpHeaders getHeaders() {
+		if(headers == null) {
+			var localheaders = new HttpHeaders();
+			localheaders.setContentType(MediaType.APPLICATION_JSON);
+			String debugName = "JWTClient POST";
+	        // {'clientIds': ['ZgwImporteerData'], 'secret': 'wachtwoord3', 'label': 'user', 'heeftAlleAutorisaties': 'true', 'autorisaties': []}
+			// {'clientIds': ['OpenZaakbrug'], 'secret': 'wachtwoord1', 'label': 'user', 'heeftAlleAutorisaties': 'true', 'autorisaties': []}
+
+			String json =  "{\"clientIds\": [\"" + issuer + "\"],\"secret\": \"" + secret + "\" ,\"label\": \"user\",\"heeftAlleAutorisaties\": \"true\",\"autorisaties\": []}";						
+
+			
+	        json = debug.startpoint(debugName, json.toString());
+			String url = debug.inputpoint("url", jwturl);
+			log.debug("POST: " + url + ", json: " + json.toString());
+			HttpEntity<String> entity = new HttpEntity<String>(json.toString(), localheaders);
+			String jwtResponse = null;
+			try {
+				long startTime = System.currentTimeMillis();
+				long[] exchangeDuration = new long[2];
+				String finalUrl = url;
+				jwtResponse= (String) debug.endpoint(debugName, () -> {
+					exchangeDuration[0] = System.currentTimeMillis();
+					String response = this.restTemplateService.getRestTemplate().postForObject(finalUrl, entity, String.class);
+					exchangeDuration[1] = System.currentTimeMillis();
+					return response;
+				});
+				long endTime = System.currentTimeMillis();
+				var duration = endTime - startTime;
+				var message = "POST to: " + url + " took " + duration + " milliseconds";
+				log.debug(message);
+				debug.infopoint("Duration", message);
+				log.debug("POST response: " + jwtResponse);
+			} catch (HttpStatusCodeException hsce) {
+				if(json!=null) {
+					json = json.replace("{", "{\n").replace("\",", "\",\n").replace("\"}", "\"\n}");
+				}
+				var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
+						"\"\n}");
+				var details = "--------------POST:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+				log.warn("POST naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
+				throw new ConverterException("POST voor JWT-token naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+						hsce);
+			} catch (org.springframework.web.client.ResourceAccessException rae) {
+				log.warn("POST naar OpenZaak: " + url + " niet geslaagd", rae);
+				throw new ConverterException("POST voor JWT-token naar OpenZaak: " + url + " niet geslaagd", rae);
+			}			
+			
+			if(jwtResponse != null && jwtResponse.length() == 0 ){
+				log.warn("POST voor JWT-token naar OpenZaak: " + url + " niet geslaagd, lege response");
+				throw new ConverterException("POST voor JWT-token naar OpenZaak: " + url + " niet geslaagd, lege response");				
+			}
+			
+			localheaders.set("Accept-Crs", "EPSG:4326");
+			localheaders.set("Content-Crs", "EPSG:4326");
+			localheaders.set("Authorization", "Bearer " + jwtResponse);
+			headers = localheaders;
+		}
+		return headers;
+	}
+	
 	private String post(String url, String json) {
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
 		log.debug("POST: " + url + ", json: " + json);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.restTemplateService.getHeaders());
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders());
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -170,7 +249,7 @@ public class ZGWClient {
 			}
 		}
 		log.debug("GET: " + url);
-		HttpEntity entity = new HttpEntity(this.restTemplateService.getHeaders());
+		HttpEntity entity = new HttpEntity(this.getHeaders());
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -207,7 +286,7 @@ public class ZGWClient {
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
 		log.debug("DELETE: " + url);
-		HttpEntity entity = new HttpEntity(this.restTemplateService.getHeaders());
+		HttpEntity entity = new HttpEntity(this.getHeaders());
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -244,7 +323,7 @@ public class ZGWClient {
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
 		log.debug("PUT: " + url + ", json: " + json);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.restTemplateService.getHeaders());
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders());
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -283,7 +362,7 @@ public class ZGWClient {
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
 		log.debug("PATCH: " + url + ", json: " + json);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.restTemplateService.getHeaders());
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders());
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -369,7 +448,7 @@ public class ZGWClient {
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
 		log.debug("GET(BASE64): " + url);
-		HttpEntity entity = new HttpEntity(this.restTemplateService.getHeaders());
+		HttpEntity entity = new HttpEntity(this.getHeaders());
 		try {
 			long startTime = System.currentTimeMillis();
 			String finalUrl = url;

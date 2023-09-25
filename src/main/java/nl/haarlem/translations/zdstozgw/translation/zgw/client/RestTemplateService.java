@@ -92,6 +92,7 @@ public class RestTemplateService {
 		return requestFactory;
 	}
 
+	/*
 	public HttpHeaders getHeaders() {
 		var headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -102,4 +103,5 @@ public class RestTemplateService {
 
 		return headers;
 	}
+	*/
 }
