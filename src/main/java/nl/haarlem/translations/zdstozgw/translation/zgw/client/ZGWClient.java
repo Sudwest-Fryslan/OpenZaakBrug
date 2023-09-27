@@ -17,10 +17,13 @@ package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +71,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
 
 import org.apache.tomcat.util.json.JSONParser;
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONObject;
 
 @Service
 public class ZGWClient {
@@ -139,6 +142,8 @@ public class ZGWClient {
 	private HttpHeaders headers = null;
 	private HttpHeaders getHeaders() {
 		if(headers == null) {
+			
+/*			
 			var localheaders = new HttpHeaders();
 			localheaders.setContentType(MediaType.APPLICATION_JSON);
 			String debugName = "JWTClient POST";
@@ -193,6 +198,40 @@ public class ZGWClient {
 			localheaders.set("Content-Crs", "EPSG:4326");
 			localheaders.set("Authorization", "Bearer " + jwtResponse);
 			headers = localheaders;
+*/
+			var localheaders = new HttpHeaders();
+			
+			try {
+				URL url = new URL (jwturl);
+				HttpURLConnection con = (HttpURLConnection)url.openConnection();
+				con.setRequestMethod("POST");
+				con.setRequestProperty("Content-Type", "application/json");
+				con.setRequestProperty("Accept", "application/json");
+				con.setDoOutput(true); 
+				// String json =  "{\n\t\"clientIds\": [\n\t\t\"" + issuer + "\"\n\t],\n\t\"secret\": \"" + secret + "\" ,\n\t\"label\": \"user\",\n\t\"heeftAlleAutorisaties\": 'true',\n\t\"autorisaties\": []\n}";
+				String json =  "{\n\t\"clientIds\": [\n\t\t\"test_user\"\n\t],\n\t\"secret\": \"sosecret2\" ,\n\t\"label\": \"user\",\n\t\"heeftAlleAutorisaties\": 'true',\n\t\"autorisaties\": []\n}";
+				try(OutputStream os = con.getOutputStream()) {
+				    byte[] input = json.getBytes("utf-8");
+				    os.write(input, 0, input.length);			
+				}
+				String bearer = "";
+				try(BufferedReader br = new BufferedReader(
+						  new InputStreamReader(con.getInputStream(), "utf-8"))) {
+						    StringBuilder response = new StringBuilder();
+						    String responseLine = null;
+						    while ((responseLine = br.readLine()) != null) {
+						        response.append(responseLine.trim());
+						    }
+						    bearer = response.toString();
+						    System.out.println(response.toString());
+						}
+				log.info("Bearer: '" + bearer +  "' from url:'" + jwturl + "' with requestjson:\n" + json);
+				localheaders.set("Accept-Crs", "EPSG:4326");
+				localheaders.set("Content-Crs", "EPSG:4326");
+				localheaders.set("Authorization", "Bearer " + bearer);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
 		}
 		return headers;
 	}
