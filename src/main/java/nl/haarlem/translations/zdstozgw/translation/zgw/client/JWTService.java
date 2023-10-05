@@ -1,9 +1,9 @@
 /*
  * Copyright 2020-2021 The Open Zaakbrug Contributors
  *
- * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
  * European Commission - subsequent versions of the EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
@@ -35,21 +35,20 @@ import io.fusionauth.jwt.Signer;
 import io.fusionauth.jwt.hmac.HMACSigner;
 
 @Service
-public class JWTService {	
+public class JWTService {
 	@Value("${openzaak.jwt.url}")
 	private String jwturl;
 
 	@Value("${openzaak.jwt.issuer}")
-	private String issuer;	
-	
+	private String issuer;
+
 	@Value("${openzaak.jwt.secret}")
 	private String secret;
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
-	/*
+
 	public String getJWT() {
-		try {			
+		try {
 	        URL obj = new URL(jwturl);
 	        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -85,10 +84,10 @@ public class JWTService {
 		}
 		catch(Exception ex) {
 			String message = "Could not get an jwt token from:" + jwturl;
-			log.warn(message, ex);			
+			log.warn(message, ex);
 			throw new RuntimeException(message);
 		}
 	}
-	 */
-	
+
+
 }

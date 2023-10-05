@@ -1,9 +1,9 @@
 /*
  * Copyright 2020-2021 The Open Zaakbrug Contributors
  *
- * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
+ * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the
  * European Commission - subsequent versions of the EUPL (the "Licence");
- * 
+ *
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
  *
@@ -31,6 +31,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.*;
+
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +45,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 
@@ -51,26 +58,10 @@ import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.debug.Debugger;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.QueryResult;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAndereZaak;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwObjectInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaatType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRolType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatusType;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPatch;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakPut;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.StringUtils;
 
 import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.web.client.RestTemplate;
 //import org.json.simple.JSONObject;
 
 @Service
@@ -79,8 +70,8 @@ public class ZGWClient {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
-	
-	
+
+
 	@Value("${openzaak.zakenUrl}")
 	private @Getter String zakenUrl;
 	@Value("${openzaak.documentenUrl}")
@@ -89,7 +80,7 @@ public class ZGWClient {
 	private @Getter String catalogiUrl;
 	@Value("${openzaak.besluitenUrl}")
 	private @Getter String besluitenUrl;
-		
+
 	@Value("${zgw.endpoint.roltype:/api/v1/roltypen}")
 	private @Getter String endpointRolType;
 
@@ -128,114 +119,59 @@ public class ZGWClient {
 
 	@Value("${nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching:true}")
 	public Boolean additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching;
-	
+
 	@Autowired
 	RestTemplateService restTemplateService;
 
 	@Value("${openzaak.jwt.url}")
 	private String jwturl;
 	@Value("${openzaak.jwt.issuer}")
-	private String issuer;		
+	private String issuer;
 	@Value("${openzaak.jwt.secret}")
 	private String secret;
 
 	private HttpHeaders headers = null;
 	private HttpHeaders getHeaders() {
 		if(headers == null) {
-			
-/*			
-			var localheaders = new HttpHeaders();
-			localheaders.setContentType(MediaType.APPLICATION_JSON);
-			String debugName = "JWTClient POST";
-	        // {'clientIds': ['ZgwImporteerData'], 'secret': 'wachtwoord3', 'label': 'user', 'heeftAlleAutorisaties': 'true', 'autorisaties': []}
-			// {'clientIds': ['OpenZaakbrug'], 'secret': 'wachtwoord1', 'label': 'user', 'heeftAlleAutorisaties': 'true', 'autorisaties': []}
+			var authorizationRequestHeaders = new HttpHeaders();
 
-			String json =  "{\"clientIds\": [\"" + issuer + "\"],\"secret\": \"" + secret + "\" ,\"label\": \"user\",\"heeftAlleAutorisaties\": \"true\",\"autorisaties\": []}";						
+            String json =  "{\n" +
+                "    \"clientIds\": [\n" +
+                "        \"test_user\"\n" +
+                "    ],\n" +
+                "    \"secret\": \"sosecret2\",\n" +
+                "    \"label\": \"user\",\n" +
+                "    \"heeftAlleAutorisaties\": \"true\",\n" +
+                "    \"autorisaties\": []\n" +
+                "}";
 
-			
-	        json = debug.startpoint(debugName, json.toString());
-			String url = debug.inputpoint("url", jwturl);
-			log.debug("POST: " + url + ", json: " + json.toString());
-			HttpEntity<String> entity = new HttpEntity<String>(json.toString(), localheaders);
-			String jwtResponse = null;
-			try {
-				long startTime = System.currentTimeMillis();
-				long[] exchangeDuration = new long[2];
-				String finalUrl = url;
-				jwtResponse= (String) debug.endpoint(debugName, () -> {
-					exchangeDuration[0] = System.currentTimeMillis();
-					String response = this.restTemplateService.getRestTemplate().postForObject(finalUrl, entity, String.class);
-					exchangeDuration[1] = System.currentTimeMillis();
-					return response;
-				});
-				long endTime = System.currentTimeMillis();
-				var duration = endTime - startTime;
-				var message = "POST to: " + url + " took " + duration + " milliseconds";
-				log.debug(message);
-				debug.infopoint("Duration", message);
-				log.debug("POST response: " + jwtResponse);
-			} catch (HttpStatusCodeException hsce) {
-				if(json!=null) {
-					json = json.replace("{", "{\n").replace("\",", "\",\n").replace("\"}", "\"\n}");
-				}
-				var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
-						"\"\n}");
-				var details = "--------------POST:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-				log.warn("POST naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-				throw new ConverterException("POST voor JWT-token naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
-						hsce);
-			} catch (org.springframework.web.client.ResourceAccessException rae) {
-				log.warn("POST naar OpenZaak: " + url + " niet geslaagd", rae);
-				throw new ConverterException("POST voor JWT-token naar OpenZaak: " + url + " niet geslaagd", rae);
-			}			
-			
-			if(jwtResponse != null && jwtResponse.length() == 0 ){
-				log.warn("POST voor JWT-token naar OpenZaak: " + url + " niet geslaagd, lege response");
-				throw new ConverterException("POST voor JWT-token naar OpenZaak: " + url + " niet geslaagd, lege response");				
-			}
-			
-			localheaders.set("Accept-Crs", "EPSG:4326");
-			localheaders.set("Content-Crs", "EPSG:4326");
-			localheaders.set("Authorization", "Bearer " + jwtResponse);
-			headers = localheaders;
-*/
-			var localheaders = new HttpHeaders();
-			
-			try {
-				URL url = new URL (jwturl);
-				HttpURLConnection con = (HttpURLConnection)url.openConnection();
-				con.setRequestMethod("POST");
-				con.setRequestProperty("Content-Type", "application/json");
-				con.setRequestProperty("Accept", "application/json");
-				con.setDoOutput(true); 
-				// String json =  "{\n\t\"clientIds\": [\n\t\t\"" + issuer + "\"\n\t],\n\t\"secret\": \"" + secret + "\" ,\n\t\"label\": \"user\",\n\t\"heeftAlleAutorisaties\": 'true',\n\t\"autorisaties\": []\n}";
-				String json =  "{\n\t\"clientIds\": [\n\t\t\"test_user\"\n\t],\n\t\"secret\": \"sosecret2\" ,\n\t\"label\": \"user\",\n\t\"heeftAlleAutorisaties\": 'true',\n\t\"autorisaties\": []\n}";
-				try(OutputStream os = con.getOutputStream()) {
-				    byte[] input = json.getBytes("utf-8");
-				    os.write(input, 0, input.length);			
-				}
-				String bearer = "";
-				try(BufferedReader br = new BufferedReader(
-						  new InputStreamReader(con.getInputStream(), "utf-8"))) {
-						    StringBuilder response = new StringBuilder();
-						    String responseLine = null;
-						    while ((responseLine = br.readLine()) != null) {
-						        response.append(responseLine.trim());
-						    }
-						    bearer = response.toString();
-						    System.out.println(response.toString());
-						}
-				log.info("Bearer: '" + bearer +  "' from url:'" + jwturl + "' with requestjson:\n" + json);
-				localheaders.set("Accept-Crs", "EPSG:4326");
-				localheaders.set("Content-Crs", "EPSG:4326");
-				localheaders.set("Authorization", "Bearer " + bearer);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}			
+            final RestTemplate restTemplate = new RestTemplate();
+            final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+            final HttpClient httpClient = HttpClientBuilder.create()
+                .setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods, needed because VNG-cloud redirects with 307 -> 308 -> 200
+                .build();
+            factory.setHttpClient(httpClient);
+            restTemplate.setRequestFactory(factory);
+
+            authorizationRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
+            var accept = new ArrayList<MediaType>();
+            accept.add(MediaType.APPLICATION_JSON);
+            authorizationRequestHeaders.setAccept(accept);
+
+            HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
+            ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwturl, entity, String.class);
+            Gson gson = new Gson();
+            var authorizationResponse = gson.fromJson(bearerResponse.getBody(), AuthorizationResponse.class);
+
+            log.info("Bearer: '" + authorizationResponse +  "' from url:'" + jwturl + "' with requestjson:\n" + json);
+            headers = new HttpHeaders();
+			headers.set("Accept-Crs", "EPSG:4326");
+			headers.set("Content-Crs", "EPSG:4326");
+			headers.set("Authorization", authorizationResponse.getAuthorization());
 		}
 		return headers;
 	}
-	
+
 	private String post(String url, String json) {
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
@@ -433,7 +369,7 @@ public class ZGWClient {
 			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
 		}
 	}
-		
+
 	private String getUrlWithParameters(String url, Map<String, String> parameters) {
 		for (String key : parameters.keySet()) {
 			url += !url.contains("?") ? "?" + key + "=" + parameters.get(key) : "&" + key + "=" + parameters.get(key);
@@ -497,7 +433,7 @@ public class ZGWClient {
 			});
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
-			var message = "GET from: " + url + " took " + duration + " milliseconds";			
+			var message = "GET from: " + url + " took " + duration + " milliseconds";
 			log.debug("BASE64 INHOUD DOWNLOADED:" + (data == null ? "[null], is openzaak dms-broken?" : data.length + " bytes"));
 			return java.util.Base64.getEncoder().encodeToString(data);
 
@@ -534,7 +470,7 @@ public class ZGWClient {
 		return gson.fromJson(response, ZgwZaak.class);
 	}
 
-	
+
 	public void patchZaak(String zaakUuid, ZgwZaakPut zaak) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zaak);
@@ -779,18 +715,18 @@ public class ZGWClient {
 		List<ZgwStatusType> statustypes = this.getStatusTypes(parameters);
 		return statustypes;
 	}
-	
-	
+
+
 	public ZgwStatusType getLastStatusTypeByZaakType(ZgwZaakType zgwZaakType) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("zaaktype", zgwZaakType.url);
 		for(ZgwStatusType statustype : this.getStatusTypes(parameters)) {
 			if("true".equals(statustype.isEindstatus)) {
 				return statustype;
-			}			
-		}		
+			}
+		}
 		return null;
-	}	
+	}
 
 	public ZgwStatusType getStatusTypeByZaakTypeAndOmschrijving(ZgwZaakType zaakType, String statusOmschrijving, String verwachteVolgnummer) {
 		Map<String, String> parameters = new HashMap();
@@ -987,8 +923,8 @@ public class ZGWClient {
 		relevanteAndereZaak.aardRelatie = aardRelatie;
 		zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
 		this.patchZaak(zgwZaak.uuid, zgwZaak);
-	}	
-	
+	}
+
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(Map<String, String> parameters) {
 		// Fetch ObjectInformatieObject
 		var objectInformatieObjectJson = get(this.documentenUrl + this.endpointObjectinformatieobject, parameters);
@@ -997,8 +933,8 @@ public class ZGWClient {
 		Type documentList = new TypeToken<ArrayList<ZgwObjectInformatieObject>>() {
 		}.getType();
 		return gson.fromJson(objectInformatieObjectJson, documentList);
-	}	
-	
+	}
+
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectByObject(String objecturl) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("object", objecturl);
