@@ -46,16 +46,20 @@ public class GeefZaakdocumentBewerkenTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);	
+		
 		var zdsGeefZaakdocumentbewerkenDi02 = (ZdsGeefZaakdocumentbewerkenDi02) this.getZdsDocument();
 		var documentIdentificatie = zdsGeefZaakdocumentbewerkenDi02.edcLv01.gelijk.identificatie;
 
 		this.getSession().setFunctie("GeefZaakdocumentBewerken");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie);
 
+		
 		// het document ophalen
-		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(documentIdentificatie);
+		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization, documentIdentificatie);
 		// zetten van de lock
-		var lock = this.getZaakService().checkOutZaakDocument(documentIdentificatie);
+		var lock = this.getZaakService().checkOutZaakDocument(authorization, documentIdentificatie);
 
 		var du02 = new ZdsGeefZaakdocumentbewerkenDu02(zdsGeefZaakdocumentbewerkenDi02.stuurgegevens, this.getSession().getReferentienummer());
 		du02.parameters = new ZdsParameters();

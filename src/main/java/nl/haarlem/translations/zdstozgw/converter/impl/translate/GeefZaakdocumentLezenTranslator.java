@@ -46,13 +46,16 @@ public class GeefZaakdocumentLezenTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+
 		var zdsEdcLv01 = (ZdsEdcLv01) this.getZdsDocument();
 		var documentIdentificatie = zdsEdcLv01.gelijk.identificatie;
 
 		this.getSession().setFunctie("GeefZaakdocumentLezen");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie);
 
-		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(documentIdentificatie);
+		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization, documentIdentificatie);
 		var edcLa01 = new ZdsEdcLa01GeefZaakdocumentLezen(zdsEdcLv01.stuurgegevens, this.getSession().getReferentienummer());
 		edcLa01.antwoord = new ZdsZaakDocumentAntwoord();
 		edcLa01.antwoord.document = new ArrayList<ZdsZaakDocumentInhoud>();

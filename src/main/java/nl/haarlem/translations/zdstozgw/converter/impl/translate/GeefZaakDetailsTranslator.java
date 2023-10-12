@@ -47,6 +47,9 @@ public class GeefZaakDetailsTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+		
 		var zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
 
 		ZdsZakLa01GeefZaakDetails zdsResponse = new ZdsZakLa01GeefZaakDetails();
@@ -63,7 +66,7 @@ public class GeefZaakDetailsTranslator extends Converter {
 			this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLv01.gelijk.identificatie);
 
 			zdsResponse.antwoord.zaak
-					.add(this.getZaakService().getZaakDetailsByIdentificatie(zdsZakLv01.gelijk.identificatie));
+					.add(this.getZaakService().getZaakDetailsByIdentificatie(authorization, zdsZakLv01.gelijk.identificatie));
 		} else if (zdsZakLv01.gelijk != null && zdsZakLv01.gelijk.heeftAlsInitiator != null
 				&& zdsZakLv01.gelijk.heeftAlsInitiator.gerelateerde != null
 				&& zdsZakLv01.gelijk.heeftAlsInitiator.gerelateerde.identificatie != null) {
@@ -78,7 +81,7 @@ public class GeefZaakDetailsTranslator extends Converter {
 			this.getSession().setKenmerk("bsn:" + bsn);
 
 			zdsResponse.antwoord.zaak = this.getZaakService()
-					.getZaakDetailsByBsn(gerelateerdeidentificatie.substring(2));
+					.getZaakDetailsByBsn(authorization, gerelateerdeidentificatie.substring(2));
 		} else {
 			throw new ConverterException("Niet ondersteunde vraag binnengekregen");
 		}

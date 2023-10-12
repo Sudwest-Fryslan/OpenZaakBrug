@@ -41,6 +41,9 @@ public class UpdateZaakTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
 
 		this.getSession().setFunctie("UpdateZaak");
@@ -55,7 +58,7 @@ public class UpdateZaakTranslator extends Converter {
 			was = zdsZakLk01.objects.get(0);
 			wordt = zdsZakLk01.objects.get(1);
 		}
-		this.getZaakService().updateZaak(was, wordt);
+		this.getZaakService().updateZaak(authorization, was, wordt);
 		var bv03 = new ZdsBv03(zdsZakLk01.stuurgegevens, this.getSession().getReferentienummer());
 		var response = XmlUtils.getSOAPMessageFromObject(bv03);
 		return new ResponseEntity<>(response, HttpStatus.OK);
