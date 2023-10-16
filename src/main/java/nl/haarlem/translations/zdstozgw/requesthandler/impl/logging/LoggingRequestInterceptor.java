@@ -46,7 +46,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 				.getZgwRequestResponseCycleRepository()
 				.findById(this.currentInterimRequestResponseCycle.getId())
 				.orElse(this.currentInterimRequestResponseCycle);
-		currentInterimRequestResponseCycle.setResponse(response);
+		existingRecordRef.setResponse(response);
 		this.requestResponseCycleService.add(existingRecordRef);
 	}
 }
