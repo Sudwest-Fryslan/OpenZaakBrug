@@ -32,7 +32,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 		String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer",
 				RequestAttributes.SCOPE_REQUEST);
 		this.currentInterimRequestResponseCycle = new ZgwRequestResponseCycle(referentienummer, request, body);
-		this.requestResponseCycleService.add(this.currentInterimRequestResponseCycle);
+//		this.requestResponseCycleService.add(this.currentInterimRequestResponseCycle);
 	}
 
 	private void addResponseToDatabase(ClientHttpResponse response) throws IOException {
