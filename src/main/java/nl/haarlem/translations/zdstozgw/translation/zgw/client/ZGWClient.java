@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,10 +81,16 @@ public class ZGWClient {
     @Value("${zgw.endpoint.zaakobject:/zaken/api/v1/zaakobjecten}")
     private String endpointZaakObject;
 
+    private final ModelMapper modelMapper;
+
 	@Autowired
 	RestTemplateService restTemplateService;
 
-	private String post(String url, String json) {
+    public ZGWClient(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
+
+    private String post(String url, String json) {
         url = rewriteBaseUrl(url);
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
@@ -549,6 +556,33 @@ public class ZGWClient {
 		return gson.fromJson(response, ZgwResultaat.class);
 	}
 
+    public List<ZgwZaakObject> getZaakObjecten(Map<String, String> parameters) {
+        var zaakObjectenJson = get(this.baseUrl + this.endpointZaakObject, parameters);
+        Type type = new TypeToken<QueryResult<ZgwZaakObject>>() {
+        }.getType();
+        Gson gson = new Gson();
+        QueryResult<ZgwZaakObject> queryResult = gson.fromJson(zaakObjectenJson, type);
+        if(queryResult == null) {
+            return new ArrayList<ZgwZaakObject>();
+        }
+        var zaakObjecten = queryResult.getResults();
+        zaakObjecten.forEach(zaakObject -> {
+            if(zaakObject.getObjectType().equalsIgnoreCase("adres")){
+                //ZgwZaakObjectAdres zgwZaakObjectAdres = modelMapper.map(zaakObject, ZgwZaakObjectAdres.class);
+
+                var test = "";
+                zaakObject.setObjectIdentificatie(modelMapper.map(zaakObject.getObjectIdentificatie(), ZgwZaakObjectObjectIdentificatieAdres.class));
+                //Fix for incorrect huisnummer format in ZGW API spec
+                ZgwZaakObjectObjectIdentificatieAdres zgwZaakObjectObjectIdentificatieAdres = (ZgwZaakObjectObjectIdentificatieAdres) zaakObject.getObjectIdentificatie();
+                zgwZaakObjectObjectIdentificatieAdres.setHuisnummer(zgwZaakObjectObjectIdentificatieAdres.getHuisnummer().substring(0, zgwZaakObjectObjectIdentificatieAdres.getHuisnummer().indexOf(".")));
+                zaakObject.setObjectIdentificatie(zgwZaakObjectObjectIdentificatieAdres);
+            }
+        });
+        return zaakObjecten;
+    }
+
+
+
 	public List<ZgwZaakType> getZaakTypes(Map<String, String> parameters) {
 		var zaakTypeJson = get(this.baseUrl + this.endpointZaaktype, parameters);
 		Type type = new TypeToken<QueryResult<ZgwZaakType>>() {
@@ -625,6 +659,22 @@ public class ZGWClient {
             throw new ConverterException("zaak uuid may not be null");
         }
         delete(this.baseUrl + this.endpointZaak + "/" + uuid);
+    }
+
+    public void deleteZaakObject(ZgwZaakObject zgwZaakObject) {
+        if (zgwZaakObject.getUrl() == null) {
+            throw new ConverterException("zaakobject url may not be null");
+        }
+        delete(zgwZaakObject.getUrl());
+    }
+
+    public void updateZaakObject(ZgwZaakObject zgwZaakObject) {
+        if (zgwZaakObject.getUrl() == null) {
+            throw new ConverterException("zaakobject url may not be null");
+        }
+        Gson gson = new Gson();
+        String json = gson.toJson(zgwZaakObject);
+        patch(zgwZaakObject.getUrl(), json);
     }
 
 	public void deleteZaakResultaat(String uuid) {

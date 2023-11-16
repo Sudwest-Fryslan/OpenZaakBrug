@@ -19,6 +19,7 @@ nl.haarlem.translations.zdstozgw.readTimeout = 600000
 nl.haarlem.translations.zdstozgw.maxConnPerRoute = 20
 nl.haarlem.translations.zdstozgw.maxConnTotal = 100
 nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching = true
+nl.haarlem.translations.zdstozgw.updatezaakstatustimeoffset = -1
 
 ## Open Zaak endpoints
 zgw.endpoint.roltype = /catalogi/api/v1/roltypen
