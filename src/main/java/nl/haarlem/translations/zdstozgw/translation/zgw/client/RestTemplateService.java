@@ -44,8 +44,8 @@ import lombok.Data;
 public class RestTemplateService {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	@Autowired
-	private JWTService jwtService;
+	//@Autowired
+	//private JWTService jwtService;
 
 	RestTemplateBuilder restTemplateBuilder;
 

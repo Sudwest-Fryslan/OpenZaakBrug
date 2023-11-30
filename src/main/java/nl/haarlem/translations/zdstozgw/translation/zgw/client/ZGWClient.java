@@ -126,7 +126,7 @@ public class ZGWClient {
 	@Autowired
 	RestTemplateService restTemplateService;
 
-	@Value("${openzaak.jwt.url}")
+	@Value("${openzaak.jwt.url:#{null}}")
 	private String jwturl;
 	@Value("${openzaak.jwt.issuer}")
 	private String issuer;
@@ -142,37 +142,46 @@ public class ZGWClient {
 	}
 	
 	private ZgwAuthorization getAuthorization(String issuer, String secret) {
-		var authorizationRequestHeaders = new HttpHeaders();
-        String json =  "{\n" +
-            "    \"clientIds\": [\n" +
-            "        \"test_user\"\n" +
-            "    ],\n" +
-            "    \"secret\": \"" + secret +  "\",\n" +
-            "    \"label\": \"" + issuer +  "\",\n" +
-            "    \"heeftAlleAutorisaties\": \"true\",\n" +
-            "    \"autorisaties\": []\n" +
-            "}";
-
-        final RestTemplate restTemplate = new RestTemplate();
-        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        final HttpClient httpClient = HttpClientBuilder.create()
-            .setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods, needed because VNG-cloud redirects with 307 -> 308 -> 200
-            .build();
-        factory.setHttpClient(httpClient);
-        restTemplate.setRequestFactory(factory);
-
-        authorizationRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
-        var accept = new ArrayList<MediaType>();
-        accept.add(MediaType.APPLICATION_JSON);
-        authorizationRequestHeaders.setAccept(accept);
-
-        HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
-        ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwturl, entity, String.class);
-        Gson gson = new Gson();
-        var authorizationResponse = gson.fromJson(bearerResponse.getBody(), ZgwAuthorization.class);
-
-        log.info("Bearer: '" + authorizationResponse.getAuthorization() +  "' from url:'" + jwturl + "' with requestjson:\n" + json);	
-        return authorizationResponse;
+		if(jwturl!=null) {
+			var authorizationRequestHeaders = new HttpHeaders();
+	        String json =  "{\n" +
+	            "    \"clientIds\": [\n" +
+	            "        \"test_user\"\n" +
+	            "    ],\n" +
+	            "    \"secret\": \"" + secret +  "\",\n" +
+	            "    \"label\": \"" + issuer +  "\",\n" +
+	            "    \"heeftAlleAutorisaties\": \"true\",\n" +
+	            "    \"autorisaties\": []\n" +
+	            "}";
+	
+	        final RestTemplate restTemplate = new RestTemplate();
+	        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+	        final HttpClient httpClient = HttpClientBuilder.create()
+	            .setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods, needed because VNG-cloud redirects with 307 -> 308 -> 200
+	            .build();
+	        factory.setHttpClient(httpClient);
+	        restTemplate.setRequestFactory(factory);
+	
+	        authorizationRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
+	        var accept = new ArrayList<MediaType>();
+	        accept.add(MediaType.APPLICATION_JSON);
+	        authorizationRequestHeaders.setAccept(accept);
+	
+	        HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
+	        ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwturl, entity, String.class);
+	        Gson gson = new Gson();
+	        var authorizationResponse = gson.fromJson(bearerResponse.getBody(), ZgwAuthorization.class);
+	
+	        log.info("Bearer '" + authorizationResponse.getAuthorization() +  "' from url:'" + jwturl + "' with requestjson:\n" + json);	
+	        return authorizationResponse;
+		}
+		else {
+			var authorizationResponse = new ZgwAuthorization();
+			authorizationResponse.setCatalogusUrl(null);
+			authorizationResponse.setCatalogusRsin(null);
+			authorizationResponse.setAuthorization("Bearer " + JWTService.getJWT(issuer, secret));
+			return authorizationResponse;
+		}
 	}
 	
 	private HttpHeaders getHeaders(ZgwAuthorization authorization) {
@@ -214,7 +223,7 @@ public class ZGWClient {
 			}
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
-			var details = "--------------POST:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			var details = "--------------POST:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);			
 			log.warn("POST naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
 			throw new ConverterException("POST naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
@@ -224,20 +233,27 @@ public class ZGWClient {
 		}
 	}
 
+	private String getUrlWithParameters(String url, Map<String, String> parameters) {
+		for (String key : parameters.keySet()) {
+			url += !url.contains("?") ? "?" + key + "=" + parameters.get(key) : "&" + key + "=" + parameters.get(key);
+		}
+		return url;
+	}
+		
 	private String get(ZgwAuthorization authorization, String url, Map<String, String> parameters) {
 		if (parameters != null) {
 			url = getUrlWithParameters(url, parameters);
 		}
 		String debugName = "ZGWClient GET";
 		debug.startpoint(debugName);
-		url = debug.inputpoint("url", url);
+		url = debug.inputpoint("url", url);		
 		if (parameters != null) {
 			for (String key : parameters.keySet()) {
 				parameters.put(key, debug.inputpoint("Parameter " + key, parameters.get(key)));
 			}
 		}
 		log.debug("GET: " + url);
-		HttpEntity entity = new HttpEntity(this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization));
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -259,7 +275,7 @@ public class ZGWClient {
 		} catch (HttpStatusCodeException hsce) {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
-			var details = "--------------GET:\n" + url + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			var details = "--------------GET:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
 			log.warn("GET naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
 			throw new ConverterException("GET naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
@@ -269,12 +285,45 @@ public class ZGWClient {
 		}
 	}
 
+	public String getBas64Inhoud(ZgwAuthorization authorization, String url) {
+		String debugName = "ZGWClient GET(BASE64)";
+		debug.startpoint(debugName);
+		url = debug.inputpoint("url", url);
+		log.debug("GET(BASE64): " + url);
+		HttpEntity entity = new HttpEntity(this.getHeaders(authorization));
+		try {
+			long startTime = System.currentTimeMillis();
+			String finalUrl = url;
+			byte[] data = (byte[]) debug.endpoint(debugName, () -> {
+				return this.restTemplateService.getRestTemplate()
+						.exchange(finalUrl, HttpMethod.GET, entity, byte[].class).getBody();
+			});
+			long endTime = System.currentTimeMillis();
+			var duration = endTime - startTime;
+			var message = "GET from: " + url + " took " + duration + " milliseconds";
+			log.debug("BASE64 INHOUD DOWNLOADED:" + (data == null ? "[null], is openzaak dms-broken?" : data.length + " bytes"));
+			return java.util.Base64.getEncoder().encodeToString(data);
+
+		} catch (HttpStatusCodeException hsce) {
+			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
+					"\"\n}");
+			var details = "--------------GET:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() +  "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			log.warn("GET(BASE64) naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("GET(BASE64) naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+					hsce);
+		} catch (org.springframework.web.client.ResourceAccessException rae) {
+			log.warn("GET(BASE64) naar OpenZaak: " + url + " niet geslaagd", rae);
+			throw new ConverterException("GET(BASE64) naar OpenZaak: " + url + " niet geslaagd", rae);
+		}
+	}
+	
+	
 	private String delete(ZgwAuthorization authorization, String url) {
 		String debugName = "ZGWClient DELETE";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
 		log.debug("DELETE: " + url);
-		HttpEntity entity = new HttpEntity(this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization));
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -296,7 +345,7 @@ public class ZGWClient {
 		} catch (HttpStatusCodeException hsce) {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
-			var details = "--------------DELETE:\n" + url + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			var details = "--------------DELETE:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
 			log.warn("DELETE naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
 			throw new ConverterException("DELETE naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(),
 					details, hsce);
@@ -334,7 +383,7 @@ public class ZGWClient {
 			json = json.replace("{", "{\n").replace("\",", "\",\n").replace("\"}", "\"\n}");
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
-			var details = "--------------PUT:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			var details = "--------------PUT:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
 			log.warn("PUT naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
 			throw new ConverterException("PUT naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
@@ -373,7 +422,7 @@ public class ZGWClient {
 			json = json.replace("{", "{\n").replace("\",", "\",\n").replace("\"}", "\"\n}");
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
-			var details = "--------------PATCH:\n" + url + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
+			var details = "--------------PATCH:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
 			log.warn("PATCH naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
 			throw new ConverterException("PATCH naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
@@ -381,13 +430,6 @@ public class ZGWClient {
 			log.warn("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
 			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
 		}
-	}
-
-	private String getUrlWithParameters(String url, Map<String, String> parameters) {
-		for (String key : parameters.keySet()) {
-			url += !url.contains("?") ? "?" + key + "=" + parameters.get(key) : "&" + key + "=" + parameters.get(key);
-		}
-		return url;
 	}
 
 	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByIdentiticatie(ZgwAuthorization authorization, String identificatie) {
@@ -429,38 +471,6 @@ public class ZGWClient {
 			throw new ConverterException("Zaak met url:" + url + " niet gevonden!");
 		}
 		return result;
-	}
-
-	public String getBas64Inhoud(ZgwAuthorization authorization, String url) {
-		String debugName = "ZGWClient GET(BASE64)";
-		debug.startpoint(debugName);
-		url = debug.inputpoint("url", url);
-		log.debug("GET(BASE64): " + url);
-		HttpEntity entity = new HttpEntity(this.getHeaders(authorization));
-		try {
-			long startTime = System.currentTimeMillis();
-			String finalUrl = url;
-			byte[] data = (byte[]) debug.endpoint(debugName, () -> {
-				return this.restTemplateService.getRestTemplate()
-						.exchange(finalUrl, HttpMethod.GET, entity, byte[].class).getBody();
-			});
-			long endTime = System.currentTimeMillis();
-			var duration = endTime - startTime;
-			var message = "GET from: " + url + " took " + duration + " milliseconds";
-			log.debug("BASE64 INHOUD DOWNLOADED:" + (data == null ? "[null], is openzaak dms-broken?" : data.length + " bytes"));
-			return java.util.Base64.getEncoder().encodeToString(data);
-
-		} catch (HttpStatusCodeException hsce) {
-			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
-					"\"\n}");
-			var details = "--------------GET:\n" + url + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("GET(BASE64) naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("GET(BASE64) naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
-					hsce);
-		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("GET(BASE64) naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("GET(BASE64) naar OpenZaak: " + url + " niet geslaagd", rae);
-		}
 	}
 
 
@@ -533,7 +543,7 @@ public class ZGWClient {
 	public ZgwZaakInformatieObject addDocumentToZaak(ZgwAuthorization authorization, ZgwZaakInformatieObject zgwZaakInformatieObject) {
 		Gson gson = new Gson();
 		String json = gson.toJson(zgwZaakInformatieObject);
-		String response = this.post(authorization, this.documentenUrl + this.endpointZaakinformatieobject, json);
+		String response = this.post(authorization, this.zakenUrl + this.endpointZaakinformatieobject, json);
 		return gson.fromJson(response, ZgwZaakInformatieObject.class);
 	}
 
