@@ -198,8 +198,8 @@ public class ZGWClient {
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		log.debug("POST: " + url + ", json: " + json);
 		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization));
+		log.debug("POST: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -252,8 +252,8 @@ public class ZGWClient {
 				parameters.put(key, debug.inputpoint("Parameter " + key, parameters.get(key)));
 			}
 		}
-		log.debug("GET: " + url);
 		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization));
+		log.debug("GET: " + url + "\n\tHeaders:" + entity.getHeaders().toString());
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -289,8 +289,8 @@ public class ZGWClient {
 		String debugName = "ZGWClient GET(BASE64)";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
-		log.debug("GET(BASE64): " + url);
 		HttpEntity entity = new HttpEntity(this.getHeaders(authorization));
+		log.debug("GET(BASE64): " + url + "\n\tHeaders:" + entity.getHeaders().toString() );
 		try {
 			long startTime = System.currentTimeMillis();
 			String finalUrl = url;
@@ -322,8 +322,8 @@ public class ZGWClient {
 		String debugName = "ZGWClient DELETE";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
-		log.debug("DELETE: " + url);
 		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization));
+		log.debug("DELETE: " + url + "\n\tHeaders:" + entity.getHeaders().toString());	
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -359,8 +359,8 @@ public class ZGWClient {
 		String debugName = "ZGWClient PUT";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		log.debug("PUT: " + url + ", json: " + json);
 		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization));
+		log.debug("PUT: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
@@ -398,8 +398,8 @@ public class ZGWClient {
 		String debugName = "ZGWClient PATCH";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		log.debug("PATCH: " + url + ", json: " + json);
 		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization));
+		log.debug("PATCH: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
 			long[] exchangeDuration = new long[2];
