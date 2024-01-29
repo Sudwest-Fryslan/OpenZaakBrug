@@ -373,7 +373,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/zaken?identificatie=1900147</string>
+      <string>http://localhost:8000/zaken/api/v1/zaken?identificatie=1900147</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -423,7 +423,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;count&quot;:1,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;uuid&quot;:&quot;f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;identificatie&quot;:&quot;1900147&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;registratiedatum&quot;:&quot;2024-01-26&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2024-01-26&quot;,&quot;einddatum&quot;:&quot;2024-01-26&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;Overig&quot;,&quot;duur&quot;:&quot;P99D&quot;},&quot;opschorting&quot;:{&quot;indicatie&quot;:true,&quot;reden&quot;:&quot;niet tijdig verstrekken inform&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:&quot;http://localhost:9001/zaken/api/v1/statussen/69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,&quot;kenmerken&quot;:[{&quot;kenmerk&quot;:&quot;273846&quot;,&quot;bron&quot;:&quot;GWS4all&quot;}],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:&quot;2034-01-25&quot;,&quot;resultaat&quot;:&quot;http://localhost:9001/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54&quot;,&quot;opdrachtgevendeOrganisatie&quot;:&quot;&quot;}]}</string>
+      <string>{&quot;count&quot;:1,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;uuid&quot;:&quot;f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;identificatie&quot;:&quot;1900147&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;registratiedatum&quot;:&quot;2024-01-26&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2024-01-26&quot;,&quot;einddatum&quot;:&quot;2024-01-26&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;Overig&quot;,&quot;duur&quot;:&quot;P99D&quot;},&quot;opschorting&quot;:{&quot;indicatie&quot;:true,&quot;reden&quot;:&quot;niet tijdig verstrekken inform&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:&quot;http://localhost:8000/zaken/api/v1/statussen/69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,&quot;kenmerken&quot;:[{&quot;kenmerk&quot;:&quot;273846&quot;,&quot;bron&quot;:&quot;GWS4all&quot;}],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:&quot;2034-01-25&quot;,&quot;resultaat&quot;:&quot;http://localhost:8000/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54&quot;,&quot;opdrachtgevendeOrganisatie&quot;:&quot;&quot;}]}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -451,7 +451,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/zaken/api/v1/zaken?identificatie=1900147 took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/zaken/api/v1/zaken?identificatie=1900147 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -498,7 +498,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
+      <string>http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -523,7 +523,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;identificatie&quot;:&quot;B1026&quot;,&quot;omschrijving&quot;:&quot;Minimaregeling aanvraag&quot;,&quot;omschrijvingGeneriek&quot;:&quot;&quot;,&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;doel&quot;:&quot;Dit werkproces betreft het beoordelen van een aanvraag voor een minimaregeling. Een minimaregeling is een inkomensondersteunende voorziening voor mensen met een inkomen dat niet hoger is dan 110% van het sociaal minimum. De gemeente kan deze (gedeeltelijke) vergoeding toekennen voor kosten van witgoedapparatuur, kosten voor kinderen en kosten in verband met ouderdom, een handicap of chronische ziekte. Zie voor de minimaregeling voor de kosten in verband met een ziektekostenverzekering werkproces B1261 \&quot;Collectieve aanvullende zorgverzekering\&quot;. Een omschrijving van hetgeen beoogd is te bereiken met een zaak van dit zaaktype.&quot;,&quot;aanleiding&quot;:&quot;Aanvraag&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;indicatieInternOfExtern&quot;:&quot;intern&quot;,&quot;handelingInitiator&quot;:&quot;aanvragen&quot;,&quot;onderwerp&quot;:&quot;onderwerp&quot;,&quot;handelingBehandelaar&quot;:&quot;handelingBehandelaar&quot;,&quot;doorlooptijd&quot;:&quot;P30D&quot;,&quot;servicenorm&quot;:null,&quot;opschortingEnAanhoudingMogelijk&quot;:true,&quot;verlengingMogelijk&quot;:false,&quot;verlengingstermijn&quot;:null,&quot;trefwoorden&quot;:[],&quot;publicatieIndicatie&quot;:true,&quot;publicatietekst&quot;:&quot;&quot;,&quot;verantwoordingsrelatie&quot;:[],&quot;productenOfDiensten&quot;:[&quot;https://test.openzaak.nl/admin/catalogi/zaaktype/add/?_changelist_filters=catalogus__id__exact%3D21&amp;catalogus=21&quot;],&quot;selectielijstProcestype&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/procestypen/aa8aa2fd-b9c6-4e34-9a6c-58a677f60ea0&quot;,&quot;referentieproces&quot;:{&quot;naam&quot;:&quot;Verzoeken behandelen&quot;,&quot;link&quot;:&quot;https://referentielijsten-api.vng.cloud/api/v1/procestypen/3030daa1-d516-4cd9-8276-ef0977e32b20&quot;},&quot;catalogus&quot;:&quot;http://localhost:9001/catalogi/api/v1/catalogussen/3125c364-c673-4055-9c09-dd00032f2e8d&quot;,&quot;statustypen&quot;:[&quot;http://localhost:9001/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;http://localhost:9001/catalogi/api/v1/statustypen/8717f4bf-6864-487a-8025-dac12e67ea10&quot;,&quot;http://localhost:9001/catalogi/api/v1/statustypen/74b8e7b4-f15a-43b1-90a1-ea7cedc4e2e3&quot;,&quot;http://localhost:9001/catalogi/api/v1/statustypen/ff9d577b-da36-433c-9aa3-492b825bfb61&quot;,&quot;http://localhost:9001/catalogi/api/v1/statustypen/af1103df-ef2a-40cf-aa4c-e671dd6b5fd0&quot;,&quot;http://localhost:9001/catalogi/api/v1/statustypen/ed5b8db4-7714-4a83-afd8-1efb3e34bc4a&quot;,&quot;http://localhost:9001/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;],&quot;resultaattypen&quot;:[&quot;http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;http://localhost:9001/catalogi/api/v1/resultaattypen/2ae8e8d4-0a1b-4266-84f9-93ae93ca852e&quot;],&quot;eigenschappen&quot;:[],&quot;informatieobjecttypen&quot;:[&quot;http://localhost:9001/catalogi/api/v1/informatieobjecttypen/f906da33-0233-4680-8e72-e959232f9cc5&quot;],&quot;roltypen&quot;:[&quot;http://localhost:9001/catalogi/api/v1/roltypen/548c7dd0-f1f8-4723-a8b5-eb517ce73a27&quot;,&quot;http://localhost:9001/catalogi/api/v1/roltypen/0fc95641-1b30-4c40-9b4b-f917c326370e&quot;,&quot;http://localhost:9001/catalogi/api/v1/roltypen/78f05feb-15c8-4288-b8b2-a7a2e5665791&quot;,&quot;http://localhost:9001/catalogi/api/v1/roltypen/2f1b7f0a-243f-4c80-9e91-40331381938c&quot;,&quot;http://localhost:9001/catalogi/api/v1/roltypen/356271da-febb-4ede-b6a9-cb62aafdd0d9&quot;],&quot;besluittypen&quot;:[],&quot;deelzaaktypen&quot;:[],&quot;gerelateerdeZaaktypen&quot;:[],&quot;beginGeldigheid&quot;:&quot;2021-03-29&quot;,&quot;eindeGeldigheid&quot;:null,&quot;versiedatum&quot;:&quot;2021-03-29&quot;,&quot;concept&quot;:false}</string>
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;identificatie&quot;:&quot;B1026&quot;,&quot;omschrijving&quot;:&quot;Minimaregeling aanvraag&quot;,&quot;omschrijvingGeneriek&quot;:&quot;&quot;,&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;doel&quot;:&quot;Dit werkproces betreft het beoordelen van een aanvraag voor een minimaregeling. Een minimaregeling is een inkomensondersteunende voorziening voor mensen met een inkomen dat niet hoger is dan 110% van het sociaal minimum. De gemeente kan deze (gedeeltelijke) vergoeding toekennen voor kosten van witgoedapparatuur, kosten voor kinderen en kosten in verband met ouderdom, een handicap of chronische ziekte. Zie voor de minimaregeling voor de kosten in verband met een ziektekostenverzekering werkproces B1261 \&quot;Collectieve aanvullende zorgverzekering\&quot;. Een omschrijving van hetgeen beoogd is te bereiken met een zaak van dit zaaktype.&quot;,&quot;aanleiding&quot;:&quot;Aanvraag&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;indicatieInternOfExtern&quot;:&quot;intern&quot;,&quot;handelingInitiator&quot;:&quot;aanvragen&quot;,&quot;onderwerp&quot;:&quot;onderwerp&quot;,&quot;handelingBehandelaar&quot;:&quot;handelingBehandelaar&quot;,&quot;doorlooptijd&quot;:&quot;P30D&quot;,&quot;servicenorm&quot;:null,&quot;opschortingEnAanhoudingMogelijk&quot;:true,&quot;verlengingMogelijk&quot;:false,&quot;verlengingstermijn&quot;:null,&quot;trefwoorden&quot;:[],&quot;publicatieIndicatie&quot;:true,&quot;publicatietekst&quot;:&quot;&quot;,&quot;verantwoordingsrelatie&quot;:[],&quot;productenOfDiensten&quot;:[&quot;https://test.openzaak.nl/admin/catalogi/zaaktype/add/?_changelist_filters=catalogus__id__exact%3D21&amp;catalogus=21&quot;],&quot;selectielijstProcestype&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/procestypen/aa8aa2fd-b9c6-4e34-9a6c-58a677f60ea0&quot;,&quot;referentieproces&quot;:{&quot;naam&quot;:&quot;Verzoeken behandelen&quot;,&quot;link&quot;:&quot;https://referentielijsten-api.vng.cloud/api/v1/procestypen/3030daa1-d516-4cd9-8276-ef0977e32b20&quot;},&quot;catalogus&quot;:&quot;http://localhost:8000/catalogi/api/v1/catalogussen/3125c364-c673-4055-9c09-dd00032f2e8d&quot;,&quot;statustypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/8717f4bf-6864-487a-8025-dac12e67ea10&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/74b8e7b4-f15a-43b1-90a1-ea7cedc4e2e3&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/ff9d577b-da36-433c-9aa3-492b825bfb61&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/af1103df-ef2a-40cf-aa4c-e671dd6b5fd0&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/ed5b8db4-7714-4a83-afd8-1efb3e34bc4a&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;],&quot;resultaattypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/2ae8e8d4-0a1b-4266-84f9-93ae93ca852e&quot;],&quot;eigenschappen&quot;:[],&quot;informatieobjecttypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/informatieobjecttypen/f906da33-0233-4680-8e72-e959232f9cc5&quot;],&quot;roltypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/roltypen/548c7dd0-f1f8-4723-a8b5-eb517ce73a27&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/0fc95641-1b30-4c40-9b4b-f917c326370e&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/78f05feb-15c8-4288-b8b2-a7a2e5665791&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/2f1b7f0a-243f-4c80-9e91-40331381938c&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/356271da-febb-4ede-b6a9-cb62aafdd0d9&quot;],&quot;besluittypen&quot;:[],&quot;deelzaaktypen&quot;:[],&quot;gerelateerdeZaaktypen&quot;:[],&quot;beginGeldigheid&quot;:&quot;2021-03-29&quot;,&quot;eindeGeldigheid&quot;:null,&quot;versiedatum&quot;:&quot;2021-03-29&quot;,&quot;concept&quot;:false}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -551,7 +551,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74 took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -581,15 +581,15 @@
   &quot;betalingsindicatieWeergave&quot;: &quot;&quot;,
   &quot;deelzaken&quot;: [],
   &quot;eigenschappen&quot;: [],
-  &quot;status&quot;: &quot;http://localhost:9001/zaken/api/v1/statussen/69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,
-  &quot;resultaat&quot;: &quot;http://localhost:9001/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54&quot;,
-  &quot;url&quot;: &quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,
+  &quot;status&quot;: &quot;http://localhost:8000/zaken/api/v1/statussen/69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,
+  &quot;resultaat&quot;: &quot;http://localhost:8000/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54&quot;,
+  &quot;url&quot;: &quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,
   &quot;uuid&quot;: &quot;f6824982-27ab-48fd-8847-e9a099774c53&quot;,
   &quot;identificatie&quot;: &quot;1900147&quot;,
   &quot;bronorganisatie&quot;: &quot;823288444&quot;,
   &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
   &quot;toelichting&quot;: &quot;&quot;,
-  &quot;zaaktype&quot;: &quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,
+  &quot;zaaktype&quot;: &quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,
   &quot;registratiedatum&quot;: &quot;2024-01-26&quot;,
   &quot;verantwoordelijkeOrganisatie&quot;: &quot;823288444&quot;,
   &quot;startdatum&quot;: &quot;2024-01-26&quot;,
@@ -714,7 +714,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/catalogi/api/v1/statustypen?zaaktype=http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
+      <string>http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -739,7 +739,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
+      <string>http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
      </void>
      <void property="name">
       <string>Parameter zaaktype</string>
@@ -764,7 +764,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;count&quot;:7,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;,&quot;omschrijving&quot;:&quot;Ontvangen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ontvangen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:1,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/ed5b8db4-7714-4a83-afd8-1efb3e34bc4a&quot;,&quot;omschrijving&quot;:&quot;Geaccepteerd&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Geaccepteerd&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:2,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/af1103df-ef2a-40cf-aa4c-e671dd6b5fd0&quot;,&quot;omschrijving&quot;:&quot;In behandeling genomen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;In behandeling genomen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:3,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/ff9d577b-da36-433c-9aa3-492b825bfb61&quot;,&quot;omschrijving&quot;:&quot;Onderzoek afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Onderzoek afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:5,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/74b8e7b4-f15a-43b1-90a1-ea7cedc4e2e3&quot;,&quot;omschrijving&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:6,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/8717f4bf-6864-487a-8025-dac12e67ea10&quot;,&quot;omschrijving&quot;:&quot;Besluitvorming afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Besluitvorming afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:7,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;omschrijving&quot;:&quot;Afgehandeld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgehandeld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:10,&quot;isEindstatus&quot;:true,&quot;informeren&quot;:false}]}</string>
+      <string>{&quot;count&quot;:7,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;,&quot;omschrijving&quot;:&quot;Ontvangen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ontvangen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:1,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/ed5b8db4-7714-4a83-afd8-1efb3e34bc4a&quot;,&quot;omschrijving&quot;:&quot;Geaccepteerd&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Geaccepteerd&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:2,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/af1103df-ef2a-40cf-aa4c-e671dd6b5fd0&quot;,&quot;omschrijving&quot;:&quot;In behandeling genomen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;In behandeling genomen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:3,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/ff9d577b-da36-433c-9aa3-492b825bfb61&quot;,&quot;omschrijving&quot;:&quot;Onderzoek afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Onderzoek afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:5,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/74b8e7b4-f15a-43b1-90a1-ea7cedc4e2e3&quot;,&quot;omschrijving&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:6,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/8717f4bf-6864-487a-8025-dac12e67ea10&quot;,&quot;omschrijving&quot;:&quot;Besluitvorming afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Besluitvorming afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:7,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;omschrijving&quot;:&quot;Afgehandeld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgehandeld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:10,&quot;isEindstatus&quot;:true,&quot;informeren&quot;:false}]}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -792,7 +792,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/catalogi/api/v1/statustypen?zaaktype=http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74 took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -839,7 +839,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/statussen?zaak=http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
+      <string>http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -864,7 +864,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
+      <string>http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
      </void>
      <void property="name">
       <string>Parameter zaak</string>
@@ -889,7 +889,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;count&quot;:2,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:9001/zaken/api/v1/statussen/69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,&quot;uuid&quot;:&quot;69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,&quot;zaak&quot;:&quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;statustype&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;datumStatusGezet&quot;:&quot;2024-01-26T08:30:10.700000Z&quot;,&quot;statustoelichting&quot;:&quot;Afgehandeld&quot;},{&quot;url&quot;:&quot;http://localhost:9001/zaken/api/v1/statussen/e1c8bd56-4c9a-47b8-b488-79cd14c8314c&quot;,&quot;uuid&quot;:&quot;e1c8bd56-4c9a-47b8-b488-79cd14c8314c&quot;,&quot;zaak&quot;:&quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;statustype&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;,&quot;datumStatusGezet&quot;:&quot;2024-01-26T08:29:21.560000Z&quot;,&quot;statustoelichting&quot;:&quot;Ontvangen&quot;}]}</string>
+      <string>{&quot;count&quot;:2,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/statussen/69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,&quot;uuid&quot;:&quot;69c19064-16cc-4e6b-b1ba-decd5e0c80d9&quot;,&quot;zaak&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;statustype&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;datumStatusGezet&quot;:&quot;2024-01-26T08:30:10.700000Z&quot;,&quot;statustoelichting&quot;:&quot;Afgehandeld&quot;},{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/statussen/e1c8bd56-4c9a-47b8-b488-79cd14c8314c&quot;,&quot;uuid&quot;:&quot;e1c8bd56-4c9a-47b8-b488-79cd14c8314c&quot;,&quot;zaak&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;statustype&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;,&quot;datumStatusGezet&quot;:&quot;2024-01-26T08:29:21.560000Z&quot;,&quot;statustoelichting&quot;:&quot;Ontvangen&quot;}]}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -917,7 +917,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/zaken/api/v1/statussen?zaak=http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53 took 1 milliseconds</string>
+      <string>GET to: http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53 took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -964,7 +964,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/catalogi/api/v1/statustypen?zaaktype=http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
+      <string>http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -989,7 +989,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
+      <string>http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74</string>
      </void>
      <void property="name">
       <string>Parameter zaaktype</string>
@@ -1014,7 +1014,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;count&quot;:7,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;,&quot;omschrijving&quot;:&quot;Ontvangen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ontvangen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:1,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/ed5b8db4-7714-4a83-afd8-1efb3e34bc4a&quot;,&quot;omschrijving&quot;:&quot;Geaccepteerd&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Geaccepteerd&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:2,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/af1103df-ef2a-40cf-aa4c-e671dd6b5fd0&quot;,&quot;omschrijving&quot;:&quot;In behandeling genomen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;In behandeling genomen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:3,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/ff9d577b-da36-433c-9aa3-492b825bfb61&quot;,&quot;omschrijving&quot;:&quot;Onderzoek afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Onderzoek afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:5,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/74b8e7b4-f15a-43b1-90a1-ea7cedc4e2e3&quot;,&quot;omschrijving&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:6,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/8717f4bf-6864-487a-8025-dac12e67ea10&quot;,&quot;omschrijving&quot;:&quot;Besluitvorming afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Besluitvorming afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:7,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;omschrijving&quot;:&quot;Afgehandeld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgehandeld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:10,&quot;isEindstatus&quot;:true,&quot;informeren&quot;:false}]}</string>
+      <string>{&quot;count&quot;:7,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/99bfe079-5f01-4829-99db-7c6d65ad357b&quot;,&quot;omschrijving&quot;:&quot;Ontvangen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ontvangen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:1,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/ed5b8db4-7714-4a83-afd8-1efb3e34bc4a&quot;,&quot;omschrijving&quot;:&quot;Geaccepteerd&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Geaccepteerd&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:2,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/af1103df-ef2a-40cf-aa4c-e671dd6b5fd0&quot;,&quot;omschrijving&quot;:&quot;In behandeling genomen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;In behandeling genomen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:3,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/ff9d577b-da36-433c-9aa3-492b825bfb61&quot;,&quot;omschrijving&quot;:&quot;Onderzoek afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Onderzoek afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:5,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/74b8e7b4-f15a-43b1-90a1-ea7cedc4e2e3&quot;,&quot;omschrijving&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Voorstel voor besluitvorming opgesteld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:6,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/8717f4bf-6864-487a-8025-dac12e67ea10&quot;,&quot;omschrijving&quot;:&quot;Besluitvorming afgerond&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Besluitvorming afgerond&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:7,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/9f78ead8-3b54-4913-aba4-06282664f52b&quot;,&quot;omschrijving&quot;:&quot;Afgehandeld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgehandeld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;volgnummer&quot;:10,&quot;isEindstatus&quot;:true,&quot;informeren&quot;:false}]}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -1042,7 +1042,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/catalogi/api/v1/statustypen?zaaktype=http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74 took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1210,7 +1210,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2</string>
+      <string>http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1235,7 +1235,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;url&quot;:&quot;http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;zaaktype&quot;:&quot;http://localhost:9001/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;omschrijving&quot;:&quot;Toegekend&quot;,&quot;resultaattypeomschrijving&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/resultaattypeomschrijvingen/ce8cf476-0b59-496f-8eee-957a7c6e2506&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgebroken&quot;,&quot;selectielijstklasse&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/resultaten/afa30940-855b-4a7e-aa21-9e15a8078814&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefactietermijn&quot;:&quot;P3652D&quot;,&quot;brondatumArchiefprocedure&quot;:{&quot;afleidingswijze&quot;:&quot;afgehandeld&quot;,&quot;datumkenmerk&quot;:&quot;&quot;,&quot;einddatumBekend&quot;:false,&quot;objecttype&quot;:&quot;&quot;,&quot;registratie&quot;:&quot;&quot;,&quot;procestermijn&quot;:null}}</string>
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/081b35c8-d981-489d-911e-3dd2468c3e74&quot;,&quot;omschrijving&quot;:&quot;Toegekend&quot;,&quot;resultaattypeomschrijving&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/resultaattypeomschrijvingen/ce8cf476-0b59-496f-8eee-957a7c6e2506&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgebroken&quot;,&quot;selectielijstklasse&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/resultaten/afa30940-855b-4a7e-aa21-9e15a8078814&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefactietermijn&quot;:&quot;P3652D&quot;,&quot;brondatumArchiefprocedure&quot;:{&quot;afleidingswijze&quot;:&quot;afgehandeld&quot;,&quot;datumkenmerk&quot;:&quot;&quot;,&quot;einddatumBekend&quot;:false,&quot;objecttype&quot;:&quot;&quot;,&quot;registratie&quot;:&quot;&quot;,&quot;procestermijn&quot;:null}}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -1263,7 +1263,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2 took 0 milliseconds</string>
+      <string>GET to: http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1310,7 +1310,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/resultaten?zaak=http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
+      <string>http://localhost:8000/zaken/api/v1/resultaten?zaak=http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1335,7 +1335,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
+      <string>http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53</string>
      </void>
      <void property="name">
       <string>Parameter zaak</string>
@@ -1360,7 +1360,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;count&quot;:1,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:9001/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54&quot;,&quot;uuid&quot;:&quot;0dffd209-ad86-4048-a20e-57fcce79af54&quot;,&quot;zaak&quot;:&quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;resultaattype&quot;:&quot;http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;toelichting&quot;:&quot;Toegekend&quot;}]}</string>
+      <string>{&quot;count&quot;:1,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54&quot;,&quot;uuid&quot;:&quot;0dffd209-ad86-4048-a20e-57fcce79af54&quot;,&quot;zaak&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;resultaattype&quot;:&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;toelichting&quot;:&quot;Toegekend&quot;}]}</string>
      </void>
      <void property="name">
       <string>ZGWClient GET</string>
@@ -1388,7 +1388,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:9001/zaken/api/v1/resultaten?zaak=http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53 took 1 milliseconds</string>
+      <string>GET to: http://localhost:8000/zaken/api/v1/resultaten?zaak=http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53 took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1460,7 +1460,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54</string>
+      <string>http://localhost:8000/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1510,7 +1510,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>DELETE to: http://localhost:9001/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54 took 0 milliseconds</string>
+      <string>DELETE to: http://localhost:8000/zaken/api/v1/resultaten/0dffd209-ad86-4048-a20e-57fcce79af54 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -1535,7 +1535,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>{&quot;zaak&quot;:&quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;resultaattype&quot;:&quot;http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;toelichting&quot;:&quot;Toegekend&quot;}</string>
+      <string>{&quot;zaak&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;resultaattype&quot;:&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;toelichting&quot;:&quot;Toegekend&quot;}</string>
      </void>
      <void property="name">
       <string>ZGWClient POST</string>
@@ -1560,7 +1560,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:9001/zaken/api/v1/resultaten</string>
+      <string>http://localhost:8000/zaken/api/v1/resultaten</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -1585,7 +1585,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>{&quot;url&quot;:&quot;http://localhost:9001/zaken/api/v1/resultaten/4cdf8977-d5af-411a-9ad4-0fce03c7b1ff&quot;,&quot;uuid&quot;:&quot;4cdf8977-d5af-411a-9ad4-0fce03c7b1ff&quot;,&quot;zaak&quot;:&quot;http://localhost:9001/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;resultaattype&quot;:&quot;http://localhost:9001/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;toelichting&quot;:&quot;Toegekend&quot;}</string>
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/resultaten/4cdf8977-d5af-411a-9ad4-0fce03c7b1ff&quot;,&quot;uuid&quot;:&quot;4cdf8977-d5af-411a-9ad4-0fce03c7b1ff&quot;,&quot;zaak&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/f6824982-27ab-48fd-8847-e9a099774c53&quot;,&quot;resultaattype&quot;:&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b94e1a3a-0c80-4780-8dce-1d5ace8f45d2&quot;,&quot;toelichting&quot;:&quot;Toegekend&quot;}</string>
      </void>
      <void property="name">
       <string>ZGWClient POST</string>
@@ -1613,7 +1613,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>POST to: http://localhost:9001/zaken/api/v1/resultaten took 0 milliseconds</string>
+      <string>POST to: http://localhost:8000/zaken/api/v1/resultaten took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
