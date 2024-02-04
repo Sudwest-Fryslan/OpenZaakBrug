@@ -23,6 +23,7 @@ import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsBv03;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01ActualiseerZaakstatus;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
@@ -46,13 +47,21 @@ public class ActualiseerZaakStatusTranslator extends Converter {
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);		
 		
 		var zdsZakLk01ActualiseerZaakstatus = (ZdsZakLk01ActualiseerZaakstatus) this.zdsDocument;
-		var zdsWasZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(0);
 
 		this.getSession().setFunctie("ActualiseerZaakStatus");
-		this.getSession().setKenmerk("zaakidentificatie:" + zdsWasZaak.identificatie);
-
-		var zdsWordtZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(1);
-		var zgwZaak = this.getZaakService().actualiseerZaakstatus(authorization, zdsWasZaak, zdsWordtZaak);
+		this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
+		
+		ZdsZaak zdsWasZaak = null;
+		ZdsZaak zdsWordtZaak = null;
+		
+		if(zdsZakLk01ActualiseerZaakstatus.objects.size() == 1) {
+			zdsWordtZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(0);
+		}
+		else if(zdsZakLk01ActualiseerZaakstatus.objects.size() == 2) {
+			zdsWasZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(0);
+			zdsWordtZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(1);
+		}
+		this.getZaakService().actualiseerZaakstatus(zdsWasZaak, zdsWordtZaak);
 		var bv03 = new ZdsBv03(zdsZakLk01ActualiseerZaakstatus.stuurgegevens, this.getSession().getReferentienummer());
 		var response = XmlUtils.getSOAPMessageFromObject(bv03);
 		return new ResponseEntity<>(response, HttpStatus.OK);

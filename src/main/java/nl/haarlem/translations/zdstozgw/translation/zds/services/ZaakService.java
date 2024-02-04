@@ -862,13 +862,33 @@ public class ZaakService {
 	}
 
 	public ZgwZaak actualiseerZaakstatus(ZgwAuthorization authorization, ZdsZaak wasZaak, ZdsZaak wordtZaak) {
-		log.debug("actualiseerZaakstatus:" + wasZaak.identificatie);
-		var zaakid = wasZaak.identificatie;
-		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakid);
-		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(authorization, zgwZaak);
-		setResultaatAndStatus(authorization, wordtZaak, zgwZaak, zgwZaakType);
-
-		return zgwZaak;
+		log.debug("actualiseerZaakstatus:" + wordtZaak.identificatie);
+		var zaakid = wordtZaak.identificatie;
+		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zaakid);
+		if (zgwZaak == null) {
+			throw new ConverterException("Zaak with identification: '" + wordtZaak.identificatie + "' not found in ZGW");
+		}
+		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
+		
+		ChangeDetector changeDetector = new ChangeDetector();
+		ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
+		
+		if(wasZaak != null) {
+			var storedVsWasChanges = changeDetector.detect(zdsStored, wasZaak);
+			var storedVsWasFieldsChanges = storedVsWasChanges.getAllChangesByDeclaringClassAndFilter(ZdsZaak.class, ZdsRol.class);
+			if (storedVsWasFieldsChanges.size() > 0) {
+				log.debug("Update of zaakid:" + wasZaak.identificatie + " has # " + storedVsWasFieldsChanges.size() + " field changes between stored and was");
+				for (Change change : storedVsWasFieldsChanges.keySet()) {
+					debugWarning("The field: " + change.getField().getName() + " does not match (" + change.getChangeType() + ") stored-value:'" + change.getCurrentValue()  + "' , was-value:'" + change.getNewValue() + "'");
+				}
+			}
+		}
+		else {
+			// when there was no "was" provided
+			wasZaak = zdsStored;
+		}
+		setResultaatAndStatus(wordtZaak, zgwZaak, zgwZaakType);
+		return zgwZaak;		
 	}
 
 	public List<ZdsZaak> getZaakDetailsByBsn(ZgwAuthorization authorization, String bsn) {
