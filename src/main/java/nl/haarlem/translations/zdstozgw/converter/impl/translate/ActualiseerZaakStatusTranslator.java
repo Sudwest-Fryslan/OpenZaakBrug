@@ -61,7 +61,7 @@ public class ActualiseerZaakStatusTranslator extends Converter {
 			zdsWasZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(0);
 			zdsWordtZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(1);
 		}
-		this.getZaakService().actualiseerZaakstatus(zdsWasZaak, zdsWordtZaak);
+		this.getZaakService().actualiseerZaakstatus(authorization, zdsWasZaak, zdsWordtZaak);
 		var bv03 = new ZdsBv03(zdsZakLk01ActualiseerZaakstatus.stuurgegevens, this.getSession().getReferentienummer());
 		var response = XmlUtils.getSOAPMessageFromObject(bv03);
 		return new ResponseEntity<>(response, HttpStatus.OK);

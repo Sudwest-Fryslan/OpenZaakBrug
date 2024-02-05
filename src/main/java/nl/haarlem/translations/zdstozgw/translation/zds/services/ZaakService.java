@@ -864,11 +864,11 @@ public class ZaakService {
 	public ZgwZaak actualiseerZaakstatus(ZgwAuthorization authorization, ZdsZaak wasZaak, ZdsZaak wordtZaak) {
 		log.debug("actualiseerZaakstatus:" + wordtZaak.identificatie);
 		var zaakid = wordtZaak.identificatie;
-		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zaakid);
+		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakid);
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak with identification: '" + wordtZaak.identificatie + "' not found in ZGW");
 		}
-		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(zgwZaak);
+		ZgwZaakType zgwZaakType = this.zgwClient.getZaakTypeByZaak(authorization, zgwZaak);
 		
 		ChangeDetector changeDetector = new ChangeDetector();
 		ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
@@ -887,7 +887,7 @@ public class ZaakService {
 			// when there was no "was" provided
 			wasZaak = zdsStored;
 		}
-		setResultaatAndStatus(wordtZaak, zgwZaak, zgwZaakType);
+		setResultaatAndStatus(authorization, wordtZaak, zgwZaak, zgwZaakType);
 		return zgwZaak;		
 	}
 

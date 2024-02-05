@@ -71,15 +71,41 @@ public class ZGWClient {
 
 	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
 
-
 	@Value("${openzaak.zakenUrl}")
 	private @Getter String zakenUrl;
+	@Value("${openzaak.zakenUrl.jwt.url:#{null}}")
+	private String zakenUrlJwtUrl;
+	@Value("${openzaak.zakenUrl.jwt.issuer}")
+	private String zakenUrlJwtIssuer;
+	@Value("${openzaak.zakenUrl.jwt.secret}")
+	private String zakenUrlJwtSecret;	
+	
 	@Value("${openzaak.documentenUrl}")
 	private @Getter String documentenUrl;
+	@Value("${openzaak.documentenUrl.jwt.url:#{null}}")
+	private String documentenUrlJwtUrl;
+	@Value("${openzaak.documentenUrl.jwt.issuer}")
+	private String documentenUrlJwtIssuer;
+	@Value("${openzaak.documentenUrl.jwt.secret}")
+	private String documentenUrlJwtSecret;	
+	
 	@Value("${openzaak.catalogiUrl}")
 	private @Getter String catalogiUrl;
+	@Value("${openzaak.catalogiUrl.jwt.url:#{null}}")
+	private String catalogiUrlJwtUrl;
+	@Value("${openzaak.catalogiUrl.jwt.issuer}")
+	private String catalogiUrlJwtIssuer;
+	@Value("${openzaak.catalogiUrl.jwt.secret}")
+	private String catalogiUrlJwtSecret;	
+	
 	@Value("${openzaak.besluitenUrl}")
 	private @Getter String besluitenUrl;
+	@Value("${openzaak.besluitenUrl.jwt.url:#{null}}")
+	private String besluitenUrlJwtUrl;
+	@Value("${openzaak.besluitenUrl.jwt.issuer}")
+	private String besluitenUrlJwtIssuer;
+	@Value("${openzaak.besluitenUrl.jwt.secret}")
+	private String besluitenUrlJwtSecret;
 
 	@Value("${zgw.endpoint.catalogus:/api/v1/catalogussen}")
 	private @Getter String endpointCatalogus;
@@ -125,68 +151,31 @@ public class ZGWClient {
 
 	@Autowired
 	RestTemplateService restTemplateService;
-
-	@Value("${openzaak.jwt.url:#{null}}")
-	private String jwturl;
-	@Value("${openzaak.jwt.issuer}")
-	private String issuer;
-	@Value("${openzaak.jwt.secret}")
-	private String secret;
-
+	
+	
+//	public ZgwAuthorization getAuthorization(String url, String rsin) {
+//		ZgwAuthorization authorization = getAuthorization(url);
+//		var catalogus = 
+//		//authorization.setCatalogusUrl(catalogus.url);
+//		//authorization.setCatalogusRsin(rsin);
+//		return authorization;
+//	}
+	
 	public ZgwAuthorization getAuthorization(String rsin) {
-		ZgwAuthorization authorization = getAuthorization(issuer, secret);
-		var catalogus = getCatalogusByRsin(authorization, rsin);
-		authorization.setCatalogusUrl(catalogus.url);
-		authorization.setCatalogusRsin(rsin);
-		return authorization;
+		ZgwAuthorization authorization = new ZgwAuthorization();
+		
+		authorization.AddZgwAuthorization(zakenUrl, zakenUrlJwtUrl, zakenUrlJwtIssuer, zakenUrlJwtSecret);
+		authorization.AddZgwAuthorization(documentenUrl, documentenUrlJwtUrl, documentenUrlJwtIssuer, documentenUrlJwtSecret);
+		authorization.AddZgwAuthorization(catalogiUrl, catalogiUrlJwtUrl, catalogiUrlJwtIssuer, catalogiUrlJwtSecret);
+		authorization.AddZgwAuthorization(besluitenUrl, besluitenUrlJwtUrl, besluitenUrlJwtIssuer, besluitenUrlJwtSecret);		
+		authorization.setCatalogus(getCatalogusByRsin(authorization, rsin));
+		
+		return 	authorization;
 	}
 	
-	private ZgwAuthorization getAuthorization(String issuer, String secret) {
-		if(jwturl!=null) {
-			var authorizationRequestHeaders = new HttpHeaders();
-	        String json =  "{\n" +
-	            "    \"clientIds\": [\n" +
-	            "        \"test_user\"\n" +
-	            "    ],\n" +
-	            "    \"secret\": \"" + secret +  "\",\n" +
-	            "    \"label\": \"" + issuer +  "\",\n" +
-	            "    \"heeftAlleAutorisaties\": \"true\",\n" +
-	            "    \"autorisaties\": []\n" +
-	            "}";
-	
-	        final RestTemplate restTemplate = new RestTemplate();
-	        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-	        final HttpClient httpClient = HttpClientBuilder.create()
-	            .setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods, needed because VNG-cloud redirects with 307 -> 308 -> 200
-	            .build();
-	        factory.setHttpClient(httpClient);
-	        restTemplate.setRequestFactory(factory);
-	
-	        authorizationRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
-	        var accept = new ArrayList<MediaType>();
-	        accept.add(MediaType.APPLICATION_JSON);
-	        authorizationRequestHeaders.setAccept(accept);
-	
-	        HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
-	        ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwturl, entity, String.class);
-	        Gson gson = new Gson();
-	        var authorizationResponse = gson.fromJson(bearerResponse.getBody(), ZgwAuthorization.class);
-	
-	        log.info("Bearer '" + authorizationResponse.getAuthorization() +  "' from url:'" + jwturl + "' with requestjson:\n" + json);	
-	        return authorizationResponse;
-		}
-		else {
-			var authorizationResponse = new ZgwAuthorization();
-			authorizationResponse.setCatalogusUrl(null);
-			authorizationResponse.setCatalogusRsin(null);
-			authorizationResponse.setAuthorization("Bearer " + JWTService.getJWT(issuer, secret));
-			return authorizationResponse;
-		}
-	}
-	
-	private HttpHeaders getHeaders(ZgwAuthorization authorization) {
+	private HttpHeaders getHeaders(ZgwAuthorization authorization, String url) {
 		var headers = new HttpHeaders();
-		headers.set("Authorization", authorization.getAuthorization());		
+		headers.set("Authorization", authorization.getZgwJwtToken(url));		
 		headers.set("Accept-Crs", "EPSG:4326");
 		headers.set("Content-Crs", "EPSG:4326");
 		headers.set("Content-Type", "application/json");
@@ -198,7 +187,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization, url));
 		log.debug("POST: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
@@ -252,7 +241,7 @@ public class ZGWClient {
 				parameters.put(key, debug.inputpoint("Parameter " + key, parameters.get(key)));
 			}
 		}
-		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization, url));
 		log.debug("GET: " + url + "\n\tHeaders:" + entity.getHeaders().toString());
 		try {
 			long startTime = System.currentTimeMillis();
@@ -289,7 +278,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient GET(BASE64)";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
-		HttpEntity entity = new HttpEntity(this.getHeaders(authorization));
+		HttpEntity entity = new HttpEntity(this.getHeaders(authorization, url));
 		log.debug("GET(BASE64): " + url + "\n\tHeaders:" + entity.getHeaders().toString() );
 		try {
 			long startTime = System.currentTimeMillis();
@@ -322,7 +311,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient DELETE";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization, url));
 		log.debug("DELETE: " + url + "\n\tHeaders:" + entity.getHeaders().toString());	
 		try {
 			long startTime = System.currentTimeMillis();
@@ -359,7 +348,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient PUT";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization, url));
 		log.debug("PUT: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
@@ -398,7 +387,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient PATCH";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization));
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization, url));
 		log.debug("PATCH: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
