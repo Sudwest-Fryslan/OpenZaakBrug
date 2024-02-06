@@ -5,127 +5,160 @@
    <void method="add">
     <object class="nl.nn.testtool.Checkpoint">
      <void property="message">
-      <string>﻿&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
-	&lt;soapenv:Header/&gt;
-	&lt;soapenv:Body&gt;
-		&lt;ZKN:zakLv01 xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;
-           			xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-           			xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
-           			xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot;
-           			xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot;&gt;
-			&lt;ZKN:stuurgegevens&gt;
-				&lt;StUF:berichtcode&gt;Lv01&lt;/StUF:berichtcode&gt;
-				&lt;StUF:entiteittype&gt;ZAK&lt;/StUF:entiteittype&gt;
-			&lt;/ZKN:stuurgegevens&gt;
-			&lt;ZKN:parameters&gt;
-				&lt;StUF:sortering&gt;0&lt;/StUF:sortering&gt;
-				&lt;StUF:indicatorVervolgvraag&gt;false&lt;/StUF:indicatorVervolgvraag&gt;
-			&lt;/ZKN:parameters&gt;
-			&lt;ZKN:gelijk StUF:entiteittype=&quot;ZAK&quot;&gt;
-				&lt;ZKN:heeftAlsInitiator StUF:entiteittype=&quot;ZAKBTRINI&quot;&gt;
-					&lt;ZKN:gerelateerde&gt;
-						&lt;ZKN:identificatie&gt;11111111110&lt;/ZKN:identificatie&gt;
-					&lt;/ZKN:gerelateerde&gt;
-				&lt;/ZKN:heeftAlsInitiator&gt;
-			&lt;/ZKN:gelijk&gt;
-			&lt;ZKN:scope&gt;
-				&lt;ZKN:object StUF:entiteittype=&quot;ZAK&quot;&gt;
-					&lt;ZKN:identificatie xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:resultaat&gt;
-						&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
-						&lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&gt;
-					&lt;/ZKN:resultaat&gt;
-					&lt;ZKN:startdatum xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:registratiedatum xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:publicatiedatum xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:einddatumGepland xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:uiterlijkeEinddatum xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:einddatum xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:opschorting&gt;
-						&lt;ZKN:indicatie xsi:nil=&quot;true&quot; /&gt;
-						&lt;ZKN:reden xsi:nil=&quot;true&quot; /&gt;
-					&lt;/ZKN:opschorting&gt;
-					&lt;ZKN:verlenging&gt;
-						&lt;ZKN:duur xsi:nil=&quot;true&quot; /&gt;
-						&lt;ZKN:reden xsi:nil=&quot;true&quot; /&gt;
-					&lt;/ZKN:verlenging&gt;
-					&lt;ZKN:betalingsIndicatie xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:laatsteBetaaldatum xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:archiefnominatie xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:datumVernietigingDossier xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:zaakniveau xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:deelzakenIndicatie xsi:nil=&quot;true&quot; /&gt;
-					&lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot;&gt;
-						&lt;ZKN:gerelateerde StUF:entiteittype=&quot;ZKT&quot;&gt;
+      <string>﻿&lt;?xml version=&quot;1.0&quot;
+							encoding=&quot;utf-8&quot;?&gt;
+							&lt;soapenv:Envelope
+							xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+							&lt;soapenv:Header/&gt;
+							&lt;soapenv:Body&gt;
+							&lt;ZKN:zakLv01
+							xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;
+							xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+							xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
+							xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot;
+							xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot;&gt;
+							&lt;ZKN:stuurgegevens&gt;
+							&lt;StUF:berichtcode&gt;Lv01&lt;/StUF:berichtcode&gt;
+							&lt;StUF:entiteittype&gt;ZAK&lt;/StUF:entiteittype&gt;
+							&lt;/ZKN:stuurgegevens&gt;
+							&lt;ZKN:parameters&gt;
+							&lt;StUF:sortering&gt;0&lt;/StUF:sortering&gt;
+							&lt;StUF:indicatorVervolgvraag&gt;false&lt;/StUF:indicatorVervolgvraag&gt;
+							&lt;/ZKN:parameters&gt;
+							&lt;ZKN:gelijk StUF:entiteittype=&quot;ZAK&quot;&gt;
+							&lt;ZKN:heeftAlsInitiator
+							StUF:entiteittype=&quot;ZAKBTRINI&quot;&gt;
+							&lt;ZKN:gerelateerde&gt;
+							&lt;ZKN:identificatie&gt;11111111110&lt;/ZKN:identificatie&gt;
+							&lt;/ZKN:gerelateerde&gt;
+							&lt;/ZKN:heeftAlsInitiator&gt;
+							&lt;/ZKN:gelijk&gt;
+							&lt;ZKN:scope&gt;
+							&lt;ZKN:object StUF:entiteittype=&quot;ZAK&quot;&gt;
+							&lt;ZKN:identificatie xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:resultaat&gt;
+							&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&gt;
+							&lt;/ZKN:resultaat&gt;
+							&lt;ZKN:startdatum xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:registratiedatum xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:publicatiedatum xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:einddatumGepland xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:uiterlijkeEinddatum xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:einddatum xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:opschorting&gt;
+							&lt;ZKN:indicatie xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:reden xsi:nil=&quot;true&quot; /&gt;
+							&lt;/ZKN:opschorting&gt;
+							&lt;ZKN:verlenging&gt;
+							&lt;ZKN:duur xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:reden xsi:nil=&quot;true&quot; /&gt;
+							&lt;/ZKN:verlenging&gt;
+							&lt;ZKN:betalingsIndicatie xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:laatsteBetaaldatum xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:archiefnominatie xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:datumVernietigingDossier
+							xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:zaakniveau xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:deelzakenIndicatie xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:isVan
+							StUF:entiteittype=&quot;ZAKZKT&quot;&gt;
+							&lt;ZKN:gerelateerde
+							StUF:entiteittype=&quot;ZKT&quot;&gt;
 							&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:code xsi:nil=&quot;true&quot; /&gt;
-						&lt;/ZKN:gerelateerde&gt;
-					&lt;/ZKN:isVan&gt;
-					&lt;ZKN:heeftBetrekkingOp StUF:entiteittype=&quot;ZAKOBJ&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-						&lt;ZKN:omschrijving/&gt;
-					&lt;/ZKN:heeftBetrekkingOp&gt;
-					&lt;ZKN:heeftAlsBelanghebbende StUF:entiteittype=&quot;ZAKBTRBLH&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-						&lt;ZKN:omschrijving/&gt;
-						&lt;ZKN:code/&gt;
-						&lt;ZKN:toelichting/&gt;
-					&lt;/ZKN:heeftAlsBelanghebbende&gt;
-					&lt;ZKN:heeftAlsGemachtigde StUF:entiteittype=&quot;ZAKBTRGMC&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-						&lt;ZKN:omschrijving/&gt;
-						&lt;ZKN:code/&gt;
-						&lt;ZKN:toelichting/&gt;
-					&lt;/ZKN:heeftAlsGemachtigde&gt;
-					&lt;ZKN:heeftAlsInitiator StUF:entiteittype=&quot;ZAKBTRINI&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-						&lt;ZKN:omschrijving/&gt;
-						&lt;ZKN:code/&gt;
-						&lt;ZKN:toelichting/&gt;
-					&lt;/ZKN:heeftAlsInitiator&gt;
-					&lt;ZKN:heeftAlsUitvoerende StUF:entiteittype=&quot;ZAKBTRUTV&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-						&lt;ZKN:omschrijving/&gt;
-						&lt;ZKN:code/&gt;
-						&lt;ZKN:toelichting/&gt;
-					&lt;/ZKN:heeftAlsUitvoerende&gt;
-					&lt;ZKN:heeftAlsVerantwoordelijke StUF:entiteittype=&quot;ZAKBTRVRA&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-					&lt;/ZKN:heeftAlsVerantwoordelijke&gt;
-					&lt;ZKN:heeftAlsOverigBetrokkene StUF:entiteittype=&quot;ZAKBTROVR&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-						&lt;ZKN:omschrijving/&gt;
-						&lt;ZKN:code/&gt;
-						&lt;ZKN:toelichting/&gt;
-					&lt;/ZKN:heeftAlsOverigBetrokkene&gt;
-					&lt;ZKN:heeftAlsDeelzaak StUF:entiteittype=&quot;ZAKZAKDEL&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-					&lt;/ZKN:heeftAlsDeelzaak&gt;
-					&lt;ZKN:heeftAlsHoofdzaak StUF:entiteittype=&quot;ZAKZAKHFD&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-					&lt;/ZKN:heeftAlsHoofdzaak&gt;
-					&lt;ZKN:heeftBetrekkingOpAndere StUF:entiteittype=&quot;ZAKZAKBTR&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-					&lt;/ZKN:heeftBetrekkingOpAndere&gt;
-					&lt;ZKN:heeft StUF:entiteittype=&quot;ZAKSTT&quot;&gt;
-						&lt;ZKN:gerelateerde StUF:entiteittype=&quot;STT&quot;&gt;
-							&lt;ZKN:code xsi:nil=&quot;true&quot; /&gt;
-							&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
-						&lt;/ZKN:gerelateerde&gt;
-						&lt;ZKN:datumStatusGezet xsi:nil=&quot;true&quot; /&gt;
-						&lt;ZKN:indicatieLaatsteStatus xsi:nil=&quot;true&quot; /&gt;
-						&lt;ZKN:isGezetDoor StUF:entiteittype=&quot;ZAKSTTBTR&quot;&gt;
+							&lt;/ZKN:gerelateerde&gt;
+							&lt;/ZKN:isVan&gt;
+							&lt;ZKN:heeftBetrekkingOp
+							StUF:entiteittype=&quot;ZAKOBJ&quot;&gt;
 							&lt;ZKN:gerelateerde/&gt;
-						&lt;/ZKN:isGezetDoor&gt;
-					&lt;/ZKN:heeft&gt;
-					&lt;ZKN:heeftRelevant StUF:entiteittype=&quot;ZAKEDC&quot;&gt;
-						&lt;ZKN:gerelateerde StUF:entiteittype=&quot;EDC&quot;&gt;
+							&lt;ZKN:omschrijving/&gt;
+							&lt;/ZKN:heeftBetrekkingOp&gt;
+							&lt;ZKN:heeftAlsBelanghebbende
+							StUF:entiteittype=&quot;ZAKBTRBLH&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;ZKN:omschrijving/&gt;
+							&lt;ZKN:code/&gt;
+							&lt;ZKN:toelichting/&gt;
+							&lt;/ZKN:heeftAlsBelanghebbende&gt;
+							&lt;ZKN:heeftAlsGemachtigde
+							StUF:entiteittype=&quot;ZAKBTRGMC&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;ZKN:omschrijving/&gt;
+							&lt;ZKN:code/&gt;
+							&lt;ZKN:toelichting/&gt;
+							&lt;/ZKN:heeftAlsGemachtigde&gt;
+							&lt;ZKN:heeftAlsInitiator
+							StUF:entiteittype=&quot;ZAKBTRINI&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;ZKN:omschrijving/&gt;
+							&lt;ZKN:code/&gt;
+							&lt;ZKN:toelichting/&gt;
+							&lt;/ZKN:heeftAlsInitiator&gt;
+							&lt;ZKN:heeftAlsUitvoerende
+							StUF:entiteittype=&quot;ZAKBTRUTV&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;ZKN:omschrijving/&gt;
+							&lt;ZKN:code/&gt;
+							&lt;ZKN:toelichting/&gt;
+							&lt;/ZKN:heeftAlsUitvoerende&gt;
+							&lt;ZKN:heeftAlsVerantwoordelijke
+							StUF:entiteittype=&quot;ZAKBTRVRA&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;/ZKN:heeftAlsVerantwoordelijke&gt;
+							&lt;ZKN:heeftAlsOverigBetrokkene
+							StUF:entiteittype=&quot;ZAKBTROVR&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;ZKN:omschrijving/&gt;
+							&lt;ZKN:code/&gt;
+							&lt;ZKN:toelichting/&gt;
+							&lt;/ZKN:heeftAlsOverigBetrokkene&gt;
+							&lt;ZKN:heeftAlsDeelzaak
+							StUF:entiteittype=&quot;ZAKZAKDEL&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;/ZKN:heeftAlsDeelzaak&gt;
+							&lt;ZKN:heeftAlsHoofdzaak
+							StUF:entiteittype=&quot;ZAKZAKHFD&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;/ZKN:heeftAlsHoofdzaak&gt;
+							&lt;ZKN:heeftBetrekkingOpAndere
+							StUF:entiteittype=&quot;ZAKZAKBTR&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;/ZKN:heeftBetrekkingOpAndere&gt;
+							&lt;ZKN:heeft
+							StUF:entiteittype=&quot;ZAKSTT&quot;&gt;
+							&lt;ZKN:gerelateerde
+							StUF:entiteittype=&quot;STT&quot;&gt;
+							&lt;ZKN:code xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&gt;
+							&lt;/ZKN:gerelateerde&gt;
+							&lt;ZKN:datumStatusGezet xsi:nil=&quot;true&quot;
+							/&gt;
+							&lt;ZKN:indicatieLaatsteStatus
+							xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:isGezetDoor
+							StUF:entiteittype=&quot;ZAKSTTBTR&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;/ZKN:isGezetDoor&gt;
+							&lt;/ZKN:heeft&gt;
+							&lt;ZKN:heeftRelevant
+							StUF:entiteittype=&quot;ZAKEDC&quot;&gt;
+							&lt;ZKN:gerelateerde
+							StUF:entiteittype=&quot;EDC&quot;&gt;
 							&lt;ZKN:identificatie xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:creatiedatum xsi:nil=&quot;true&quot; /&gt;
-							&lt;ZKN:ontvangstdatum xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:ontvangstdatum xsi:nil=&quot;true&quot;
+							/&gt;
 							&lt;ZKN:titel xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:beschrijving xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:formaat xsi:nil=&quot;true&quot; /&gt;
@@ -133,20 +166,22 @@
 							&lt;ZKN:versie xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:status xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:verzenddatum xsi:nil=&quot;true&quot; /&gt;
-							&lt;ZKN:vertrouwelijkAanduiding xsi:nil=&quot;true&quot; /&gt;
+							&lt;ZKN:vertrouwelijkAanduiding
+							xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:inhoud xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:auteur xsi:nil=&quot;true&quot; /&gt;
 							&lt;ZKN:link xsi:nil=&quot;true&quot; /&gt;
-						&lt;/ZKN:gerelateerde&gt;
-					&lt;/ZKN:heeftRelevant&gt;
-					&lt;ZKN:leidtTot StUF:entiteittype=&quot;ZAKBSL&quot;&gt;
-						&lt;ZKN:gerelateerde/&gt;
-					&lt;/ZKN:leidtTot&gt;
-				&lt;/ZKN:object&gt;
-			&lt;/ZKN:scope&gt;
-		&lt;/ZKN:zakLv01&gt;
-	&lt;/soapenv:Body&gt;
-&lt;/soapenv:Envelope&gt;</string>
+							&lt;/ZKN:gerelateerde&gt;
+							&lt;/ZKN:heeftRelevant&gt;
+							&lt;ZKN:leidtTot
+							StUF:entiteittype=&quot;ZAKBSL&quot;&gt;
+							&lt;ZKN:gerelateerde/&gt;
+							&lt;/ZKN:leidtTot&gt;
+							&lt;/ZKN:object&gt;
+							&lt;/ZKN:scope&gt;
+							&lt;/ZKN:zakLv01&gt;
+							&lt;/soapenv:Body&gt;
+							&lt;/soapenv:Envelope&gt;</string>
      </void>
      <void property="name">
       <string>Translate zakLv01</string>
@@ -158,7 +193,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -183,7 +218,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -208,7 +243,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -233,7 +268,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -258,7 +293,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -283,7 +318,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -296,7 +331,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-20210518.202847-6527cd27:18d7ee137a1:-7f6e</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d05</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -308,7 +343,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -333,7 +368,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -358,7 +393,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -383,7 +418,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -418,7 +453,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -440,7 +475,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -453,7 +488,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/zakLv01 with kenmerk: &apos;null&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 216 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/zakLv01 with kenmerk: &apos;null&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 32 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -465,7 +500,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -483,151 +518,194 @@
   &lt;SOAP-ENV:Body&gt;&#13;
     &lt;SOAP-ENV:Fault&gt;&#13;
       &lt;faultcode xmlns:env=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;env:Receiver&lt;/faultcode&gt;&#13;
-      &lt;faultstring&gt;java.lang.NullPointerException&lt;/faultstring&gt;&#13;
+      &lt;faultstring&gt;nl.haarlem.translations.zdstozgw.converter.ConverterException: create soapmessage from request:com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML declaration parsing failed&lt;/faultstring&gt;&#13;
       &lt;detail&gt;&#13;
         &lt;Fo03Bericht xmlns=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ns2=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&gt;&#13;
-          &lt;stuurgegevens&gt;&#13;
-            &lt;berichtcode&gt;Fo03&lt;/berichtcode&gt;&#13;
-            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847-6527cd27:18d7ee137a1:-7f6e&lt;/referentienummer&gt;&#13;
-            &lt;tijdstipBericht&gt;20240206154629&lt;/tijdstipBericht&gt;&#13;
-          &lt;/stuurgegevens&gt;&#13;
           &lt;body&gt;&#13;
             &lt;code&gt;StUF058&lt;/code&gt;&#13;
             &lt;plek&gt;server&lt;/plek&gt;&#13;
-            &lt;omschrijving&gt;java.lang.NullPointerException&lt;/omschrijving&gt;&#13;
-            &lt;details&gt;java.lang.NullPointerException&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.converter.impl.translate.GeefZaakDetailsTranslator.execute(GeefZaakDetailsTranslator.java:50)&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.requesthandler.RequestHandler.execute(RequestHandler.java:98)&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.controller.SoapController.HandleRequest(SoapController.java:131)&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.debug.Rerunner.rerun(Rerunner.java:72)&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.debug.Rerunner$$FastClassBySpringCGLIB$$ca0b8a6e.invoke(&amp;lt;generated&amp;gt;)&amp;#13;&#13;
-	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)&amp;#13;&#13;
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)&amp;#13;&#13;
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)&amp;#13;&#13;
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)&amp;#13;&#13;
-	at org.springframework.transaction.in&lt;/details&gt;&#13;
+            &lt;omschrijving&gt;nl.haarlem.translations.zdstozgw.converter.ConverterException: create soapmessage from request:com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML declaration parsing failed&lt;/omschrijving&gt;&#13;
+            &lt;details&gt;﻿&amp;lt;?xml version=&quot;1.0&quot;&#13;
+							encoding=&quot;utf-8&quot;?&amp;gt;&#13;
+							&amp;lt;soapenv:Envelope&#13;
+							xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&amp;gt;&#13;
+							&amp;lt;soapenv:Header/&amp;gt;&#13;
+							&amp;lt;soapenv:Body&amp;gt;&#13;
+							&amp;lt;ZKN:zakLv01&#13;
+							xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&#13;
+							xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#13;
+							xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&#13;
+							xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot;&#13;
+							xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:stuurgegevens&amp;gt;&#13;
+							&amp;lt;StUF:berichtcode&amp;gt;Lv01&amp;lt;/StUF:berichtcode&amp;gt;&#13;
+							&amp;lt;StUF:entiteittype&amp;gt;ZAK&amp;lt;/StUF:entiteittype&amp;gt;&#13;
+							&amp;lt;/ZKN:stuurgegevens&amp;gt;&#13;
+							&amp;lt;ZKN:parameters&amp;gt;&#13;
+							&amp;lt;StUF:sortering&amp;gt;0&amp;lt;/StUF:sortering&amp;gt;&#13;
+							&amp;lt;StUF:indicatorVervolgvraag&amp;gt;false&amp;lt;/StUF:indicatorVervolgvraag&amp;gt;&#13;
+							&amp;lt;/ZKN:parameters&amp;gt;&#13;
+							&amp;lt;ZKN:gelijk StUF:entiteittype=&quot;ZAK&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsInitiator&#13;
+							StUF:entiteittype=&quot;ZAKBTRINI&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde&amp;gt;&#13;
+							&amp;lt;ZKN:identificatie&amp;gt;11111111110&amp;lt;/ZKN:identificatie&amp;gt;&#13;
+	&lt;/details&gt;&#13;
             &lt;detailsXML&gt;&#13;
-              &lt;todo&gt;﻿&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&#13;
-&amp;lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&amp;gt;&#13;
-	&amp;lt;soapenv:Header/&amp;gt;&#13;
-	&amp;lt;soapenv:Body&amp;gt;&#13;
-		&amp;lt;ZKN:zakLv01 xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&#13;
-           			xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#13;
-           			xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&#13;
-           			xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot;&#13;
-           			xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot;&amp;gt;&#13;
-			&amp;lt;ZKN:stuurgegevens&amp;gt;&#13;
-				&amp;lt;StUF:berichtcode&amp;gt;Lv01&amp;lt;/StUF:berichtcode&amp;gt;&#13;
-				&amp;lt;StUF:entiteittype&amp;gt;ZAK&amp;lt;/StUF:entiteittype&amp;gt;&#13;
-			&amp;lt;/ZKN:stuurgegevens&amp;gt;&#13;
-			&amp;lt;ZKN:parameters&amp;gt;&#13;
-				&amp;lt;StUF:sortering&amp;gt;0&amp;lt;/StUF:sortering&amp;gt;&#13;
-				&amp;lt;StUF:indicatorVervolgvraag&amp;gt;false&amp;lt;/StUF:indicatorVervolgvraag&amp;gt;&#13;
-			&amp;lt;/ZKN:parameters&amp;gt;&#13;
-			&amp;lt;ZKN:gelijk StUF:entiteittype=&quot;ZAK&quot;&amp;gt;&#13;
-				&amp;lt;ZKN:heeftAlsInitiator StUF:entiteittype=&quot;ZAKBTRINI&quot;&amp;gt;&#13;
-					&amp;lt;ZKN:gerelateerde&amp;gt;&#13;
-						&amp;lt;ZKN:identificatie&amp;gt;11111111110&amp;lt;/ZKN:identificatie&amp;gt;&#13;
-					&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
-				&amp;lt;/ZKN:heeftAlsInitiator&amp;gt;&#13;
-			&amp;lt;/ZKN:gelijk&amp;gt;&#13;
-			&amp;lt;ZKN:scope&amp;gt;&#13;
-				&amp;lt;ZKN:object StUF:entiteittype=&quot;ZAK&quot;&amp;gt;&#13;
-					&amp;lt;ZKN:identificatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:resultaat&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;/ZKN:resultaat&amp;gt;&#13;
-					&amp;lt;ZKN:startdatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:registratiedatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:publicatiedatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:einddatumGepland xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:uiterlijkeEinddatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:einddatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:opschorting&amp;gt;&#13;
-						&amp;lt;ZKN:indicatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;ZKN:reden xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;/ZKN:opschorting&amp;gt;&#13;
-					&amp;lt;ZKN:verlenging&amp;gt;&#13;
-						&amp;lt;ZKN:duur xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;ZKN:reden xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;/ZKN:verlenging&amp;gt;&#13;
-					&amp;lt;ZKN:betalingsIndicatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:laatsteBetaaldatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:archiefnominatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:datumVernietigingDossier xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:zaakniveau xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:deelzakenIndicatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-					&amp;lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde StUF:entiteittype=&quot;ZKT&quot;&amp;gt;&#13;
+              &lt;todo&gt;﻿&amp;lt;?xml version=&quot;1.0&quot;&#13;
+							encoding=&quot;utf-8&quot;?&amp;gt;&#13;
+							&amp;lt;soapenv:Envelope&#13;
+							xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&amp;gt;&#13;
+							&amp;lt;soapenv:Header/&amp;gt;&#13;
+							&amp;lt;soapenv:Body&amp;gt;&#13;
+							&amp;lt;ZKN:zakLv01&#13;
+							xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&#13;
+							xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&#13;
+							xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&#13;
+							xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot;&#13;
+							xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:stuurgegevens&amp;gt;&#13;
+							&amp;lt;StUF:berichtcode&amp;gt;Lv01&amp;lt;/StUF:berichtcode&amp;gt;&#13;
+							&amp;lt;StUF:entiteittype&amp;gt;ZAK&amp;lt;/StUF:entiteittype&amp;gt;&#13;
+							&amp;lt;/ZKN:stuurgegevens&amp;gt;&#13;
+							&amp;lt;ZKN:parameters&amp;gt;&#13;
+							&amp;lt;StUF:sortering&amp;gt;0&amp;lt;/StUF:sortering&amp;gt;&#13;
+							&amp;lt;StUF:indicatorVervolgvraag&amp;gt;false&amp;lt;/StUF:indicatorVervolgvraag&amp;gt;&#13;
+							&amp;lt;/ZKN:parameters&amp;gt;&#13;
+							&amp;lt;ZKN:gelijk StUF:entiteittype=&quot;ZAK&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsInitiator&#13;
+							StUF:entiteittype=&quot;ZAKBTRINI&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde&amp;gt;&#13;
+							&amp;lt;ZKN:identificatie&amp;gt;11111111110&amp;lt;/ZKN:identificatie&amp;gt;&#13;
+							&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsInitiator&amp;gt;&#13;
+							&amp;lt;/ZKN:gelijk&amp;gt;&#13;
+							&amp;lt;ZKN:scope&amp;gt;&#13;
+							&amp;lt;ZKN:object StUF:entiteittype=&quot;ZAK&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:identificatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:resultaat&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;/ZKN:resultaat&amp;gt;&#13;
+							&amp;lt;ZKN:startdatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:registratiedatum xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:publicatiedatum xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:einddatumGepland xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:uiterlijkeEinddatum xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:einddatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:opschorting&amp;gt;&#13;
+							&amp;lt;ZKN:indicatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:reden xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;/ZKN:opschorting&amp;gt;&#13;
+							&amp;lt;ZKN:verlenging&amp;gt;&#13;
+							&amp;lt;ZKN:duur xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:reden xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;/ZKN:verlenging&amp;gt;&#13;
+							&amp;lt;ZKN:betalingsIndicatie xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:laatsteBetaaldatum xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:archiefnominatie xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:datumVernietigingDossier&#13;
+							xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:zaakniveau xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:deelzakenIndicatie xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:isVan&#13;
+							StUF:entiteittype=&quot;ZAKZKT&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde&#13;
+							StUF:entiteittype=&quot;ZKT&quot;&amp;gt;&#13;
 							&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:code xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
-					&amp;lt;/ZKN:isVan&amp;gt;&#13;
-					&amp;lt;ZKN:heeftBetrekkingOp StUF:entiteittype=&quot;ZAKOBJ&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftBetrekkingOp&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsBelanghebbende StUF:entiteittype=&quot;ZAKBTRBLH&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
-						&amp;lt;ZKN:code/&amp;gt;&#13;
-						&amp;lt;ZKN:toelichting/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsBelanghebbende&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsGemachtigde StUF:entiteittype=&quot;ZAKBTRGMC&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
-						&amp;lt;ZKN:code/&amp;gt;&#13;
-						&amp;lt;ZKN:toelichting/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsGemachtigde&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsInitiator StUF:entiteittype=&quot;ZAKBTRINI&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
-						&amp;lt;ZKN:code/&amp;gt;&#13;
-						&amp;lt;ZKN:toelichting/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsInitiator&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsUitvoerende StUF:entiteittype=&quot;ZAKBTRUTV&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
-						&amp;lt;ZKN:code/&amp;gt;&#13;
-						&amp;lt;ZKN:toelichting/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsUitvoerende&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsVerantwoordelijke StUF:entiteittype=&quot;ZAKBTRVRA&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsVerantwoordelijke&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsOverigBetrokkene StUF:entiteittype=&quot;ZAKBTROVR&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
-						&amp;lt;ZKN:code/&amp;gt;&#13;
-						&amp;lt;ZKN:toelichting/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsOverigBetrokkene&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsDeelzaak StUF:entiteittype=&quot;ZAKZAKDEL&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsDeelzaak&amp;gt;&#13;
-					&amp;lt;ZKN:heeftAlsHoofdzaak StUF:entiteittype=&quot;ZAKZAKHFD&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftAlsHoofdzaak&amp;gt;&#13;
-					&amp;lt;ZKN:heeftBetrekkingOpAndere StUF:entiteittype=&quot;ZAKZAKBTR&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftBetrekkingOpAndere&amp;gt;&#13;
-					&amp;lt;ZKN:heeft StUF:entiteittype=&quot;ZAKSTT&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde StUF:entiteittype=&quot;STT&quot;&amp;gt;&#13;
-							&amp;lt;ZKN:code xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-							&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
-						&amp;lt;ZKN:datumStatusGezet xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;ZKN:indicatieLaatsteStatus xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;ZKN:isGezetDoor StUF:entiteittype=&quot;ZAKSTTBTR&quot;&amp;gt;&#13;
+							&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
+							&amp;lt;/ZKN:isVan&amp;gt;&#13;
+							&amp;lt;ZKN:heeftBetrekkingOp&#13;
+							StUF:entiteittype=&quot;ZAKOBJ&quot;&amp;gt;&#13;
 							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-						&amp;lt;/ZKN:isGezetDoor&amp;gt;&#13;
-					&amp;lt;/ZKN:heeft&amp;gt;&#13;
-					&amp;lt;ZKN:heeftRelevant StUF:entiteittype=&quot;ZAKEDC&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde StUF:entiteittype=&quot;EDC&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftBetrekkingOp&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsBelanghebbende&#13;
+							StUF:entiteittype=&quot;ZAKBTRBLH&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
+							&amp;lt;ZKN:code/&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsBelanghebbende&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsGemachtigde&#13;
+							StUF:entiteittype=&quot;ZAKBTRGMC&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
+							&amp;lt;ZKN:code/&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsGemachtigde&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsInitiator&#13;
+							StUF:entiteittype=&quot;ZAKBTRINI&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
+							&amp;lt;ZKN:code/&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsInitiator&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsUitvoerende&#13;
+							StUF:entiteittype=&quot;ZAKBTRUTV&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
+							&amp;lt;ZKN:code/&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsUitvoerende&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsVerantwoordelijke&#13;
+							StUF:entiteittype=&quot;ZAKBTRVRA&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsVerantwoordelijke&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsOverigBetrokkene&#13;
+							StUF:entiteittype=&quot;ZAKBTROVR&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving/&amp;gt;&#13;
+							&amp;lt;ZKN:code/&amp;gt;&#13;
+							&amp;lt;ZKN:toelichting/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsOverigBetrokkene&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsDeelzaak&#13;
+							StUF:entiteittype=&quot;ZAKZAKDEL&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsDeelzaak&amp;gt;&#13;
+							&amp;lt;ZKN:heeftAlsHoofdzaak&#13;
+							StUF:entiteittype=&quot;ZAKZAKHFD&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftAlsHoofdzaak&amp;gt;&#13;
+							&amp;lt;ZKN:heeftBetrekkingOpAndere&#13;
+							StUF:entiteittype=&quot;ZAKZAKBTR&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftBetrekkingOpAndere&amp;gt;&#13;
+							&amp;lt;ZKN:heeft&#13;
+							StUF:entiteittype=&quot;ZAKSTT&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde&#13;
+							StUF:entiteittype=&quot;STT&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:code xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:omschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
+							&amp;lt;ZKN:datumStatusGezet xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
+							&amp;lt;ZKN:indicatieLaatsteStatus&#13;
+							xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:isGezetDoor&#13;
+							StUF:entiteittype=&quot;ZAKSTTBTR&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;/ZKN:isGezetDoor&amp;gt;&#13;
+							&amp;lt;/ZKN:heeft&amp;gt;&#13;
+							&amp;lt;ZKN:heeftRelevant&#13;
+							StUF:entiteittype=&quot;ZAKEDC&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde&#13;
+							StUF:entiteittype=&quot;EDC&quot;&amp;gt;&#13;
 							&amp;lt;ZKN:identificatie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:creatiedatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-							&amp;lt;ZKN:ontvangstdatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:ontvangstdatum xsi:nil=&quot;true&quot;&#13;
+							/&amp;gt;&#13;
 							&amp;lt;ZKN:titel xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:beschrijving xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:formaat xsi:nil=&quot;true&quot; /&amp;gt;&#13;
@@ -635,20 +713,22 @@
 							&amp;lt;ZKN:versie xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:status xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:verzenddatum xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-							&amp;lt;ZKN:vertrouwelijkAanduiding xsi:nil=&quot;true&quot; /&amp;gt;&#13;
+							&amp;lt;ZKN:vertrouwelijkAanduiding&#13;
+							xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:inhoud xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:auteur xsi:nil=&quot;true&quot; /&amp;gt;&#13;
 							&amp;lt;ZKN:link xsi:nil=&quot;true&quot; /&amp;gt;&#13;
-						&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
-					&amp;lt;/ZKN:heeftRelevant&amp;gt;&#13;
-					&amp;lt;ZKN:leidtTot StUF:entiteittype=&quot;ZAKBSL&quot;&amp;gt;&#13;
-						&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
-					&amp;lt;/ZKN:leidtTot&amp;gt;&#13;
-				&amp;lt;/ZKN:object&amp;gt;&#13;
-			&amp;lt;/ZKN:scope&amp;gt;&#13;
-		&amp;lt;/ZKN:zakLv01&amp;gt;&#13;
-	&amp;lt;/soapenv:Body&amp;gt;&#13;
-&amp;lt;/soapenv:Envelope&amp;gt;&lt;/todo&gt;&#13;
+							&amp;lt;/ZKN:gerelateerde&amp;gt;&#13;
+							&amp;lt;/ZKN:heeftRelevant&amp;gt;&#13;
+							&amp;lt;ZKN:leidtTot&#13;
+							StUF:entiteittype=&quot;ZAKBSL&quot;&amp;gt;&#13;
+							&amp;lt;ZKN:gerelateerde/&amp;gt;&#13;
+							&amp;lt;/ZKN:leidtTot&amp;gt;&#13;
+							&amp;lt;/ZKN:object&amp;gt;&#13;
+							&amp;lt;/ZKN:scope&amp;gt;&#13;
+							&amp;lt;/ZKN:zakLv01&amp;gt;&#13;
+							&amp;lt;/soapenv:Body&amp;gt;&#13;
+							&amp;lt;/soapenv:Envelope&amp;gt;&lt;/todo&gt;&#13;
             &lt;/detailsXML&gt;&#13;
           &lt;/body&gt;&#13;
         &lt;/Fo03Bericht&gt;&#13;
@@ -668,7 +748,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-8</string>
+      <string>Thread-108</string>
      </void>
      <void property="type">
       <int>3</int>
@@ -677,10 +757,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-20210518.202847-6527cd27:18d7ee137a1:-7f6e</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d05</string>
   </void>
   <void property="endTime">
-   <long>1707230789831</long>
+   <long>1707233151618</long>
   </void>
   <void property="name">
    <string>Translate zakLv01 (2)</string>
@@ -689,10 +769,10 @@
    <string>/Verint KANA/</string>
   </void>
   <void property="startTime">
-   <long>1707230789576</long>
+   <long>1707233151585</long>
   </void>
   <void property="storageId">
-   <int>854</int>
+   <int>901</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>

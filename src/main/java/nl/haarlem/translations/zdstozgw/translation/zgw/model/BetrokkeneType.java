@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
-package nl.haarlem.translations.zdstozgw.translation;
+package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
 public enum BetrokkeneType {
 	NATUURLIJK_PERSOON("natuurlijk_persoon"), NIET_NATUURLIJK_PERSOON("niet_natuurlijk_persoon"),

@@ -10,561 +10,563 @@
 		<documentsoort id="MDS0000000">
 			<naam>Onbepaalde documentsoort</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting>Default soort. Deze waarde geeft aan dat een inhoudelijke soort nog moet worden toegekend</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting>Default soort. Deze waarde geeft aan dat een
+				inhoudelijke soort nog moet worden toegekend</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000001">
 			<naam>Aanvraag</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Voordracht;Verzoek</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000002">
 			<naam>Plan</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Werkopdracht</synoniemen>
-			<toelichting>Document op basis waarvan periodieke processen worden geïnitieerd.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Document op basis waarvan periodieke processen worden
+				geïnitieerd.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000003">
 			<naam>Melding</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Aangifte;Claim</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000004">
 			<naam>Klaagschrift</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Claim</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000005">
 			<naam>Beroepschrift</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Beroep</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000006">
 			<naam>Bezwaarschrift</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000007">
 			<naam>Projectvoorstel</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000008">
 			<naam>Opdracht</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Wetswijziging</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000009">
 			<naam>Verzoek aanvullende gegevens</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Verzoek gegevens</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000010">
 			<naam>Aanvullende gegevens</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Gegevens</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000011">
 			<naam>Uitnodiging mondelinge toelichting</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Uitnodiging hoorzitting</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000012">
 			<naam>Verslag mondelinge toelichting</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Verslag hoorzitting</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000013">
 			<naam>Bewijsstuk (alg.)</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000014">
 			<naam>Bewijs identiteit</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000015">
 			<naam>Bewijs eigendom</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000016">
 			<naam>Bewijs inschrijving</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000017">
 			<naam>Bewijs inkomen</naam>
 			<procesfase>Informatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000018">
 			<naam>Verzoek advies (intern)</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000019">
 			<naam>Advies (intern)</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000020">
 			<naam>Verzoek advies (extern)</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000021">
 			<naam>Advies (extern)</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000022">
 			<naam>Voorstel (alg.)</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000023">
 			<naam>Raadsvoorstel</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000024">
 			<naam>Collegevoorstel</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000025">
 			<naam>Besluit (alg.)</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Uitvoeringsplan</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000026">
 			<naam>Raadsbesluit</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000027">
 			<naam>Collegebesluit</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000028">
 			<naam>Beschikking (alg.)</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000029">
 			<naam>Kennisgeving besluit naar aanvrager</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000030">
 			<naam>Kennisgeving besluit naar derden</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000031">
 			<naam>Zienswijze (uitgaand)</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Verweer</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000032">
 			<naam>Pleitnota</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000033">
 			<naam>Uitspraak</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000034">
 			<naam>Factuur</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Aanslag;Leges</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000035">
 			<naam>Bewijs van betaling</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000036">
 			<naam>Bewijs van uitvoering (alg.)</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000037">
 			<naam>Rapport</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Uitvoeringsrapport;Projectrapport;Eindrapport</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000038">
 			<naam>(kopie) Overeenkomst</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Opdracht;Uitvoeringscontract</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000039">
 			<naam>(kopie) Product</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000040">
 			<naam>Overig stuk inkomend</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000041">
 			<naam>Overig stuk intern</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000042">
 			<naam>Overig stuk uitgaand</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000043">
 			<naam>Kennisgeving (alg.)</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000044">
 			<naam>Kennisgeving voortgang</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000045">
 			<naam>Kennisgeving ontvangst</naam>
 			<procesfase>Alle fases</procesfase>
-			<type xsi:nil="true"/>
+			<type xsi:nil="true" />
 			<synoniemen>Ontvangstbevestiging</synoniemen>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000046">
 			<naam>Kennisgeving besluit</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000047">
 			<naam>Kennisgeving beschikking</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000048">
 			<naam>Zienswijze (inkomend)</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000049">
 			<naam>Verslag zienswijzen</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
 		<documentsoort id="MDS0000050">
 			<naam>Onderzoeksstuk</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<type xsi:nil="true"/>
-			<synoniemen xsi:nil="true"/>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<type xsi:nil="true" />
+			<synoniemen xsi:nil="true" />
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</documentsoort>
@@ -573,36 +575,40 @@
 		<statussoort id="MSS0000000">
 			<naam>Onbepaalde statussoort</naam>
 			<procesfase>Alle fases</procesfase>
-			<toelichting>Default soort. Deze waarde geeft aan dat een inhoudelijke soort nog moet worden toegekend</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Default soort. Deze waarde geeft aan dat een
+				inhoudelijke soort nog moet worden toegekend</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:02:00</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000001">
 			<naam>Geregistreerd</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<toelichting>Deze status markeert dat het startdocument van de zaak is geregistreerd.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat het startdocument van de zaak
+				is geregistreerd.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000002">
 			<naam>Geaccepteerd</naam>
 			<procesfase>Initiatiefase</procesfase>
-			<toelichting>Deze status markeert dat de behandelende afdeling de zaak heeft geaccepteerd.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de behandelende afdeling de
+				zaak heeft geaccepteerd.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000003">
 			<naam>In behandeling genomen</naam>
 			<procesfase>Informatiefase</procesfase>
-			<toelichting>Deze status markeert dat de zaak is toegekend aan een behandelaar.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de zaak is toegekend aan een
+				behandelaar.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:07:26</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
@@ -610,44 +616,48 @@
 			<naam>Afgehandeld</naam>
 			<procesfase>Afrondingsfase</procesfase>
 			<toelichting>Deze status markeert dat de zaak is afgesloten.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:32:26</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000006">
 			<naam>Toetsing wet- en regelgeving afgerond</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<toelichting>Deze status markeert dat de toets aan de vigerende wet- en regelgeving is uitgevoerd.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de toets aan de vigerende wet-
+				en regelgeving is uitgevoerd.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000007">
 			<naam>Onderzoek afgerond</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<toelichting>Deze status markeert dat de benodigde onderzoeken zijn afgerond.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de benodigde onderzoeken zijn
+				afgerond.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000008">
 			<naam>Advies ingewonnen</naam>
 			<procesfase>Consultatiefase</procesfase>
-			<toelichting>Deze status markeert dat advies is ingewonnen bij de daarvoor aangewezen instanties en partijen.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat advies is ingewonnen bij de
+				daarvoor aangewezen instanties en partijen.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000009">
 			<naam>Voorstel voor besluitvorming opgesteld</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<toelichting>Deze status markeert dat er een concept-besluit is opgesteld.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat er een concept-besluit is
+				opgesteld.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
@@ -655,44 +665,48 @@
 			<naam>Besluitvorming afgerond</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
 			<toelichting>Deze status markeert dat er een besluit is genomen.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:07:26</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000011">
 			<naam>Ter inzage legging afgerond</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<toelichting>Deze status markeert dat de periode dat het besluit voor inzage beschikbaar is is afgesloten.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de periode dat het besluit
+				voor inzage beschikbaar is is afgesloten.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000012">
 			<naam>Inspraakprocedure afgerond</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<toelichting>Deze status markeert dat de inspraakprocedure is afgerond.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de inspraakprocedure is
+				afgerond.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000013">
 			<naam>Zienswijzeprocedure afgerond</naam>
 			<procesfase>Besluitvormingsfase</procesfase>
-			<toelichting>Deze status markeert dat de zienswijzeprocedure is afgerond.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de zienswijzeprocedure is
+				afgerond.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000014">
 			<naam>Uitvoering afgerond</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<toelichting>Deze status markeert dat de uitvoering van het besluit is afgerond.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de uitvoering van het besluit
+				is afgerond.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
@@ -700,17 +714,18 @@
 			<naam>Melding ontvangen</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
 			<toelichting>Deze status markeert dat de melding is ontvangen.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-07-24T10:06:12</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
 		<statussoort id="MSS0000016">
 			<naam>Gegevens verwerkt</naam>
 			<procesfase>Uitvoeringsfase</procesfase>
-			<toelichting>Deze status markeert dat de te verwerken gegevens zijn verwerkt in de betreffende administraties.</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Deze status markeert dat de te verwerken gegevens zijn
+				verwerkt in de betreffende administraties.</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2015-11-05T11:54:36</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</statussoort>
@@ -718,425 +733,426 @@
 	<resultaatsoorten>
 		<resultaatsoort id="MRS0000000">
 			<naam>Onbepaalde resultaatsoort</naam>
-			<toelichting>Default soort. Deze waarde geeft aan dat een inhoudelijke soort nog moet worden toegekend</toelichting>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting>Default soort. Deze waarde geeft aan dat een
+				inhoudelijke soort nog moet worden toegekend</toelichting>
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000001">
 			<naam>Aangekocht</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000002">
 			<naam>Niet aangekocht</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000003">
 			<naam>Verhuurd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000004">
 			<naam>Verkocht</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000005">
 			<naam>Aangesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000006">
 			<naam>Niet aangesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000007">
 			<naam>Aanvaard</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000008">
 			<naam>Geweigerd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000009">
 			<naam>Afgehandeld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000010">
 			<naam>Afgebroken</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000011">
 			<naam>Afgewezen</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000012">
 			<naam>Betaald</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000013">
 			<naam>Niet betaald</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000014">
 			<naam>Toegekend</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000015">
 			<naam>Definitief toegekend</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000016">
 			<naam>Geïnd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000017">
 			<naam>Gedeeltelijk geïnd/afgeboekt</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000018">
 			<naam>Niet geïnd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000019">
 			<naam>Afgeboekt</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000020">
 			<naam>Gegrond</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000021">
 			<naam>Ongegrond</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000022">
 			<naam>Gewijzigd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000023">
 			<naam>Niet gewijzigd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000024">
 			<naam>Ingeschreven</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000025">
 			<naam>Niet ingeschreven</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000026">
 			<naam>Ingesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000027">
 			<naam>Niet ingesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000028">
 			<naam>Ingetrokken</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000029">
 			<naam>Niet ingetrokken</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000030">
 			<naam>Verwerkt</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000031">
 			<naam>Niet verwerkt</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000032">
 			<naam>Vastgesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000033">
 			<naam>Niet vastgesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000034">
 			<naam>Verleend</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000035">
 			<naam>Niet verleend</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000036">
 			<naam>Verstrekt</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000037">
 			<naam>Niet verstrekt</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000038">
 			<naam>Overtreding opgeheven</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000039">
 			<naam>Overtreding gedoogd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:00:42</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000040">
 			<naam>Positief advies</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:02:00</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000041">
 			<naam>Negatief advies</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2012-08-23T15:02:00</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000043">
 			<naam>Niet doorgegaan</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000044">
 			<naam>Verkregen</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000045">
 			<naam>Niet uitgevoerd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000046">
 			<naam>Niet geleverd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000047">
 			<naam>Geleverd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000048">
 			<naam>Niet toegekend</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000049">
 			<naam>Ingewilligd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000050">
 			<naam>Aangegaan</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000051">
 			<naam>Uitgevoerd</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:35:35</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000052">
 			<naam>Buiten behandeling gesteld</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2017-10-27T10:35:35</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
 		<resultaatsoort id="MRS0000053">
 			<naam>Opgeheven</naam>
-			<toelichting xsi:nil="true"/>
-			<opmerking xsi:nil="true"/>
-			<LokaleMetaData/>
+			<toelichting xsi:nil="true" />
+			<opmerking xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2019-05-22T14:18:34</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</resultaatsoort>
@@ -1147,25 +1163,34 @@
 			<model-kernomschrijving>Minimaregeling aanvraag</model-kernomschrijving>
 			<naam>Het beoordelen van een aanvraag minimaregelingen</naam>
 			<bron>Model</bron>
-			<proceseigenaar xsi:nil="true"/>
+			<proceseigenaar xsi:nil="true" />
 			<taakveld>Sociale voorzieningen en maatschappelijke dienstverlening</taakveld>
-			<vind-catalogusterm/>
+			<vind-catalogusterm />
 			<vng-thesaurusterm>SOCIALE MINIMA</vng-thesaurusterm>
-			<lokale-trefwoorden xsi:nil="true"/>
+			<lokale-trefwoorden xsi:nil="true" />
 			<basisarchiefcode>-1.844.51</basisarchiefcode>
 			<goedgekeurd>Nee</goedgekeurd>
-			<goedkeurdatum xsi:nil="true"/>
+			<goedkeurdatum xsi:nil="true" />
 			<exportprofiel>
 				<waardes>
 					<waarde ref="LW00000017">Key2zaken</waarde>
 					<waarde ref="LW00000018">Nu exporteren</waarde>
 				</waardes>
 			</exportprofiel>
-			<ketenpartners/>
-			<toelichting-proces>Dit werkproces betreft het beoordelen van een aanvraag voor een minimaregeling. Een minimaregeling is een inkomensondersteunende voorziening voor mensen met een inkomen dat niet hoger is dan 110% van het sociaal minimum. De gemeente kan deze (gedeeltelijke) vergoeding toekennen voor kosten van witgoedapparatuur, kosten voor kinderen en kosten in verband met ouderdom, een handicap of chronische ziekte. Zie voor de minimaregeling voor de kosten in verband met een ziektekostenverzekering werkproces B1261 "Collectieve aanvullende zorgverzekering".</toelichting-proces>
-			<opmerking-proces xsi:nil="true"/>
+			<ketenpartners />
+			<toelichting-proces>Dit werkproces betreft het beoordelen van een
+				aanvraag voor een minimaregeling. Een minimaregeling is een
+				inkomensondersteunende voorziening voor mensen met een inkomen
+				dat niet hoger is dan 110% van het sociaal minimum. De gemeente
+				kan deze (gedeeltelijke) vergoeding toekennen voor kosten van
+				witgoedapparatuur, kosten voor kinderen en kosten in verband met
+				ouderdom, een handicap of chronische ziekte. Zie voor de
+				minimaregeling voor de kosten in verband met een
+				ziektekostenverzekering werkproces B1261 "Collectieve
+				aanvullende zorgverzekering".</toelichting-proces>
+			<opmerking-proces xsi:nil="true" />
 			<ztc-procestype>Specifiek werkproces</ztc-procestype>
-			<generiek-zaaktype xsi:nil="true"/>
+			<generiek-zaaktype xsi:nil="true" />
 			<zaaktype-code>41</zaaktype-code>
 			<zaaktype-naam-model>
 				<structuur>
@@ -1182,16 +1207,17 @@
 				</structuur>
 			</zaaktype-naam>
 			<zaaktype-categorie>Trigger Extern (TE)</zaaktype-categorie>
-			<zaaktype-procesarchitectuur>Behandelen verzoek ondersteuningsproduct</zaaktype-procesarchitectuur>
+			<zaaktype-procesarchitectuur>Behandelen verzoek
+				ondersteuningsproduct</zaaktype-procesarchitectuur>
 			<zaaktype-iv3-categorie>6.3 Inkomensregelingen</zaaktype-iv3-categorie>
 			<grondslag>
-				<list/>
+				<list />
 			</grondslag>
 			<lokale-regelgeving>
-				<list/>
+				<list />
 			</lokale-regelgeving>
 			<vernietigingsgrondslag>
-				<list/>
+				<list />
 			</vernietigingsgrondslag>
 			<waardering>Vernietigen</waardering>
 			<bewaartermijn>10</bewaartermijn>
@@ -1200,603 +1226,640 @@
 			<beroep-mogelijk>Ja</beroep-mogelijk>
 			<betaling-nodig>Nee</betaling-nodig>
 			<vertrouwelijkheid>Vertrouwelijk</vertrouwelijkheid>
-			<wkpb/>
-			<bag/>
+			<wkpb />
+			<bag />
 			<wet-dwangsom>Ja</wet-dwangsom>
 			<lex_silencio_positivo>Nee</lex_silencio_positivo>
 			<publicatie-indicatie>Nee</publicatie-indicatie>
-			<publicatietekst xsi:nil="true"/>
-			<afdoeningstermijn xsi:nil="true"/>
-			<afdoeningstermijn-eenheid xsi:nil="true"/>
+			<publicatietekst xsi:nil="true" />
+			<afdoeningstermijn xsi:nil="true" />
+			<afdoeningstermijn-eenheid xsi:nil="true" />
 			<wettelijke-afdoeningstermijn>8</wettelijke-afdoeningstermijn>
 			<wettelijke-afdoeningstermijn-eenheid>Week</wettelijke-afdoeningstermijn-eenheid>
-			<verdagingstermijn xsi:nil="true"/>
-			<verdagingstermijn-eenheid xsi:nil="true"/>
-			<wettelijke-verdagingstermijn xsi:nil="true"/>
-			<wettelijke-verdagingstermijn-eenheid xsi:nil="true"/>
-			<signaleringstermijn xsi:nil="true"/>
-			<signaleringstermijn-eenheid xsi:nil="true"/>
-			<toelichting-handeling>Ander datumkenmerk: na beëindiging voorziening in registratie 'Minimaregelingen'</toelichting-handeling>
-			<opmerking-handeling xsi:nil="true"/>
+			<verdagingstermijn xsi:nil="true" />
+			<verdagingstermijn-eenheid xsi:nil="true" />
+			<wettelijke-verdagingstermijn xsi:nil="true" />
+			<wettelijke-verdagingstermijn-eenheid xsi:nil="true" />
+			<signaleringstermijn xsi:nil="true" />
+			<signaleringstermijn-eenheid xsi:nil="true" />
+			<toelichting-handeling>Ander datumkenmerk: na beëindiging
+				voorziening in registratie 'Minimaregelingen'</toelichting-handeling>
+			<opmerking-handeling xsi:nil="true" />
 			<statustypen>
 				<statustype id="MST0002253" soort-id="MSS0000001" volgnummer="1">
 					<naam>Ontvangen</naam>
 					<naam-model>Geregistreerd</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting>Deze status markeert dat het startdocument van de zaak is geregistreerd.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<toelichting>Deze status markeert dat het startdocument van
+						de zaak is geregistreerd.</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:33</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2016-10-17T12:55:10</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="MST0002254" soort-id="MSS0000002" volgnummer="2">
 					<naam>Geaccepteerd</naam>
 					<naam-model>Geaccepteerd</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting>Deze status markeert dat de behandelende afdeling de zaak heeft geaccepteerd.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<toelichting>Deze status markeert dat de behandelende
+						afdeling de zaak heeft geaccepteerd.</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2015-11-24T11:20:03</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="MST0002255" soort-id="MSS0000003" volgnummer="3">
 					<naam>In behandeling genomen</naam>
 					<naam-model>In behandeling genomen</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting>Deze status markeert dat de zaak is toegekend aan een behandelaar.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<toelichting>Deze status markeert dat de zaak is toegekend
+						aan een behandelaar.</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2015-11-24T11:20:03</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="MST0002256" soort-id="MSS0000005" volgnummer="4">
 					<naam>Afgehandeld</naam>
 					<naam-model>Afgehandeld</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
 					<toelichting>Deze status markeert dat de zaak is afgesloten.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2016-10-25T10:28:59</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="MST0004643" soort-id="MSS0000007" volgnummer="5">
 					<naam>Onderzoek afgerond</naam>
 					<naam-model>Onderzoek afgerond</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting>Deze status markeert dat de benodigde onderzoeken zijn afgerond.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<toelichting>Deze status markeert dat de benodigde
+						onderzoeken zijn afgerond.</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2015-07-24T10:54:13</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:33</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="MST0004644" soort-id="MSS0000009" volgnummer="6">
 					<naam>Voorstel voor besluitvorming opgesteld</naam>
 					<naam-model>Voorstel voor besluitvorming opgesteld</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting>Deze status markeert dat er een concept-besluit is opgesteld.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<toelichting>Deze status markeert dat er een concept-besluit
+						is opgesteld.</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2015-07-24T10:54:13</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:33</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="MST0004645" soort-id="MSS0000010" volgnummer="7">
 					<naam>Besluitvorming afgerond</naam>
 					<naam-model>Besluitvorming afgerond</naam-model>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting>Deze status markeert dat er een besluit is genomen.</toelichting>
-					<opmerking xsi:nil="true"/>
+					<toelichting>Deze status markeert dat er een besluit is
+						genomen.</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2015-07-24T10:54:13</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:34</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 				<statustype id="ST00000087" soort-id="MSS0000005" volgnummer="8">
 					<naam>Ingetrokken</naam>
-					<naam-model xsi:nil="true"/>
-					<standaard-doorlooptijd xsi:nil="true"/>
-					<standaard-doorlooptijd-eenheid xsi:nil="true"/>
+					<naam-model xsi:nil="true" />
+					<standaard-doorlooptijd xsi:nil="true" />
+					<standaard-doorlooptijd-eenheid xsi:nil="true" />
 					<zichtbaarheid>Intern</zichtbaarheid>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2016-10-25T14:13:26</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:34</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</statustype>
 			</statustypen>
 			<resultaattypen>
-				<resultaattype id="MRT0000967" soort-id="MRS0000010" volgnummer="1">
+				<resultaattype id="MRT0000967" soort-id="MRS0000010"
+					volgnummer="1">
 					<naam>Afgebroken</naam>
 					<naam-model>Afgebroken</naam-model>
 					<waardering>Vernietigen</waardering>
 					<bewaartermijn>1</bewaartermijn>
 					<bewaartermijn-eenheid>Jaar</bewaartermijn-eenheid>
 					<bewaartermijn-start>Afgehandeld</bewaartermijn-start>
-					<vernietigingsgrondslag>Resultaat 8.4 Selectielijst gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<vernietigingsgrondslag>Resultaat 8.4 Selectielijst
+						gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2019-05-22T14:32:40</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</resultaattype>
-				<resultaattype id="MRT0000968" soort-id="MRS0000008" volgnummer="2">
+				<resultaattype id="MRT0000968" soort-id="MRS0000008"
+					volgnummer="2">
 					<naam>Afgewezen</naam>
 					<naam-model>Geweigerd</naam-model>
 					<waardering>Vernietigen</waardering>
 					<bewaartermijn>5</bewaartermijn>
 					<bewaartermijn-eenheid>Jaar</bewaartermijn-eenheid>
 					<bewaartermijn-start>Afgehandeld</bewaartermijn-start>
-					<vernietigingsgrondslag>Resultaat 8.2 Selectielijst gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<vernietigingsgrondslag>Resultaat 8.2 Selectielijst
+						gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2019-05-22T14:32:40</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</resultaattype>
-				<resultaattype id="MRT0000969" soort-id="MRS0000036" volgnummer="3">
+				<resultaattype id="MRT0000969" soort-id="MRS0000036"
+					volgnummer="3">
 					<naam>Toegekend</naam>
 					<naam-model>Verstrekt</naam-model>
 					<waardering>Vernietigen</waardering>
 					<bewaartermijn>10</bewaartermijn>
 					<bewaartermijn-eenheid>Jaar</bewaartermijn-eenheid>
 					<bewaartermijn-start>Ander datumkenmerk</bewaartermijn-start>
-					<vernietigingsgrondslag>Resultaat 8.1 Selectielijst gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
-					<toelichting-bewaartermijn>Tot juli 1997 geldt een bewaartermijn van 7 jaar. De gemeente kan de vernietigingstermijn bepalen op 7 jaar indien het college het besluit neemt af te zien van invordering.</toelichting-bewaartermijn>
-					<toelichting>Ander datumkenmerk: na beëindiging voorziening in registratie 'Minimaregelingen'</toelichting>
-					<opmerking xsi:nil="true"/>
+					<vernietigingsgrondslag>Resultaat 8.1 Selectielijst
+						gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
+					<toelichting-bewaartermijn>Tot juli 1997 geldt een
+						bewaartermijn van 7 jaar. De gemeente kan de
+						vernietigingstermijn bepalen op 7 jaar indien het
+						college het besluit neemt af te zien van invordering.</toelichting-bewaartermijn>
+					<toelichting>Ander datumkenmerk: na beëindiging voorziening
+						in registratie 'Minimaregelingen'</toelichting>
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2019-05-22T14:32:40</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</resultaattype>
-				<resultaattype id="MRT0003044" soort-id="MRS0000052" volgnummer="4">
+				<resultaattype id="MRT0003044" soort-id="MRS0000052"
+					volgnummer="4">
 					<naam>Buiten behandeling gesteld</naam>
 					<naam-model>Buiten behandeling gesteld</naam-model>
 					<waardering>Vernietigen</waardering>
 					<bewaartermijn>5</bewaartermijn>
 					<bewaartermijn-eenheid>Jaar</bewaartermijn-eenheid>
 					<bewaartermijn-start>Afgehandeld</bewaartermijn-start>
-					<vernietigingsgrondslag>Resultaat 8.2 Selectielijst gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<vernietigingsgrondslag>Resultaat 8.2 Selectielijst
+						gemeenten en intergemeentelijke organen 2017;</vernietigingsgrondslag>
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2017-12-14T14:07:15</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2019-05-22T14:32:40</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</resultaattype>
 			</resultaattypen>
 			<documenttypen>
-				<documenttype id="BE00004832" soort-id="MDS0000024" volgnummer="1">
+				<documenttype id="BE00004832" soort-id="MDS0000024"
+					volgnummer="1">
 					<naam>Collegevoorstel</naam>
 					<naam-model>Collegevoorstel</naam-model>
 					<type>Intern</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2017-10-27T10:25:55</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00004833" soort-id="MDS0000047" volgnummer="2">
+				<documenttype id="BE00004833" soort-id="MDS0000047"
+					volgnummer="2">
 					<naam>Beschikking definitief</naam>
 					<naam-model>Kennisgeving beschikking</naam-model>
 					<type>Uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:53</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00004835" soort-id="MDS0000001" volgnummer="3">
+				<documenttype id="BE00004835" soort-id="MDS0000001"
+					volgnummer="3">
 					<naam>Formulier</naam>
 					<naam-model>Formulier aanvraag verstrekking minimabeleid</naam-model>
 					<type>Inkomend</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Ja</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:33</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2019-05-22T14:18:34</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00004836" soort-id="MDS0000009" volgnummer="4">
+				<documenttype id="BE00004836" soort-id="MDS0000009"
+					volgnummer="4">
 					<naam>Formulier inlichtingen verstrekking minimabeleid</naam>
 					<naam-model>Formulier inlichtingen verstrekking minimabeleid</naam-model>
 					<type>Uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2019-05-22T14:18:34</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00004834" soort-id="MDS0000028" volgnummer="5">
+				<documenttype id="BE00004834" soort-id="MDS0000028"
+					volgnummer="5">
 					<naam>Kopie beschikking</naam>
 					<naam-model>Beschikking</naam-model>
 					<type>Intern</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:54</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00007675" soort-id="MDS0000040" volgnummer="6">
+				<documenttype id="BE00007675" soort-id="MDS0000040"
+					volgnummer="6">
 					<naam>Overig stuk inkomend</naam>
 					<naam-model>Overig stuk inkomend</naam-model>
 					<type>Inkomend</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:54</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00007676" soort-id="MDS0000041" volgnummer="7">
+				<documenttype id="BE00007676" soort-id="MDS0000041"
+					volgnummer="7">
 					<naam>Overig stuk intern</naam>
 					<naam-model>Overig stuk intern</naam-model>
 					<type>Intern</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:32</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:55</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00007677" soort-id="MDS0000042" volgnummer="8">
+				<documenttype id="BE00007677" soort-id="MDS0000042"
+					volgnummer="8">
 					<naam>Brief</naam>
 					<naam-model>Overig stuk uitgaand</naam-model>
 					<type>Uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2012-08-23T15:01:33</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:55</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00012813" soort-id="MDS0000040" volgnummer="9">
+				<documenttype id="BE00012813" soort-id="MDS0000040"
+					volgnummer="9">
 					<naam>Verzoek intrekking aanvraag</naam>
 					<naam-model>Verzoek intrekking aanvraag</naam-model>
 					<type>Inkomend</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2014-05-26T09:50:09</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:55</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00012814" soort-id="MDS0000043" volgnummer="10">
+				<documenttype id="BE00012814" soort-id="MDS0000043"
+					volgnummer="10">
 					<naam>Bevestiging intrekking aanvraag</naam>
 					<naam-model>Bevestiging intrekking aanvraag</naam-model>
 					<type>Uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2014-05-26T09:50:09</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:56</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00015506" soort-id="MDS0000010" volgnummer="11">
+				<documenttype id="BE00015506" soort-id="MDS0000010"
+					volgnummer="11">
 					<naam>Aanvullende gegevens</naam>
 					<naam-model>Aanvullende gegevens</naam-model>
 					<type>Inkomend</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2017-12-14T14:07:15</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:28:12</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="BE00015507" soort-id="MDS0000047" volgnummer="12">
+				<documenttype id="BE00015507" soort-id="MDS0000047"
+					volgnummer="12">
 					<naam>Buiten behandeling stelling</naam>
 					<naam-model>Buiten behandeling stelling</naam-model>
 					<type>Uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2017-12-14T14:07:15</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:28:12</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="LB00000224" soort-id="MDS0000028" volgnummer="13">
+				<documenttype id="LB00000224" soort-id="MDS0000028"
+					volgnummer="13">
 					<naam>Beschikking</naam>
-					<naam-model xsi:nil="true"/>
+					<naam-model xsi:nil="true" />
 					<type>Uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2016-10-25T14:13:26</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:28:12</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="LB00000332" soort-id="MDS0000000" volgnummer="14">
+				<documenttype id="LB00000332" soort-id="MDS0000000"
+					volgnummer="14">
 					<naam>E-mail</naam>
-					<naam-model xsi:nil="true"/>
+					<naam-model xsi:nil="true" />
 					<type>In/uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2017-01-26T11:16:53</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:28:13</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="LB00000226" soort-id="MDS0000000" volgnummer="15">
+				<documenttype id="LB00000226" soort-id="MDS0000000"
+					volgnummer="15">
 					<naam>Overige</naam>
-					<naam-model xsi:nil="true"/>
+					<naam-model xsi:nil="true" />
 					<type>In/uitgaand</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2016-10-25T14:13:26</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:28:13</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="LB00000225" soort-id="MDS0000050" volgnummer="16">
+				<documenttype id="LB00000225" soort-id="MDS0000050"
+					volgnummer="16">
 					<naam>Rapport</naam>
-					<naam-model xsi:nil="true"/>
+					<naam-model xsi:nil="true" />
 					<type>Intern</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2016-10-25T14:13:26</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:50</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
-				<documenttype id="LB00000387" soort-id="MDS0000050" volgnummer="17">
+				<documenttype id="LB00000387" soort-id="MDS0000050"
+					volgnummer="17">
 					<naam>Rapportmemo</naam>
-					<naam-model xsi:nil="true"/>
+					<naam-model xsi:nil="true" />
 					<type>Intern</type>
 					<indossier>Ja</indossier>
-					<waardering xsi:nil="true"/>
-					<bewaartermijn xsi:nil="true"/>
-					<bewaartermijn-eenheid xsi:nil="true"/>
-					<bewaartermijn-start xsi:nil="true"/>
-					<toelichting-bewaartermijn xsi:nil="true"/>
-					<trefwoorden xsi:nil="true"/>
+					<waardering xsi:nil="true" />
+					<bewaartermijn xsi:nil="true" />
+					<bewaartermijn-eenheid xsi:nil="true" />
+					<bewaartermijn-start xsi:nil="true" />
+					<toelichting-bewaartermijn xsi:nil="true" />
+					<trefwoorden xsi:nil="true" />
 					<procestrigger>Nee</procestrigger>
-					<sjabloonnaam xsi:nil="true"/>
-					<vertrouwelijkheid xsi:nil="true"/>
-					<toelichting xsi:nil="true"/>
-					<opmerking xsi:nil="true"/>
+					<sjabloonnaam xsi:nil="true" />
+					<vertrouwelijkheid xsi:nil="true" />
+					<toelichting xsi:nil="true" />
+					<opmerking xsi:nil="true" />
 					<actueel-van>2017-12-14T14:07:15</actueel-van>
-					<actueel-tot xsi:nil="true"/>
-					<LokaleMetaData/>
+					<actueel-tot xsi:nil="true" />
+					<LokaleMetaData />
 					<laatst-gewijzigd>2018-11-01T13:27:50</laatst-gewijzigd>
 					<actief>Ja</actief>
 				</documenttype>
 			</documenttypen>
-			<standaard-dossiernaam xsi:nil="true"/>
-			<dossierlokatie xsi:nil="true"/>
-			<toelichting-documenttypen xsi:nil="true"/>
-			<opmerking-documenttypen xsi:nil="true"/>
-			<toelichting-applicaties xsi:nil="true"/>
-			<opmerking-applicaties xsi:nil="true"/>
-			<toelichting-archiefbestanden xsi:nil="true"/>
-			<opmerking-archiefbestanden xsi:nil="true"/>
-			<toelichting-producten xsi:nil="true"/>
-			<opmerking-producten xsi:nil="true"/>
-			<toelichting-registers xsi:nil="true"/>
-			<opmerking-registers xsi:nil="true"/>
-			<schemalocatie>http://www.model-dsp.nl/vngdspsec/models/schemas/B1026/index.htm</schemalocatie>
+			<standaard-dossiernaam xsi:nil="true" />
+			<dossierlokatie xsi:nil="true" />
+			<toelichting-documenttypen xsi:nil="true" />
+			<opmerking-documenttypen xsi:nil="true" />
+			<toelichting-applicaties xsi:nil="true" />
+			<opmerking-applicaties xsi:nil="true" />
+			<toelichting-archiefbestanden xsi:nil="true" />
+			<opmerking-archiefbestanden xsi:nil="true" />
+			<toelichting-producten xsi:nil="true" />
+			<opmerking-producten xsi:nil="true" />
+			<toelichting-registers xsi:nil="true" />
+			<opmerking-registers xsi:nil="true" />
+			<schemalocatie>
+				http://www.model-dsp.nl/vngdspsec/models/schemas/B1026/index.htm</schemalocatie>
 			<actueel-van>2012-08-23T15:01:33</actueel-van>
-			<actueel-tot xsi:nil="true"/>
-			<LokaleMetaData/>
+			<actueel-tot xsi:nil="true" />
+			<LokaleMetaData />
 			<laatst-gewijzigd>2019-10-03T13:52:10</laatst-gewijzigd>
 			<actief>Ja</actief>
 		</proces>
 	</processen>
-	<processen-niet-in-DSP/>
+	<processen-niet-in-DSP />
 </dsp>

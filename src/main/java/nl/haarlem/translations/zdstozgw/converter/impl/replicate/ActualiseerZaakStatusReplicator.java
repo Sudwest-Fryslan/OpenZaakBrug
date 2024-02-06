@@ -28,7 +28,7 @@ import nl.haarlem.translations.zdstozgw.converter.impl.translate.ActualiseerZaak
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01ActualiseerZaakstatus;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
-import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAuthorization;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class ActualiseerZaakStatusReplicator extends ActualiseerZaakStatusTranslator {
 

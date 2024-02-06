@@ -1,4 +1,4 @@
-package nl.haarlem.translations.zdstozgw.translation.zgw.model;
+package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -21,8 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
-import nl.haarlem.translations.zdstozgw.translation.zgw.client.JWTService;
-
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwCatalogus;
 import lombok.Data;
 
 
