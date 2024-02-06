@@ -29,7 +29,7 @@ public class JWTService {
 
 		io.fusionauth.jwt.domain.JWT jwt = new io.fusionauth.jwt.domain.JWT().setIssuer(issuer)
 				.setIssuedAt(now(ZoneOffset.UTC)).addClaim("client_id", issuer).addClaim("user_id", issuer)
-				.addClaim("user_reresentation", issuer).setExpiration(now(ZoneOffset.UTC).plusMinutes(10));
+				.addClaim("user_representation", issuer).setExpiration(now(ZoneOffset.UTC).plusMinutes(10));
 
 		return io.fusionauth.jwt.domain.JWT.getEncoder().encode(jwt, signer);
 	}
