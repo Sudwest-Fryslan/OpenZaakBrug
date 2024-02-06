@@ -14,39 +14,30 @@ import nl.haarlem.translations.zdstozgw.config.SpringContext;
 
 public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 
-	private RequestResponseCycleService requestResponseCycleService;
-	private ZgwRequestResponseCycle currentInterimRequestResponseCycle;
-//	private String referentienummer;
-
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
 			throws IOException {
-		this.requestResponseCycleService = SpringContext.getBean(RequestResponseCycleService.class);
-		addRequestToDatabase(request, body);
+		RequestResponseCycleService requestResponseCycleService = SpringContext.getBean(RequestResponseCycleService.class);
+		ZgwRequestResponseCycle zgwRequestResponseCycle = new ZgwRequestResponseCycle();
+		addRequestToDatabase(requestResponseCycleService, zgwRequestResponseCycle, request, body);
 		ClientHttpResponse response = execution.execute(request, body);
-		addResponseToDatabase(response);
+		addResponseToDatabase(requestResponseCycleService, zgwRequestResponseCycle, response);
 		return response;
 	}
 
-	private void addRequestToDatabase(HttpRequest request, byte[] body) throws UnsupportedEncodingException {
+	private void addRequestToDatabase(RequestResponseCycleService requestResponseCycleService,
+			ZgwRequestResponseCycle zgwRequestResponseCycle, HttpRequest request, byte[] body
+			) throws UnsupportedEncodingException {
 		String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer",
 				RequestAttributes.SCOPE_REQUEST);
-		this.currentInterimRequestResponseCycle = new ZgwRequestResponseCycle(referentienummer, request, body);
-//		this.requestResponseCycleService.add(this.currentInterimRequestResponseCycle);
+		zgwRequestResponseCycle.setRequest(referentienummer, request, body);
+//		requestResponseCycleService.add(zgwRequestResponseCycle);
 	}
 
-	private void addResponseToDatabase(ClientHttpResponse response) throws IOException {
-		// Added to prevent us from:
-		//		org.springframework.orm.jpa.JpaSystemException: identifier of an instance of 
-		//		nl.haarlem.translations.zdstozgw.requesthandler.impl.logging.ZgwRequestResponseCycle 
-		//		was altered from 133274 to 133275; nested exception is org.hibernate.HibernateException: 
-		//		identifier of an instance of nl.haarlem.translations.zdstozgw.requesthandler.impl.logging.ZgwRequestResponseCycle 
-		//		was altered from 133274 to 133275
-		ZgwRequestResponseCycle existingRecordRef = this.requestResponseCycleService
-				.getZgwRequestResponseCycleRepository()
-				.findById(this.currentInterimRequestResponseCycle.getId())
-				.orElse(this.currentInterimRequestResponseCycle);
-		existingRecordRef.setResponse(response);
-		this.requestResponseCycleService.add(existingRecordRef);
+	private void addResponseToDatabase(RequestResponseCycleService requestResponseCycleService,
+			ZgwRequestResponseCycle zgwRequestResponseCycle, ClientHttpResponse response
+			) throws IOException {
+		zgwRequestResponseCycle.setResponse(response);
+		requestResponseCycleService.add(zgwRequestResponseCycle);
 	}
 }
