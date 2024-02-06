@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="11.0.9" class="java.beans.XMLDecoder">
+<java version="11.0.16" class="java.beans.XMLDecoder">
  <object class="nl.nn.testtool.Report" id="Report0">
   <void property="checkpoints">
    <void method="add">
@@ -76,7 +76,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -101,7 +101,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -126,7 +126,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -151,7 +151,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -176,7 +176,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -201,7 +201,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -214,7 +214,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f92</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847-6527cd27:18d7ee137a1:-7f80</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -226,7 +226,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -251,7 +251,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -276,7 +276,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -301,7 +301,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -323,7 +323,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -336,7 +336,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>http://localhost:8000/zaken/api/v1/zaken?identificatie=1900788</string>
+      <string>https://catalogi-api.vng.cloud/api/v1/catalogussen?rsin=823288444</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -348,7 +348,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -361,10 +361,10 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>1900788</string>
+      <string>823288444</string>
      </void>
      <void property="name">
-      <string>Parameter identificatie</string>
+      <string>Parameter rsin</string>
      </void>
      <void property="report">
       <object idref="Report0"/>
@@ -373,7 +373,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -401,7 +401,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -414,7 +414,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: http://localhost:8000/zaken/api/v1/zaken?identificatie=1900788 took 0 milliseconds</string>
+      <string>GET to: https://catalogi-api.vng.cloud/api/v1/catalogussen?rsin=823288444 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -426,7 +426,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -448,7 +448,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -461,7 +461,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>https://open-zaak.test.swf.opengem.nl/catalogi/api/v1/zaaktypen/074fa738-9603-4573-83a1-3f7b01295087</string>
+      <string>https://zaken-api.vng.cloud/api/v1/zaken?identificatie=1900788</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -473,7 +473,32 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>1900788</string>
+     </void>
+     <void property="name">
+      <string>Parameter identificatie</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -501,7 +526,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -514,7 +539,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: https://open-zaak.test.swf.opengem.nl/catalogi/api/v1/zaaktypen/074fa738-9603-4573-83a1-3f7b01295087 took 0 milliseconds</string>
+      <string>GET to: https://zaken-api.vng.cloud/api/v1/zaken?identificatie=1900788 took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -526,391 +551,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>{
-  &quot;betalingsindicatieWeergave&quot;: &quot;&quot;,
-  &quot;deelzaken&quot;: [],
-  &quot;eigenschappen&quot;: [],
-  &quot;url&quot;: &quot;https://open-zaak.test.swf.opengem.nl/zaken/api/v1/zaken/a24b7f37-7c95-4ccc-b56d-7f5a4cfdefa0&quot;,
-  &quot;uuid&quot;: &quot;a24b7f37-7c95-4ccc-b56d-7f5a4cfdefa0&quot;,
-  &quot;identificatie&quot;: &quot;1900788&quot;,
-  &quot;bronorganisatie&quot;: &quot;823288444&quot;,
-  &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
-  &quot;toelichting&quot;: &quot;&quot;,
-  &quot;zaaktype&quot;: &quot;https://open-zaak.test.swf.opengem.nl/catalogi/api/v1/zaaktypen/074fa738-9603-4573-83a1-3f7b01295087&quot;,
-  &quot;registratiedatum&quot;: &quot;2023-01-03&quot;,
-  &quot;verantwoordelijkeOrganisatie&quot;: &quot;823288444&quot;,
-  &quot;startdatum&quot;: &quot;2023-01-03&quot;,
-  &quot;einddatumGepland&quot;: &quot;2021-01-01&quot;,
-  &quot;communicatiekanaal&quot;: &quot;&quot;,
-  &quot;productenOfDiensten&quot;: [],
-  &quot;vertrouwelijkheidaanduiding&quot;: &quot;intern&quot;,
-  &quot;betalingsindicatie&quot;: &quot;&quot;,
-  &quot;selectielijstklasse&quot;: &quot;&quot;,
-  &quot;relevanteAndereZaken&quot;: [],
-  &quot;kenmerken&quot;: [],
-  &quot;archiefnominatie&quot;: &quot;blijvend_bewaren&quot;,
-  &quot;archiefstatus&quot;: &quot;nog_te_archiveren&quot;
-}</string>
-     </void>
-     <void property="name">
-      <string>ModelMapper ZgwZaak-&gt;ZdsZaak</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>1</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>2</int>
-     </void>
-     <void property="message">
-      <string>{
-  &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
-  &quot;toelichting&quot;: &quot;&quot;,
-  &quot;kenmerk&quot;: [],
-  &quot;startdatum&quot;: &quot;20230103&quot;,
-  &quot;registratiedatum&quot;: &quot;20230103&quot;,
-  &quot;einddatumGepland&quot;: &quot;20210101&quot;,
-  &quot;archiefnominatie&quot;: &quot;N&quot;,
-  &quot;entiteittype&quot;: &quot;ZAK&quot;,
-  &quot;identificatie&quot;: &quot;1900788&quot;
-}</string>
-     </void>
-     <void property="name">
-      <string>ModelMapper ZgwZaak-&gt;ZdsZaak</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>2</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: einddatumGepland does not match (CHANGED) stored-value:&apos;20210101&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: startdatum does not match (CHANGED) stored-value:&apos;20230103&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: archiefnominatie does not match (CHANGED) stored-value:&apos;N&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: toelichting does not match (CHANGED) stored-value:&apos;&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: omschrijving does not match (CHANGED) stored-value:&apos;Aanvraag minimaregelingen (Z)&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: kenmerk does not match (CHANGED) stored-value:&apos;[]&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>The field: registratiedatum does not match (CHANGED) stored-value:&apos;20230103&apos; , was-value:&apos;null&apos;</string>
-     </void>
-     <void property="name">
-      <string>Warning</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>6</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="name">
-      <string>ZGWClient GET</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>1</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>2</int>
-     </void>
-     <void property="message">
-      <string>http://localhost:8000/zaken/api/v1/zaken?identificatie=1900788</string>
-     </void>
-     <void property="name">
-      <string>url</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>4</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>2</int>
-     </void>
-     <void property="message">
-      <string>1900788</string>
-     </void>
-     <void property="name">
-      <string>Parameter identificatie</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>4</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>2</int>
-     </void>
-     <void property="message">
-      <string>{&quot;url&quot;:&quot;https://open-zaak.test.swf.opengem.nl/catalogi/api/v1/roltypen/e27df3ad-0402-4a65-bd61-03468fdedb04&quot;,&quot;zaaktype&quot;:&quot;https://open-zaak.test.swf.opengem.nl/catalogi/api/v1/zaaktypen/074fa738-9603-4573-83a1-3f7b01295087&quot;,&quot;omschrijving&quot;:&quot;Initiator&quot;,&quot;omschrijvingGeneriek&quot;:&quot;initiator&quot;}</string>
-     </void>
-     <void property="name">
-      <string>ZGWClient GET</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
-     </void>
-     <void property="stubbed">
-      <boolean>true</boolean>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
-     </void>
-     <void property="type">
-      <int>2</int>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="nl.nn.testtool.Checkpoint">
-     <void property="level">
-      <int>1</int>
-     </void>
-     <void property="message">
-      <string>GET to: http://localhost:8000/zaken/api/v1/zaken?identificatie=1900788 took 0 milliseconds</string>
-     </void>
-     <void property="name">
-      <string>Duration</string>
-     </void>
-     <void property="report">
-      <object idref="Report0"/>
-     </void>
-     <void property="sourceClassName">
-      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
-     </void>
-     <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -927,7 +568,7 @@
      </void>
      <void property="message">
       <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;java version=&quot;11.0.9&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
+&lt;java version=&quot;11.0.16&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
  &lt;int&gt;500&lt;/int&gt;
 &lt;/java&gt;
 </string>
@@ -945,7 +586,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -970,7 +611,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -983,7 +624,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01 with kenmerk: &apos;zaakidentificatie:1900788&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 114 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01 with kenmerk: &apos;zaakidentificatie:1900788&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 865 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -995,7 +636,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -1013,7 +654,7 @@
   &lt;SOAP-ENV:Body&gt;&#13;
     &lt;SOAP-ENV:Fault&gt;&#13;
       &lt;faultcode xmlns:env=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;env:Receiver&lt;/faultcode&gt;&#13;
-      &lt;faultstring&gt;nl.haarlem.translations.zdstozgw.converter.ConverterException: Zaak not found for identification: &apos;1900788&apos;&lt;/faultstring&gt;&#13;
+      &lt;faultstring&gt;nl.haarlem.translations.zdstozgw.converter.ConverterException: Zaak with identification: &apos;1900788&apos; not found in ZGW&lt;/faultstring&gt;&#13;
       &lt;detail&gt;&#13;
         &lt;Fo03Bericht xmlns=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ns2=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&gt;&#13;
           &lt;stuurgegevens&gt;&#13;
@@ -1026,14 +667,14 @@
               &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
               &lt;applicatie&gt;CLO&lt;/applicatie&gt;&#13;
             &lt;/ontvanger&gt;&#13;
-            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f92&lt;/referentienummer&gt;&#13;
-            &lt;tijdstipBericht&gt;20230110174129&lt;/tijdstipBericht&gt;&#13;
+            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847-6527cd27:18d7ee137a1:-7f80&lt;/referentienummer&gt;&#13;
+            &lt;tijdstipBericht&gt;20240206154617&lt;/tijdstipBericht&gt;&#13;
             &lt;crossRefnummer&gt;9d4c4e50-0d9a-4b1d-a7c8-a41172525b1d&lt;/crossRefnummer&gt;&#13;
           &lt;/stuurgegevens&gt;&#13;
           &lt;body&gt;&#13;
             &lt;code&gt;StUF058&lt;/code&gt;&#13;
             &lt;plek&gt;server&lt;/plek&gt;&#13;
-            &lt;omschrijving&gt;nl.haarlem.translations.zdstozgw.converter.ConverterException: Zaak not found for identification: &apos;1900788&apos;&lt;/omschrijving&gt;&#13;
+            &lt;omschrijving&gt;nl.haarlem.translations.zdstozgw.converter.ConverterException: Zaak with identification: &apos;1900788&apos; not found in ZGW&lt;/omschrijving&gt;&#13;
             &lt;detailsXML&gt;&#13;
               &lt;todo&gt;&amp;lt;SOAP-ENV:Envelope xsi:schemaLocation=&quot;http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd&quot; xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot; xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&amp;gt;&amp;#13;&#13;
    &amp;lt;SOAP-ENV:Header/&amp;gt;&amp;#13;&#13;
@@ -1114,7 +755,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-16</string>
+      <string>Thread-8</string>
      </void>
      <void property="type">
       <int>3</int>
@@ -1123,10 +764,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f92</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847-6527cd27:18d7ee137a1:-7f80</string>
   </void>
   <void property="endTime">
-   <long>1673368889966</long>
+   <long>1707230777617</long>
   </void>
   <void property="name">
    <string>Translate updateZaak_Lk01</string>
@@ -1135,10 +776,10 @@
    <string>/Issue332/</string>
   </void>
   <void property="startTime">
-   <long>1673368889850</long>
+   <long>1707230776751</long>
   </void>
   <void property="storageId">
-   <int>787</int>
+   <int>838</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>
