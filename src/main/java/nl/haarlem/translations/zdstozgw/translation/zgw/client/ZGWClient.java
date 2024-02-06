@@ -71,45 +71,45 @@ public class ZGWClient {
 
 	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
 
-	@Value("${openzaak.zakenUrl}")
+	@Value("${zgw.registry.zaken.url}")
 	private @Getter String zakenUrl;
-	@Value("${openzaak.zakenUrl.jwt.url:#{null}}")
+	@Value("${zgw.registry.zaken.jwt.url:#{null}}")
 	private String zakenUrlJwtUrl;
-	@Value("${openzaak.zakenUrl.jwt.issuer}")
+	@Value("${zgw.registry.zaken.jwt.issuer}")
 	private String zakenUrlJwtIssuer;
-	@Value("${openzaak.zakenUrl.jwt.secret}")
+	@Value("${zgw.registry.zaken.jwt.secret}")
 	private String zakenUrlJwtSecret;	
 	
-	@Value("${openzaak.documentenUrl}")
+	@Value("${zgw.registry.documenten.url}")
 	private @Getter String documentenUrl;
-	@Value("${openzaak.documentenUrl.jwt.url:#{null}}")
+	@Value("${zgw.registry.documenten.jwt.url:#{null}}")
 	private String documentenUrlJwtUrl;
-	@Value("${openzaak.documentenUrl.jwt.issuer}")
+	@Value("${zgw.registry.documenten.jwt.issuer}")
 	private String documentenUrlJwtIssuer;
-	@Value("${openzaak.documentenUrl.jwt.secret}")
+	@Value("${zgw.registry.documenten.jwt.secret}")
 	private String documentenUrlJwtSecret;	
 	
-	@Value("${openzaak.catalogiUrl}")
+	@Value("${zgw.registry.catalogi.url}")
 	private @Getter String catalogiUrl;
-	@Value("${openzaak.catalogiUrl.jwt.url:#{null}}")
+	@Value("${zgw.registry.catalogi.jwt.url:#{null}}")
 	private String catalogiUrlJwtUrl;
-	@Value("${openzaak.catalogiUrl.jwt.issuer}")
+	@Value("${zgw.registry.catalogi.jwt.issuer}")
 	private String catalogiUrlJwtIssuer;
-	@Value("${openzaak.catalogiUrl.jwt.secret}")
+	@Value("${zgw.registry.catalogi.jwt.secret}")
 	private String catalogiUrlJwtSecret;	
 	
-	@Value("${openzaak.besluitenUrl}")
+	@Value("${zgw.registry.besluiten.url}")
 	private @Getter String besluitenUrl;
-	@Value("${openzaak.besluitenUrl.jwt.url:#{null}}")
+	@Value("${zgw.registry.besluiten.jwt.url:#{null}}")
 	private String besluitenUrlJwtUrl;
-	@Value("${openzaak.besluitenUrl.jwt.issuer}")
+	@Value("${zgw.registry.besluiten.jwt.issuer}")
 	private String besluitenUrlJwtIssuer;
-	@Value("${openzaak.besluitenUrl.jwt.secret}")
+	@Value("${zgw.registry.besluiten.jwt.secret}")
 	private String besluitenUrlJwtSecret;
 
 	@Value("${zgw.endpoint.catalogus:/api/v1/catalogussen}")
 	private @Getter String endpointCatalogus;
-		
+	
 	@Value("${zgw.endpoint.roltype:/api/v1/roltypen}")
 	private @Getter String endpointRolType;
 
@@ -175,7 +175,7 @@ public class ZGWClient {
 	
 	private HttpHeaders getHeaders(ZgwAuthorization authorization, String url) {
 		var headers = new HttpHeaders();
-		headers.set("Authorization", authorization.getZgwJwtToken(url));		
+		headers.set("Authorization", authorization.getAuthorizationToken(url));		
 		headers.set("Accept-Crs", "EPSG:4326");
 		headers.set("Content-Crs", "EPSG:4326");
 		headers.set("Content-Type", "application/json");
@@ -213,12 +213,12 @@ public class ZGWClient {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
 			var details = "--------------POST:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);			
-			log.warn("POST naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("POST naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+			log.warn("POST naar ZgwRegistry: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("POST naar ZgwRegistry: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
 		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("POST naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("POST naar OpenZaak: " + url + " niet geslaagd", rae);
+			log.warn("POST naar ZgwRegistry: " + url + " niet geslaagd", rae);
+			throw new ConverterException("POST naar ZgwRegistry: " + url + " niet geslaagd", rae);
 		}
 	}
 
@@ -265,12 +265,12 @@ public class ZGWClient {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
 			var details = "--------------GET:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("GET naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("GET naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+			log.warn("GET naar ZgwRegistry: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("GET naar ZgwRegistry: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
 		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("GET naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("GET naar OpenZaak: " + url + " niet geslaagd", rae);
+			log.warn("GET naar ZgwRegistry: " + url + " niet geslaagd", rae);
+			throw new ConverterException("GET naar ZgwRegistry: " + url + " niet geslaagd", rae);
 		}
 	}
 
@@ -290,19 +290,19 @@ public class ZGWClient {
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
 			var message = "GET from: " + url + " took " + duration + " milliseconds";
-			log.debug("BASE64 INHOUD DOWNLOADED:" + (data == null ? "[null], is openzaak dms-broken?" : data.length + " bytes"));
+			log.debug("BASE64 INHOUD DOWNLOADED:" + (data == null ? "[null], is ZgwRegistry dms-broken?" : data.length + " bytes"));
 			return java.util.Base64.getEncoder().encodeToString(data);
 
 		} catch (HttpStatusCodeException hsce) {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
 			var details = "--------------GET:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() +  "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("GET(BASE64) naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("GET(BASE64) naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+			log.warn("GET(BASE64) naar ZgwRegistry: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("GET(BASE64) naar ZgwRegistry: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
 		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("GET(BASE64) naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("GET(BASE64) naar OpenZaak: " + url + " niet geslaagd", rae);
+			log.warn("GET(BASE64) naar ZgwRegistry: " + url + " niet geslaagd", rae);
+			throw new ConverterException("GET(BASE64) naar ZgwRegistry: " + url + " niet geslaagd", rae);
 		}
 	}
 	
@@ -335,12 +335,12 @@ public class ZGWClient {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
 			var details = "--------------DELETE:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("DELETE naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("DELETE naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(),
+			log.warn("DELETE naar ZgwRegistry: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("DELETE naar ZgwRegistry: " + url + " gaf foutmelding:" + hsce.toString(),
 					details, hsce);
 		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("DELETE naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("DELETE naar OpenZaak: " + url + " niet geslaagd", rae);
+			log.warn("DELETE naar ZgwRegistry: " + url + " niet geslaagd", rae);
+			throw new ConverterException("DELETE naar ZgwRegistry: " + url + " niet geslaagd", rae);
 		}
 	}
 
@@ -373,12 +373,12 @@ public class ZGWClient {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
 			var details = "--------------PUT:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("PUT naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("PUT naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+			log.warn("PUT naar ZgwRegistry: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("PUT naar ZgwRegistry: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
 		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("PUT naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("PUT naar OpenZaak: " + url + " niet geslaagd", rae);
+			log.warn("PUT naar ZgwRegistry: " + url + " niet geslaagd", rae);
+			throw new ConverterException("PUT naar ZgwRegistry: " + url + " niet geslaagd", rae);
 		}
 	}
 
@@ -412,12 +412,12 @@ public class ZGWClient {
 			var response = hsce.getResponseBodyAsString().replace("{", "{\n").replace("\",", "\",\n").replace("\"}",
 					"\"\n}");
 			var details = "--------------PATCH:\n" + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n" + StringUtils.shortenLongString(json, StringUtils.MAX_ERROR_SIZE) + "\n--------------RESPONSE:\n" + StringUtils.shortenLongString(response, StringUtils.MAX_ERROR_SIZE);
-			log.warn("PATCH naar OpenZaak: " + url + " gaf foutmelding:\n" + details, hsce);
-			throw new ConverterException("PATCH naar OpenZaak: " + url + " gaf foutmelding:" + hsce.toString(), details,
+			log.warn("PATCH naar ZgwRegistry: " + url + " gaf foutmelding:\n" + details, hsce);
+			throw new ConverterException("PATCH naar ZgwRegistry: " + url + " gaf foutmelding:" + hsce.toString(), details,
 					hsce);
 		} catch (org.springframework.web.client.ResourceAccessException rae) {
-			log.warn("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
-			throw new ConverterException("PATCH naar OpenZaak: " + url + " niet geslaagd", rae);
+			log.warn("PATCH naar ZgwRegistry: " + url + " niet geslaagd", rae);
+			throw new ConverterException("PATCH naar ZgwRegistry: " + url + " niet geslaagd", rae);
 		}
 	}
 
@@ -795,7 +795,7 @@ public class ZGWClient {
 	public ZgwResultaatType getResultaatTypeByZaakTypeAndOmschrijving(ZgwAuthorization authorization, ZgwZaakType zaakType, String resultaatOmschrijving) {
 		var omschrijving = resultaatOmschrijving;
 		if(omschrijving.length() > 20) {
-			// maximum length of openzaak is 20 characters
+			// maximum length of omschrijving is 20 characters
 			omschrijving = omschrijving.substring(0, 20);
 		}
 		for (String found: zaakType.resultaattypen) {

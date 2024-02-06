@@ -37,13 +37,13 @@ public class ZgwAuthorization {
 		public  String jwtUrl;
 		public  String jwtIssuer;
 		public  String jwtSecret;
-		public  String jwtToken;
+		public  String authorization;
 		
-		public ZgwJwtTokenEntry(String jwtUrl, String jwtIssuer, String jwtSecret, String jwtToken) {
+		public ZgwJwtTokenEntry(String jwtUrl, String jwtIssuer, String jwtSecret, String authorization) {
 			this.jwtUrl = jwtUrl;
 			this.jwtIssuer = jwtIssuer;
 			this.jwtSecret = jwtSecret;
-			this.jwtToken = jwtToken;
+			this.authorization = authorization;
 		}
 	}
 	
@@ -66,12 +66,13 @@ public class ZgwAuthorization {
 				continue;
 			}
 			// bestond al, geven we terug
+			log.debug("For url: " + url + " using: '" + entry.getAuthorization() +  "' from previous found entry");
 			this.authorizations.put(url, entry);
 			return;
 		}
 		
 		// not already known, new jwt-token needed for this endpoint
-		if(jwtUrl!=null) {
+		if(jwtUrl != null && jwtUrl.trim().length() > 0) {
 			var authorizationRequestHeaders = new HttpHeaders();
 	        String json =  "{\n" +
 	            "    \"clientIds\": [\n" +
@@ -99,23 +100,27 @@ public class ZgwAuthorization {
 	        HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
 	        ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwtUrl, entity, String.class);
 	        Gson gson = new Gson();
-	        var authorizationResponse = gson.fromJson(bearerResponse.getBody(), ZgwJwtTokenEntry.class);
+	        var zgwJwtTokenEntry = gson.fromJson(bearerResponse.getBody(), ZgwJwtTokenEntry.class);
 	
-	        log.info("Bearer '" + authorizationResponse.getJwtToken() +  "' from url:'" + jwtUrl + "' with requestjson:\n" + json);	
-	        this.authorizations.put(url, authorizationResponse);
+	        log.debug("For url: " + url + " using: '" + zgwJwtTokenEntry.getAuthorization() +  "' from url:'" + jwtUrl + "' with requestjson:\n" + json);
+	        zgwJwtTokenEntry.jwtUrl = jwtUrl;
+	        zgwJwtTokenEntry.jwtIssuer = jwtIssuer;
+	        zgwJwtTokenEntry.jwtSecret = jwtSecret;
+	        this.authorizations.put(url, zgwJwtTokenEntry);
 		}
 		else {
 			var token = JWTService.getJWT(jwtIssuer, jwtSecret);
-			var authorizationResponse = new ZgwJwtTokenEntry(jwtUrl, jwtIssuer, jwtSecret, "Bearer " + token);
-			this.authorizations.put(url, authorizationResponse);
+			var zgwJwtTokenEntry = new ZgwJwtTokenEntry(jwtUrl, jwtIssuer, jwtSecret, "Bearer " + token);
+			log.debug("For url: " + url + " using: '" + zgwJwtTokenEntry.getAuthorization() +  "' without using a jwtUrl");
+			this.authorizations.put(url, zgwJwtTokenEntry);
 		}
 	}	
 	
 	
-	public String getZgwJwtToken(String url) {
+	public String getAuthorizationToken(String url) {
 		for(String baseurl: this.authorizations.keySet()) {
 			if(url.startsWith(baseurl)) {
-				return authorizations.get(baseurl).getJwtToken();
+				return authorizations.get(baseurl).getAuthorization();
 			}
 		}
 		throw new ConverterException("No authorization defined for the url: " + url); 

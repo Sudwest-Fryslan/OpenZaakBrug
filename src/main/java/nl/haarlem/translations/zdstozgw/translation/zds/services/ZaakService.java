@@ -255,7 +255,7 @@ public class ZaakService {
 		var changed = false;
 		ChangeDetector changeDetector = new ChangeDetector();
 
-		// check if the zdsWasZaak is equal to the one stored inside OpenZaak
+		// check if the zdsWasZaak is equal to the one stored inside ZgwRegistry
 		// this should be the case
 		ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
 		if(zdsWasZaak != null) {
@@ -900,7 +900,7 @@ public class ZaakService {
 			var zgwRolType = this.zgwClient.getRolTypeByUrl(authorization, rol.roltype);
 			ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
 			if (zgwRolType.omschrijving.equals(zgwRolOmschrijving.getHeeftAlsInitiator())) {
-				// TODO: hier minder overhead: hier wordt nu 2 keer achterelkaar een getzaak op openzaak gedaan!
+				// TODO: hier minder overhead: hier wordt nu 2 keer achterelkaar een getzaak op ZgwRegistry gedaan!
 				var zgwZaak = this.zgwClient.getZaakByUrl(authorization, rol.zaak);
 				result.add(getZaakDetailsByIdentificatie(authorization, zgwZaak.identificatie));
 			}
