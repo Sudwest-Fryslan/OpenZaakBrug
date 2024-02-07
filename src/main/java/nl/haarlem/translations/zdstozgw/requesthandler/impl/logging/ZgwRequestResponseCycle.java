@@ -63,7 +63,7 @@ public class ZgwRequestResponseCycle {
 		startdatetime = LocalDateTime.now();
 	};	
 
-	public ZgwRequestResponseCycle(String referentienummer, HttpRequest request, byte[] body) throws UnsupportedEncodingException {
+	public void setRequest(String referentienummer, HttpRequest request, byte[] body) throws UnsupportedEncodingException {
 		this.referentienummer = referentienummer;
 		this.zgwMethod = request.getMethodValue();
 		this.zgwUrl = request.getURI().toString();
