@@ -24,6 +24,7 @@ public class StringUtils {
 	public static int MAX_ERROR_SIZE = 2 * 1024;
 
 	public static String shortenLongString(String message, int maxLength) {
+		if(message == null) return null;
 		if(maxLength != 0 && message.length() > maxLength) {
 			var niceEnding = "...(" + (message.length() - maxLength) + " characters have been trimmed)..";
 			return message.substring(0, maxLength) + niceEnding;

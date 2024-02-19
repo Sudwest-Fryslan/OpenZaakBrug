@@ -130,7 +130,7 @@ public class ModelMapperConfig {
 		
 		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPostTypeMapping(modelMapper);
 		// is de volgende nog nodig?
-		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(modelMapper);
+		// addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(modelMapper);
 
 		addZdsNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(modelMapper);
 		addZdsNietNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(modelMapper);
@@ -243,25 +243,34 @@ public class ModelMapperConfig {
 				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
 						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObjectPost::setOntvangstdatum))
 				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObjectPost::setVerzenddatum))
+						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObjectPost::setVerzenddatum))							
 				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
 						ZdsZaakDocument::getVertrouwelijkAanduiding,
-						ZgwEnkelvoudigInformatieObjectPost::setVertrouwelijkheidaanduiding));
+						ZgwEnkelvoudigInformatieObjectPost::setVertrouwelijkheidaanduiding))
+	            .addMappings(mapper -> {
+	                mapper.map(src -> src.getInhoud().getBestandsnaam(), ZgwEnkelvoudigInformatieObjectPost::setBestandsnaam);
+	                // dit is dubieus, omdat er ook een ZgwEnkelvoudigInformatieObjectPost.formaat bestaat
+	                // mapper.map(src -> src.getInhoud().getContentType() != null ? src.getInhoud().getContentType() : src.getFormaat(), ZgwEnkelvoudigInformatieObjectPost::setFormaat);
+	                mapper.map(src -> src.getInhoud().getContentType(), ZgwEnkelvoudigInformatieObjectPost::setFormaat);
+	                mapper.map(src -> src.getInhoud().getValue(), ZgwEnkelvoudigInformatieObjectPost::setInhoud);
+	            });				
 	}
+	
+	
 
-	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(ModelMapper modelMapper) {
-		modelMapper.typeMap(ZdsZaakDocumentInhoud.class, ZgwEnkelvoudigInformatieObject.class)
-//				.includeBase(ZgwEnkelvoudigInformatieObject.class, ZdsZaakDocument.class)
-				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-						.map(ZdsZaakDocument::getCreatiedatum, ZgwEnkelvoudigInformatieObject::setCreatiedatum))
-				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObject::setOntvangstdatum))
-				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObject::setVerzenddatum))
-				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
-						ZdsZaakDocument::getVertrouwelijkAanduiding,
-						ZgwEnkelvoudigInformatieObject::setVertrouwelijkheidaanduiding));
-	}
+//	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(ModelMapper modelMapper) {
+//		modelMapper.typeMap(ZdsZaakDocumentInhoud.class, ZgwEnkelvoudigInformatieObject.class)
+////				.includeBase(ZgwEnkelvoudigInformatieObject.class, ZdsZaakDocument.class)
+//				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+//						.map(ZdsZaakDocument::getCreatiedatum, ZgwEnkelvoudigInformatieObject::setCreatiedatum))
+//				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+//						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObject::setOntvangstdatum))
+//				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+//						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObject::setVerzenddatum))
+//				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
+//						ZdsZaakDocument::getVertrouwelijkAanduiding,
+//						ZgwEnkelvoudigInformatieObject::setVertrouwelijkheidaanduiding));
+//	}
 
 	public void addZdsZaakToZgwZaakTypeMapping(ModelMapper modelMapper) {
 		modelMapper.typeMap(ZdsZaak.class, ZgwZaak.class)

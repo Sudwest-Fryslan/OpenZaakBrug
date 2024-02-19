@@ -857,7 +857,7 @@ public class ZaakService {
 		if (result.taal != null && result.taal.length() == 0) {
 			result.taal = null;
 		}
-		if (result.status.length() == 0) {
+		if (result.status != null && result.status.length() == 0) {
 			result.status = null;
 		}
 		if(result.vertrouwelijkAanduiding != null && result.vertrouwelijkAanduiding.length()==0) {
