@@ -71,6 +71,7 @@ public class ConfigService {
 				log.debug("\t===>\tgemeentenaam:" + organisatie.getGemeenteNaam());
 				log.debug("\t\tgemeentecode:" + organisatie.getGemeenteCode());
 				log.debug("\t\trsin:" + organisatie.getRSIN());
+				log.debug("\t\tdefault:" + organisatie.getVoorkeur());
 			}
 
 			section = "zgwRolOmschrijving";

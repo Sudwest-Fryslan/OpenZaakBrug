@@ -46,7 +46,7 @@ public class GeefZaakdocumentLezenTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
 
 		var zdsEdcLv01 = (ZdsEdcLv01) this.getZdsDocument();

@@ -58,6 +58,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentInh
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.BetrokkeneType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAdres;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPost;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwOpschorting;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
@@ -122,9 +123,13 @@ public class ModelMapperConfig {
 
 		addZgwBetrokkeneIdentificatieToNatuurlijkPersoonTypeMapping(modelMapper);
 		addZgwAdresToZdsAdresTypeMapping(modelMapper);
+
+		
 		addZgwEnkelvoudigInformatieObjectToZaakDocumentLinkTypeMapping(modelMapper);
 		addZgwEnkelvoudigInformatieObjectToZdsZaakDocumentInhoudTypeMapping(modelMapper);
-
+		
+		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPostTypeMapping(modelMapper);
+		// is de volgende nog nodig?
 		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(modelMapper);
 
 		addZdsNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(modelMapper);
@@ -227,6 +232,21 @@ public class ModelMapperConfig {
 				.addMappings(mapper -> mapper.using(convertToUpperCase()).map(
 						ZgwEnkelvoudigInformatieObject::getVertrouwelijkheidaanduiding,
 						ZdsZaakDocument::setVertrouwelijkAanduiding));
+	}
+
+
+	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPostTypeMapping(ModelMapper modelMapper) {
+		modelMapper.typeMap(ZdsZaakDocumentInhoud.class, ZgwEnkelvoudigInformatieObjectPost.class)
+//				.includeBase(ZgwEnkelvoudigInformatieObject.class, ZdsZaakDocument.class)
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getCreatiedatum, ZgwEnkelvoudigInformatieObjectPost::setCreatiedatum))
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObjectPost::setOntvangstdatum))
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObjectPost::setVerzenddatum))
+				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
+						ZdsZaakDocument::getVertrouwelijkAanduiding,
+						ZgwEnkelvoudigInformatieObjectPost::setVertrouwelijkheidaanduiding));
 	}
 
 	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(ModelMapper modelMapper) {

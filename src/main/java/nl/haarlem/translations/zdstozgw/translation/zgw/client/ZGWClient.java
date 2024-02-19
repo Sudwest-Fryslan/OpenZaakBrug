@@ -168,8 +168,12 @@ public class ZGWClient {
 		authorization.AddZgwAuthorization(documentenUrl, documentenUrlJwtUrl, documentenUrlJwtIssuer, documentenUrlJwtSecret);
 		authorization.AddZgwAuthorization(catalogiUrl, catalogiUrlJwtUrl, catalogiUrlJwtIssuer, catalogiUrlJwtSecret);
 		authorization.AddZgwAuthorization(besluitenUrl, besluitenUrlJwtUrl, besluitenUrlJwtIssuer, besluitenUrlJwtSecret);		
-		authorization.setCatalogus(getCatalogusByRsin(authorization, rsin));
 		
+		ZgwCatalogus catalogus = getCatalogusByRsin(authorization, rsin);
+		if(catalogus == null) {
+			throw new ConverterException("Catalogus voor rsin: " + rsin + " kon niet worden gevonden");
+		}
+		authorization.setCatalogus(catalogus);
 		return 	authorization;
 	}
 	
@@ -522,9 +526,9 @@ public class ZGWClient {
 	}
 
 	public ZgwEnkelvoudigInformatieObject addZaakDocument(ZgwAuthorization authorization, 
-			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
+			ZgwEnkelvoudigInformatieObjectPost zgwEnkelvoudigInformatieObjectPost) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
+		String json = gson.toJson(zgwEnkelvoudigInformatieObjectPost);
 		String response = this.post(authorization, this.documentenUrl + this.endpointEnkelvoudiginformatieobject, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
 	}

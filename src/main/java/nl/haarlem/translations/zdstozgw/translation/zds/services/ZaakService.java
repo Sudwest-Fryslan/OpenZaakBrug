@@ -46,6 +46,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsIsRelevantVoor;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsKenmerk;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsOpschorting;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsRol;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsStuurgegevens;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVan;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsVerlenging;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
@@ -58,6 +59,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAdres;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAndereZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPost;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwKenmerk;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
@@ -90,6 +92,22 @@ public class ZaakService {
 		this.configService = configService;
 	}
 
+	
+	public String getRSIN(ZdsStuurgegevens stuurgegevens) {
+		String rsin = null;
+		if(stuurgegevens != null && stuurgegevens.zender != null && stuurgegevens.zender.organisatie != null) {
+			String organisatie = stuurgegevens.zender.organisatie;
+			return this.getRSIN(organisatie);
+		}
+		else {			
+			var organisaties = this.configService.getConfiguration().getOrganisaties(); 
+			Organisatie foundOrganisatie = organisaties.stream().filter(current -> Boolean.TRUE.equals(current.getVoorkeur())).findFirst().orElse(null);
+			if(foundOrganisatie == null) throw new ConverterException("Geen stuurgegevens.zender.organisatie of voorkeur organisatie gedefinieerd in config.json");
+			debugWarning("Geen stuurgegevens.zender.organisatie meegegeven in request, fallback naar:" + foundOrganisatie.getGemeenteNaam());
+			return foundOrganisatie.getRSIN();			
+		}		
+	}
+	
 	public String getRSIN(String gemeenteCode) {
 		List<Organisatie> organisaties = this.configService.getConfiguration().getOrganisaties();
 		for (Organisatie organisatie : organisaties) {
@@ -709,56 +727,56 @@ public class ZaakService {
 		}
 
 
-		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.modelMapper.map(zdsInformatieObject, ZgwEnkelvoudigInformatieObject.class);
-		zgwEnkelvoudigInformatieObject.informatieobjecttype = zgwInformatieObjectType.url;
-		zgwEnkelvoudigInformatieObject.bronorganisatie = authorization.getCatalogusRsin();
+		ZgwEnkelvoudigInformatieObjectPost zgwEnkelvoudigInformatieObjectPost = this.modelMapper.map(zdsInformatieObject, ZgwEnkelvoudigInformatieObjectPost.class);
+		zgwEnkelvoudigInformatieObjectPost.informatieobjecttype = zgwInformatieObjectType.url;
+		zgwEnkelvoudigInformatieObjectPost.bronorganisatie = authorization.getCatalogusRsin();
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
 		// 		Move code to the ModelMapperConfig.java
-		if(zgwEnkelvoudigInformatieObject.verzenddatum != null && zgwEnkelvoudigInformatieObject.verzenddatum.length() == 0) {
-			zgwEnkelvoudigInformatieObject.verzenddatum = null;
+		if(zgwEnkelvoudigInformatieObjectPost.verzenddatum != null && zgwEnkelvoudigInformatieObjectPost.verzenddatum.length() == 0) {
+			zgwEnkelvoudigInformatieObjectPost.verzenddatum = null;
 		}
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
 		// 		Move code to the ModelMapperConfig.java
-		if(zgwEnkelvoudigInformatieObject.taal != null && zgwEnkelvoudigInformatieObject.taal.length() == 2) {
-			debugWarning("taal only had 2, expected 3 characted, trying to convert: '" + zgwEnkelvoudigInformatieObject.taal  + "'");
+		if(zgwEnkelvoudigInformatieObjectPost.taal != null && zgwEnkelvoudigInformatieObjectPost.taal.length() == 2) {
+			debugWarning("taal only had 2, expected 3 characted, trying to convert: '" + zgwEnkelvoudigInformatieObjectPost.taal  + "'");
 			// https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes
-			switch (zgwEnkelvoudigInformatieObject.taal.toLowerCase()) {
+			switch (zgwEnkelvoudigInformatieObjectPost.taal.toLowerCase()) {
 			case "fy":
 				// Fryslân boppe!
-				zgwEnkelvoudigInformatieObject.taal = "fry";
+				zgwEnkelvoudigInformatieObjectPost.taal = "fry";
 				break;
 			case "nl":
-				zgwEnkelvoudigInformatieObject.taal = "nld";
+				zgwEnkelvoudigInformatieObjectPost.taal = "nld";
 				break;
 			case "en":
-				zgwEnkelvoudigInformatieObject.taal = "eng";
+				zgwEnkelvoudigInformatieObjectPost.taal = "eng";
 				break;
 			default:
-				debugWarning("could not convert: '" + zgwEnkelvoudigInformatieObject.taal.toLowerCase()  + "', this will possible result in an error");
+				debugWarning("could not convert: '" + zgwEnkelvoudigInformatieObjectPost.taal.toLowerCase()  + "', this will possible result in an error");
 			}
 		}
 
-		zgwEnkelvoudigInformatieObject.indicatieGebruiksrecht = "false";
+		zgwEnkelvoudigInformatieObjectPost.indicatieGebruiksrecht = "false";
 
-		if(zgwEnkelvoudigInformatieObject.status != null) {
+		if(zgwEnkelvoudigInformatieObjectPost.status != null) {
 			/*
 			in_bewerking - (In bewerking) Aan het informatieobject wordt nog gewerkt.
 			ter_vaststelling - (Ter vaststelling) Informatieobject gereed maar moet nog vastgesteld worden.
 			definitief - (Definitief) Informatieobject door bevoegd iets of iemand vastgesteld dan wel ontvangen.
 			gearchiveerd - (Gearchiveerd) Informatieobject duurzaam bewaarbaar gemaakt; een gearchiveerd informatie-element.
 			*/
-			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.replace(" ", "_");
-			zgwEnkelvoudigInformatieObject.status = zgwEnkelvoudigInformatieObject.status.toLowerCase();
-			if(!List.of("in_bewerking", "ter_vaststelling", "definitief", "gearchiveerd").contains(zgwEnkelvoudigInformatieObject.status)) {
-				debugWarning("document-status: '" + zgwEnkelvoudigInformatieObject.status + "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
-				zgwEnkelvoudigInformatieObject.status = null;
+			zgwEnkelvoudigInformatieObjectPost.status = zgwEnkelvoudigInformatieObjectPost.status.replace(" ", "_");
+			zgwEnkelvoudigInformatieObjectPost.status = zgwEnkelvoudigInformatieObjectPost.status.toLowerCase();
+			if(!List.of("in_bewerking", "ter_vaststelling", "definitief", "gearchiveerd").contains(zgwEnkelvoudigInformatieObjectPost.status)) {
+				debugWarning("document-status: '" + zgwEnkelvoudigInformatieObjectPost.status + "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
+				zgwEnkelvoudigInformatieObjectPost.status = null;
 			}
 		}
-		if(StringUtils.isEmpty(zgwEnkelvoudigInformatieObject.titel)) {
-			debugWarning("Titel is empty, using the bestandsnaam ["+zgwEnkelvoudigInformatieObject.bestandsnaam+"] as titel");
-			zgwEnkelvoudigInformatieObject.titel = zgwEnkelvoudigInformatieObject.bestandsnaam;
+		if(StringUtils.isEmpty(zgwEnkelvoudigInformatieObjectPost.titel)) {
+			debugWarning("Titel is empty, using the bestandsnaam ["+zgwEnkelvoudigInformatieObjectPost.bestandsnaam+"] as titel");
+			zgwEnkelvoudigInformatieObjectPost.titel = zgwEnkelvoudigInformatieObjectPost.bestandsnaam;
 		}
-		zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(authorization, zgwEnkelvoudigInformatieObject);
+		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient.addZaakDocument(authorization, zgwEnkelvoudigInformatieObjectPost);
 		ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(authorization, zgwEnkelvoudigInformatieObject, zgwZaak.url);
 
 		// status
@@ -830,19 +848,19 @@ public class ZaakService {
 		}
 		result.titel = zgwEnkelvoudigInformatieObject.titel;
 		result.beschrijving = zgwEnkelvoudigInformatieObject.beschrijving;
-		if (result.beschrijving.length() == 0) {
+		if (result.beschrijving != null && result.beschrijving.length() == 0) {
 			result.beschrijving = null;
 		}
-		if (result.versie.length() == 0) {
+		if (result.versie != null && result.versie.length() == 0) {
 			result.versie = null;
 		}
-		if (result.taal.length() == 0) {
+		if (result.taal != null && result.taal.length() == 0) {
 			result.taal = null;
 		}
 		if (result.status.length() == 0) {
 			result.status = null;
 		}
-		if(result.vertrouwelijkAanduiding.length()==0) {
+		if(result.vertrouwelijkAanduiding != null && result.vertrouwelijkAanduiding.length()==0) {
 			result.vertrouwelijkAanduiding=null;
 		}
 

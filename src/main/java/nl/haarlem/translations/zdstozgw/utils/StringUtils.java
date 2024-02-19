@@ -15,12 +15,16 @@
  */
 package nl.haarlem.translations.zdstozgw.utils;
 
+import org.springframework.beans.factory.annotation.Value;
+
+import lombok.Getter;
+
 public class StringUtils {
 	public static int MAX_MESSAGE_SIZE = 2 * 1024;
 	public static int MAX_ERROR_SIZE = 2 * 1024;
 
 	public static String shortenLongString(String message, int maxLength) {
-		if(message.length() > maxLength) {
+		if(maxLength != 0 && message.length() > maxLength) {
 			var niceEnding = "...(" + (message.length() - maxLength) + " characters have been trimmed)..";
 			return message.substring(0, maxLength) + niceEnding;
 		}

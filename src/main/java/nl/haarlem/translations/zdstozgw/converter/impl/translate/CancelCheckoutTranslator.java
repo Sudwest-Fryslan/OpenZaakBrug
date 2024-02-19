@@ -40,7 +40,7 @@ public class CancelCheckoutTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);		
 		
 		var zdsCancelCheckoutDi02 = (ZdsCancelCheckoutDi02) this.getZdsDocument();

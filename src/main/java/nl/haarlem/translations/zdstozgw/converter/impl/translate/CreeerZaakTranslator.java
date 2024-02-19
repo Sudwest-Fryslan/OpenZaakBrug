@@ -41,7 +41,7 @@ public class CreeerZaakTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
 		
 		ZdsZakLk01 zdsZakLk01 = (ZdsZakLk01) this.zdsDocument;

@@ -49,7 +49,7 @@ public class GeefLijstZaakdocumentenTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
 
 		ZdsZakLv01 zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();

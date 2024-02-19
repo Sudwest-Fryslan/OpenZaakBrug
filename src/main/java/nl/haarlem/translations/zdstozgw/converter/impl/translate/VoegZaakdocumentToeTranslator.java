@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
+import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
@@ -41,7 +42,7 @@ public class VoegZaakdocumentToeTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
 		
 		var zdsEdcLk01 = (ZdsEdcLk01) this.getZdsDocument();
