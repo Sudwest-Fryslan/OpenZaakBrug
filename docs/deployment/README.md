@@ -1,6 +1,46 @@
 # Open ZaakBrug deployment Instructions 
+#### Repeat until stable version
 
+- Login to T and execute the following commands as root
+- Check current running version: docker ps
+- Check Open ZaakBrug logs: docker logs --tail 1000 OpenZaakBrug
+- ./update_ozb.sh latest
+- Check current running version: docker ps
+- Check newest file in folder update_ozb_history
+- Check Open ZaakBrug logs: docker logs OpenZaakBrug
+- Notify tester(s) and wait for approval
 
+#### Release stable version
+
+- Go to https://github.com/Sudwest-Fryslan/OpenZaakBrug
+- In the top left dropdown create branch release-x.y.z from 'master'
+- Change version x.y.z-SNAPSHOT in pom.xml of the branch (remove -SNAPSHOT)
+- Create pull request: Remove-SNAPSHOT-from-version
+- Wait for PR approval (not doing so isn't a big problem in case of emergency fix without someone to approve)
+- To the right of the list of files, click Releases
+- Click Draft a new release
+- Click Target and select the release branch
+- Click Choose a tag and type x.y.z
+- Click Create new tag
+- Add Release title: Release x.y.z
+- Add a description
+- Click Publish release
+- Go to https://github.com/Sudwest-Fryslan/OpenZaakBrug/actions
+- Wait for the release to be build
+- Change version x.y.z-SNAPSHOT in pom.xml of master (increment z)
+- Create pull request: Increment-version-after-release-x.y.z
+
+#### Deploy stable version
+
+- Login to T, A and P and execute the following commands as root
+- Check current running version: docker ps
+- Check Open ZaakBrug logs: docker logs --tail 1000 OpenZaakBrug
+- ./update_ozb.sh x.y.z. (Example: ./update_ozb.sh 1.2.18)
+- Check current running version: docker ps
+- Check newest file in folder update_ozb_history
+- Check Open ZaakBrug logs: docker logs OpenZaakBrug
+
+# Additional Information
 ## Commit/PR-CI
 
 In the Open ZaakBrug repository we use github actions for the ci/cd. 
@@ -103,46 +143,3 @@ Do not forget to restart nginx after making changes (```systemctl restart nginx`
 	In het update script zie ik: -v /root/config:/home/config -v data-debug:/home/data. Waar kan ik de data-debug folder vinden? Zit niet onder /root zo te zien, maar waar dan wel? 
 
 	The former will mount the folder in the host machine to the docker container and the latter(data-debug) is the name of the volume. It will keep the persisted data in /home/data folder in the docker container. Available volumes can be seen by executing the command:  docker volume ls
-
-## Step by step summary
-
-#### Repeat until stable version
-
-- Login to T and execute the following commands as root
-- Check current running version: docker ps
-- Check Open ZaakBrug logs: docker logs --tail 1000 OpenZaakBrug
-- ./update_ozb.sh latest
-- Check current running version: docker ps
-- Check newest file in folder update_ozb_history
-- Check Open ZaakBrug logs: docker logs OpenZaakBrug
-- Notify tester(s) and wait for approval
-
-#### Release stable version
-
-- Go to https://github.com/Sudwest-Fryslan/OpenZaakBrug
-- In the top left dropdown create branch release-x.y.z from 'master'
-- Change version x.y.z-SNAPSHOT in pom.xml of the branch (remove -SNAPSHOT)
-- Create pull request: Remove-SNAPSHOT-from-version
-- Wait for PR approval (not doing so isn't a big problem in case of emergency fix without someone to approve)
-- To the right of the list of files, click Releases
-- Click Draft a new release
-- Click Target and select the release branch
-- Click Choose a tag and type x.y.z
-- Click Create new tag
-- Add Release title: Release x.y.z
-- Add a description
-- Click Publish release
-- Go to https://github.com/Sudwest-Fryslan/OpenZaakBrug/actions
-- Wait for the release to be build
-- Change version x.y.z-SNAPSHOT in pom.xml of master (increment z)
-- Create pull request: Increment-version-after-release-x.y.z
-
-#### Deploy stable version
-
-- Login to T, A and P and execute the following commands as root
-- Check current running version: docker ps
-- Check Open ZaakBrug logs: docker logs --tail 1000 OpenZaakBrug
-- ./update_ozb.sh 1.2.6
-- Check current running version: docker ps
-- Check newest file in folder update_ozb_history
-- Check Open ZaakBrug logs: docker logs OpenZaakBrug

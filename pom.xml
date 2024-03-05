@@ -8,9 +8,10 @@
         <version>2.6.6</version>
         <relativePath/>
     </parent>
+  
     <groupId>nl.haarlem.translations</groupId>
     <artifactId>zds-to-zgw</artifactId>
-    <version>1.2.17-SNAPSHOT</version>
+    <version>1.2.18-SNAPSHOT</version>
     <name>Open Zaakbrug</name>
     <description>StUF ZDS 1.2 to ZGW API 1.x translator</description>
 
