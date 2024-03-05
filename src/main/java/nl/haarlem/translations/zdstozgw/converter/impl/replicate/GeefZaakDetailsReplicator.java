@@ -19,7 +19,6 @@ import java.lang.invoke.MethodHandles;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,17 +36,17 @@ public class GeefZaakDetailsReplicator extends GeefZaakDetailsTranslator {
 		super(session, translation, zaakService);
 	}
 
-    /**
-     * Replicates the zaak before returning zaakdetails
-     *
-     * @return ZDS Zaakdetails
-     * @throws ResponseStatusException
-     */
-    @Override
+	/**
+	 * Replicates the zaak before returning zaakdetails
+	 *
+	 * @return ZDS Zaakdetails
+	 * @throws ResponseStatusException
+	 */
+	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-    	String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
-    	var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);    	
-    	
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+
 		var zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();

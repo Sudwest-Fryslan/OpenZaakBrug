@@ -62,7 +62,7 @@ public class ZgwEnkelvoudigInformatieObjectPost {
 	@SerializedName("taal")
 	@Expose
 	public String taal;
-	
+
 	@SerializedName("versie")
 	@Expose
 	public String versie;
@@ -70,15 +70,15 @@ public class ZgwEnkelvoudigInformatieObjectPost {
 	@SerializedName("bestandsnaam")
 	@Expose
 	public String bestandsnaam;
-	
+
 	@SerializedName("inhoud")
 	@Expose
-	public String inhoud;	
+	public String inhoud;
 
-	//@SerializedName("link")
-	//@Expose
-	//public String link;	
-	
+	// @SerializedName("link")
+	// @Expose
+	// public String link;
+
 	@SerializedName("beschrijving")
 	@Expose
 	public String beschrijving;
@@ -89,7 +89,7 @@ public class ZgwEnkelvoudigInformatieObjectPost {
 
 	@SerializedName("verzenddatum")
 	@Expose
-	public String verzenddatum;	
+	public String verzenddatum;
 
 	@SerializedName("indicatieGebruiksrecht")
 	@Expose
@@ -97,7 +97,7 @@ public class ZgwEnkelvoudigInformatieObjectPost {
 
 	@SerializedName("informatieobjecttype")
 	@Expose
-	public String informatieobjecttype;			
+	public String informatieobjecttype;
 //	@SerializedName("versie")
 //	@Expose
 //	public String versie;
@@ -109,5 +109,5 @@ public class ZgwEnkelvoudigInformatieObjectPost {
 //	@SerializedName("locked")
 //	@Expose
 //	public boolean locked;
-	
+
 }

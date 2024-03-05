@@ -37,27 +37,27 @@ public class ActualiseerZaakStatusTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsZakLk01ActualiseerZaakstatus) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
-				ZdsZakLk01ActualiseerZaakstatus.class);
+		this.zdsDocument = (ZdsZakLk01ActualiseerZaakstatus) XmlUtils
+				.getStUFObject(this.getSession().getClientRequestBody(), ZdsZakLk01ActualiseerZaakstatus.class);
 	}
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);		
-		
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+
 		var zdsZakLk01ActualiseerZaakstatus = (ZdsZakLk01ActualiseerZaakstatus) this.zdsDocument;
 
 		this.getSession().setFunctie("ActualiseerZaakStatus");
-		this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
-		
+		this.getSession()
+				.setKenmerk("zaakidentificatie:" + zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
+
 		ZdsZaak zdsWasZaak = null;
 		ZdsZaak zdsWordtZaak = null;
-		
-		if(zdsZakLk01ActualiseerZaakstatus.objects.size() == 1) {
+
+		if (zdsZakLk01ActualiseerZaakstatus.objects.size() == 1) {
 			zdsWordtZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(0);
-		}
-		else if(zdsZakLk01ActualiseerZaakstatus.objects.size() == 2) {
+		} else if (zdsZakLk01ActualiseerZaakstatus.objects.size() == 2) {
 			zdsWasZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(0);
 			zdsWordtZaak = zdsZakLk01ActualiseerZaakstatus.objects.get(1);
 		}

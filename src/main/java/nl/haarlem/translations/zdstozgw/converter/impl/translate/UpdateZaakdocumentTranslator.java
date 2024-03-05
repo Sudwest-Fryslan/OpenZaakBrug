@@ -29,13 +29,15 @@ import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class UpdateZaakdocumentTranslator extends Converter {
 
-	public UpdateZaakdocumentTranslator(RequestResponseCycle context, Translation translation, ZaakService zaakService) {
+	public UpdateZaakdocumentTranslator(RequestResponseCycle context, Translation translation,
+			ZaakService zaakService) {
 		super(context, translation, zaakService);
 	}
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsUpdateZaakdocumentDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsUpdateZaakdocumentDi02.class);
+		this.zdsDocument = (ZdsUpdateZaakdocumentDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
+				ZdsUpdateZaakdocumentDi02.class);
 	}
 
 	@Override
@@ -49,7 +51,8 @@ public class UpdateZaakdocumentTranslator extends Converter {
 		var zdsWordtInformatieObject = zdsUpdateZaakdocumentDi02.edcLk02.documenten.get(1);
 
 		this.getSession().setFunctie("UpdateZaakdocument");
-		this.getSession().setKenmerk("documentidentificatie:" + zdsWasInformatieObject.identificatie + " with lock:" + lock);
+		this.getSession()
+				.setKenmerk("documentidentificatie:" + zdsWasInformatieObject.identificatie + " with lock:" + lock);
 
 		this.getZaakService().updateZaakDocument(authorization, lock, zdsWasInformatieObject, zdsWordtInformatieObject);
 

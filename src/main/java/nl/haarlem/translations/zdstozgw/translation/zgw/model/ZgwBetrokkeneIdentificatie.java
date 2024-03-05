@@ -92,9 +92,9 @@ public class ZgwBetrokkeneIdentificatie {
 
 	@Expose
 	public String bezoekadres;
-	
+
 	@Expose
-	public ZgwAdresBuitenland subVerblijfBuitenland;	
+	public ZgwAdresBuitenland subVerblijfBuitenland;
 
 	// vestiging
 	@Expose
@@ -103,20 +103,20 @@ public class ZgwBetrokkeneIdentificatie {
 	@Expose
 	public String[] handelsnaam;
 
-	//public ZgwAdres verblijfsadres;
-	//public ZgwAdresBuitenland subVerblijfBuitenland;	
-	
+	// public ZgwAdres verblijfsadres;
+	// public ZgwAdresBuitenland subVerblijfBuitenland;
+
 	// organisatorische_eenheid
-	@Expose	
-	public String identificatie;	
-	//public String naam;		
-	//public String isGehuisvestIn;	
-	
+	@Expose
+	public String identificatie;
+	// public String naam;
+	// public String isGehuisvestIn;
+
 	// medewerker
-	//public String identificatie;
-	//public String achternaam;	
-	//public String voorletters;
-	@Expose		
+	// public String identificatie;
+	// public String achternaam;
+	// public String voorletters;
+	@Expose
 	public String voorvoegselAchternaam;
-		
+
 }

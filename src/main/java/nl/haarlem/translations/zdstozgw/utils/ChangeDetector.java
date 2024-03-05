@@ -54,7 +54,7 @@ public class ChangeDetector {
 		DELETED, CHANGED, NEW
 	}
 
-	public class Changes extends HashMap<Change, ChangeType>  {
+	public class Changes extends HashMap<Change, ChangeType> {
 		public Changes() {
 			super();
 		}
@@ -65,15 +65,15 @@ public class ChangeDetector {
 
 		public ChangeDetector.Changes getAllChangesByFieldType(Class classType) {
 
-			Map<Change, ChangeType> result =  this.entrySet().stream()
-					.filter(changeTypeChangeEntry -> changeTypeChangeEntry.getKey().getField().getType().equals(classType))
+			Map<Change, ChangeType> result = this.entrySet().stream().filter(
+					changeTypeChangeEntry -> changeTypeChangeEntry.getKey().getField().getType().equals(classType))
 					.collect(Collectors.toMap(changeTypeChangeEntry -> changeTypeChangeEntry.getKey(),
 							changeTypeChangeEntry -> changeTypeChangeEntry.getValue()));
 			return new Changes(result);
 		}
 
 		public ChangeDetector.Changes getAllChangesByDeclaringClassAndFilter(Class classType, Class filterFieldType) {
-			Map<Change, ChangeType> result =  this.entrySet().stream()
+			Map<Change, ChangeType> result = this.entrySet().stream()
 					.filter(changeTypeChangeEntry -> changeTypeChangeEntry.getKey().getField().getDeclaringClass()
 							.equals(classType))
 					.filter(changeChangeTypeEntry -> !changeChangeTypeEntry.getKey().getField().getType()
@@ -97,10 +97,13 @@ public class ChangeDetector {
 
 				log.debug("looking for changes in current: '" + storedValue + "' into: '" + field + "'");
 
-				if(newValue instanceof ZdsRol && ((ZdsRol) newValue).tijdvakGeldigheid != null && StringUtils.isNotBlank(((ZdsRol) newValue).tijdvakGeldigheid.eindGeldigheid)) {
-					// eindGeldigheid would imply that the role will be no longer valid so delete the role
-					if(currentState != null) {
-						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.DELETED);
+				if (newValue instanceof ZdsRol && ((ZdsRol) newValue).tijdvakGeldigheid != null
+						&& StringUtils.isNotBlank(((ZdsRol) newValue).tijdvakGeldigheid.eindGeldigheid)) {
+					// eindGeldigheid would imply that the role will be no longer valid so delete
+					// the role
+					if (currentState != null) {
+						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)),
+								ChangeType.DELETED);
 					}
 				} else {
 					if (storedValue == null && newValue != null) {
@@ -110,7 +113,8 @@ public class ChangeDetector {
 					}
 
 					if (changeType != null) {
-						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), changeType);
+						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)),
+								changeType);
 					}
 				}
 			}

@@ -60,9 +60,8 @@ public abstract class RequestHandler {
 		log.warn("request for path: /" + this.converter.getSession().getClientUrl() + "/ with soapaction: "
 				+ this.converter.getSession().getClientSoapAction(), ex);
 
-		var fo03 = this.converter.getZdsDocument() != null
-				? new ZdsFo03(this.converter.getZdsDocument().stuurgegevens, convertor.getSession().getReferentienummer())
-				: new ZdsFo03();
+		var fo03 = this.converter.getZdsDocument() != null ? new ZdsFo03(this.converter.getZdsDocument().stuurgegevens,
+				convertor.getSession().getReferentienummer()) : new ZdsFo03();
 		fo03.body = new ZdsFo03.Body();
 		fo03.body.code = "StUF058";
 		fo03.body.plek = "server";
@@ -90,7 +89,8 @@ public abstract class RequestHandler {
 	}
 
 	public ResponseEntity<?> execute() {
-		log.debug("Executing request with handler: " + this.getClass().getCanonicalName() + " and converter: " + this.converter.getClass().getCanonicalName());
+		log.debug("Executing request with handler: " + this.getClass().getCanonicalName() + " and converter: "
+				+ this.converter.getClass().getCanonicalName());
 		Configuration configuration = this.configService.getConfiguration();
 
 		try {

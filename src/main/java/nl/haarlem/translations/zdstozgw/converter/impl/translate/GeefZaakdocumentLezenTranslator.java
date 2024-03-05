@@ -41,7 +41,8 @@ public class GeefZaakdocumentLezenTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsEdcLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsEdcLv01.class);
+		this.zdsDocument = (ZdsEdcLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
+				ZdsEdcLv01.class);
 	}
 
 	@Override
@@ -55,8 +56,10 @@ public class GeefZaakdocumentLezenTranslator extends Converter {
 		this.getSession().setFunctie("GeefZaakdocumentLezen");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie);
 
-		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization, documentIdentificatie);
-		var edcLa01 = new ZdsEdcLa01GeefZaakdocumentLezen(zdsEdcLv01.stuurgegevens, this.getSession().getReferentienummer());
+		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization,
+				documentIdentificatie);
+		var edcLa01 = new ZdsEdcLa01GeefZaakdocumentLezen(zdsEdcLv01.stuurgegevens,
+				this.getSession().getReferentienummer());
 		edcLa01.antwoord = new ZdsZaakDocumentAntwoord();
 		edcLa01.antwoord.document = new ArrayList<ZdsZaakDocumentInhoud>();
 		edcLa01.antwoord.document.add(document);

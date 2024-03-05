@@ -36,7 +36,6 @@ public class CancelCheckoutReplicator extends CancelCheckoutTranslator {
 		super(session, translation, zaakService);
 	}
 
-
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		throw new ConverterException("not imlemented");

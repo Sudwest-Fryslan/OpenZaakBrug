@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 
 /**
  * Advice class for logging the input and output of the ModelMapper mappings
+ * 
  * @author Ricardo van Holst
  *
  */
@@ -33,6 +34,7 @@ public class ModelMapperAdvice {
 	private String getDebugName(Object source, Class<?> destination) {
 		return "ModelMapper " + source.getClass().getSimpleName() + "->" + destination.getSimpleName();
 	}
+
 	private String convertToString(Object obj) {
 		return new GsonBuilder().setPrettyPrinting().create().toJson(obj);
 	}

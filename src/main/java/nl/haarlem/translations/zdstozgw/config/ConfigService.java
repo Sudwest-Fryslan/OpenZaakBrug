@@ -20,13 +20,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 
-import com.google.gson.Gson;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
 
 import lombok.Data;
 import nl.haarlem.translations.zdstozgw.config.model.Configuration;
@@ -47,7 +47,7 @@ public class ConfigService {
 	public ConfigService(@Value("${config.json.location:config.json}") String configPath) throws Exception {
 		var cpr = new ClassPathResource(configPath);
 
-		try(InputStream configStream = cpr.getInputStream()){
+		try (InputStream configStream = cpr.getInputStream()) {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(configStream));
 			Gson gson = new Gson();
 			this.configuration = gson.fromJson(bufferedReader, Configuration.class);
@@ -62,7 +62,7 @@ public class ConfigService {
 		var section = "";
 		try {
 			section = "requestHandlerImplementation";
-			log.debug("=== " + section + " ===");			
+			log.debug("=== " + section + " ===");
 			log.debug("\trequestHandlerImplementation:" + this.configuration.getRequestHandlerImplementation());
 
 			section = "organisaties";
@@ -84,28 +84,33 @@ public class ConfigService {
 			log.debug("\theeftAlsVerantwoordelijke:" + rolomschrijving.getHeeftAlsVerantwoordelijke());
 			log.debug("\theeftAlsGemachtigde:" + rolomschrijving.getHeeftAlsGemachtigde());
 			log.debug("\theeftAlsOverigeBetrokkene:" + rolomschrijving.getHeeftAlsOverigBetrokkene());
-	
+
 			section = "beeindigZaakWanneerEinddatum";
-			log.debug("=== " + section + " #" + this.configuration.getBeeindigZaakWanneerEinddatum().size() + " ===");			
-			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration.getBeeindigZaakWanneerEinddatum()) {
+			log.debug("=== " + section + " #" + this.configuration.getBeeindigZaakWanneerEinddatum().size() + " ===");
+			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration
+					.getBeeindigZaakWanneerEinddatum()) {
 				log.debug("\t===>\tzaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
 				log.debug("\t\tcoalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
 			}
 
 			section = "einddatumEnResultaatWanneerLastStatus";
-			log.debug("=== " + section + " #" + this.configuration.getEinddatumEnResultaatWanneerLastStatus().size() + " ===");			
-			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration.getEinddatumEnResultaatWanneerLastStatus()) {
+			log.debug("=== " + section + " #" + this.configuration.getEinddatumEnResultaatWanneerLastStatus().size()
+					+ " ===");
+			for (ZaaktypeMetCoalesceResultaat beeindigZaakWanneerEinddatum : this.configuration
+					.getEinddatumEnResultaatWanneerLastStatus()) {
 				log.debug("\t===>\tzaakType:" + beeindigZaakWanneerEinddatum.getZaakType());
 				log.debug("\t\tcoalesceResultaat:" + beeindigZaakWanneerEinddatum.getCoalesceResultaat());
 			}
 
 			section = "translateVerblijfsadresForZaaktype";
-			log.debug("=== " + section + " #" + this.configuration.getTranslateVerblijfsadresForZaaktype().size() + " ===");			
-			for (TranslateVerblijfsadresForZaaktype translateVerblijfsadresForZaaktype : this.configuration.getTranslateVerblijfsadresForZaaktype()) {
+			log.debug("=== " + section + " #" + this.configuration.getTranslateVerblijfsadresForZaaktype().size()
+					+ " ===");
+			for (TranslateVerblijfsadresForZaaktype translateVerblijfsadresForZaaktype : this.configuration
+					.getTranslateVerblijfsadresForZaaktype()) {
 				log.debug("\t===>\tzaakType:" + translateVerblijfsadresForZaaktype.getZaakType());
 				log.debug("\t\tuseOpenbareRuimteNaam:" + translateVerblijfsadresForZaaktype.getUseOpenbareRuimteNaam());
 			}
-			
+
 			section = "replicatie";
 			log.debug("=== " + section + " ===");
 			var replicatie = this.configuration.getReplication();
@@ -115,9 +120,9 @@ public class ConfigService {
 			log.debug("\tgeefLijstZaakdocumentenUrl:" + replicatie.getGeefLijstZaakdocumenten().getUrl());
 			log.debug("\tgeefZaakDocumentLezenAction:" + replicatie.getGeefZaakdocumentLezen().getSoapaction());
 			log.debug("\tgeefZaakDocumentLezenUrl:" + replicatie.getGeefZaakdocumentLezen().getUrl());
-	
+
 			section = "translations";
-			log.debug("=== " + section + " #" + this.configuration.getTranslations().size() +  " ===");
+			log.debug("=== " + section + " #" + this.configuration.getTranslations().size() + " ===");
 			for (Translation translation : this.configuration.getTranslations()) {
 				log.debug("\t===>\ttranslation:" + translation.getTranslation());
 				log.debug("\t\tpath:" + translation.getPath());
@@ -126,8 +131,7 @@ public class ConfigService {
 				log.debug("\t\tlegacyservice:" + translation.getLegacyservice());
 				log.debug("\t\tparameters:" + translation.getParameters());
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			var msg = "Invalid config.json, error in section: '" + section + "'";
 			log.error(msg, e);
 			throw new ConverterException(msg, e);

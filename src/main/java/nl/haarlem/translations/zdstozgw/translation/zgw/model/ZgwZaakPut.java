@@ -69,18 +69,18 @@ public class ZgwZaakPut {
 	@Expose
 	public String selectielijstklasse;
 	@Expose
-	public String hoofdzaak  = null;
+	public String hoofdzaak = null;
 	@Expose
 	public List<ZgwAndereZaak> relevanteAndereZaken = null;
 	@SerializedName("kenmerken")
 	@Expose
 	public List<ZgwKenmerk> kenmerk = null;
 	@Expose
-	public String archiefnominatie  = null;
+	public String archiefnominatie = null;
 	@Expose
 	public String archiefstatus;
 	@Expose
-	public String archiefactiedatum  = null;
+	public String archiefactiedatum = null;
 
 	public static ZgwZaakPut merge(ZgwZaak original, ZgwZaakPut changes) {
 		var result = new ZgwZaakPut();

@@ -15,11 +15,8 @@
  */
 package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
@@ -29,5 +26,5 @@ public class ZgwZaakPatch extends ZgwZaakPut {
 	@Expose
 	public String url;
 	@Expose
-	public String uuid;	
+	public String uuid;
 }

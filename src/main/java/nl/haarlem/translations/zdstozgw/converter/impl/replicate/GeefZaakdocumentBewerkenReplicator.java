@@ -32,10 +32,10 @@ public class GeefZaakdocumentBewerkenReplicator extends GeefZaakdocumentBewerken
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	public GeefZaakdocumentBewerkenReplicator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
+	public GeefZaakdocumentBewerkenReplicator(RequestResponseCycle session, Translation translation,
+			ZaakService zaakService) {
 		super(session, translation, zaakService);
 	}
-
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {

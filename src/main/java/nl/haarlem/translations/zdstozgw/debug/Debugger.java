@@ -39,7 +39,7 @@ import nl.nn.testtool.TestTool;
  */
 public class Debugger {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
+
 	private static Map<Class<?>, Debugger> debuggers = new HashMap<Class<?>, Debugger>();
 	private TestTool testTool;
 	private String sourceClassName;
@@ -94,8 +94,8 @@ public class Debugger {
 
 	public <T, E extends Exception> T outputpoint(String name,
 			ExternalConnectionCodeThrowsException externalConnectionCodeThrowsException, E throwsException) throws E {
-		return testTool.outputpoint(getReferentienummer(), sourceClassName, name,
-				externalConnectionCodeThrowsException, throwsException);
+		return testTool.outputpoint(getReferentienummer(), sourceClassName, name, externalConnectionCodeThrowsException,
+				throwsException);
 	}
 
 	public <T> T infopoint(String name, T message) {
@@ -111,8 +111,8 @@ public class Debugger {
 	}
 
 	private static String getReferentienummer() {
-		return (String)RequestContextHolder.getRequestAttributes()
-				.getAttribute("referentienummer", RequestAttributes.SCOPE_REQUEST);
+		return (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer",
+				RequestAttributes.SCOPE_REQUEST);
 	}
 
 	public void startpoint(RequestResponseCycle session) {
@@ -135,14 +135,15 @@ public class Debugger {
 		this.outputpoint("statusCode", response.getStatusCodeValue());
 		this.outputpoint("kenmerk", session.getKenmerk());
 
-		var message = "Soapaction: " + session.getClientSoapAction() + " with kenmerk: '" + session.getKenmerk() + "' returned statuscode:" + response.getStatusCode() + " and took " + session.getDurationInMilliseconds() + " milliseconds";
+		var message = "Soapaction: " + session.getClientSoapAction() + " with kenmerk: '" + session.getKenmerk()
+				+ "' returned statuscode:" + response.getStatusCode() + " and took "
+				+ session.getDurationInMilliseconds() + " milliseconds";
 
 		this.infopoint("Total duration", message);
 
-		if(response.getStatusCode() == HttpStatus.OK) {
-			this.endpoint(session.getReportName(), response.getBody().toString());			
-		}
-		else {
+		if (response.getStatusCode() == HttpStatus.OK) {
+			this.endpoint(session.getReportName(), response.getBody().toString());
+		} else {
 			this.abortpoint(session.getReportName(), response.getBody().toString());
 			log.warn(message);
 		}

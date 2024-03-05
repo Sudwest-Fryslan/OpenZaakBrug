@@ -16,18 +16,17 @@
 package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
 @Data
 public class ZgwObjectInformatieObject {
 	@Expose
-	public String url;	
+	public String url;
 	@Expose
 	public String uuid;
 	@Expose
-	public String informatieobject;	
+	public String informatieobject;
 	@Expose
 	public String object;
 	@Expose

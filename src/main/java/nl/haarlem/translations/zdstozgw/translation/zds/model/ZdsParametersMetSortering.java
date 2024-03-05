@@ -25,7 +25,7 @@ import lombok.Data;
 
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ZdsParametersMetSortering extends ZdsParameters{
+public class ZdsParametersMetSortering extends ZdsParameters {
 
 	@XmlElement(namespace = STUF, nillable = true)
 	public String sortering;

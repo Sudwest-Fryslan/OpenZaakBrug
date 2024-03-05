@@ -28,14 +28,10 @@ import javax.persistence.Table;
 import org.springframework.http.ResponseEntity;
 
 import lombok.Data;
-import nl.haarlem.translations.zdstozgw.utils.StringUtils;
 
 @Data
 @Entity
-@Table(indexes= {
-		@Index(columnList = "referentienummer"),
-		@Index(columnList = "kenmerk")}
-)
+@Table(indexes = { @Index(columnList = "referentienummer"), @Index(columnList = "kenmerk") })
 public class RequestResponseCycle {
 	@Id
 	@GeneratedValue
@@ -52,7 +48,7 @@ public class RequestResponseCycle {
 
 	private String clientUrl;
 	private String clientSoapAction;
-	@Column(columnDefinition="TEXT", name = "client_request_body")
+	@Column(columnDefinition = "TEXT", name = "client_request_body")
 	private String clientRequestBody;
 	private Integer clientRequestSize;
 	private String referentienummer;
@@ -62,7 +58,7 @@ public class RequestResponseCycle {
 	private String converterImplementation;
 	private String converterTemplate;
 
-	@Column(columnDefinition="TEXT", name = "client_response_body")
+	@Column(columnDefinition = "TEXT", name = "client_response_body")
 	private String clientResponseBody;
 	private int clientResponseCode;
 	private Integer clientResponseSize;
@@ -72,14 +68,15 @@ public class RequestResponseCycle {
 
 	private String ThreadName;
 
-	@Column(columnDefinition="TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String stackTrace;
 
 	public RequestResponseCycle() {
 		startdatetime = LocalDateTime.now();
 	};
 
-	public RequestResponseCycle(String modus, String version, String protocol, String endpoint, String url, String soapAction, String requestBody, String referentienummer) {
+	public RequestResponseCycle(String modus, String version, String protocol, String endpoint, String url,
+			String soapAction, String requestBody, String referentienummer) {
 		this.modus = modus;
 		this.version = version;
 		this.protocol = protocol;
@@ -93,7 +90,7 @@ public class RequestResponseCycle {
 		this.clientRequestBody = requestBody;
 
 		// how many threads are running?
-		this.ThreadName= Thread.currentThread().getName();
+		this.ThreadName = Thread.currentThread().getName();
 		startdatetime = LocalDateTime.now();
 	}
 
@@ -105,7 +102,7 @@ public class RequestResponseCycle {
 	public void setResponse(ResponseEntity<?> response) {
 		this.clientResponseCode = response.getStatusCodeValue();
 
-		this.clientResponseBody  = response.getBody().toString();
+		this.clientResponseBody = response.getBody().toString();
 		this.clientResponseSize = this.clientResponseBody.length();
 
 //		if(this.clientResponseCode == 200) {
@@ -126,8 +123,9 @@ public class RequestResponseCycle {
 			reportName = reportName.substring(0, 1).toUpperCase() + reportName.substring(1);
 			if (this.clientSoapAction != null) {
 				int i = this.clientSoapAction.lastIndexOf('/');
-				if (i != -1 ) {
-					reportName = reportName + " " + this.clientSoapAction.substring(i + 1, this.clientSoapAction.length());
+				if (i != -1) {
+					reportName = reportName + " "
+							+ this.clientSoapAction.substring(i + 1, this.clientSoapAction.length());
 				}
 			}
 		}

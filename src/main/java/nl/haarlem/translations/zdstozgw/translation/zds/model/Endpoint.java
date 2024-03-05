@@ -40,7 +40,7 @@ public class Endpoint extends ZdsObject {
 	}
 
 	public Endpoint(Endpoint endpoint) {
-		if(endpoint != null) {
+		if (endpoint != null) {
 			this.applicatie = endpoint.applicatie;
 			this.organisatie = endpoint.organisatie;
 			this.gebruiker = endpoint.gebruiker;

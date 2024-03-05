@@ -32,7 +32,8 @@ public class UpdateZaakdocumentReplicator extends UpdateZaakdocumentTranslator {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	public UpdateZaakdocumentReplicator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
+	public UpdateZaakdocumentReplicator(RequestResponseCycle session, Translation translation,
+			ZaakService zaakService) {
 		super(session, translation, zaakService);
 	}
 

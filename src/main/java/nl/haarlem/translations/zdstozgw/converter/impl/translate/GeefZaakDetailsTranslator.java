@@ -42,18 +42,20 @@ public class GeefZaakDetailsTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsZakLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsZakLv01.class);
+		this.zdsDocument = (ZdsZakLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
+				ZdsZakLv01.class);
 	}
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
 		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
-		
+
 		var zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
 
 		ZdsZakLa01GeefZaakDetails zdsResponse = new ZdsZakLa01GeefZaakDetails();
-		zdsResponse.stuurgegevens = new ZdsStuurgegevens(zdsZakLv01.stuurgegevens, this.getSession().getReferentienummer());
+		zdsResponse.stuurgegevens = new ZdsStuurgegevens(zdsZakLv01.stuurgegevens,
+				this.getSession().getReferentienummer());
 		zdsResponse.stuurgegevens.berichtcode = "La01";
 		zdsResponse.stuurgegevens.entiteittype = "ZAK";
 		zdsResponse.parameters = new ZdsParameters(zdsZakLv01.parameters);
@@ -65,8 +67,8 @@ public class GeefZaakDetailsTranslator extends Converter {
 			this.getSession().setFunctie("GeefZaakDetails-ZaakId");
 			this.getSession().setKenmerk("zaakidentificatie:" + zdsZakLv01.gelijk.identificatie);
 
-			zdsResponse.antwoord.zaak
-					.add(this.getZaakService().getZaakDetailsByIdentificatie(authorization, zdsZakLv01.gelijk.identificatie));
+			zdsResponse.antwoord.zaak.add(this.getZaakService().getZaakDetailsByIdentificatie(authorization,
+					zdsZakLv01.gelijk.identificatie));
 		} else if (zdsZakLv01.gelijk != null && zdsZakLv01.gelijk.heeftAlsInitiator != null
 				&& zdsZakLv01.gelijk.heeftAlsInitiator.gerelateerde != null
 				&& zdsZakLv01.gelijk.heeftAlsInitiator.gerelateerde.identificatie != null) {
@@ -80,8 +82,8 @@ public class GeefZaakDetailsTranslator extends Converter {
 			this.getSession().setFunctie("GeefZaakDetails-Bsn");
 			this.getSession().setKenmerk("bsn:" + bsn);
 
-			zdsResponse.antwoord.zaak = this.getZaakService()
-					.getZaakDetailsByBsn(authorization, gerelateerdeidentificatie.substring(2));
+			zdsResponse.antwoord.zaak = this.getZaakService().getZaakDetailsByBsn(authorization,
+					gerelateerdeidentificatie.substring(2));
 		} else {
 			throw new ConverterException("Niet ondersteunde vraag binnengekregen");
 		}

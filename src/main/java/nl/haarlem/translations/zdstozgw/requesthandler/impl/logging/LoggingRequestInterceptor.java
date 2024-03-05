@@ -17,7 +17,8 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
 			throws IOException {
-		RequestResponseCycleService requestResponseCycleService = SpringContext.getBean(RequestResponseCycleService.class);
+		RequestResponseCycleService requestResponseCycleService = SpringContext
+				.getBean(RequestResponseCycleService.class);
 		ZgwRequestResponseCycle zgwRequestResponseCycle = new ZgwRequestResponseCycle();
 		addRequestToDatabase(requestResponseCycleService, zgwRequestResponseCycle, request, body);
 		ClientHttpResponse response = execution.execute(request, body);
@@ -26,8 +27,8 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 	}
 
 	private void addRequestToDatabase(RequestResponseCycleService requestResponseCycleService,
-			ZgwRequestResponseCycle zgwRequestResponseCycle, HttpRequest request, byte[] body
-			) throws UnsupportedEncodingException {
+			ZgwRequestResponseCycle zgwRequestResponseCycle, HttpRequest request, byte[] body)
+			throws UnsupportedEncodingException {
 		String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer",
 				RequestAttributes.SCOPE_REQUEST);
 		zgwRequestResponseCycle.setRequest(referentienummer, request, body);
@@ -35,8 +36,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 	}
 
 	private void addResponseToDatabase(RequestResponseCycleService requestResponseCycleService,
-			ZgwRequestResponseCycle zgwRequestResponseCycle, ClientHttpResponse response
-			) throws IOException {
+			ZgwRequestResponseCycle zgwRequestResponseCycle, ClientHttpResponse response) throws IOException {
 		zgwRequestResponseCycle.setResponse(response);
 		requestResponseCycleService.add(zgwRequestResponseCycle);
 	}

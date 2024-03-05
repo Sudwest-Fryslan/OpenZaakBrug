@@ -19,7 +19,6 @@ import java.lang.invoke.MethodHandles;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -33,21 +32,22 @@ public class GeefLijstZaakdocumentenReplicator extends GeefLijstZaakdocumentenTr
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	public GeefLijstZaakdocumentenReplicator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
+	public GeefLijstZaakdocumentenReplicator(RequestResponseCycle session, Translation translation,
+			ZaakService zaakService) {
 		super(session, translation, zaakService);
 	}
 
-    /**
-     * Replicates the zaak before returning list of documents
-     *
-     * @return ZDS Lijst Zaakdocumenten
-     * @throws ResponseStatusException
-     */
+	/**
+	 * Replicates the zaak before returning list of documents
+	 *
+	 * @return ZDS Lijst Zaakdocumenten
+	 * @throws ResponseStatusException
+	 */
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
 		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);		
-		
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+
 		var zdsZakLv01 = (ZdsZakLv01) this.getZdsDocument();
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();

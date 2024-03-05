@@ -19,22 +19,19 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
-import com.google.gson.annotations.Expose;
-
-import lombok.Data;
 
 @Data
-public class ZgwEnkelvoudigInformatieObject  extends ZgwEnkelvoudigInformatieObjectPost {
+public class ZgwEnkelvoudigInformatieObject extends ZgwEnkelvoudigInformatieObjectPost {
 
 	@SerializedName("link")
 	@Expose
-	public String link;	
-	
+	public String link;
+
 	@SerializedName("lock")
 	@Expose
 	public String lock;
 
 	@SerializedName("locked")
 	@Expose
-	public boolean locked;	
+	public boolean locked;
 }

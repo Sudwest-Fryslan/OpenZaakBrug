@@ -32,7 +32,6 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsStuurgegevens;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLa01LijstZaakdocumenten;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLv01;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
-import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GeefLijstZaakdocumentenTranslator extends Converter {
@@ -44,7 +43,8 @@ public class GeefLijstZaakdocumentenTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsZakLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsZakLv01.class);
+		this.zdsDocument = (ZdsZakLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
+				ZdsZakLv01.class);
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class GeefLijstZaakdocumentenTranslator extends Converter {
 		this.getSession().setFunctie("GeefLijstZaakdocumenten");
 		this.getSession().setKenmerk("zaakidentificatie:" + zaakidentificatie);
 
-		List<ZdsHeeftRelevant> gerelateerdeDocumenten = this.getZaakService()
-				.geefLijstZaakdocumenten(authorization, zaakidentificatie);
+		List<ZdsHeeftRelevant> gerelateerdeDocumenten = this.getZaakService().geefLijstZaakdocumenten(authorization,
+				zaakidentificatie);
 
 		ZdsZakLa01LijstZaakdocumenten zdsZakLa01LijstZaakdocumenten = new ZdsZakLa01LijstZaakdocumenten(
 				zdsZakLv01.stuurgegevens, this.getSession().getReferentienummer());

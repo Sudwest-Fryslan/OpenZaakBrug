@@ -32,7 +32,6 @@ public class ConverterException extends RuntimeException {
 		this.details = details;
 	}
 
-	
 	public ConverterException(String omschrijving, Throwable cause) {
 		super(omschrijving, cause);
 		log.error(cause.getStackTrace().toString());

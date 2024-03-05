@@ -40,8 +40,8 @@ public class GenereerDocumentIdentificatieEmulator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsGenereerDocumentIdentificatieDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
-				ZdsGenereerDocumentIdentificatieDi02.class);
+		this.zdsDocument = (ZdsGenereerDocumentIdentificatieDi02) XmlUtils
+				.getStUFObject(this.getSession().getClientRequestBody(), ZdsGenereerDocumentIdentificatieDi02.class);
 	}
 
 	@Override
@@ -57,7 +57,8 @@ public class GenereerDocumentIdentificatieEmulator extends Converter {
 		this.getSession().setKenmerk("documentidentificatie:" + did);
 
 		var di02 = (ZdsGenereerDocumentIdentificatieDi02) this.zdsDocument;
-		var du02 = new ZdsGenereerDocumentIdentificatieDu02(di02.stuurgegevens, this.getSession().getReferentienummer());
+		var du02 = new ZdsGenereerDocumentIdentificatieDu02(di02.stuurgegevens,
+				this.getSession().getReferentienummer());
 		du02.document = new ZdsZaakDocument();
 		du02.document.functie = "entiteit";
 		du02.document.identificatie = did;

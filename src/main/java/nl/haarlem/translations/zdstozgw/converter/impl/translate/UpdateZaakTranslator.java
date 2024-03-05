@@ -36,7 +36,8 @@ public class UpdateZaakTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsZakLk01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsZakLk01.class);
+		this.zdsDocument = (ZdsZakLk01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
+				ZdsZakLk01.class);
 	}
 
 	@Override
@@ -51,10 +52,9 @@ public class UpdateZaakTranslator extends Converter {
 
 		ZdsZaak was = null;
 		ZdsZaak wordt = null;
-		if(zdsZakLk01.objects.size() == 1) {
+		if (zdsZakLk01.objects.size() == 1) {
 			wordt = zdsZakLk01.objects.get(0);
-		}
-		else if(zdsZakLk01.objects.size() == 2) {
+		} else if (zdsZakLk01.objects.size() == 2) {
 			was = zdsZakLk01.objects.get(0);
 			wordt = zdsZakLk01.objects.get(1);
 		}
