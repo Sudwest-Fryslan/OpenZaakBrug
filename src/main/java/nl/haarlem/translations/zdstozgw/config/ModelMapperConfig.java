@@ -59,6 +59,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.BetrokkeneType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAdres;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPost;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwOpschorting;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwRol;
@@ -129,8 +130,8 @@ public class ModelMapperConfig {
 		addZgwEnkelvoudigInformatieObjectToZdsZaakDocumentInhoudTypeMapping(modelMapper);
 		
 		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPostTypeMapping(modelMapper);
-		// is de volgende nog nodig?
-		// addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(modelMapper);
+		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPutTypeMapping(modelMapper);
+		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(modelMapper);
 
 		addZdsNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(modelMapper);
 		addZdsNietNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(modelMapper);
@@ -256,21 +257,40 @@ public class ModelMapperConfig {
 	            });				
 	}
 	
-	
+	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPutTypeMapping(ModelMapper modelMapper) {
+		modelMapper.typeMap(ZdsZaakDocumentInhoud.class, ZgwEnkelvoudigInformatieObjectPut.class)
+//				.includeBase(ZgwEnkelvoudigInformatieObject.class, ZdsZaakDocument.class)
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getCreatiedatum, ZgwEnkelvoudigInformatieObjectPost::setCreatiedatum))
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObjectPost::setOntvangstdatum))
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObjectPost::setVerzenddatum))							
+				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
+						ZdsZaakDocument::getVertrouwelijkAanduiding,
+						ZgwEnkelvoudigInformatieObjectPost::setVertrouwelijkheidaanduiding))
+	            .addMappings(mapper -> {
+	                mapper.map(src -> src.getInhoud().getBestandsnaam(), ZgwEnkelvoudigInformatieObjectPost::setBestandsnaam);
+	                // dit is dubieus, omdat er ook een ZgwEnkelvoudigInformatieObjectPost.formaat bestaat
+	                // mapper.map(src -> src.getInhoud().getContentType() != null ? src.getInhoud().getContentType() : src.getFormaat(), ZgwEnkelvoudigInformatieObjectPost::setFormaat);
+	                mapper.map(src -> src.getInhoud().getContentType(), ZgwEnkelvoudigInformatieObjectPut::setFormaat);
+	                mapper.map(src -> src.getInhoud().getValue(), ZgwEnkelvoudigInformatieObjectPut::setInhoud);
+	            });				
+	}	
 
-//	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(ModelMapper modelMapper) {
-//		modelMapper.typeMap(ZdsZaakDocumentInhoud.class, ZgwEnkelvoudigInformatieObject.class)
-////				.includeBase(ZgwEnkelvoudigInformatieObject.class, ZdsZaakDocument.class)
-//				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-//						.map(ZdsZaakDocument::getCreatiedatum, ZgwEnkelvoudigInformatieObject::setCreatiedatum))
-//				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-//						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObject::setOntvangstdatum))
-//				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-//						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObject::setVerzenddatum))
-//				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
-//						ZdsZaakDocument::getVertrouwelijkAanduiding,
-//						ZgwEnkelvoudigInformatieObject::setVertrouwelijkheidaanduiding));
-//	}
+	public void addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectTypeMapping(ModelMapper modelMapper) {
+		modelMapper.typeMap(ZdsZaakDocumentInhoud.class, ZgwEnkelvoudigInformatieObject.class)
+//				.includeBase(ZgwEnkelvoudigInformatieObject.class, ZdsZaakDocument.class)
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getCreatiedatum, ZgwEnkelvoudigInformatieObject::setCreatiedatum))
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getOntvangstdatum, ZgwEnkelvoudigInformatieObject::setOntvangstdatum))
+				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
+						.map(ZdsZaakDocument::getVerzenddatum, ZgwEnkelvoudigInformatieObject::setVerzenddatum))
+				.addMappings(mapper -> mapper.using(convertToLowerCase()).map(
+						ZdsZaakDocument::getVertrouwelijkAanduiding,
+						ZgwEnkelvoudigInformatieObject::setVertrouwelijkheidaanduiding));
+	}
 
 	public void addZdsZaakToZgwZaakTypeMapping(ModelMapper modelMapper) {
 		modelMapper.typeMap(ZdsZaak.class, ZgwZaak.class)
