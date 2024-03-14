@@ -82,7 +82,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -107,7 +107,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -132,7 +132,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -157,7 +157,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -182,7 +182,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -207,7 +207,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -220,7 +220,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d1c</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847--7cfc54d3:18e3ee938e2:-7f0f</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -232,7 +232,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -257,7 +257,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -282,7 +282,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -307,7 +307,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -329,7 +329,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -342,7 +342,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>https://catalogi-api.vng.cloud/api/v1/catalogussen?rsin=823288444</string>
+      <string>https://test.openzaak.nl/catalogi/api/v1/catalogussen?rsin=823288444</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -354,7 +354,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -379,7 +379,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -407,7 +407,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -420,7 +420,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: https://catalogi-api.vng.cloud/api/v1/catalogussen?rsin=823288444 took 0 milliseconds</string>
+      <string>GET to: https://test.openzaak.nl/catalogi/api/v1/catalogussen?rsin=823288444 took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -432,7 +432,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -504,7 +504,7 @@
       <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -536,7 +536,7 @@
       <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -558,7 +558,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -571,7 +571,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>https://catalogi-api.vng.cloud/api/v1/zaaktypen?catalogus=http://localhost:8000/catalogi/api/v1/zaaktypen/50e6b78d-b938-492a-9400-8ff6e315bd47&amp;identificatie=B1291&amp;status=definitief</string>
+      <string>https://test.openzaak.nl/catalogi/api/v1/zaaktypen?catalogus=http://localhost:8000/catalogi/api/v1/zaaktypen/50e6b78d-b938-492a-9400-8ff6e315bd47&amp;identificatie=B1291&amp;status=definitief</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -583,7 +583,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -608,7 +608,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -633,7 +633,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -658,7 +658,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -686,7 +686,7 @@
       <boolean>true</boolean>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>2</int>
@@ -699,7 +699,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: https://catalogi-api.vng.cloud/api/v1/zaaktypen?catalogus=http://localhost:8000/catalogi/api/v1/zaaktypen/50e6b78d-b938-492a-9400-8ff6e315bd47&amp;identificatie=B1291&amp;status=definitief took 0 milliseconds</string>
+      <string>GET to: https://test.openzaak.nl/catalogi/api/v1/zaaktypen?catalogus=http://localhost:8000/catalogi/api/v1/zaaktypen/50e6b78d-b938-492a-9400-8ff6e315bd47&amp;identificatie=B1291&amp;status=definitief took 1 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -711,7 +711,7 @@
       <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -746,7 +746,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -771,7 +771,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>5</int>
@@ -784,7 +784,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01 with kenmerk: &apos;zaakidentificatie:1900831&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 616 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01 with kenmerk: &apos;zaakidentificatie:1900831&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 43 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -796,7 +796,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -827,8 +827,8 @@
               &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
               &lt;applicatie&gt;CLO&lt;/applicatie&gt;&#13;
             &lt;/ontvanger&gt;&#13;
-            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d1c&lt;/referentienummer&gt;&#13;
-            &lt;tijdstipBericht&gt;20240206162549&lt;/tijdstipBericht&gt;&#13;
+            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--7cfc54d3:18e3ee938e2:-7f0f&lt;/referentienummer&gt;&#13;
+            &lt;tijdstipBericht&gt;20240314231002&lt;/tijdstipBericht&gt;&#13;
             &lt;crossRefnummer&gt;46bb36b9-dc1b-4ddd-92d0-a08dce97524d&lt;/crossRefnummer&gt;&#13;
           &lt;/stuurgegevens&gt;&#13;
           &lt;body&gt;&#13;
@@ -836,8 +836,8 @@
             &lt;plek&gt;server&lt;/plek&gt;&#13;
             &lt;omschrijving&gt;java.lang.NullPointerException&lt;/omschrijving&gt;&#13;
             &lt;details&gt;java.lang.NullPointerException&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient.getZgwZaakTypeByIdentificatie(ZGWClient.java:873)&amp;#13;&#13;
-	at nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService.creeerZaak(ZaakService.java:109)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient.getZgwZaakTypeByIdentificatie(ZGWClient.java:877)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService.creeerZaak(ZaakService.java:128)&amp;#13;&#13;
 	at nl.haarlem.translations.zdstozgw.converter.impl.translate.CreeerZaakTranslator.execute(CreeerZaakTranslator.java:53)&amp;#13;&#13;
 	at nl.haarlem.translations.zdstozgw.requesthandler.RequestHandler.execute(RequestHandler.java:98)&amp;#13;&#13;
 	at nl.haarlem.translations.zdstozgw.controller.SoapController.HandleRequest(SoapController.java:131)&amp;#13;&#13;
@@ -932,7 +932,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-20</string>
      </void>
      <void property="type">
       <int>3</int>
@@ -941,10 +941,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d1c</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847--7cfc54d3:18e3ee938e2:-7f0f</string>
   </void>
   <void property="endTime">
-   <long>1707233149733</long>
+   <long>1710454202429</long>
   </void>
   <void property="name">
    <string>Translate creeerZaak_Lk01</string>
@@ -953,10 +953,10 @@
    <string>/Issue330/</string>
   </void>
   <void property="startTime">
-   <long>1707233149117</long>
+   <long>1710454202385</long>
   </void>
   <void property="storageId">
-   <int>886</int>
+   <int>907</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>
