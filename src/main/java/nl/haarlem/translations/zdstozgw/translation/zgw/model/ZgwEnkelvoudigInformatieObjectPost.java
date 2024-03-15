@@ -22,11 +22,10 @@ import lombok.Data;
 
 @Data
 public class ZgwEnkelvoudigInformatieObjectPost {
-
 	@SerializedName("url")
-	@Expose
-	public String url;
-
+	@Expose(serialize = false, deserialize = true) 
+	public String url;	
+	
 	@SerializedName("identificatie")
 	@Expose
 	public String identificatie;

@@ -60,6 +60,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwAndereZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPost;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPut;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwInformatieObjectType;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwKenmerk;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwLock;
@@ -1242,15 +1243,12 @@ public class ZaakService {
 
 	public String checkOutZaakDocument(ZgwAuthorization authorization, String documentIdentificatie) {
 		log.debug("checkOutZaakDocument:" + documentIdentificatie);
-		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie);
+		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie);
 		if (zgwEnkelvoudigInformatieObject == null) {
-			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie not found for identificatie: "
-					+ documentIdentificatie);
+			throw new ConverterException("ZgwEnkelvoudigInformatieObject #" + documentIdentificatie + " could not found" );
+			throw new ConverterException("ZgwEnkelvoudigInformatieObject #" + documentIdentificatie + " could not found" );
 		}
-		if (zgwEnkelvoudigInformatieObject.locked) {
-			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: "
-					+ zgwEnkelvoudigInformatieObject.identificatie + " cannot be locked and then changed");
+			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: " + zgwEnkelvoudigInformatieObject.identificatie + " cannot be locked and then changed");
 		}
 
 		ZgwLock lock = this.zgwClient.getZgwInformatieObjectLock(authorization, zgwEnkelvoudigInformatieObject);
@@ -1273,56 +1271,46 @@ public class ZaakService {
 		return null;
 	}
 
-	public ZgwEnkelvoudigInformatieObject updateZaakDocument(ZgwAuthorization authorization, String lock,
-			ZdsZaakDocumentInhoud zdsWasInformatieObject, ZdsZaakDocumentInhoud zdsWordtInformatieObject) {
 		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWasInformatieObject.identificatie);
 
-		var zgwWasEnkelvoudigInformatieObject = this.zgwClient
-				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWasInformatieObject.identificatie);
-		if ("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
-			throw new ConverterException("ZgwEnkelvoudigInformatieObjectByIdentiticatie with identificatie: "
-					+ zdsWasInformatieObject.identificatie
-					+ " has status 'defintief ' and cannot be locked and then changed");
+		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWasInformatieObject.identificatie);
+		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
+			throw new ConverterException("ZgwEnkelvoudigInformatieObject #: " + zdsWasInformatieObject.identificatie + " has status 'defintief ' and therefore cannot be locked and then changed");
 		}
 
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
-		// Move code to the ModelMapperConfig.java
-		// Also merge, we shouldnt overwrite the old values this hard
-		var zgwWordtEnkelvoudigInformatieObject = this.modelMapper.map(zdsWordtInformatieObject,
-				ZgwEnkelvoudigInformatieObject.class);
-		zgwWordtEnkelvoudigInformatieObject.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
-		zgwWordtEnkelvoudigInformatieObject.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;
+		// 		Move code to the ModelMapperConfig.java
+		//		Also merge, we shouldnt overwrite the old values this hard
+		var zgwWordtEnkelvoudigInformatieObjectPut = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObjectPut.class);
+		zgwWordtEnkelvoudigInformatieObjectPut.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
+		zgwWordtEnkelvoudigInformatieObjectPut.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
-		// Move code to the ModelMapperConfig.java
-		if (zgwWordtEnkelvoudigInformatieObject.verzenddatum != null
-				&& zgwWordtEnkelvoudigInformatieObject.verzenddatum.length() == 0) {
-			zgwWordtEnkelvoudigInformatieObject.verzenddatum = null;
+		// 		Move code to the ModelMapperConfig.java
+		if(zgwWordtEnkelvoudigInformatieObjectPut.verzenddatum != null && zgwWordtEnkelvoudigInformatieObjectPut.verzenddatum.length() == 0) {
+			zgwWordtEnkelvoudigInformatieObjectPut.verzenddatum = null;
 		}
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
-		// Move code to the ModelMapperConfig.java
-		if (zgwWordtEnkelvoudigInformatieObject.taal != null
-				&& zgwWordtEnkelvoudigInformatieObject.taal.length() == 2) {
-			debugWarning("taal only had 2, expected 3 characted, trying to convert: '"
-					+ zgwWordtEnkelvoudigInformatieObject.taal + "'");
+		// 		Move code to the ModelMapperConfig.java
+		if(zgwWordtEnkelvoudigInformatieObjectPut.taal != null && zgwWordtEnkelvoudigInformatieObjectPut.taal.length() == 2) {
+			debugWarning("taal only had 2, expected 3 characted, trying to convert: '" + zgwWordtEnkelvoudigInformatieObjectPut.taal  + "'");
 			// https://nl.wikipedia.org/wiki/Lijst_van_ISO_639-codes
-			switch (zgwWordtEnkelvoudigInformatieObject.taal.toLowerCase()) {
+			switch (zgwWordtEnkelvoudigInformatieObjectPut.taal.toLowerCase()) {
 			case "fy":
 				// Fryslân boppe!
-				zgwWordtEnkelvoudigInformatieObject.taal = "fry";
+				zgwWordtEnkelvoudigInformatieObjectPut.taal = "fry";
 				break;
 			case "nl":
-				zgwWordtEnkelvoudigInformatieObject.taal = "nld";
+				zgwWordtEnkelvoudigInformatieObjectPut.taal = "nld";
 				break;
 			case "en":
-				zgwWordtEnkelvoudigInformatieObject.taal = "eng";
+				zgwWordtEnkelvoudigInformatieObjectPut.taal = "eng";
 				break;
 			default:
-				debugWarning("could not convert: '" + zgwWordtEnkelvoudigInformatieObject.taal.toLowerCase()
-						+ "', this will possible result in an error");
+				debugWarning("could not convert: '" + zgwWordtEnkelvoudigInformatieObjectPut.taal.toLowerCase()  + "', this will possible result in an error");
 			}
 		}
-		zgwWordtEnkelvoudigInformatieObject.indicatieGebruiksrecht = "false";
-		if (zgwWordtEnkelvoudigInformatieObject.status != null) {
+		zgwWordtEnkelvoudigInformatieObjectPut.indicatieGebruiksrecht = "false";
+		if(zgwWordtEnkelvoudigInformatieObjectPut.status != null) {
 			/*
 			 * in_bewerking - (In bewerking) Aan het informatieobject wordt nog gewerkt.
 			 * ter_vaststelling - (Ter vaststelling) Informatieobject gereed maar moet nog
@@ -1331,28 +1319,23 @@ public class ZaakService {
 			 * Informatieobject duurzaam bewaarbaar gemaakt; een gearchiveerd
 			 * informatie-element.
 			 */
-			zgwWordtEnkelvoudigInformatieObject.status = zgwWordtEnkelvoudigInformatieObject.status.replace(" ", "_");
-			zgwWordtEnkelvoudigInformatieObject.status = zgwWordtEnkelvoudigInformatieObject.status.toLowerCase();
-			if (!List.of("in_bewerking", "ter_vaststelling", "definitief", "gearchiveerd")
-					.contains(zgwWordtEnkelvoudigInformatieObject.status)) {
-				debugWarning("document-status: '" + zgwWordtEnkelvoudigInformatieObject.status
-						+ "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
-				zgwWordtEnkelvoudigInformatieObject.status = null;
+			zgwWordtEnkelvoudigInformatieObjectPut.status = zgwWordtEnkelvoudigInformatieObjectPut.status.replace(" ", "_");
+			zgwWordtEnkelvoudigInformatieObjectPut.status = zgwWordtEnkelvoudigInformatieObjectPut.status.toLowerCase();
+			if(!List.of("in_bewerking", "ter_vaststelling", "definitief", "gearchiveerd").contains(zgwWordtEnkelvoudigInformatieObjectPut.status)) {
+				debugWarning("document-status: '" + zgwWordtEnkelvoudigInformatieObjectPut.status + "', resetting to null (possible values: in_bewerking / ter_vaststelling / definitief / gearchiveerd)");
+				zgwWordtEnkelvoudigInformatieObjectPut.status = null;
 			}
 		}
 
-		zgwWordtEnkelvoudigInformatieObject.lock = lock;
-		zgwWordtEnkelvoudigInformatieObject.url = zgwWasEnkelvoudigInformatieObject.url;
-		zgwWasEnkelvoudigInformatieObject = this.zgwClient.putZaakDocument(authorization,
-				zgwWordtEnkelvoudigInformatieObject);
-		// ZgwZaak zgwZaak =
-		// this.zgwClient.getZaakByIdentificatie(zdsInformatieObject.isRelevantVoor.gerelateerde.identificatie);
-		// ZgwZaakInformatieObject zgwZaakInformatieObject =
-		// addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
+		zgwWordtEnkelvoudigInformatieObjectPut.lock = lock;
+		zgwWordtEnkelvoudigInformatieObjectPut.url = zgwWasEnkelvoudigInformatieObject.url;
+		zgwWasEnkelvoudigInformatieObject = this.zgwClient.putZaakDocument(authorization, zgwWordtEnkelvoudigInformatieObjectPut);
+		//ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(zdsInformatieObject.isRelevantVoor.gerelateerde.identificatie);
+		//ZgwZaakInformatieObject zgwZaakInformatieObject = addZaakInformatieObject(zgwEnkelvoudigInformatieObject, zgwZaak.url);
 
 		ZgwLock zgwLock = new ZgwLock();
 		zgwLock.lock = lock;
-		this.zgwClient.getZgwInformatieObjectUnLock(authorization, zgwWordtEnkelvoudigInformatieObject, zgwLock);
+		this.zgwClient.getZgwInformatieObjectUnLock(authorization, zgwWordtEnkelvoudigInformatieObjectPut, zgwLock);
 
 		return zgwWasEnkelvoudigInformatieObject;
 	}

@@ -938,26 +938,25 @@ public class ZGWClient {
 
 	public ZgwLock getZgwInformatieObjectLock(ZgwAuthorization authorization,
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
-		var lock = post(authorization, zgwEnkelvoudigInformatieObject.url + "/lock", null);
+		String json = "{ }";
+		var lock = post(authorization, zgwEnkelvoudigInformatieObject.url + "/lock", json);
 		Gson gson = new Gson();
 		ZgwLock result = gson.fromJson(lock, ZgwLock.class);
 		return result;
 	}
 
-	public void getZgwInformatieObjectUnLock(ZgwAuthorization authorization,
-			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject, ZgwLock zgwLock) {
-		Gson gson = new Gson();
-		String json = gson.toJson(zgwLock);
-		var lock = post(authorization, zgwEnkelvoudigInformatieObject.url + "/unlock", json);
-		Object result = gson.fromJson(lock, Object.class);
-		return;
+	public void getZgwInformatieObjectUnLock(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObjectPut zgwEnkelvoudigInformatieObjectPut, ZgwLock zgwLock) {
+			Gson gson = new Gson();
+			String json = gson.toJson(zgwLock);
+			var lock = post(authorization, zgwEnkelvoudigInformatieObjectPut.url + "/unlock", json);
+			Object result = gson.fromJson(lock, Object.class);
+			return;
 	}
 
-	public ZgwEnkelvoudigInformatieObject putZaakDocument(ZgwAuthorization authorization,
-			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
-		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
-		String response = this.put(authorization, zgwEnkelvoudigInformatieObject.url, json);
+	public ZgwEnkelvoudigInformatieObject putZaakDocument(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObjectPut zgwEnkelvoudigInformatieObjectPut) {
+		Gson gson = new GsonBuilder().disableHtmlEscaping().excludeFieldsWithoutExposeAnnotation().create();
+		String json = gson.toJson(zgwEnkelvoudigInformatieObjectPut);
+		String response = this.put(authorization, zgwEnkelvoudigInformatieObjectPut.url, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
 	}
 
