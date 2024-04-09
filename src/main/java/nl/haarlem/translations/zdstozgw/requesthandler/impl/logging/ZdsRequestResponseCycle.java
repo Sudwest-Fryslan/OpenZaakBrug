@@ -65,7 +65,7 @@ public class ZdsRequestResponseCycle {
 		this.zdsSoapAction = zdsSoapAction;
 
 		this.zdsRequestSize = zdsRequestBody.length();
-		this.zdsShortenedRequestBody = StringUtils.shortenLongString(zdsRequestBody, StringUtils.MAX_MESSAGE_SIZE);
+		this.zdsShortenedRequestBody = zdsRequestBody;//StringUtils.shortenLongString(zdsRequestBody, StringUtils.MAX_MESSAGE_SIZE);
 
 		this.referentienummer = referentienummer;
 		startdatetime = LocalDateTime.now();
@@ -81,7 +81,7 @@ public class ZdsRequestResponseCycle {
 
 		var message = response.getBody().toString();
 		this.zdsResponseSize = message.length();
-		this.zdsShortenedResponseBody = StringUtils.shortenLongString(message, StringUtils.MAX_MESSAGE_SIZE);
+		this.zdsShortenedResponseBody = message;//StringUtils.shortenLongString(message, StringUtils.MAX_MESSAGE_SIZE);
 
 		this.stopdatetime = LocalDateTime.now();
 		this.durationInMilliseconds = Duration.between(startdatetime, stopdatetime).toMillis();

@@ -22,11 +22,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import lombok.Data;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsRol;
 
 @Data
 public class ChangeDetector {
@@ -88,25 +90,28 @@ public class ChangeDetector {
 	public Changes detect(Object currentState, Object newState) throws ConverterException {
 		try {
 			var changes = new Changes();
-			for (Field field : List.of(currentState.getClass().getDeclaredFields())) {
-				Object currentValue = field.get(currentState);
+			for (Field field : List.of(newState.getClass().getDeclaredFields())) {
+				Object storedValue = field.get(currentState);
 				Object newValue = field.get(newState);
 				ChangeType changeType = null;
 
-				log.debug("looking for changes in current: '" + currentValue + "' into: '" + field + "'");
+				log.debug("looking for changes in current: '" + storedValue + "' into: '" + field + "'");
 
-				if (currentValue == null && newValue != null) {
-					changeType = ChangeType.NEW;
-				}
-				else if (currentValue != null && newValue == null) {
-					changeType = ChangeType.DELETED;
-				}
-				else if (currentValue != null && !currentValue.equals(newValue)) {
-					changeType = ChangeType.CHANGED;
-				}
+				if(newValue instanceof ZdsRol && ((ZdsRol) newValue).tijdvakGeldigheid != null && StringUtils.isNotBlank(((ZdsRol) newValue).tijdvakGeldigheid.eindGeldigheid)) {
+					// eindGeldigheid would imply that the role will be no longer valid so delete the role
+					if(currentState != null) {
+						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), ChangeType.DELETED);
+					}
+				} else {
+					if (storedValue == null && newValue != null) {
+						changeType = ChangeType.NEW;
+					} else if (storedValue != null && !storedValue.equals(newValue)) {
+						changeType = ChangeType.CHANGED;
+					}
 
-				if (changeType != null) {
-					changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), changeType);
+					if (changeType != null) {
+						changes.put(new Change(field, changeType, field.get(currentState), field.get(newState)), changeType);
+					}
 				}
 			}
 			return changes;

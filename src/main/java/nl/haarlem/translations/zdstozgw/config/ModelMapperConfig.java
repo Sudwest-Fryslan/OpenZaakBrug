@@ -26,6 +26,8 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import nl.haarlem.translations.zdstozgw.translation.zds.model.enumeration.SoortRechtsvorm;
+
 import org.apache.commons.lang.StringUtils;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Conditions;
@@ -285,17 +287,12 @@ public class ModelMapperConfig {
 								ZgwBetrokkeneIdentificatie::setGeslachtsaanduiding));
 	}
 
-	public void addZdsNietNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(ModelMapper modelMapper) {
-		modelMapper.typeMap(ZdsNietNatuurlijkPersoon.class, ZgwBetrokkeneIdentificatie.class);
-		/*
-				.addMappings(mapper -> mapper.using(convertStufDateToZgwDate())
-						.map(ZdsNatuurlijkPersoon::getGeboortedatum, ZgwBetrokkeneIdentificatie::setGeboortedatum))
-				.addMappings(mapper -> mapper.map(ZdsNatuurlijkPersoon::getBsn, ZgwBetrokkeneIdentificatie::setInpBsn))
-				.addMappings(
-						mapper -> mapper.using(convertToLowerCase()).map(ZdsNatuurlijkPersoon::getGeslachtsaanduiding,
-								ZgwBetrokkeneIdentificatie::setGeslachtsaanduiding));
-		*/
-	}
+    public void addZdsNietNatuurlijkPersoonToZgwBetrokkeneIdentificatieTypeMapping(ModelMapper modelMapper) {
+        modelMapper.typeMap(ZdsNietNatuurlijkPersoon.class, ZgwBetrokkeneIdentificatie.class)
+            .addMappings(
+                mapper -> mapper.using(convertStufRechtsvormToZGWRechtsvorm()).map(ZdsNietNatuurlijkPersoon::getInnRechtsvorm,
+                    ZgwBetrokkeneIdentificatie::setInnRechtsvorm));
+    }
 
 	public void addZdsZaakDocumentToZgwEnkelvoudigInformatieObjectTypeMapping(ModelMapper modelMapper) {
 		modelMapper.typeMap(ZdsZaakDocument.class, ZgwEnkelvoudigInformatieObject.class)
@@ -353,13 +350,10 @@ public class ModelMapperConfig {
 		if (stufDateTime == null || stufDateTime.length() == 0) {
 			return null;
 		}
-		if (stufDateTime.length() == 8) {
+		if (stufDateTime.length() == 8 || stufDateTime.length() == 12 || stufDateTime.length() == 14) {
+			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of "+stufDateTime.length()+" characters:"
+					+ stufDateTime + " will be expanded to 16");
 			stufDateTime = stufDateTime + StringUtils.repeat("0", 16 - stufDateTime.length());
-		}
-		if (stufDateTime.length() == 14) {
-			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of 14 characters:"
-						+ stufDateTime + " will be expanded to 16");
-			stufDateTime = stufDateTime + "00";
 		}
 		if (stufDateTime.length() == 17) {
 			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of 17 characters:"
@@ -600,4 +594,20 @@ public class ModelMapperConfig {
 			}
 		};
 	}
+
+
+    private AbstractConverter<String, String> convertStufRechtsvormToZGWRechtsvorm() {
+        return new AbstractConverter<>() {
+            @Override
+            protected String convert(String zdsInnRechtsvorm) {
+                var rechtsvorm = SoortRechtsvorm.getSoortRechtsvorm(zdsInnRechtsvorm);
+                if(rechtsvorm.isPresent()){
+                    return rechtsvorm.get().getZgwInnRechtsvorm();
+                } else {
+                    log.info("[processing warning] Rechtsvorm: '{}' kon niet worden geconverteerd", zdsInnRechtsvorm );
+                    return null;
+                }
+            }
+        };
+    }
 }

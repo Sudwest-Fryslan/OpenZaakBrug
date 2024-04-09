@@ -1,0 +1,158 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+applicationSuite: Open Zaakbrug
+categories:
+  - translation
+description:
+  nl:
+    documentation: 'https://github.com/Sudwest-Fryslan/OpenZaakBrug/tree/master/docs'
+    features:
+      - ZDS 1.1 genereerZaakIdentificatie_Di02
+      - |-
+        ZDS 1.1 creeerZaak_Lk01	
+      - |-
+        ZDS 1.1 geefZaakdetails_Lv01	
+      - |-
+        ZDS 1.1 updateZaak_Lk01	
+      - |-
+        ZDS 1.1 actualiseerZaakstatus_Lk01	
+      - |-
+        ZDS 1.1 geefLijstZaakdocumenten_Lv01	
+      - |-
+        ZDS 1.1 genereerDocumentIdentificatie_Di02	
+      - |-
+        ZDS 1.1 maakZaakdocument_Lk01	
+      - |-
+        ZDS 1.1 voegZaakdocumentToe_Lk01	
+      - |-
+        ZDS 1.1 geefZaakdocumentLezen_Lv01	
+      - |-
+        ZDS 1.1 geefZaakdocumentbewerken_Di02	
+      - |-
+        ZDS 1.1 updateZaakdocument_Di02	
+      - |-
+        ZDS 1.1 cancelCheckout_Di02	
+      - |-
+        StufZkn 3.1 zakLv01	
+    genericName: Open Zaakbrug
+    localisedName: Open Zaakbrug
+    longDescription: |
+      De nieuwe standaard voor het zaakgewijs werken is de [zgw
+      standaard](https://www.vngrealisatie.nl/producten/api-standaarden-zaakgericht-werken),
+      dit is de opvolger van de Zaak- en Documentservices (ZDS) standaard. Om de
+      overstap te maken naar deze nieuwe standaard vinden wij het belangrijk om
+      niet meer te investeren in de oude-zds-koppelingen, maar zo snel mogelijk
+      de nieuwe zgw-standaard te gebruiken. Om deze reden heeft het team Open
+      Zaakbrug een oplossing om de bestaande applicaties, die de oude
+      zds-standaard praten, toch met een zgw-zaaksysteem te laten praten.
+
+
+      Hiermee kan de gemeente de bestaande zaaksgewijswerken applicaties blijven
+      gebruiken en toch overstappen op bijvoorbeeld
+      [openzaak](https://openzaak.org/). Dit zodat alles blijft draaien en
+      ondertussen de overstap kan worden gemaakt naar de nieuwe commonground
+      wereld.
+
+
+      Door te beginnen met een zgw-zaaksysteem kunnen alle nieuwe
+      domein-specifieke-applicaties via deze nieuwe standaard aansluiten en
+      krijgen de leveranciers van de bestaande applicaties de tijd om de ZGW
+      koppeling in te bouwen.
+
+       
+
+      De API-standaarden voor zaakgericht werken stellen gemeenten in staat om
+      de informatievoorziening rondom zaakgericht werken in te richten volgens
+      de informatiekundige visie Common Ground. Hiermee zetten ze een eerste
+      stap in de richting van een modernisering van het ICT-landschap. Dit helpt
+      bij het (ont)koppelen van processystemen en de opslagcomponenten waar
+      documenten en overige informatie in zijn opgeslagen.
+
+
+      Wij willen niet meer investeren in de oude koppelingen van het
+      zaaksgericht werken (ZDS standaard) en willen zo snel mogelijk de nieuwe
+      Zaakgericht Werken-api's gebruiken. Daarom willen we zo snel mogelijk de
+      nieuwe opslaginfrastructuur op basis van deze standaard aanbieden. Daarna
+      kunnen alle nieuwe applicaties via deze nieuwe standaard aansluiten.
+
+
+      Omdat de bestaande applicaties niet de nieuwe standaard ondersteunen
+      kunnen deze niet aangesloten worden op het nieuwe zaaksysteem. Door een
+      component te ontwikkelen welke de communicatie omzet van de oude standaard
+      (ZDS) naar de nieuwe (ZGW) hoeven de bestaande applicaties niet op
+      hetzelfde moment te worden aangepast.
+
+
+      Het uiteindelijke doel is om alle applicaties op de nieuwe Zaakgericht
+      Werken-api's te krijgen, met deze aanpak ontstaat er tijd om beheerst en
+      onder regie dit uit te voeren.
+
+
+      Met dit vertaal component zorgen we ervoor dat de bestaande ZDS-
+      applicaties kunnen aansluiten op de nieuwe zaak en document
+      opslagcomponenten.
+
+
+      Hierbij hebben we de volgende uitgangspunten:
+
+
+      - Het doel is het aansluiten van de bestaande ZDS-applicaties
+
+      - De oplossing hoeft niet aan de volledige ZDS-standaard te voldoen
+      (minimaal vereiste functionele ondersteuning)
+
+      - De programmatuur moet makkelijk herbruikbaar zijn
+
+      - De broncode moet overdraagbaar zijn en naar wens aanpasbaar zijn door
+      gemeenten
+
+      - Het betreft een tijdelijke oplossing, de leveranciers moeten over naar
+      ZGW
+    screenshots:
+      - |-
+        https://raw.githubusercontent.com/Sudwest-Fryslan/OpenZaakBrug/master/docs/screenshot.png
+    shortDescription: |-
+      Vertaalt het oude-zds-berichtenverkeer van het zaakgericht naar zgw, om zo
+      snel mogelijk de nieuwe zaakgericht werken-api’s te gebruiken
+developmentStatus: stable
+isBasedOn:
+  - 'https://github.com/Haarlem/zds-stuf-to-zgw-api-translator'
+nl:
+  conforme:
+    gdpr: false
+    lineeGuidaDesign: false
+    misureMinimeSicurezza: false
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+landingURL: 'https://sudwest-fryslan.github.io/OpenZaakBrug/'
+legal:
+  license: EUPL
+localisation:
+  availableLanguages:
+    - nl
+  localisationReady: false
+logo: |-
+  https://raw.githubusercontent.com/Sudwest-Fryslan/OpenZaakBrug/master/src/main/resources/static/img/open-zaakbrug.png
+maintenance:
+  contacts:
+    - email: e.witteveen@sudwestfryslan.nl
+      name: Eduard Witteveen
+  type: community
+name: Open Zaakbrug
+platforms:
+  - windows
+  - linux
+  - mac
+releaseDate: '2021-07-01'
+roadmap: 'https://sudwest-fryslan.github.io/OpenZaakBrug/'
+softwareType: addon
+softwareVersion: 1.2.11
+url: 'https://github.com/Sudwest-Fryslan/OpenZaakBrug.git'

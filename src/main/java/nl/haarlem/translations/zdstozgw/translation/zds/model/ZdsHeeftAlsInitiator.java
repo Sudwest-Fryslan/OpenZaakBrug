@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ZdsHeeftAlsInitiator extends ZdsObject {
-	@XmlElement(namespace = ZKN)
-	public ZdsGerelateerde zdsGerelateerde;
+public class ZdsHeeftAlsInitiator extends ZdsRol {
+//	@XmlElement(namespace = ZKN)
+//	public ZdsGerelateerde zdsGerelateerde;
 }

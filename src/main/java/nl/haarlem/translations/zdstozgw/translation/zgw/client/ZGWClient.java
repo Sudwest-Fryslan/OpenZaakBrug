@@ -34,6 +34,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import lombok.Getter;
@@ -423,7 +424,7 @@ public class ZGWClient {
 
 	public ZgwEnkelvoudigInformatieObject addZaakDocument(
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
 		String response = this.post(this.baseUrl + this.endpointEnkelvoudiginformatieobject, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
@@ -827,7 +828,7 @@ public class ZGWClient {
 	}
 
 	public ZgwEnkelvoudigInformatieObject putZaakDocument(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = gson.toJson(zgwEnkelvoudigInformatieObject);
 		String response = this.put(zgwEnkelvoudigInformatieObject.url, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
