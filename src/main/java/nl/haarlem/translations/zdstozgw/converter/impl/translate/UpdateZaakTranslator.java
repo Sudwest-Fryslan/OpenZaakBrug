@@ -51,7 +51,7 @@ public class UpdateZaakTranslator extends Converter {
 		if(zdsZakLk01.objects.size() == 1) {
 			wordt = zdsZakLk01.objects.get(0);
 		}
-		else if(zdsZakLk01.objects.size() == 2) {
+		else {
 			was = zdsZakLk01.objects.get(0);
 			wordt = zdsZakLk01.objects.get(1);
 		}

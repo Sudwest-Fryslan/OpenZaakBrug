@@ -11,10 +11,11 @@ Door te beginnen met een zgw-zaaksysteem kunnen alle nieuwe domein-specifieke-ap
 ### Nieuws
 - [Súdwest-Fryslân live met OpenZaak en Open Zaakbrug](https://commonground.nl/blog/view/6a946c44-851a-4a2b-bfaf-8368d886aff7/sudwest-fryslan-live-met-openzaak-en-open-zaakbrug)
 - [Borging van Open ZaakBrug](https://blog.wearefrank.nl/borging-openzaakbrug-integratie-vng)
-### Súdwest-Fryslân live
+### Live Súdwest-Fryslân en Haarlem
 De gemeente Súdwest-Fryslân is inmiddels live met Open Zaakbrug in combinatie met OpenZaak, de oude dossiers zijn vanuit, met Open Zaakbrug, vanuit het oude systeem gemigreerd naar Open Zaak. Na 2021-Q3 moeten alle systemen over zijn en de gegevens gemigreerd.
-### Haarlem testen
-De gemeente Haarlem is bezig om hetomgevingswet pakket te testen met de Open Zaakbrug.
+De gemeente Haarlem is live
+### Zaakbrug
+Naast de Open Zaakbrug bestaat ook de Zaakbrug, de bedoeliing is dat deze in de toekomst alle functionaliteiten van de OZB gaat bevatten, waarna dit project niet meer nodig is.
 
 ## Over OpenZaakBrug
 De API-standaarden voor zaakgericht werken stellen gemeenten in staat om de informatievoorziening rondom zaakgericht werken in te richten volgens de informatiekundige visie Common Ground. Hiermee zetten ze een eerste stap in de richting van een modernisering van het ICT-landschap. Dit helpt bij het (ont)koppelen van processystemen en de opslagcomponenten waar documenten en overige informatie in zijn opgeslagen.
@@ -52,7 +53,7 @@ Aanpassen code en geautomatiseerd testen:
 - Eén of meerdere issue's wordt aangemaakt waarin beschreven staat welke werkzaamheden worden uitgevoerd
 - Voor deze werkzaamheden wordt een branch aangemaakt
 - De werkzaamheden worden via commit's op de betreffende branch gedaan
-- Na het doen van een commit worden er [testen](https://travis-ci.com/github/Sudwest-Fryslan/OpenZaakBrug/builds/) uitgevoerd op github om te kijken of alles werkt. 
+- Na het doen van een commit worden er [testen](https://travis-ci.com/github/Sudwest-Fryslan/OpenZaakBrug/builds/) uitgevoerd op github om te kijken of alles werkt.
   - Hierin wordt controle gedaan door voorbeeldberichten te verwerken, te controleren of Open Zaakbrug zich hetzelfde blijft gedragen.
   - Te kijken of er een docker image kan worden gemaakt en worden opgestart
 
@@ -88,22 +89,23 @@ Bekijk onze [checklist](commonground/checklist.md) om te zien hoe common ground 
 
 ## Huidige ondersteuning applicaties
 
-Op dit moment wordt er druk gewerkt om de Open Zaakbrug live te krijgen. Hiervoor testen de functioneelbeheerders van de verschillende backoffice applicaties het gedrag van de vertaler.  Hierbij wordt getest of de applicatie zich gedraagt zoals het voorheen werkte met het legacy (ZDS) zaaksysteem voor de nieuwe processen. Daarnaast wordt getest of de bestaande zaken uit het oude zaaksysteem goed gerepliceerd worden naar het nieuwe systeem, zodat er geen conversies hoeven te worden gedaan. (het is wel zaak dat de gegevenskwaliteit hiervoor goed in orde is!) 
+Op dit moment wordt er druk gewerkt om de Open Zaakbrug live te krijgen. Hiervoor testen de functioneelbeheerders van de verschillende backoffice applicaties het gedrag van de vertaler.  Hierbij wordt getest of de applicatie zich gedraagt zoals het voorheen werkte met het legacy (ZDS) zaaksysteem voor de nieuwe processen. Daarnaast wordt getest of de bestaande zaken uit het oude zaaksysteem goed gerepliceerd worden naar het nieuwe systeem, zodat er geen conversies hoeven te worden gedaan. (het is wel zaak dat de gegevenskwaliteit hiervoor goed in orde is!)
 
 | Applicatie                                                   | Proxy functionaliteit     | Translate functionaliteit | Replicatie functionaliteit | Status        |
 | ------------------------------------------------------------ | ------------------------- | ------------------------- | -------------------------- | ------------- |
-| Suites voor Sociaaldomein                                    | Getest door fb en akkoord | Getest door fb en akkoord | Getest door fb en akkoord  | in acceptatie |
+| Suites voor Sociaaldomein                                    | Getest door fb en akkoord | Getest door fb en akkoord | Getest door fb en akkoord  | **live** |
 | Gisvg (wabo/apv-vergunningen)                                | Getest door fb en akkoord |  **live**                 | **live**                   | **live**      |
-| Midofficevuller met BZ (verhuizing/identieitskaart/rijbewijs) | Getest door fb en akkoord | **live**                 | nvt.                       | **live**      |
-| [Sleeptool](https://github.com/Sudwest-Fryslan/DeSleepTool) (toevoegen documenten aan bestaande zaak) | Getest door fb en akkoord | **live** | nvt. | -           |
+| [Midofficevuller](https://github.com/EduardWitteveen/ZaaksysteemVuller) met BZ (verhuizing/identieitskaart/rijbewijs) | Getest door fb en akkoord | **live**                 | nvt.                       | **live**      |
+| [Sleeptool](https://github.com/Sudwest-Fryslan/DeSleepTool) (toevoegen documenten aan bestaande zaak) | Getest door fb en akkoord | **live** | nvt. | **live**    |
 | Verint Kana                                                  | Getest door fb en akkoord | Getest door fb en akkoord | Getest door fb en akkoord  | in acceptatie |
-| Gidso regiesysteem                                           | -                         | -                         | -                          | -             |
-| Powerbrowser                                                 | -                         | -                         | -                          | -             |
+| Gidso regiesysteem                                           | -                         | -                         | -                          | **live**      |
+| Powerbrowser                                                 | -                         | -                         | -                          | **live**      |
+| Centric Leefomgeving                                         | -                         | -                         | -                          | in acceptatie      |
 
 De bovenstaande testen zijn uitgevoerd door de functioneelbeheerders van de betreffende taakspecifieke applicaties, dus door de personen die moeten zorgen voor de functionaliteiten en continuiteit van de betreffende applicaties.
 
 - **Proxy** : Verstuurd de berichten door naar het oude, legacy zaaksysteem, Open Zaakbrug kan gebruikt worden om de berichten te inspecteren.
-- **Translate** : Vertaald de ZDS berichten naar ZGW en geeft weer netjes een antwoord in ZDS. 
+- **Translate** : Vertaald de ZDS berichten naar ZGW en geeft weer netjes een antwoord in ZDS.
 - **Replicate**:  Combinatie van de bovenste 2, de berichten worden vertaald EN doorgestuurd naar het nieuwe systeem. Wanneer er verwezen wordt naar een zaak of zaakdocument die niet bestaat in openzaak, dan wordt deze informatie on-the-fly uit het oude systeem gecopieerd naar openzaak en de betreffende applicatie uitgevoerd.
 
 Omdat het een standaard is die wordt vertaald, zullen vervolg applicaties steeds "makkelijker" te koppelen zijn, omdat daarmee de functie-set beter is getest en daarmee volwassener zal worden. Op dit moment blijkt dat het implementeren van de volgende webservices voldoende is om goede ondersteuning te leveren:
@@ -121,9 +123,9 @@ Omdat het een standaard is die wordt vertaald, zullen vervolg applicaties steeds
 | ZDS 1.1 maakZaakdocument_Lk01              | ondersteund | ondersteund          |
 | ZDS 1.1 voegZaakdocumentToe_Lk01           | ondersteund | ondersteund          |
 | ZDS 1.1 geefZaakdocumentLezen_Lv01         | ondersteund | ondersteund          |
-| ZDS 1.1 geefZaakdocumentbewerken_Di02      | in test     | niet geïmplementeerd |
-| ZDS 1.1 updateZaakdocument_Di02            | in test     | niet geïmplementeerd |
-| ZDS 1.1 cancelCheckout_Di02                | in test     | niet geïmplementeerd |
+| ZDS 1.1 geefZaakdocumentbewerken_Di02      | ondersteund | ondersteund          |
+| ZDS 1.1 updateZaakdocument_Di02            | ondersteund | ondersteund          |
+| ZDS 1.1 cancelCheckout_Di02                | ondersteund | ondersteund          |
 
 ## Roadmap
 
@@ -136,7 +138,6 @@ Omdat het een standaard is die wordt vertaald, zullen vervolg applicaties steeds
 - [Gemeente Súdwest-Fryslân](https://sudwestfryslan.nl/), Jacco Hovinga,  Santoshi Bouma en Eduard Witteveen (productowner)
 - [Gemeente Haarlem](https://www.haarlem.nl/),  David van Hussel
 - [Gemeente Utrecht](https://www.utrecht.nl/), Lazo Bozarov
-- [WeAreFrank!](https://blog.wearefrank.nl/borging-openzaakbrug-integratie-vng), Jaco de Groot 
+- [WeAreFrank!](https://blog.wearefrank.nl/borging-openzaakbrug-integratie-vng), Jaco de Groot
 
 Om ons te bereiken kunt u een email versturen naar e.witteveen@sudwestfryslan.nl of stel gewoon een vraag in onze [slack](https://samenorganiseren.slack.com/archives/C01FDA71Y4V)
-
