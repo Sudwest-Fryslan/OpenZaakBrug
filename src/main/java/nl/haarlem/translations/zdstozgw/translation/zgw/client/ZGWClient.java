@@ -814,10 +814,10 @@ public class ZGWClient {
 			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
 
-		Map<String, String> parameters = new HashMap();
-		
-		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);
-		parameters.put("expand", getZakenExpandParameterValue());
+		Map<String, String> parameters = new HashMap();		
+		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
+		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);		
+		parameters.put("expand", getZakenExpandParameterValue());	
 
 		List<ZgwZaak> zaken = this.getZaken(authorization, parameters);
 		authorization.cacheAdd(zaken);
@@ -831,12 +831,12 @@ public class ZGWClient {
 		}
 
 
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap();		
+		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", zaakIdentificatie);
-		parameters.put("expand", getZakenExpandParameterValue());
-
-		ZgwZaak zgwZaak = this.getZaak(authorization, parameters);
+		parameters.put("expand", getZakenExpandParameterValue());				
 		
+		ZgwZaak zgwZaak = this.getZaak(authorization, parameters);		
 		if (zgwZaak == null) {
 			return null;
 		}
