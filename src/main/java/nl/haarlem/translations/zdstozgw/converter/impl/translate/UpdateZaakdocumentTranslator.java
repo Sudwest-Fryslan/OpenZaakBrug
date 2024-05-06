@@ -24,6 +24,8 @@ import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsBv02;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsUpdateZaakdocumentDi02;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentInhoud;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
 import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
@@ -43,11 +45,20 @@ public class UpdateZaakdocumentTranslator extends Converter {
 	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsUpdateZaakdocumentDi02 = (ZdsUpdateZaakdocumentDi02) this.getZdsDocument();
 		var lock = zdsUpdateZaakdocumentDi02.parameters.checkedOutId;
-		var zdsWasInformatieObject = zdsUpdateZaakdocumentDi02.edcLk02.documenten.get(0);
-		var zdsWordtInformatieObject = zdsUpdateZaakdocumentDi02.edcLk02.documenten.get(1);
+		
+		ZdsZaakDocumentInhoud zdsWasInformatieObject = null;
+		ZdsZaakDocumentInhoud zdsWordtInformatieObject = null;
 
+		if(zdsUpdateZaakdocumentDi02.edcLk02.documenten.size() == 1) {
+			zdsWordtInformatieObject = zdsUpdateZaakdocumentDi02.edcLk02.documenten.get(0);
+		}
+		else  {
+			zdsWasInformatieObject = zdsUpdateZaakdocumentDi02.edcLk02.documenten.get(0);
+			zdsWordtInformatieObject = zdsUpdateZaakdocumentDi02.edcLk02.documenten.get(1);
+		}
+		
 		this.getSession().setFunctie("UpdateZaakdocument");
-		this.getSession().setKenmerk("documentidentificatie:" + zdsWasInformatieObject.identificatie + " with lock:" + lock);
+		this.getSession().setKenmerk("documentidentificatie:" + zdsWordtInformatieObject.identificatie + " with lock:" + lock);
 
 		this.getZaakService().updateZaakDocument(authorization, lock, zdsWasInformatieObject, zdsWordtInformatieObject);
 
