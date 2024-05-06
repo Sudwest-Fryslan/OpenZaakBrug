@@ -15,14 +15,15 @@
  */
 package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
 @Data
-public class ZgwCatalogus {
-	@Expose
-	public String url;
+public class ZgwCatalogus  extends ZgwObject  {
 	@Expose
 	public String domein;
 	@Expose

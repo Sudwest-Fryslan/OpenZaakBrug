@@ -23,10 +23,9 @@ import lombok.Data;
 @Data
 public class ZgwOpschorting {
 
-	@SerializedName("indicatie")
 	@Expose
 	public Boolean indicatie;
-	@SerializedName("reden")
+
 	@Expose
 	public String reden;
 

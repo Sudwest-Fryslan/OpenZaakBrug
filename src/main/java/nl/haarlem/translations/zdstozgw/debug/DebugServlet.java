@@ -40,7 +40,7 @@ public class DebugServlet extends WebContainerServlet {
 
 	@Override
 	public ApplicationInstance newApplicationInstance() {
-		return (Echo2Application) webApplicationContext.getBean("echo2Application");
+		return (Echo2Application)webApplicationContext.getBean("echo2Application");
 	}
 
 }

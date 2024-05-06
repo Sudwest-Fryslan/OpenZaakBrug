@@ -18,21 +18,40 @@ package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
 @Data
 public class ZgwZaak extends ZgwZaakPatch {
+
 	@Expose
 	public String einddatum;
+
 	@Expose
 	public String betalingsindicatieWeergave;
+	
 	@Expose
 	public List<String> deelzaken = null;
+	
 	@Expose
-	public List<Object> eigenschappen = null;
+	public List<String> eigenschappen = null;
+	
+	@Expose
+	public List<String> rollen;	
+	
 	@Expose
 	public String status;
+	
 	@Expose
-	public Object resultaat;
+	public String resultaat;
+		
+	@Expose
+	public List<String> zaakinformatieobjecten;	
+
+	@Expose
+	public List<String> zaakobjecten;			
+	
+	@Expose
+	public ZgwZrcExpand _expand;
 }

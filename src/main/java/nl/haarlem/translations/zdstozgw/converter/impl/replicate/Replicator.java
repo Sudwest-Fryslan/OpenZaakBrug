@@ -48,19 +48,22 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLa01GeefZaak
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLa01LijstZaakdocumenten;
 import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwResultaat;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaakType;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 @Service
 public class Replicator {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	private Converter converter;
-	private final ZDSClient zdsClient;
-	private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
+    private final ZDSClient zdsClient;
+    private static final Debugger debug = Debugger.getDebugger(MethodHandles.lookup().lookupClass());
 
 	@Autowired
 	private Replicator(ZDSClient zdsClient) {
-		this.zdsClient = zdsClient;
+        this.zdsClient = zdsClient;
 	}
 
 	public Replicator(Converter converter) {
@@ -70,180 +73,152 @@ public class Replicator {
 
 	public void replicateZaak(ZgwAuthorization authorization, String zaakidentificatie) {
 		debug.infopoint("replicatie", "Start repliceren van zaak met identificatie:" + zaakidentificatie);
-		var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization,
-				zaakidentificatie);
-		var zdsZaak = getLegacyZaak(zaakidentificatie);
+		var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie);
+		var zdsZaak = getLegacyZaak(zaakidentificatie);		
 		if (zgwZaak == null) {
 			createZaak(authorization, zdsZaak);
 		} else {
-			updateZaak(authorization, zdsZaak);
+        	updateZaak(authorization, zdsZaak);
 		}
-		List<ZdsHeeftRelevant> relevanteDocumenten = getLijstZaakdocumenten(zaakidentificatie);
-		replicateDocumenten(authorization, zaakidentificatie, relevanteDocumenten);
-	}
+        List<ZdsHeeftRelevant> relevanteDocumenten = getLijstZaakdocumenten(zaakidentificatie);
+        replicateDocumenten(authorization, zaakidentificatie, relevanteDocumenten);
+    }
 
 	private ZdsZaak getLegacyZaak(String zaakidentificatie) {
-		var zdsUrl = this.converter.getZaakService().configService.getConfiguration().getReplication()
-				.getGeefZaakdetails().getUrl();
-		var zdsSoapAction = this.converter.getZaakService().configService.getConfiguration().getReplication()
-				.getGeefZaakdetails().getSoapaction();
-		var zdsRequest = new ZdsReplicateGeefZaakdetailsLv01();
-		zdsRequest.stuurgegevens = this.converter.getZdsDocument().stuurgegevens;
-		zdsRequest.stuurgegevens.berichtcode = "Lv01";
-		zdsRequest.parameters = new ZdsParametersMetSortering();
-		zdsRequest.parameters.setSortering("0");
-		zdsRequest.parameters.setIndicatorVervolgvraag("false");
-		zdsRequest.gelijk = new ZdsZaak();
-		zdsRequest.gelijk.identificatie = zaakidentificatie;
-		zdsRequest.scope = new ZdsScope();
-		zdsRequest.scope.object = new ZdsScopeObject();
-		zdsRequest.scope.object.setEntiteittype("ZAK");
-		zdsRequest.scope.object.setScope("alles");
+        var zdsUrl = this.converter.getZaakService().configService.getConfiguration().getReplication().getGeefZaakdetails().getUrl();
+        var zdsSoapAction = this.converter.getZaakService().configService.getConfiguration().getReplication().getGeefZaakdetails().getSoapaction();
+        var zdsRequest = new ZdsReplicateGeefZaakdetailsLv01();
+        zdsRequest.stuurgegevens = this.converter.getZdsDocument().stuurgegevens;
+        zdsRequest.stuurgegevens.berichtcode = "Lv01";
+        zdsRequest.parameters = new ZdsParametersMetSortering();
+        zdsRequest.parameters.setSortering("0");
+        zdsRequest.parameters.setIndicatorVervolgvraag("false");
+        zdsRequest.gelijk = new ZdsZaak();
+        zdsRequest.gelijk.identificatie = zaakidentificatie;
+        zdsRequest.scope = new ZdsScope();
+        zdsRequest.scope.object = new ZdsScopeObject();
+        zdsRequest.scope.object.setEntiteittype("ZAK");
+        zdsRequest.scope.object.setScope("alles");
 
-		var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction,
-				zdsRequest);
+        var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction, zdsRequest);
 
-		// fetch the zaak details
-		String rawResponse = zdsResponse.getBody().toString();
-		byte[] bytes = rawResponse.getBytes();
-		var response = new String(bytes, StandardCharsets.UTF_8);
-		log.debug("GeefZaakDetails response:" + response);
-		ZdsZakLa01GeefZaakDetails zakLa01 = (ZdsZakLa01GeefZaakDetails) XmlUtils.getStUFObject(response,
-				ZdsZakLa01GeefZaakDetails.class);
-		return zakLa01.antwoord.zaak.get(0);
+        // fetch the zaak details
+        String rawResponse = zdsResponse.getBody().toString();
+        byte[] bytes = rawResponse.getBytes();
+        var response = new String(bytes, StandardCharsets.UTF_8);
+        log.debug("GeefZaakDetails response:" + response);
+        ZdsZakLa01GeefZaakDetails zakLa01 = (ZdsZakLa01GeefZaakDetails) XmlUtils.getStUFObject(response, ZdsZakLa01GeefZaakDetails.class);
+        return zakLa01.antwoord.zaak.get(0);
 	}
-
+	
 	private void createZaak(ZgwAuthorization authorization, ZdsZaak zdsZaak) {
-		debug.infopoint("replicatie", "received zaak-data from zds-zaaksysteem for zaak:" + zdsZaak.identificatie
-				+ ", now storing in zgw-zaaksysteem");
-		this.converter.getZaakService().creeerZaak(authorization, zdsZaak);
+        debug.infopoint("replicatie", "received zaak-data from zds-zaaksysteem for zaak:" + zdsZaak.identificatie + ", now storing in zgw-zaaksysteem");
+        this.converter.getZaakService().creeerZaak(authorization, zdsZaak);
 		var azg = this.converter.getSession().getAantalZakenGerepliceerd();
 		this.converter.getSession().setAantalZakenGerepliceerd(azg + 1);
-	}
+    }
 
-	private void updateZaak(ZgwAuthorization authorization, ZdsZaak zdsZaak) {
-		debug.infopoint("replicatie", "received zaak-data from zds-zaaksysteem for zaak:" + zdsZaak.identificatie
-				+ ", updating in zgw-zaaksysteem");
-		this.converter.getZaakService().updateZaak(authorization, zdsZaak);
+    private void updateZaak(ZgwAuthorization authorization, ZdsZaak zdsZaak) {
+    	debug.infopoint("replicatie", "received zaak-data from zds-zaaksysteem for zaak:" + zdsZaak.identificatie + ", updating in zgw-zaaksysteem");
+        this.converter.getZaakService().updateZaak(authorization, zdsZaak);        
 		var azg = this.converter.getSession().getAantalZakenGerepliceerd();
 		this.converter.getSession().setAantalZakenGerepliceerd(azg + 1);
-	}
-
+    }
+	
 	public void replicateDocument(ZgwAuthorization authorization, String documentidentificatie) {
 		debug.infopoint("replicatie", "Start repliceren van document met identificatie:" + documentidentificatie);
-		String rsin = this.converter.getZaakService()
-				.getRSIN(this.converter.getZdsDocument().stuurgegevens.zender.organisatie);
-
-		var zgwDocument = this.converter.getZaakService().zgwClient
-				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentidentificatie);
+		var zgwDocument = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentidentificatie);
 		if (zgwDocument == null) {
-			debug.infopoint("replicatie",
-					"document not found, copying document with identificatie #" + documentidentificatie);
+			debug.infopoint("replicatie", "document not found, copying document with identificatie #" + documentidentificatie);
 			copyDocument(authorization, documentidentificatie);
-		} else {
-			debug.infopoint("replicatie",
-					"document already found, no need to copy document with identificatie #" + documentidentificatie);
+        } else {
+        	debug.infopoint("replicatie", "document already found, no need to copy document with identificatie #" + documentidentificatie);
 		}
 	}
+            
+    private List<ZdsHeeftRelevant> getLijstZaakdocumenten(String zaakidentificatie) {
+        List<ZdsHeeftRelevant> relevanteDocumenten = null;
+        var zdsUrl = this.converter.getZaakService().configService.getConfiguration().getReplication().getGeefLijstZaakdocumenten().getUrl();
+        var zdsSoapAction = this.converter.getZaakService().configService.getConfiguration().getReplication().getGeefLijstZaakdocumenten().getSoapaction();
+        var zdsRequest = new ZdsReplicateGeefLijstZaakdocumentenLv01();
+        zdsRequest.stuurgegevens = this.converter.getZdsDocument().stuurgegevens;
+        zdsRequest.stuurgegevens.berichtcode = "Lv01";
+        zdsRequest.parameters = new ZdsParametersMetSortering();
+        zdsRequest.parameters.setSortering("0");
+        zdsRequest.parameters.setIndicatorVervolgvraag("false");
+        zdsRequest.gelijk = new ZdsZaak();
+        zdsRequest.gelijk.identificatie = zaakidentificatie;
+        zdsRequest.scope = new ZdsScope();
+        zdsRequest.scope.object = new ZdsScopeObject();
+        zdsRequest.scope.object.entiteittype = "ZAK";
+        zdsRequest.scope.object.heeftRelevant = new ZdsScopeHeeftRelevant();
+        zdsRequest.scope.object.heeftRelevant.entiteittype = "ZAKEDC";
+        zdsRequest.scope.object.heeftRelevant.gerelateerde = new ZdsScopeGerelateerde();
+        zdsRequest.scope.object.heeftRelevant.gerelateerde.entiteittype = "EDC";
 
-	private List<ZdsHeeftRelevant> getLijstZaakdocumenten(String zaakidentificatie) {
-		List<ZdsHeeftRelevant> relevanteDocumenten = null;
-		var zdsUrl = this.converter.getZaakService().configService.getConfiguration().getReplication()
-				.getGeefLijstZaakdocumenten().getUrl();
-		var zdsSoapAction = this.converter.getZaakService().configService.getConfiguration().getReplication()
-				.getGeefLijstZaakdocumenten().getSoapaction();
-		var zdsRequest = new ZdsReplicateGeefLijstZaakdocumentenLv01();
-		zdsRequest.stuurgegevens = this.converter.getZdsDocument().stuurgegevens;
-		zdsRequest.stuurgegevens.berichtcode = "Lv01";
-		zdsRequest.parameters = new ZdsParametersMetSortering();
-		zdsRequest.parameters.setSortering("0");
-		zdsRequest.parameters.setIndicatorVervolgvraag("false");
-		zdsRequest.gelijk = new ZdsZaak();
-		zdsRequest.gelijk.identificatie = zaakidentificatie;
-		zdsRequest.scope = new ZdsScope();
-		zdsRequest.scope.object = new ZdsScopeObject();
-		zdsRequest.scope.object.entiteittype = "ZAK";
-		zdsRequest.scope.object.heeftRelevant = new ZdsScopeHeeftRelevant();
-		zdsRequest.scope.object.heeftRelevant.entiteittype = "ZAKEDC";
-		zdsRequest.scope.object.heeftRelevant.gerelateerde = new ZdsScopeGerelateerde();
-		zdsRequest.scope.object.heeftRelevant.gerelateerde.entiteittype = "EDC";
+        var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction, zdsRequest);
+        var zakZakLa01 = (ZdsZakLa01LijstZaakdocumenten) XmlUtils.getStUFObject(zdsResponse.getBody().toString(),ZdsZakLa01LijstZaakdocumenten.class);
+        if(zakZakLa01.antwoord == null || zakZakLa01.antwoord.object == null || zakZakLa01.antwoord.object.heeftRelevant == null) {
+        	// no documents
+        	return new ArrayList<ZdsHeeftRelevant>();
+        }
+        return zakZakLa01.antwoord.object.heeftRelevant;
+    }
 
-		var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction,
-				zdsRequest);
-		var zakZakLa01 = (ZdsZakLa01LijstZaakdocumenten) XmlUtils.getStUFObject(zdsResponse.getBody().toString(),
-				ZdsZakLa01LijstZaakdocumenten.class);
-		if (zakZakLa01.antwoord == null || zakZakLa01.antwoord.object == null
-				|| zakZakLa01.antwoord.object.heeftRelevant == null) {
-			// no documents
-			return new ArrayList<ZdsHeeftRelevant>();
-		}
-		return zakZakLa01.antwoord.object.heeftRelevant;
-	}
+    private void replicateDocumenten(ZgwAuthorization authorization, String zaakidentificatie, List<ZdsHeeftRelevant> relevanteDocumenten) {
+    	debug.infopoint("replicatie", "Aantal gekoppelde zaakdocumenten is: " + relevanteDocumenten.size() + "(zaakid: " + zaakidentificatie + ")");
+    	var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie);
+    	var zgwZaakDocumenten = this.converter.getZaakService().zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
+        for (ZdsHeeftRelevant relevant : relevanteDocumenten) {
+            var zaakdocumentidentificatie = relevant.gerelateerde.identificatie;
+            debug.infopoint("replicatie", "Start repliceren van zaakdocument met  identificatie:" + zaakdocumentidentificatie + "(zaakid: " + zaakidentificatie + ")");
 
-	private void replicateDocumenten(ZgwAuthorization authorization, String zaakidentificatie,
-			List<ZdsHeeftRelevant> relevanteDocumenten) {
-		debug.infopoint("replicatie", "Aantal gekoppelde zaakdocumenten is: " + relevanteDocumenten.size() + "(zaakid: "
-				+ zaakidentificatie + ")");
-		var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization,
-				zaakidentificatie);
-		var zgwZaakDocumenten = this.converter.getZaakService().zgwClient.getZaakInformatieObjectenByZaak(authorization,
-				zgwZaak.url);
-		for (ZdsHeeftRelevant relevant : relevanteDocumenten) {
-			var zaakdocumentidentificatie = relevant.gerelateerde.identificatie;
-			debug.infopoint("replicatie", "Start repliceren van zaakdocument met  identificatie:"
-					+ zaakdocumentidentificatie + "(zaakid: " + zaakidentificatie + ")");
-
-			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient
-					.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zaakdocumentidentificatie);
-			if (zgwEnkelvoudigInformatieObject == null) {
-				debug.infopoint("replicatie",
-						"document not found, copying document with identificatie #" + zaakdocumentidentificatie);
-				try {
-					copyDocument(authorization, zaakdocumentidentificatie);
-					var adg = this.converter.getSession().getAantalDocumentenGerepliceerd();
-					this.converter.getSession().setAantalDocumentenGerepliceerd(adg + 1);
-				} catch (ConverterException ex) {
-					debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie
-							+ " has error:" + ex.toString());
-					if (ex.details != null) {
-						debug.infopoint("converter exception-details", ex.details);
-					}
-					var sw = new java.io.StringWriter();
-					var pw = new java.io.PrintWriter(sw);
-					ex.printStackTrace(pw);
-					debug.infopoint("converter exception-stacktrace", sw.toString());
-
-					var IGNORE_ERROR1 = "Fout tijdens het selecteren van een enkelvouding document.";
-					if (ex.details != null && ex.details.indexOf(IGNORE_ERROR1) != -1) {
-						debug.infopoint("converter exception: ignore exception", "ignoring:" + IGNORE_ERROR1);
-					} else {
-						throw ex;
-					}
-				}
-			} else {
-				// maybe it needs to be attached to the zaak
-				var found = false;
-				for (ZgwZaakInformatieObject zio : zgwZaakDocumenten) {
-					if (zio.informatieobject.equals(zgwEnkelvoudigInformatieObject.url)) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					debug.infopoint("replicatie",
-							"document already but not attached to the zaak, document with identificatie #"
-									+ zaakdocumentidentificatie + " has to be punt in zaak with identificatie #"
-									+ zaakidentificatie);
-					ZgwZaakInformatieObject zgwZaakInformatieObject = this.converter.getZaakService()
-							.addZaakInformatieObject(authorization, zgwEnkelvoudigInformatieObject, zgwZaak.url);
-				} else {
-					debug.infopoint("replicatie",
-							"document already found and attached to the zaak, no action needed for document with identificatie #"
-									+ zaakdocumentidentificatie);
-				}
-			}
-		}
-	}
+            ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zaakdocumentidentificatie);
+            if (zgwEnkelvoudigInformatieObject == null) {
+            	debug.infopoint("replicatie", "document not found, copying document with identificatie #" + zaakdocumentidentificatie);
+            	try {
+            		copyDocument(authorization, zaakdocumentidentificatie);
+                	var adg = this.converter.getSession().getAantalDocumentenGerepliceerd();
+            		this.converter.getSession().setAantalDocumentenGerepliceerd(adg + 1);
+            	}
+            	catch(ConverterException ex) {
+            		debug.infopoint("converter exception", "document with identificatie #" + zaakdocumentidentificatie + " has error:" + ex.toString());
+            		if(ex.details != null) {
+            			debug.infopoint("converter exception-details", ex.details);
+            		}
+            		var sw = new java.io.StringWriter();
+            		var pw = new java.io.PrintWriter(sw);
+            		ex.printStackTrace(pw);
+            		debug.infopoint("converter exception-stacktrace", sw.toString());
+            		
+            		var IGNORE_ERROR1 = "Fout tijdens het selecteren van een enkelvouding document.";
+            		if(ex.details != null && ex.details.indexOf(IGNORE_ERROR1) !=-1) {
+            			debug.infopoint("converter exception: ignore exception", "ignoring:" + IGNORE_ERROR1);
+            		}
+            		else {
+            			throw ex;
+            		}
+            	}
+            }
+            else {
+            	// maybe it needs to be attached to the zaak
+            	var found = false;
+            	for(ZgwZaakInformatieObject zio : zgwZaakDocumenten) {
+            		if(zio.informatieobject.equals(zgwEnkelvoudigInformatieObject.url)) {
+            			found = true;
+            			break;
+            		}
+            	}
+            	if(!found) {
+                	debug.infopoint("replicatie", "document already but not attached to the zaak, document with identificatie #" + zaakdocumentidentificatie + " has to be punt in zaak with identificatie #" + zaakidentificatie);
+            		ZgwZaakInformatieObject zgwZaakInformatieObject = this.converter.getZaakService().addZaakInformatieObject(authorization, zgwEnkelvoudigInformatieObject, zgwZaak.url);
+            	}
+            	else {
+                	debug.infopoint("replicatie", "document already found and attached to the zaak, no action needed for document with identificatie #" + zaakdocumentidentificatie);
+            	}
+            }
+        }
+    }
 
 	private void copyDocument(ZgwAuthorization authorization, String zaakdocumentidentificatie) {
 		var zdsUrl = this.converter.getZaakService().configService.getConfiguration().getReplication()
@@ -264,19 +239,15 @@ public class Replicator {
 		zdsRequest.scope.object.setEntiteittype("EDC");
 		zdsRequest.scope.object.setScope("alles");
 
-		var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction,
-				zdsRequest);
+		var zdsResponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), zdsUrl, zdsSoapAction, zdsRequest);
 		// fetch the document details
 		log.debug("getGeefZaakdocumentLezen response:" + zdsResponse.getBody().toString());
 		var zdsEdcLa01 = (ZdsEdcLa01GeefZaakdocumentLezen) XmlUtils.getStUFObject(zdsResponse.getBody().toString(),
 				ZdsEdcLa01GeefZaakdocumentLezen.class);
 
-		if (zdsEdcLa01.antwoord == null || zdsEdcLa01.antwoord.document == null
-				|| zdsEdcLa01.antwoord.document.get(0) == null) {
-			// throw new RuntimeException("Document not found for identificatie: " +
-			// zaakdocumentidentificatie);
-			debug.infopoint("Warning", "zaakdocumentidentificatie #" + zaakdocumentidentificatie
-					+ " not found, this document will not be replicated");
+		if (zdsEdcLa01.antwoord == null || zdsEdcLa01.antwoord.document == null || zdsEdcLa01.antwoord.document.get(0) == null) {
+			//throw new RuntimeException("Document not found for identificatie: " + zaakdocumentidentificatie);
+			debug.infopoint("Warning", "zaakdocumentidentificatie #" + zaakdocumentidentificatie + " not found, this document will not be replicated");
 			return;
 		}
 		var zdsDocument = zdsEdcLa01.antwoord.document.get(0);
@@ -285,20 +256,15 @@ public class Replicator {
 		this.converter.getZaakService().voegZaakDocumentToe(authorization, zdsDocument);
 	}
 
-	public ResponseEntity<?> proxy() {
+    public ResponseEntity<?> proxy() {
 		var url = this.converter.getTranslation().getLegacyservice();
 		var soapaction = this.converter.getTranslation().getSoapaction();
 		var request = this.converter.getSession().getClientRequestBody();
-		debug.infopoint("proxy", "relaying request to url: " + url + " with soapaction: " + soapaction
-				+ " request-size:" + request.length());
+		debug.infopoint("proxy", "relaying request to url: " + url + " with soapaction: " + soapaction + " request-size:" + request.length());
 
-		var legacyresponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), url, soapaction,
-				request);
+		var legacyresponse = this.zdsClient.post(this.converter.getSession().getReferentienummer(), url, soapaction, request);
 		if (legacyresponse.getStatusCode() != HttpStatus.OK) {
-			throw new ConverterException(
-					"HttpStatus:" + legacyresponse.getStatusCode().toString() + " Url:" + url + " SoapAction: "
-							+ soapaction + " Service:" + this.converter.getTranslation().getLegacyservice(),
-					legacyresponse.getBody().toString());
+			throw new ConverterException("HttpStatus:" + legacyresponse.getStatusCode().toString() + " Url:" + url + " SoapAction: " + soapaction +  " Service:" + this.converter.getTranslation().getLegacyservice(), legacyresponse.getBody().toString());
 		}
 		return legacyresponse;
 	}

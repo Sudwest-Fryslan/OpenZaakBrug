@@ -117,11 +117,11 @@ public class ZdsZaak extends ZdsZaakIdentificatie {
 
 	@XmlElement(namespace = ZKN)
 	public List<ZdsHeeftGerelateerde> heeftAlsDeelzaak;
-
-	@XmlElement(namespace = ZKN)
-	public ZdsHeeftGerelateerde heeftAlsHoofdzaak;
-
-	@XmlElement(namespace = ZKN)
+	
+	@XmlElement(namespace = ZKN)	
+	public ZdsHeeftGerelateerde heeftAlsHoofdzaak;	
+	
+	@XmlElement(namespace = ZKN)	
 	public List<ZdsHeeftGerelateerde> heeftBetrekkingOpAndere;
 
 	@XmlElement(namespace = ZKN)

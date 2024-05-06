@@ -32,6 +32,7 @@ import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsDetailsXML;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsFo03;
+import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsStuurgegevens;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 @Data
@@ -60,8 +61,9 @@ public abstract class RequestHandler {
 		log.warn("request for path: /" + this.converter.getSession().getClientUrl() + "/ with soapaction: "
 				+ this.converter.getSession().getClientSoapAction(), ex);
 
-		var fo03 = this.converter.getZdsDocument() != null ? new ZdsFo03(this.converter.getZdsDocument().stuurgegevens,
-				convertor.getSession().getReferentienummer()) : new ZdsFo03();
+		var fo03 = this.converter.getZdsDocument() != null
+				? new ZdsFo03(this.converter.getZdsDocument().stuurgegevens, convertor.getSession().getReferentienummer())
+				: new ZdsFo03();
 		fo03.body = new ZdsFo03.Body();
 		fo03.body.code = "StUF058";
 		fo03.body.plek = "server";
@@ -89,13 +91,20 @@ public abstract class RequestHandler {
 	}
 
 	public ResponseEntity<?> execute() {
-		log.debug("Executing request with handler: " + this.getClass().getCanonicalName() + " and converter: "
-				+ this.converter.getClass().getCanonicalName());
+		log.debug("Executing request with handler: " + this.getClass().getCanonicalName() + " and converter: " + this.converter.getClass().getCanonicalName());
 		Configuration configuration = this.configService.getConfiguration();
 
 		try {
 			this.converter.load();
-			var response = this.converter.execute();
+			if(converter.getZdsDocument() == null) {
+				throw new ConverterException("zdsdocument was null");
+			}	
+			if(converter.getZdsDocument().stuurgegevens == null) {
+				throw new ConverterException("zdsdocument.stuurgegevens was null");
+			}
+			var stuurgegevens = converter.getZdsDocument().stuurgegevens;
+			var authorization = converter.getZaakService().zgwClient.getAuthorization(configuration, stuurgegevens);				
+			var response = this.converter.execute(authorization);
 
 			return response;
 		} catch (Exception ex) {

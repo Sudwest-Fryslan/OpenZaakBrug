@@ -30,6 +30,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsParameters;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentAntwoord;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentInhoud;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GeefZaakdocumentLezenTranslator extends Converter {
@@ -41,25 +42,19 @@ public class GeefZaakdocumentLezenTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsEdcLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
-				ZdsEdcLv01.class);
+		this.zdsDocument = (ZdsEdcLv01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsEdcLv01.class);
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
-
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsEdcLv01 = (ZdsEdcLv01) this.getZdsDocument();
 		var documentIdentificatie = zdsEdcLv01.gelijk.identificatie;
 
 		this.getSession().setFunctie("GeefZaakdocumentLezen");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie);
 
-		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization,
-				documentIdentificatie);
-		var edcLa01 = new ZdsEdcLa01GeefZaakdocumentLezen(zdsEdcLv01.stuurgegevens,
-				this.getSession().getReferentienummer());
+		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization, documentIdentificatie);
+		var edcLa01 = new ZdsEdcLa01GeefZaakdocumentLezen(zdsEdcLv01.stuurgegevens, this.getSession().getReferentienummer());
 		edcLa01.antwoord = new ZdsZaakDocumentAntwoord();
 		edcLa01.antwoord.document = new ArrayList<ZdsZaakDocumentInhoud>();
 		edcLa01.antwoord.document.add(document);

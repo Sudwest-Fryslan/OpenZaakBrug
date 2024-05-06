@@ -23,10 +23,9 @@ import lombok.Data;
 @Data
 public class ZgwVerlenging {
 
-	@SerializedName("reden")
 	@Expose
 	public String reden;
-	@SerializedName("duur")
+
 	@Expose
 	public String duur;
 

@@ -25,62 +25,87 @@ import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class ZgwZaakPut {
+public class ZgwZaakPut extends ZgwObject {
+	
 	@Expose
 	public String identificatie;
+	
 	@Expose
 	public String bronorganisatie;
+	
 	@Expose
 	public String omschrijving;
+	
 	@Expose
 	public String toelichting;
+	
 	@Expose
 	public String zaaktype;
+	
 	@Expose
 	public String registratiedatum;
+	
 	@Expose
 	public String verantwoordelijkeOrganisatie;
+	
 	@Expose
 	public String startdatum;
+	
 	@Expose
 	public String einddatumGepland;
+	
 	@Expose
 	public String uiterlijkeEinddatumAfdoening;
+	
 	@Expose
 	public String publicatiedatum;
+	
 	@Expose
 	public String communicatiekanaal;
+	
 	@Expose
 	public List<Object> productenOfDiensten = null;
+	
 	@Expose
 	public String vertrouwelijkheidaanduiding;
+	
 	@Expose
 	public String betalingsindicatie;
 //    @SerializedName("laatsteBetaaldatum")
 //    @Expose
 //    public String laatsteBetaaldatum = null;
+	
 	@Expose
 	public ZgwZaakGeometrie zaakgeometrie;
+	
 	@Expose
 	public ZgwVerlenging verlenging = null;
-	@SerializedName("opschorting")
+	
 	@Expose
 	public ZgwOpschorting opschorting = null;
+
 	@Expose
 	public String selectielijstklasse;
+
 	@Expose
-	public String hoofdzaak = null;
+	public String hoofdzaak  = null;
+	
 	@Expose
 	public List<ZgwAndereZaak> relevanteAndereZaken = null;
-	@SerializedName("kenmerken")
+	
+//	@Expose
+//	public List<ZgwKenmerk> kenmerk = null;
 	@Expose
-	public List<ZgwKenmerk> kenmerk = null;
+	public List<ZgwKenmerk> kenmerken = null;	
+	
+
 	@Expose
-	public String archiefnominatie = null;
+	public String archiefnominatie  = null;
+	
 	@Expose
 	public String archiefstatus;
 	@Expose
-	public String archiefactiedatum = null;
+	public String archiefactiedatum  = null;
 
 	public static ZgwZaakPut merge(ZgwZaak original, ZgwZaakPut changes) {
 		var result = new ZgwZaakPut();
@@ -118,7 +143,7 @@ public class ZgwZaakPut {
 		result.hoofdzaak = changes.hoofdzaak != null ? changes.hoofdzaak : original.hoofdzaak;
 		result.relevanteAndereZaken = changes.relevanteAndereZaken != null ? changes.relevanteAndereZaken
 				: original.relevanteAndereZaken;
-		result.kenmerk = changes.kenmerk != null ? changes.kenmerk : original.kenmerk;
+		result.kenmerken = changes.kenmerken != null ? changes.kenmerken : original.kenmerken;
 		result.archiefnominatie = changes.archiefnominatie != null ? changes.archiefnominatie
 				: original.archiefnominatie;
 		result.archiefstatus = changes.archiefstatus != null ? changes.archiefstatus : original.archiefstatus;

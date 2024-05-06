@@ -27,18 +27,19 @@ import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.converter.impl.translate.GeefZaakdocumentBewerkenTranslator;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class GeefZaakdocumentBewerkenReplicator extends GeefZaakdocumentBewerkenTranslator {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	public GeefZaakdocumentBewerkenReplicator(RequestResponseCycle session, Translation translation,
-			ZaakService zaakService) {
+	public GeefZaakdocumentBewerkenReplicator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
 		super(session, translation, zaakService);
 	}
 
+
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		throw new ConverterException("not imlemented");
 	}
 }

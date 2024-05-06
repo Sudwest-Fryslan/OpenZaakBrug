@@ -1,8 +1,14 @@
 package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 
 import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.HttpClient;
@@ -19,120 +25,115 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
-import lombok.Data;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwCatalogus;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZrcExpand;
+import lombok.Data;
+
 
 public class ZgwAuthorization {
-
-	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	
+	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());	
 	private ZgwCatalogus catalogus;
-
+	
 	@Data
-	public class ZgwJwtTokenEntry {
-
-		public String jwtUrl;
-		public String jwtIssuer;
-		public String jwtSecret;
-		public String authorization;
-
-		public ZgwJwtTokenEntry(String jwtUrl, String jwtIssuer, String jwtSecret, String authorization) {
+	public class ZgwJwtTokenEntry {		
+		
+		public  String jwtUrl;
+		public  String jwtIssuer;
+		public  String jwtSecret;
+		public 	String jwtClientIds;
+		public  String authorization;
+		
+		public ZgwJwtTokenEntry(String jwtUrl, String jwtIssuer, String jwtSecret,  String jwtClientIds, String authorization) {
 			this.jwtUrl = jwtUrl;
 			this.jwtIssuer = jwtIssuer;
 			this.jwtSecret = jwtSecret;
+			this.jwtClientIds = jwtClientIds;
 			this.authorization = authorization;
 		}
 	}
-
-	public Map<String, ZgwJwtTokenEntry> authorizations = new LinkedHashMap<>();
-
-	public void AddZgwAuthorization(String url, String jwtUrl, String jwtIssuer, String jwtSecret) {
+	
+	public Map<String, ZgwJwtTokenEntry> authorizations = new LinkedHashMap<>();		
+	public void AddZgwAuthorization(String url, String jwtUrl, String jwtIssuer, String jwtSecret, String jwtClientIds) {		
 		// do we already have an endpoint for this jwt-token?
-		for (ZgwJwtTokenEntry entry : this.authorizations.values()) {
+		for(ZgwJwtTokenEntry entry : this.authorizations.values()) {			
 			if (entry.jwtUrl == null) {
-				if (jwtUrl != null)
-					continue;
-			} else {
-				if (!entry.jwtUrl.equals(jwtUrl)) {
+				if(jwtUrl != null) continue;
+			}
+			else {
+				if(!entry.jwtUrl.equals(jwtUrl)) {
 					continue;
 				}
 			}
-			if (!entry.jwtIssuer.equals(jwtIssuer)) {
+			if(!entry.jwtIssuer.equals(jwtIssuer)) {
 				continue;
 			}
-			if (!entry.jwtSecret.equals(jwtSecret)) {
+			if(!entry.jwtSecret.equals(jwtSecret)) {
 				continue;
 			}
 			// bestond al, geven we terug
-			log.debug("For url: " + url + " using: '" + entry.getAuthorization() + "' from previous found entry");
+			log.debug("For url: " + url + " using: '" + entry.getAuthorization() +  "' from previous found entry");
 			this.authorizations.put(url, entry);
 			return;
 		}
-
+		
 		// not already known, new jwt-token needed for this endpoint
-		if (jwtUrl != null && jwtUrl.trim().length() > 0) {
+		if(jwtUrl != null && jwtUrl.trim().length() > 0) {
 			var authorizationRequestHeaders = new HttpHeaders();
-			String json = "{\n" + "    \"clientIds\": [\n" + "        \"test_user\"\n" + "    ],\n"
-					+ "    \"secret\": \"" + jwtSecret + "\",\n" + "    \"label\": \"" + jwtIssuer + "\",\n"
-					+ "    \"heeftAlleAutorisaties\": \"true\",\n" + "    \"autorisaties\": []\n" + "}";
-
-			final RestTemplate restTemplate = new RestTemplate();
-			final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-			final HttpClient httpClient = HttpClientBuilder.create().setRedirectStrategy(new LaxRedirectStrategy()) // adds
-																													// HTTP
-																													// REDIRECT
-																													// support
-																													// to
-																													// GET
-																													// and
-																													// POST
-																													// methods,
-																													// needed
-																													// because
-																													// VNG-cloud
-																													// redirects
-																													// with
-																													// 307
-																													// ->
-																													// 308
-																													// ->
-																													// 200
-					.build();
-			factory.setHttpClient(httpClient);
-			restTemplate.setRequestFactory(factory);
-
-			authorizationRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
-			var accept = new ArrayList<MediaType>();
-			accept.add(MediaType.APPLICATION_JSON);
-			authorizationRequestHeaders.setAccept(accept);
-
-			HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
-			ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwtUrl, entity, String.class);
-			Gson gson = new Gson();
-			var zgwJwtTokenEntry = gson.fromJson(bearerResponse.getBody(), ZgwJwtTokenEntry.class);
-
-			log.debug("For url: " + url + " using: '" + zgwJwtTokenEntry.getAuthorization() + "' from url:'" + jwtUrl
-					+ "' with requestjson:\n" + json);
-			zgwJwtTokenEntry.jwtUrl = jwtUrl;
-			zgwJwtTokenEntry.jwtIssuer = jwtIssuer;
-			zgwJwtTokenEntry.jwtSecret = jwtSecret;
-			this.authorizations.put(url, zgwJwtTokenEntry);
-		} else {
+	        String json =  "{\n" +
+	            "    \"clientIds\": [\n" +
+	            "        \"" + jwtClientIds + "\"\n" +
+	            "    ],\n" +
+	            "    \"secret\": \"" + jwtSecret +  "\",\n" +
+	            "    \"label\": \"" + jwtIssuer +  "\",\n" +
+	            "    \"heeftAlleAutorisaties\": \"true\",\n" +
+	            "    \"autorisaties\": []\n" +
+	            "}";
+	
+	        final RestTemplate restTemplate = new RestTemplate();
+	        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+	        final HttpClient httpClient = HttpClientBuilder.create()
+	            .setRedirectStrategy(new LaxRedirectStrategy()) // adds HTTP REDIRECT support to GET and POST methods, needed because VNG-cloud redirects with 307 -> 308 -> 200
+	            .build();
+	        factory.setHttpClient(httpClient);
+	        restTemplate.setRequestFactory(factory);
+	
+	        authorizationRequestHeaders.setContentType(MediaType.APPLICATION_JSON);
+	        var accept = new ArrayList<MediaType>();
+	        accept.add(MediaType.APPLICATION_JSON);
+	        authorizationRequestHeaders.setAccept(accept);
+	
+	        HttpEntity<String> entity = new HttpEntity<String>(json, authorizationRequestHeaders);
+	        ResponseEntity<String> bearerResponse = restTemplate.postForEntity(jwtUrl, entity, String.class);
+	        Gson gson = new Gson();
+	        var zgwJwtTokenEntry = gson.fromJson(bearerResponse.getBody(), ZgwJwtTokenEntry.class);
+	
+	        log.debug("For url: " + url + " using: '" + zgwJwtTokenEntry.getAuthorization() +  "' from url:'" + jwtUrl + "' with requestjson:\n" + json);
+	        zgwJwtTokenEntry.jwtUrl = jwtUrl;
+	        zgwJwtTokenEntry.jwtIssuer = jwtIssuer;
+	        zgwJwtTokenEntry.jwtSecret = jwtSecret;
+	        this.authorizations.put(url, zgwJwtTokenEntry);
+		}
+		else {
 			var token = JWTService.getJWT(jwtIssuer, jwtSecret);
-			var zgwJwtTokenEntry = new ZgwJwtTokenEntry(jwtUrl, jwtIssuer, jwtSecret, "Bearer " + token);
-			log.debug(
-					"For url: " + url + " using: '" + zgwJwtTokenEntry.getAuthorization() + "' without using a jwtUrl");
+			var zgwJwtTokenEntry = new ZgwJwtTokenEntry(jwtUrl, jwtIssuer, jwtSecret, jwtClientIds, "Bearer " + token);
+			log.debug("For url: " + url + " using: '" + zgwJwtTokenEntry.getAuthorization() +  "' without using a jwtUrl");
 			this.authorizations.put(url, zgwJwtTokenEntry);
 		}
-	}
-
+	}	
+	
+	
 	public String getAuthorizationToken(String url) {
-		for (String baseurl : this.authorizations.keySet()) {
-			if (url.startsWith(baseurl)) {
+		for(String baseurl: this.authorizations.keySet()) {
+			if(url.startsWith(baseurl)) {
 				return authorizations.get(baseurl).getAuthorization();
 			}
 		}
-		throw new ConverterException("No authorization defined for the url: " + url);
+		throw new ConverterException("No authorization defined for the url: " + url); 
 	}
 
 	public void setCatalogus(ZgwCatalogus catalogus) {
@@ -142,8 +143,128 @@ public class ZgwAuthorization {
 	public String getCatalogusRsin() {
 		return this.catalogus.getRsin();
 	}
-
+	
 	public String getCatalogusUrl() {
 		return this.catalogus.getUrl();
+	}
+
+	
+	public class LRUCache<K, V> extends LinkedHashMap<K, V> {
+	    private final int capacity;
+
+	    public LRUCache(int capacity) {
+	        // Pass true for accessOrder to the superclass to achieve LRU order.
+	        // The default initial capacity (16) and default load factor (0.75) are used.
+	        super(16, 0.75f, true);
+	        this.capacity = capacity;
+	    }
+
+	    @Override
+	    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
+	        // Remove the eldest entry if the size exceeds the capacity of the cache.
+	        return size() > capacity;
+	    }
+	    
+	    @Override
+	    public String toString() {
+	        StringBuilder sb = new StringBuilder();
+	        sb.append(String.format("LRUCache{capacity=%d, currentSize=%d}\n", capacity, size()));
+	        for (Map.Entry<K, V> entry : entrySet()) {
+	            // sb.append(String.format("\t[%s] %s %s\n", entry.getKey(), entry.getValue().getClass().getSimpleName(), entry.getValue()));
+	        	sb.append(String.format("\t[%s] %s\n", entry.getKey(), entry.getValue()));
+	        }
+	        return sb.toString();
+	    }
+	}	
+	private LRUCache<String, ZgwObject> cache = new LRUCache<>(250);
+	
+	public void cacheAdd(List<? extends ZgwObject> zgwObjecten) {
+	    for (ZgwObject zgwObject : zgwObjecten) {
+	    	cacheAdd(zgwObject);
+		}
+	}		
+	
+	public void cacheAdd(ZgwObject zgwObject) {
+		log.debug("Cache add zgwObject:" + getUuid(zgwObject.url));
+	    // Directly cache the passed object
+        cache.put(getUuid(zgwObject.url), zgwObject);
+        // Recursively cache its members
+        cacheMembers(zgwObject);
+        
+        log.debug(cache.toString());
+    }
+	
+    private void cacheMembers(Object member)  {
+         for (Field field : member.getClass().getDeclaredFields()) {
+            field.setAccessible(true); // Make private fields accessible
+            try {
+	            Object fieldValue = field.get(member);
+	            if(fieldValue == null) continue;
+	
+	            if (ZgwZrcExpand.class.isAssignableFrom(field.getType())) {
+	            	cacheMembers(fieldValue);
+	            }
+	            else if (ZgwObject.class.isAssignableFrom(field.getType())) {
+	                ZgwObject zgwObject = (ZgwObject) fieldValue;
+	                log.debug("Cache ZgwObject add '" + field.getName() + "' : " + getUuid(zgwObject.url));
+	                cache.put(getUuid(zgwObject.url), zgwObject);
+	                cacheMembers(zgwObject);
+	            } else if (Collection.class.isAssignableFrom(field.getType())) {
+	                // If the field is a collection, process each element
+	                Collection<?> collection = (Collection<?>) fieldValue;
+	                for (Object item : collection) {
+	                    if (item instanceof ZgwObject) {
+	                        ZgwObject zgwObject = (ZgwObject) item;
+	                        log.debug("Cache Collection-add '" + field.getName() + "' : " + zgwObject.uuid);
+	                        cache.put(getUuid(zgwObject.url), zgwObject);
+	                        cacheMembers(zgwObject);
+	                    }
+	                }
+	            } else if (field.getType().isArray()) {
+	            	// If the field is an array, process each element
+	            	int length = Array.getLength(fieldValue);
+	            	for (int i = 0; i < length; i++) {
+	            		Object item = Array.get(fieldValue, i);
+	            		if (item instanceof ZgwObject) {
+	            			ZgwObject zgwObject = (ZgwObject) item;
+	            			log.debug("Cache Arry-add " + field.getName() + " : " + getUuid(zgwObject.url));
+	            			cache.put(getUuid(zgwObject.url), zgwObject);
+	            			cacheMembers(zgwObject);
+	            		}
+	            	}
+	            }
+	            else if (ZgwBetrokkeneIdentificatie.class.isAssignableFrom(field.getType())) {
+	            	// datacontainers
+	            }
+	            	            
+	            else if (field.getType().equals(java.lang.String.class) || field.getType().equals(java.util.Date.class) || field.getType().getName().equals("int")|| field.getType().getName().equals("boolean")) {
+	            	// basictypes: no caching needed
+	            }
+	            else {
+	            	log.debug("NOT CACHING: '" + field.getName() + "' : " + field.getType().getName());
+	            }
+            }
+            catch(Exception e) {
+            	log.warn("Error while adding object to cache:" + member, e);
+            }
+        }
+    }	
+    
+    // Not everything has an uuid,
+    // Everything does have an url
+    public String getUuid(String url) {
+    	if(url == null) {
+    		return null;
+    	}
+		return url.substring(url.length() - 36);    	
+    }
+    
+	public ZgwObject cacheGet(String url) {
+		log.debug("Cache looking for:" + url);
+		// also accept urls
+		var uuid = getUuid(url);
+		if(cache.get(uuid) != null) log.debug("Cache hit:" + uuid);
+		else log.debug("Cache miss:" + uuid);
+		return cache.get(uuid);
 	}
 }

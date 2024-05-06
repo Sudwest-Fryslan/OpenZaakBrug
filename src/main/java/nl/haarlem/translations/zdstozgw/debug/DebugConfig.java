@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration;
 public class DebugConfig {
 
 	@Bean
-	public ServletRegistrationBean<DebugServlet> servletRegistrationBean() {
+	public ServletRegistrationBean<DebugServlet> servletRegistrationBean(){
 		return new ServletRegistrationBean<DebugServlet>(new DebugServlet(), "/debug/*");
 	}
 

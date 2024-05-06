@@ -29,6 +29,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGenereerZaakIde
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGenereerZaakIdentificatieDu02;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GenereerZaakIdentificatieEmulator extends Converter {
@@ -40,19 +41,17 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsGenereerZaakIdentificatieDi02) XmlUtils
-				.getStUFObject(this.getSession().getClientRequestBody(), ZdsGenereerZaakIdentificatieDi02.class);
+		this.zdsDocument = (ZdsGenereerZaakIdentificatieDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsGenereerZaakIdentificatieDi02.class);
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ConverterException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ConverterException {
 		/*
-		 * zaakidentificatie, hiervoor gelden de volgende regels (genomen uit RGBZ): 1e
-		 * 4 posities: gemeentecode van de gemeente die verantwoordelijk is voor de
-		 * behandeling van de zaak; pos. 5 – 40: alle alfanumerieke tekens m.u.v.
-		 * diacrieten
+ 			zaakidentificatie, hiervoor gelden de volgende regels (genomen uit RGBZ):
+			1e 4 posities: gemeentecode van de gemeente die verantwoordelijk is voor de behandeling van de zaak;
+			pos. 5 – 40: alle alfanumerieke tekens m.u.v. diacrieten  
 		 */
-
+		
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
 		var prefixparam = repository.getOne("ZaakIdentificatiePrefix");
 		var idparam = repository.getOne("ZaakIdentificatieHuidige");

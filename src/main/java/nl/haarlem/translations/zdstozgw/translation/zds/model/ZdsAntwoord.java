@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ZdsAntwoord extends ZdsObject {
 
+
+
 	@XmlElement(namespace = ZKN, name = "object")
 	public ZdsZaakDocumentInhoud object;
 }

@@ -19,14 +19,17 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class ZgwZaakGeometrie {
+	
 	@Expose
 	public String type;
+	
 	@Expose
-	public List<Double> coordinates;
+	public List<Double>  coordinates;
 }

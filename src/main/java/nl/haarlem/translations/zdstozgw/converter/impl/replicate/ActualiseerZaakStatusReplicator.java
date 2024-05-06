@@ -27,31 +27,28 @@ import nl.haarlem.translations.zdstozgw.converter.impl.translate.ActualiseerZaak
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01ActualiseerZaakstatus;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class ActualiseerZaakStatusReplicator extends ActualiseerZaakStatusTranslator {
 
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	public ActualiseerZaakStatusReplicator(RequestResponseCycle session, Translation translation,
-			ZaakService zaakService) {
+	public ActualiseerZaakStatusReplicator(RequestResponseCycle session, Translation translation, ZaakService zaakService) {
 		super(session, translation, zaakService);
 	}
 
-	/**
-	 * Replicates zaak before updating zaakstatus
-	 *
-	 * @return
-	 * @throws ResponseStatusException
-	 */
+    /**
+     * Replicates zaak before updating zaakstatus
+     *
+     * @return
+     * @throws ResponseStatusException
+     */
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
-
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsZakLk01ActualiseerZaakstatus = (ZdsZakLk01ActualiseerZaakstatus) this.getZdsDocument();
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
 		replicator.replicateZaak(authorization, zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
-		return super.execute();
+		return super.execute(authorization);
 	}
 }

@@ -43,10 +43,8 @@ public class Rerunner implements nl.nn.testtool.Rerunner {
 	@Transactional
 	public String rerun(String correlationId, Report originalReport, SecurityContext securityContext,
 			ReportRunner reportRunner) {
-		// Get bean here instead of specifying the bean in the constructor (with @Lazy)
-		// and have it auto wired to
-		// prevent cycle of bean dependencies between bean rerunner and bean testTool
-		// that sometimes occurs when running
+		// Get bean here instead of specifying the bean in the constructor (with @Lazy) and have it auto wired to
+		// prevent cycle of bean dependencies between bean rerunner and bean testTool that sometimes occurs when running
 		// with java -jar (problem has not been observed with mvn spring-boot:run)
 		SoapController soapController = SpringContext.getBean(SoapController.class);
 		String errorMessage = null;
@@ -73,7 +71,7 @@ public class Rerunner implements nl.nn.testtool.Rerunner {
 									RequestContextHolder.setRequestAttributes(new MockRequestAttributes());
 									soapController.HandleRequest(modus, version, protocol, endpoint, soapAction, body,
 											correlationId);
-								} catch (Throwable t) {
+								} catch(Throwable t) {
 									// Exceptions can be legitimate when testing error handling with Ladybug
 									log.debug(errorMessage, t);
 								}
@@ -94,7 +92,7 @@ public class Rerunner implements nl.nn.testtool.Rerunner {
 			}
 		} else {
 			errorMessage = "Original report only has " + checkpoints.size()
-					+ " checkpoints, hence cannot read modus, version, protocol, endpoint and soapAction from it";
+			+ " checkpoints, hence cannot read modus, version, protocol, endpoint and soapAction from it";
 		}
 		return errorMessage;
 	}

@@ -31,40 +31,35 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsParameters;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentAntwoord;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocumentInhoud;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GeefZaakdocumentBewerkenTranslator extends Converter {
 
-	public GeefZaakdocumentBewerkenTranslator(RequestResponseCycle context, Translation translation,
-			ZaakService zaakService) {
+	public GeefZaakdocumentBewerkenTranslator(RequestResponseCycle context, Translation translation, ZaakService zaakService) {
 		super(context, translation, zaakService);
 	}
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsGeefZaakdocumentbewerkenDi02) XmlUtils
-				.getStUFObject(this.getSession().getClientRequestBody(), ZdsGeefZaakdocumentbewerkenDi02.class);
+		this.zdsDocument = (ZdsGeefZaakdocumentbewerkenDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsGeefZaakdocumentbewerkenDi02.class);
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
-
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsGeefZaakdocumentbewerkenDi02 = (ZdsGeefZaakdocumentbewerkenDi02) this.getZdsDocument();
 		var documentIdentificatie = zdsGeefZaakdocumentbewerkenDi02.edcLv01.gelijk.identificatie;
 
 		this.getSession().setFunctie("GeefZaakdocumentBewerken");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie);
 
+		
 		// het document ophalen
-		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization,
-				documentIdentificatie);
+		ZdsZaakDocumentInhoud document = this.getZaakService().getZaakDocumentLezen(authorization, documentIdentificatie);
 		// zetten van de lock
 		var lock = this.getZaakService().checkOutZaakDocument(authorization, documentIdentificatie);
 
-		var du02 = new ZdsGeefZaakdocumentbewerkenDu02(zdsGeefZaakdocumentbewerkenDi02.stuurgegevens,
-				this.getSession().getReferentienummer());
+		var du02 = new ZdsGeefZaakdocumentbewerkenDu02(zdsGeefZaakdocumentbewerkenDi02.stuurgegevens, this.getSession().getReferentienummer());
 		du02.parameters = new ZdsParameters();
 		du02.parameters.checkedOutId = lock;
 		du02.edcLa01 = new ZdsEdcLa01();

@@ -44,7 +44,7 @@ public class ModelMapperTests {
         //assign
     	System.setProperty("user.timezone", "CET");
     	ModelMapperConfig.singleton.timeoffset = "0";
-        ZgwEnkelvoudigInformatieObjectPost zgwEnkelvoudigInformatieObject = new ZgwEnkelvoudigInformatieObjectPost()
+        ZgwEnkelvoudigInformatieObjectPost zgwEnkelvoudigInformatieObject = (ZgwEnkelvoudigInformatieObjectPost) new ZgwEnkelvoudigInformatieObjectPost()
                 .setBestandsnaam("bestandsnaam")
                 .setInhoud("inhoud")
                 .setAuteur("auteur")
@@ -57,11 +57,11 @@ public class ModelMapperTests {
                 .setOntvangstdatum("2020-06-20")
                 .setStatus("status")
                 .setTaal("taal")
-                .setTitel("titel")
-                .setUrl("url")
+                .setTitel("titel")             
                 .setVersie("versie")
                 .setVertrouwelijkheidaanduiding("vertrouwelijkheidaanduiding")
-                .setVerzenddatum("2020-05-09");
+                .setVerzenddatum("2020-05-09")
+                .setUrl("url");
         // String expectedCreatieDatum = "20200230";
         // TODO: use gooed expectd values
         String expectedCreatieDatum = "20200229";

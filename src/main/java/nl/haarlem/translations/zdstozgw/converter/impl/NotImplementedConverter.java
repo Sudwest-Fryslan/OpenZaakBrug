@@ -23,6 +23,7 @@ import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class NotImplementedConverter extends Converter {
 
@@ -36,7 +37,7 @@ public class NotImplementedConverter extends Converter {
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ConverterException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ConverterException {
 		throw new ConverterException("not implemented!");
 	}
 }

@@ -52,72 +52,73 @@ public class SoapController {
 	private final BuildProperties buildProperties;
 
 	@Autowired
-	private org.springframework.core.env.Environment enviroment;
-
+	private org.springframework.core.env.Environment enviroment;	
+	
 	@Autowired
 	public SoapController(ConverterFactory converterFactory, ConfigService configService,
-			RequestHandlerFactory requestHandlerFactory, BuildProperties buildProperties) {
+                          RequestHandlerFactory requestHandlerFactory, BuildProperties buildProperties) {
 		this.converterFactory = converterFactory;
 		this.configService = configService;
 		this.requestHandlerFactory = requestHandlerFactory;
-		this.buildProperties = buildProperties;
-	}
+        this.buildProperties = buildProperties;
+    }
 
-	/**
-	 * Give some basic information about the application
-	 */
+
+    /**
+     * Give some basic information about the application
+     */
 	@RequestMapping("/")
-	public String index(Model model) {
+    public String index(Model model ) {
 		model.addAttribute("applicationname", buildProperties.getName());
-		model.addAttribute("applicationversion", buildProperties.getVersion());
-		model.addAttribute("applicationtime", buildProperties.getTime());
-		model.addAttribute("translations", this.configService.getConfiguration().getTranslations());
-		model.addAttribute("ladybugpath", "./debug");
-		if ("org.h2.Driver".equals(enviroment.getProperty("spring.datasource.driverClassName"))) {
-			if (enviroment.getProperty("spring.h2.console.path") != null) {
-				model.addAttribute("databasepath", enviroment.getProperty("spring.h2.console.path"));
-			} else {
-				model.addAttribute("databasepath", "./h2-console");
-			}
-		} else if ("org.postgresql.Driver".equals(enviroment.getProperty("spring.datasource.driverClassName"))) {
-			model.addAttribute("databasepath", "http://127.0.0.1:64386/browser/");
-		} else {
-			// unknown
-			model.addAttribute("databasepath", "/");
-		}
-		return "index";
+        model.addAttribute("applicationversion", buildProperties.getVersion());
+        model.addAttribute("applicationtime", buildProperties.getTime());
+        model.addAttribute("translations", this.configService.getConfiguration().getTranslations());
+        model.addAttribute("ladybugpath", "./debug");
+        if("org.h2.Driver".equals(enviroment.getProperty("spring.datasource.driverClassName"))) {
+        	if(enviroment.getProperty("spring.h2.console.path") != null) {
+        		model.addAttribute("databasepath", enviroment.getProperty("spring.h2.console.path"));        		
+        	}
+        	else {
+        		model.addAttribute("databasepath", "./h2-console");
+        	}
+        }
+        else if ("org.postgresql.Driver".equals(enviroment.getProperty("spring.datasource.driverClassName")))  {
+    		model.addAttribute("databasepath", "http://127.0.0.1:64386/browser/");        	
+        }
+        else {
+        	// unknown
+        	model.addAttribute("databasepath", "/");
+        }
+        return "index";
 	}
 
-	/**
-	 * Receives the SOAP requests. Based on the configuration and path variables,
-	 * the correct translation implementation is used.
-	 *
-	 * @param modus
-	 * @param version
-	 * @param protocol
-	 * @param endpoint
-	 * @param soapAction
-	 * @param body
-	 * @return ZDS response
-	 */
-	@PostMapping(path = {
-			"/{modus}/{version}/{protocol}/{endpoint}" }, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
-	public ResponseEntity<?> HandleRequest(@PathVariable String modus, @PathVariable String version,
-			@PathVariable String protocol, @PathVariable String endpoint,
-			@RequestHeader(name = "SOAPAction", required = true) String soapAction, @RequestBody String body,
-			String referentienummer) {
+    /**
+     * Receives the SOAP requests. Based on the configuration and path variables, the correct translation implementation is used.
+     *
+     * @param modus
+     * @param version
+     * @param protocol
+     * @param endpoint
+     * @param soapAction
+     * @param body
+     * @return ZDS response
+     */
+	@PostMapping(path = { "/{modus}/{version}/{protocol}/{endpoint}" },
+                    consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
+	public ResponseEntity<?> HandleRequest(
+			@PathVariable String modus, @PathVariable String version, @PathVariable String protocol,
+			@PathVariable String endpoint, @RequestHeader(name = "SOAPAction", required = true) String soapAction,
+			@RequestBody String body, String referentienummer) {
 
 		// used by the ladybug-tests
-		if (referentienummer == null)
-			referentienummer = "ozb-" + java.util.UUID.randomUUID().toString();
+		if (referentienummer == null)  referentienummer = "ozb-" + java.util.UUID.randomUUID().toString();
 		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;
-		var msg = "Processing: " + referentienummer + " with path: /" + path + "/ and soapaction: " + soapAction;
+		var msg = "Processing: " + referentienummer + " with path: /" + path + "/ and soapaction: " + soapAction; 
 		log.info(msg);
 
-		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""),
-				body, referentienummer);
-		RequestContextHolder.getRequestAttributes().setAttribute("referentienummer", referentienummer,
-				RequestAttributes.SCOPE_REQUEST);
+
+		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);
+		RequestContextHolder.getRequestAttributes().setAttribute("referentienummer", referentienummer, RequestAttributes.SCOPE_REQUEST);
 		debug.startpoint(session);
 
 		ResponseEntity<?> response;
@@ -132,14 +133,14 @@ public class SoapController {
 
 			session.setResponse(response);
 			handler.save(session);
-		} catch (Throwable t) {
+		} catch(Throwable t) {
 			debug.abortpoint(session.getReportName(), t.toString());
 			log.warn("Unhandled exception while processing:" + msg);
 			throw t;
 		} finally {
 			debug.close();
 		}
-		log.info("Finished: " + referentienummer + " with:" + response.getStatusCode());
+		log.info("Finished: "+ referentienummer + " with:" + response.getStatusCode());
 		return response;
 	}
 }

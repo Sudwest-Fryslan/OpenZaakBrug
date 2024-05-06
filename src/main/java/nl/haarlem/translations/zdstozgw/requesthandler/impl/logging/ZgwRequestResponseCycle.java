@@ -48,23 +48,22 @@ public class ZgwRequestResponseCycle {
 	private Long durationInMilliseconds;
 
 	private String zgwMethod;
-	@Column(columnDefinition = "TEXT")
+	@Column(columnDefinition="TEXT")
 	private String zgwUrl;
-	@Column(columnDefinition = "TEXT", name = "zgw_request_body")
+	@Column(columnDefinition="TEXT", name = "zgw_request_body")
 	private String zgwShortenedRequestBody;
 	private Integer zgwRequestSize;
 
-	private int zgwResponseCode;
-	@Column(columnDefinition = "TEXT", name = "zgw_response_body")
-	private String zgwShortenedResponseBody;
+	private int zgwResponseCode;	
+	@Column(columnDefinition="TEXT", name = "zgw_response_body")
+	private String zgwShortenedResponseBody;	
 	private Integer zgwResponseSize;
 
 	public ZgwRequestResponseCycle() {
 		startdatetime = LocalDateTime.now();
-	};
+	};	
 
-	public void setRequest(String referentienummer, HttpRequest request, byte[] body)
-			throws UnsupportedEncodingException {
+	public void setRequest(String referentienummer, HttpRequest request, byte[] body) throws UnsupportedEncodingException {
 		this.referentienummer = referentienummer;
 		this.zgwMethod = request.getMethodValue();
 		this.zgwUrl = request.getURI().toString();

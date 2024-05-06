@@ -64,31 +64,27 @@ public class ZDSClient {
 			method.setRequestEntity(requestEntity);
 			var httpclient = new org.apache.commons.httpclient.HttpClient();
 
-			// String referentienummer = (String)
-			// RequestContextHolder.getRequestAttributes().getAttribute("referentienummer",
-			// RequestAttributes.SCOPE_REQUEST);
+			//String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer", RequestAttributes.SCOPE_REQUEST);
 
-			ZdsRequestResponseCycle zdsRequestResponseCycle = new ZdsRequestResponseCycle(zdsUrl, zdsSoapAction,
-					zdsRequestBody, referentienummer);
-			this.repository.save(zdsRequestResponseCycle);
+            ZdsRequestResponseCycle zdsRequestResponseCycle = new ZdsRequestResponseCycle(zdsUrl, zdsSoapAction, zdsRequestBody, referentienummer);
+            this.repository.save(zdsRequestResponseCycle);
 
 			String debugName = "ZDSClient POST";
 			debug.startpoint(debugName, zdsRequestBody);
 			debug.infopoint("url", zdsUrl);
 			int responsecode = (Integer) debug.outputpoint("statusCode", () -> {
 				return httpclient.executeMethod(method);
-			}, (IOException) null);
+			}, (IOException)null);
 			String zdsResponseBody = (String) debug.endpoint(debugName, () -> {
-				return method.getResponseBodyAsString();
-			}, (IOException) null);
+					return method.getResponseBodyAsString();
+			}, (IOException)null);
 
 			ResponseEntity<?> result = new ResponseEntity<>(zdsResponseBody, HttpStatus.valueOf(responsecode));
 			zdsRequestResponseCycle.setResponse(result);
 			this.repository.save(zdsRequestResponseCycle);
 
-			if (responsecode != 200) {
-				String message = "Error: responsecode #" + responsecode + " (not 200) while requesting url:" + zdsUrl
-						+ " with soapaction: " + zdsSoapAction;
+			if(responsecode != 200) {
+				String message = "Error: responsecode #" + responsecode + " (not 200) while requesting url:" + zdsUrl + " with soapaction: " + zdsSoapAction;
 				debugName = "Invalid response code";
 				debug.startpoint(debugName, responsecode);
 				debug.abortpoint(debugName, message);

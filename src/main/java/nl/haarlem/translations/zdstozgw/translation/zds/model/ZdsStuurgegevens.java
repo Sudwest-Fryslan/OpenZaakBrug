@@ -56,10 +56,10 @@ public class ZdsStuurgegevens extends ZdsObject {
 	}
 
 	public ZdsStuurgegevens(ZdsStuurgegevens stuurgegevens, String referentienummer) {
-		if (stuurgegevens.ontvanger != null) {
+		if(stuurgegevens.ontvanger != null) {
 			this.zender = new Endpoint(stuurgegevens.ontvanger);
 		}
-		if (stuurgegevens.zender != null) {
+		if(stuurgegevens.zender != null) {
 			this.ontvanger = new Endpoint(stuurgegevens.zender);
 		}
 		this.referentienummer = referentienummer;

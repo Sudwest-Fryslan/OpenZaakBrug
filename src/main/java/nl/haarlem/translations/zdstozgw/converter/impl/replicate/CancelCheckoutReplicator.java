@@ -27,6 +27,7 @@ import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.converter.impl.translate.CancelCheckoutTranslator;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class CancelCheckoutReplicator extends CancelCheckoutTranslator {
 
@@ -36,8 +37,9 @@ public class CancelCheckoutReplicator extends CancelCheckoutTranslator {
 		super(session, translation, zaakService);
 	}
 
+
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		throw new ConverterException("not imlemented");
 	}
 }

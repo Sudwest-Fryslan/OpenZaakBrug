@@ -29,6 +29,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGenereerDocumen
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsGenereerDocumentIdentificatieDu02;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocument;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GenereerDocumentIdentificatieEmulator extends Converter {
@@ -40,12 +41,12 @@ public class GenereerDocumentIdentificatieEmulator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsGenereerDocumentIdentificatieDi02) XmlUtils
-				.getStUFObject(this.getSession().getClientRequestBody(), ZdsGenereerDocumentIdentificatieDi02.class);
+		this.zdsDocument = (ZdsGenereerDocumentIdentificatieDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
+				ZdsGenereerDocumentIdentificatieDi02.class);
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ConverterException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ConverterException {
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
 		var prefixparam = repository.getOne("DocumentIdentificatiePrefix");
 		var idparam = repository.getOne("DocumentIdentificatieHuidige");
@@ -57,8 +58,7 @@ public class GenereerDocumentIdentificatieEmulator extends Converter {
 		this.getSession().setKenmerk("documentidentificatie:" + did);
 
 		var di02 = (ZdsGenereerDocumentIdentificatieDi02) this.zdsDocument;
-		var du02 = new ZdsGenereerDocumentIdentificatieDu02(di02.stuurgegevens,
-				this.getSession().getReferentienummer());
+		var du02 = new ZdsGenereerDocumentIdentificatieDu02(di02.stuurgegevens, this.getSession().getReferentienummer());
 		du02.document = new ZdsZaakDocument();
 		du02.document.functie = "entiteit";
 		du02.document.identificatie = did;

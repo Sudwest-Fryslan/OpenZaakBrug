@@ -19,6 +19,7 @@ import java.lang.invoke.MethodHandles;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,6 +28,7 @@ import nl.haarlem.translations.zdstozgw.converter.impl.translate.CreeerZaakTrans
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class CreeerZaakReplicator extends CreeerZaakTranslator {
 
@@ -36,17 +38,17 @@ public class CreeerZaakReplicator extends CreeerZaakTranslator {
 		super(session, translation, zaakService);
 	}
 
-	/**
-	 * Creates the zaak, no replication is necessary because it's a new zaak
-	 *
-	 * @return ZDS response
-	 * @throws ResponseStatusException
-	 */
+    /**
+     * Creates the zaak, no replication is necessary because it's a new zaak
+     *
+     * @return ZDS response
+     * @throws ResponseStatusException
+     */
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		return super.execute();
+		return super.execute(authorization);
 	}
 }

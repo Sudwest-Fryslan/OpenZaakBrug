@@ -22,28 +22,31 @@ import lombok.Data;
 
 @Data
 public class ZgwRol extends ZgwObject {
-	@SerializedName("zaak")
+
 	@Expose
 	public String zaak;
-	@SerializedName("betrokkene")
+
 	@Expose
 	public String betrokkene;
-	@SerializedName("betrokkeneType")
+
 	@Expose
 	public String betrokkeneType;
-	@SerializedName("roltype")
+
 	@Expose
 	public String roltype;
-	@SerializedName("roltoelichting")
+
 	@Expose
 	public String roltoelichting;
-	@SerializedName("betrokkeneIdentificatie")
+
 	@Expose
 	public ZgwBetrokkeneIdentificatie betrokkeneIdentificatie;
-	@SerializedName("omschrijvingGeneriek")
+
 	@Expose
 	public String omschrijvingGeneriek;
-	@SerializedName("omschrijving")
+
 	@Expose
 	public String omschrijving;
+
+	@Expose
+	public ZgwZrcExpand _expand;
 }

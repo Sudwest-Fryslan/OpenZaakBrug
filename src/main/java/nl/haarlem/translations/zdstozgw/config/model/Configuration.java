@@ -18,6 +18,7 @@ package nl.haarlem.translations.zdstozgw.config.model;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 
@@ -30,16 +31,16 @@ public class Configuration {
 	@Expose
 	public ZgwRolOmschrijving zgwRolOmschrijving = null;
 	@Expose
-	public List<ZaaktypeMetCoalesceResultaat> beeindigZaakWanneerEinddatum = null;
+	public List<ZaaktypeMetCoalesceResultaat> beeindigZaakWanneerEinddatum = null;	
 	@Expose
-	public List<ZaaktypeMetCoalesceResultaat> einddatumEnResultaatWanneerLastStatus = null;
+	public List<ZaaktypeMetCoalesceResultaat> einddatumEnResultaatWanneerLastStatus = null;	
 	@Expose
 	public List<TranslateVerblijfsadresForZaaktype> translateVerblijfsadresForZaaktype = null;
 	@Expose
 	public Replication replication = null;
 	@Expose
 	public List<Translation> translations = null;
-
+	
 	public String getTranslationsString() {
 		String combinations = "";
 		for (Translation t : this.getTranslations()) {

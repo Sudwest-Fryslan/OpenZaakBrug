@@ -35,7 +35,7 @@ public class ZdsEdcLa01 {
 	public ZdsZaakDocumentAntwoord antwoord;
 
 	@XmlAttribute(namespace = STUF)
-	public String entiteittype = "EDC";
+	public String entiteittype ="EDC";
 	@XmlAttribute(namespace = STUF)
 	public String functie = "antwoord";
 

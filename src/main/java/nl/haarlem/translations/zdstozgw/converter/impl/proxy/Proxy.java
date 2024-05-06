@@ -29,6 +29,7 @@ import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.client.ZDSClient;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class Proxy extends Converter {
 
@@ -45,7 +46,7 @@ public class Proxy extends Converter {
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ConverterException {
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ConverterException {
 		var url = this.getTranslation().getLegacyservice();
 		var soapaction = this.getTranslation().getSoapaction();
 		var request = this.getSession().getClientRequestBody();

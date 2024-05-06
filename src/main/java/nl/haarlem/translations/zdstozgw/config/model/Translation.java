@@ -37,10 +37,10 @@ public class Translation {
 	public String legacyservice;
 	@Expose
 	public List<KeyValuePair> parameters;
-
+	
 	public String getParameterValue(String key) {
-		for (KeyValuePair kvp : parameters) {
-			if (kvp.key.equals(key)) {
+		for(KeyValuePair kvp : parameters) {
+			if(kvp.key.equals(key)) {
 				return kvp.value;
 			}
 		}

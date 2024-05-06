@@ -27,6 +27,7 @@ import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZknDocument;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 @Data
 public abstract class Converter {
@@ -46,5 +47,5 @@ public abstract class Converter {
 
 	public abstract void load() throws ResponseStatusException;
 
-	public abstract ResponseEntity<?> execute() throws ConverterException;
+	public abstract ResponseEntity<?> execute(ZgwAuthorization authorization) throws ConverterException;
 }

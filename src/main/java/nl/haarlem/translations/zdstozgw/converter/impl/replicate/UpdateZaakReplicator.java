@@ -19,6 +19,7 @@ import java.lang.invoke.MethodHandles;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,6 +28,7 @@ import nl.haarlem.translations.zdstozgw.converter.impl.translate.UpdateZaakTrans
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class UpdateZaakReplicator extends UpdateZaakTranslator {
 
@@ -36,22 +38,19 @@ public class UpdateZaakReplicator extends UpdateZaakTranslator {
 		super(session, translation, zaakService);
 	}
 
-	/**
-	 * Replicates the zaak before updating it
-	 *
-	 * @return
-	 * @throws ResponseStatusException
-	 */
+    /**
+     * Replicates the zaak before updating it
+     *
+     * @return
+     * @throws ResponseStatusException
+     */
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
-
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
 
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
 		replicator.replicateZaak(authorization, zdsZakLk01.objects.get(0).identificatie);
-		return super.execute();
+		return super.execute(authorization);
 	}
 }

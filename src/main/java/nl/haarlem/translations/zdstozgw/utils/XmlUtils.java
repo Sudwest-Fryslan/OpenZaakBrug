@@ -176,10 +176,8 @@ public class XmlUtils {
 			Document doc = builder.parse(new InputSource(new StringReader(unformattedxml)));
 			doc.setXmlStandalone(true);
 
-			// Explicitly use JDK internal TransformerFactory to prevent Saxon-HE being used
-			// (depending on (transitive) dependencies in pom.xml).
-			// Saxon-HE is causing some of the SOAP response messages to become invalid by
-			// adding xmlns="".
+			// Explicitly use JDK internal TransformerFactory to prevent Saxon-HE being used (depending on (transitive) dependencies in pom.xml).
+			// Saxon-HE is causing some of the SOAP response messages to become invalid by adding xmlns="".
 			// See also https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/61
 			Transformer transformer = TransformerFactory.newInstance(transformerFactoryClass, null).newTransformer();
 
@@ -264,10 +262,9 @@ public class XmlUtils {
 	public static Object getStUFObject(String body, Class c) {
 		Object object = null;
 		try {
-			// WORKAROUND [A] : replace header '﻿<?xml version="1.0" encoding="utf-8"?>'
-			// here
+			// WORKAROUND [A] : replace header '﻿<?xml version="1.0" encoding="utf-8"?>' here
 			var WRITE_XML_DECLARATION = "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-			if (body.startsWith(WRITE_XML_DECLARATION)) {
+			if(body.startsWith(WRITE_XML_DECLARATION)) {
 				body = body.substring(WRITE_XML_DECLARATION.length());
 			}
 			var inputstream = new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
@@ -275,16 +272,17 @@ public class XmlUtils {
 			var document = message.getSOAPBody().extractContentAsDocument();
 			var unmarshaller = JAXBContext.newInstance(c).createUnmarshaller();
 			// WORKAROUND [A] : otherwise here exception:
-			// java.lang.RuntimeException: com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML
-			// declaration parsing failed
-			// java.io.IOException: Unexpected characters before XML declaration
+			//	java.lang.RuntimeException: com.sun.xml.messaging.saaj.SOAPExceptionImpl: XML declaration parsing failed
+			//	java.io.IOException: Unexpected characters before XML declaration
 			object = unmarshaller.unmarshal(document);
-		} catch (SOAPException se) {
+		}
+		catch (SOAPException se) {
 			throw new ConverterException("create soapmessage from request:" + se.toString(), body, se);
-		} catch (JAXBException jaxbe) {
-			throw new ConverterException("unmarshalllen request to class:" + c.getName() + " : " + jaxbe.toString(),
-					jaxbe.getMessage(), jaxbe);
-		} catch (Exception e) {
+		}
+		catch (JAXBException jaxbe) {
+			throw new ConverterException("unmarshalllen request to class:" + c.getName() + " : " + jaxbe.toString(), jaxbe.getMessage(), jaxbe);
+		}
+		catch (Exception e) {
 			throw new ConverterException("fout bij parsen xml:" + e.toString(), e);
 		}
 		return object;

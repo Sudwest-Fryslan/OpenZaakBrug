@@ -26,6 +26,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsBv03;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaak;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class UpdateZaakTranslator extends Converter {
@@ -36,15 +37,11 @@ public class UpdateZaakTranslator extends Converter {
 
 	@Override
 	public void load() throws ResponseStatusException {
-		this.zdsDocument = (ZdsZakLk01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(),
-				ZdsZakLk01.class);
+		this.zdsDocument = (ZdsZakLk01) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsZakLk01.class);
 	}
 
 	@Override
-	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
-		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
-
+	public ResponseEntity<?> execute(ZgwAuthorization authorization) throws ResponseStatusException {
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
 
 		this.getSession().setFunctie("UpdateZaak");
@@ -52,9 +49,10 @@ public class UpdateZaakTranslator extends Converter {
 
 		ZdsZaak was = null;
 		ZdsZaak wordt = null;
-		if (zdsZakLk01.objects.size() == 1) {
+		if(zdsZakLk01.objects.size() == 1) {
 			wordt = zdsZakLk01.objects.get(0);
-		} else if (zdsZakLk01.objects.size() == 2) {
+		}
+		else if(zdsZakLk01.objects.size() == 2) {
 			was = zdsZakLk01.objects.get(0);
 			wordt = zdsZakLk01.objects.get(1);
 		}
