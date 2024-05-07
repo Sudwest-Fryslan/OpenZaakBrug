@@ -810,36 +810,38 @@ public class ZGWClient {
 	private String getZakenExpandParameterValue() {
 		var expand = new ArrayList<String>();
 		expand.add("zaaktype");
-		expand.add("eigenschappen");
-		expand.add("eigenschappen.eigenschap");
+		//expand.add("eigenschappen");
+		//expand.add("eigenschappen.eigenschap");
 		expand.add("status");
 		expand.add("status.statustype");
 		expand.add("resultaat");
 		expand.add("resultaat.resultaattype");
 		expand.add("rollen");
 		expand.add("rollen.roltype");
-		expand.add("zaakinformatieobjecten");
-		expand.add("zaakobjecten");
-		expand.add("hoofdzaak");	
-		expand.add("hoofdzaak.zaaktype");		
-		expand.add("hoofdzaak.status");
-		expand.add("hoofdzaak.status.statustype");
-		expand.add("hoofdzaak.resultaat");
-		expand.add("hoofdzaak.resultaat.resultaattype");
-		expand.add("hoofdzaak.rollen");
-		expand.add("hoofdzaak.rollen.roltype");
-		expand.add("hoofdzaak.zaakinformatieobjecten");
-		expand.add("hoofdzaak.zaakobjecten");
-		expand.add("deelzaken");	
-		expand.add("deelzaken.zaaktype");		
-		expand.add("deelzaken.status");
-		expand.add("deelzaken.status.statustype");
-		expand.add("deelzaken.resultaat");
-		expand.add("deelzaken.resultaat.resultaattype");
-		expand.add("deelzaken.rollen");
-		expand.add("deelzaken.rollen.roltype");
-		expand.add("deelzaken.zaakinformatieobjecten");
-		expand.add("deelzaken.zaakobjecten");
+		if(!additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching) {
+			expand.add("zaakinformatieobjecten");
+		}
+		//expand.add("zaakobjecten");
+		//expand.add("hoofdzaak");	
+		//expand.add("hoofdzaak.zaaktype");		
+		//expand.add("hoofdzaak.status");
+		//expand.add("hoofdzaak.status.statustype");
+		//expand.add("hoofdzaak.resultaat");
+		//expand.add("hoofdzaak.resultaat.resultaattype");
+		//expand.add("hoofdzaak.rollen");
+		//expand.add("hoofdzaak.rollen.roltype");
+		//expand.add("hoofdzaak.zaakinformatieobjecten");
+		//expand.add("hoofdzaak.zaakobjecten");
+		//expand.add("deelzaken");	
+		//expand.add("deelzaken.zaaktype");		
+		//expand.add("deelzaken.status");
+		//expand.add("deelzaken.status.statustype");
+		//expand.add("deelzaken.resultaat");
+		//expand.add("deelzaken.resultaat.resultaattype");
+		//expand.add("deelzaken.rollen");
+		//expand.add("deelzaken.rollen.roltype");
+		//expand.add("deelzaken.zaakinformatieobjecten");
+		//expand.add("deelzaken.zaakobjecten");
 		return String.join(",", expand);
 	}
 
@@ -1089,6 +1091,7 @@ public class ZGWClient {
 		var documentType = get(authorization, url, null);
 		Gson gson = new Gson();
 		ZgwInformatieObjectType result = gson.fromJson(documentType, ZgwInformatieObjectType.class);
+		authorization.cacheAdd(result);
 		return result;
 	}
 

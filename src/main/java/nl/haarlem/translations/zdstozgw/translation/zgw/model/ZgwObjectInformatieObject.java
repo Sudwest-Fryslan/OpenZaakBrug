@@ -21,11 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class ZgwObjectInformatieObject {
-	@Expose
-	public String url;	
-	@Expose
-	public String uuid;
+public class ZgwObjectInformatieObject extends ZgwObject {
 	@Expose
 	public String informatieobject;	
 	@Expose
