@@ -3,6 +3,7 @@ package nl.haarlem.translations.zdstozgw.translation.zgw.client;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -28,6 +29,7 @@ import com.google.gson.Gson;
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwCatalogus;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwDrcExpand;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwObject;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZaak;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwZrcExpand;
@@ -159,6 +161,10 @@ public class ZgwAuthorization {
 	        this.capacity = capacity;
 	    }
 
+	    public boolean hasCapacity() {
+	    	return this.capacity > super.size();
+	    }
+	    
 	    @Override
 	    protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
 	        // Remove the eldest entry if the size exceeds the capacity of the cache.
@@ -176,7 +182,7 @@ public class ZgwAuthorization {
 	        return sb.toString();
 	    }
 	}	
-	private LRUCache<String, ZgwObject> cache = new LRUCache<>(250);
+	private LRUCache<String, ZgwObject> cache = new LRUCache<>(1024);
 	
 	public void cacheAdd(List<? extends ZgwObject> zgwObjecten) {
 	    for (ZgwObject zgwObject : zgwObjecten) {
@@ -185,7 +191,12 @@ public class ZgwAuthorization {
 	}		
 	
 	public void cacheAdd(ZgwObject zgwObject) {
-		log.debug("Cache add zgwObject:" + getUuid(zgwObject.url));
+		log.debug("Cache add zgwObject:" + getUuid(zgwObject.url));		
+		
+		if(!cache.hasCapacity()) {
+			log.warn("Volle zgwobject-cache!(" + cache.size() + " objects)");
+		}
+		
 	    // Directly cache the passed object
         cache.put(getUuid(zgwObject.url), zgwObject);
         // Recursively cache its members
@@ -204,6 +215,9 @@ public class ZgwAuthorization {
 	            if (ZgwZrcExpand.class.isAssignableFrom(field.getType())) {
 	            	cacheMembers(fieldValue);
 	            }
+	            else if (ZgwDrcExpand.class.isAssignableFrom(field.getType())) {
+	            	cacheMembers(fieldValue);
+	            }	            
 	            else if (ZgwObject.class.isAssignableFrom(field.getType())) {
 	                ZgwObject zgwObject = (ZgwObject) fieldValue;
 	                log.debug("Cache ZgwObject add '" + field.getName() + "' : " + getUuid(zgwObject.url));
@@ -263,7 +277,7 @@ public class ZgwAuthorization {
 		log.debug("Cache looking for:" + url);
 		// also accept urls
 		var uuid = getUuid(url);
-		if(cache.get(uuid) != null) log.debug("Cache hit:" + uuid);
+		if(cache.get(uuid) != null) log.debug("Cache hit:" + uuid + " (url: " + cache.get(uuid).url + " java-type:" + cache.get(uuid).getClass().getName() + ")");
 		else log.debug("Cache miss:" + uuid);
 		return cache.get(uuid);
 	}

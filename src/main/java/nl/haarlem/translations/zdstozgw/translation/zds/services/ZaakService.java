@@ -676,7 +676,7 @@ public class ZaakService {
 		}
 		for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-					.getZaakDocumentByUrl(authorization, zgwZaakInformatieObject.informatieobject);
+					.getZgwEnkelvoudigInformatieObjectByUrl(authorization, zgwZaakInformatieObject.informatieobject);
 			if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
 				throw new ConverterException("could not get the zaakdocument: "
 						+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);

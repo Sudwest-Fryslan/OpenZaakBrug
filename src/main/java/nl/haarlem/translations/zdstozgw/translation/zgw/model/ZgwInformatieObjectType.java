@@ -20,14 +20,7 @@ import com.google.gson.annotations.Expose;
 import lombok.Data;
 
 @Data
-public class ZgwInformatieObjectType {
-
-	@Expose
-	public String url;
-
-	@Expose
-	public String uuid;
-
+public class ZgwInformatieObjectType extends ZgwObject {
 	@Expose
 	public String omschrijving;
 }

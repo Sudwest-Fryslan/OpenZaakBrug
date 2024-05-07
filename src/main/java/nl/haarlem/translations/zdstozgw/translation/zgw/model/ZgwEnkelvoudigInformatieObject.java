@@ -24,8 +24,10 @@ import com.google.gson.annotations.Expose;
 import lombok.Data;
 
 @Data
-public class ZgwEnkelvoudigInformatieObject  extends ZgwEnkelvoudigInformatieObjectPut {
+public class ZgwEnkelvoudigInformatieObject extends ZgwEnkelvoudigInformatieObjectPut {
 	@SerializedName("locked")
 	@Expose
-	public boolean locked;	
+	public boolean locked;		
+	@Expose
+	public ZgwDrcExpand _expand;	
 }
