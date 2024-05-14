@@ -447,7 +447,7 @@ public class ZGWClient {
 		return null;		
 	}
 	
-	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByIdentiticatie(ZgwAuthorization authorization, String documentIdentificatie) {
+	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByIdentiticatie(ZgwAuthorization authorization, String documentIdentificatie, boolean expand) {
 		log.debug("get zaakdocument #" + documentIdentificatie);
 
 		if(documentIdentificatie == null || documentIdentificatie.length() == 0) {
@@ -457,19 +457,22 @@ public class ZGWClient {
 		Map<String, String> parameters = new HashMap();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", documentIdentificatie);
-		parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());						
-		
+		if(expand) {
+			parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		}		
 		ZgwEnkelvoudigInformatieObject zgwDocument = this.getZgwEnkelvoudigInformatieObject(authorization, parameters);
 		authorization.cacheAdd(zgwDocument);
 		return zgwDocument;
 	}
 	
-	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByUrl(ZgwAuthorization authorization, String url) {
+	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByUrl(ZgwAuthorization authorization, String url, boolean expand) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwEnkelvoudigInformatieObject) cachedObject;		
 
 		Map<String, String> parameters = new HashMap();
-		parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		if(expand) {
+			parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		}
 		var zaakInformatieObjectJson = get(authorization, url, parameters);
 		Gson gson = new Gson();
 		var result = gson.fromJson(zaakInformatieObjectJson, ZgwEnkelvoudigInformatieObject.class);
@@ -508,14 +511,16 @@ public class ZGWClient {
 		}
 		return queryResult.getResults();
 	}	
-	
-	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url) {
+
+	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url, boolean expand) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwZaak) cachedObject;
 		
 		Map<String, String> parameters = new HashMap();
-		parameters.put("expand", getZakenExpandParameterValue());		
-		var zaakJson = get(authorization, url, null);
+		if(expand) {
+			parameters.put("expand", getZakenExpandParameterValue());
+		}
+		var zaakJson = get(authorization, url, parameters);
 		Gson gson = new Gson();
 		ZgwZaak result = gson.fromJson(zaakJson, ZgwZaak.class);
 		if(result == null) {
@@ -524,6 +529,10 @@ public class ZGWClient {
 		
 		authorization.cacheAdd(result);
 		return result;
+	}	
+	
+	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url) {
+		return getZaakByUrl(authorization, url, true);
 	}
 
 
@@ -845,15 +854,17 @@ public class ZGWClient {
 		return String.join(",", expand);
 	}
 
-	public List<ZgwZaak> getZakenByBsn(ZgwAuthorization authorization, String bsn) {
+	public List<ZgwZaak> getZakenByBsn(ZgwAuthorization authorization, String bsn, boolean expand) {
 		if(bsn == null || bsn.length() == 0) {
 			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
 
 		Map<String, String> parameters = new HashMap();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
-		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);		
-		parameters.put("expand", getZakenExpandParameterValue());	
+		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);	
+		if(expand) {
+			parameters.put("expand", getZakenExpandParameterValue());
+		}
 
 		List<ZgwZaak> zaken = this.getZaken(authorization, parameters);
 		authorization.cacheAdd(zaken);
@@ -861,17 +872,17 @@ public class ZGWClient {
 	}	
 	
 	
-	public ZgwZaak getZaakByIdentificatie(ZgwAuthorization authorization, String zaakIdentificatie) {
+	public ZgwZaak getZaakByIdentificatie(ZgwAuthorization authorization, String zaakIdentificatie, boolean expand) {
 		if(zaakIdentificatie == null || zaakIdentificatie.length() == 0) {
 			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
 
-
 		Map<String, String> parameters = new HashMap();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", zaakIdentificatie);
-		parameters.put("expand", getZakenExpandParameterValue());				
-		
+		if(expand) {
+			parameters.put("expand", getZakenExpandParameterValue());
+		}		
 		ZgwZaak zgwZaak = this.getZaak(authorization, parameters);		
 		if (zgwZaak == null) {
 			return null;
@@ -893,6 +904,10 @@ public class ZGWClient {
 		return zgwZaak;
 	}
 
+	public ZgwZaak getZaakByIdentificatie(ZgwAuthorization authorization, String zaakIdentificatie) {
+		return getZaakByIdentificatie(authorization, zaakIdentificatie, true);
+	}
+	
 	public ZgwZaakInformatieObject getZgwZaakInformatieObjectByEnkelvoudigInformatieObjectUrl(ZgwAuthorization authorization, String url) {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("informatieobject", url);		

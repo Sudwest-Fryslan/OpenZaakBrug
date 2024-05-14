@@ -654,7 +654,7 @@ public class ZaakService {
 
 	public List<ZdsHeeftRelevant> geefLijstZaakdocumenten(ZgwAuthorization authorization, String zaakidentificatie) {
 		log.debug("geefLijstZaakdocumenten:" + zaakidentificatie);
-		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie);
+		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, false);
 	
 		var relevanteDocumenten = new ArrayList<ZdsHeeftRelevant>();
 		List<ZgwZaakInformatieObject> zgwZaakInformatieObjecten = new ArrayList<ZgwZaakInformatieObject>();
@@ -676,7 +676,7 @@ public class ZaakService {
 		}
 		for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
 			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-					.getZgwEnkelvoudigInformatieObjectByUrl(authorization, zgwZaakInformatieObject.informatieobject);
+					.getZgwEnkelvoudigInformatieObjectByUrl(authorization, zgwZaakInformatieObject.informatieobject, true);
 			if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
 				throw new ConverterException("could not get the zaakdocument: "
 						+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);
@@ -796,7 +796,7 @@ public class ZaakService {
 			ZgwAuthorization authorization, String documentIdentificatie) {
 		log.debug("getZaakDocumentLezen:" + documentIdentificatie);
 		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie);
+				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie, true);
 		if (zgwEnkelvoudigInformatieObject == null) {
 			throw new ConverterException(
 					"ZgwEnkelvoudigInformatieObject #" + documentIdentificatie + " could not be found");
@@ -899,7 +899,7 @@ public class ZaakService {
 	public List<ZdsZaak> getZaakDetailsByBsn(ZgwAuthorization authorization, String bsn) {
 		log.debug("getZaakDetailsByBsn:" + bsn);
 		
-		var zgwZaken = this.zgwClient.getZakenByBsn(authorization, bsn);
+		var zgwZaken = this.zgwClient.getZakenByBsn(authorization, bsn, true);
 		var result = new ArrayList<ZdsZaak>();
 		for (ZgwZaak zgwZaak : zgwZaken) {
 			List<String> rollen = zgwZaak.getRollen();
@@ -1176,7 +1176,7 @@ public class ZaakService {
 
 	public String checkOutZaakDocument(ZgwAuthorization authorization, String documentIdentificatie) {
 		log.debug("checkOutZaakDocument:" + documentIdentificatie);
-		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie);
+		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie, false);
 		if (zgwEnkelvoudigInformatieObject == null) {
 			throw new ConverterException("ZgwEnkelvoudigInformatieObject #" + documentIdentificatie + " could not found" );
 		}
@@ -1192,7 +1192,7 @@ public class ZaakService {
 	public Object cancelCheckOutZaakDocument(ZgwAuthorization authorization, String documentIdentificatie, String lock) {
 		log.debug("checkOutZaakDocument:" + documentIdentificatie);
 		ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie);
+				.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentIdentificatie, false);
 		if (zgwEnkelvoudigInformatieObject == null) {
 			throw new ConverterException(
 					"ZgwEnkelvoudigInformatieObject #" + documentIdentificatie + " could not be found");
@@ -1206,7 +1206,7 @@ public class ZaakService {
 	public ZgwEnkelvoudigInformatieObject updateZaakDocument(ZgwAuthorization authorization, String lock, ZdsZaakDocumentInhoud zdsWasInformatieObject, ZdsZaakDocumentInhoud zdsWordtInformatieObject) {
 		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWordtInformatieObject.identificatie);
 
-		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWordtInformatieObject.identificatie);
+		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWordtInformatieObject.identificatie, true);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
 			throw new ConverterException("ZgwEnkelvoudigInformatieObject #: " + zdsWasInformatieObject.identificatie + " has status 'defintief ' and therefore cannot be locked and then changed");
 		}

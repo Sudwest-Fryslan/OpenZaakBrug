@@ -127,7 +127,7 @@ public class Replicator {
 	
 	public void replicateDocument(ZgwAuthorization authorization, String documentidentificatie) {
 		debug.infopoint("replicatie", "Start repliceren van document met identificatie:" + documentidentificatie);
-		var zgwDocument = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentidentificatie);
+		var zgwDocument = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentidentificatie, true);
 		if (zgwDocument == null) {
 			debug.infopoint("replicatie", "document not found, copying document with identificatie #" + documentidentificatie);
 			copyDocument(authorization, documentidentificatie);
@@ -173,7 +173,7 @@ public class Replicator {
             var zaakdocumentidentificatie = relevant.gerelateerde.identificatie;
             debug.infopoint("replicatie", "Start repliceren van zaakdocument met  identificatie:" + zaakdocumentidentificatie + "(zaakid: " + zaakidentificatie + ")");
 
-            ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zaakdocumentidentificatie);
+            ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zaakdocumentidentificatie, true);
             if (zgwEnkelvoudigInformatieObject == null) {
             	debug.infopoint("replicatie", "document not found, copying document with identificatie #" + zaakdocumentidentificatie);
             	try {
