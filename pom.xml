@@ -90,6 +90,7 @@
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
+			<version>2.3.1</version>
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
 
