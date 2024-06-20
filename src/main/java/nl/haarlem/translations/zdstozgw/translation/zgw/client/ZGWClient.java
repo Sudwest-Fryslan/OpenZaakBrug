@@ -154,6 +154,10 @@ public class ZGWClient {
 	@Value("${nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching:true}")
 	public Boolean additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching;
 
+	@Value("${nl.haarlem.translations.zdstozgw.experimental-enkelvoudiginformatieobjecten-object:false}")
+	public Boolean experimentalEnkelvoudiginformatieobjectenObject;
+	
+	
 	@Autowired
 	RestTemplateService restTemplateService;
 	
@@ -433,16 +437,21 @@ public class ZGWClient {
 		}
 	}
 
-	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObject(ZgwAuthorization authorization, Map<String, String> parameters) {
+	public List<ZgwEnkelvoudigInformatieObject> getZgwEnkelvoudigInformatieObjecten(ZgwAuthorization authorization, Map<String, String> parameters) {
 		ZgwEnkelvoudigInformatieObject result = null;
 		var documentJson = get(authorization, this.documentenUrl + this.endpointEnkelvoudiginformatieobject, parameters);
 		Type type = new TypeToken<QueryResult<ZgwEnkelvoudigInformatieObject>>() {
 		}.getType();
 		Gson gson = new Gson();
 		QueryResult<ZgwEnkelvoudigInformatieObject> queryResult = gson.fromJson(documentJson, type);
+		return queryResult.getResults();		
+	}
 
-		if (queryResult.getResults() != null && queryResult.getResults().size() == 1) {
-			return queryResult.getResults().get(0);
+	
+	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObject(ZgwAuthorization authorization, Map<String, String> parameters) {
+		var results = getZgwEnkelvoudigInformatieObjecten(authorization, parameters);
+		if (results != null && results.size() == 1) {
+			return results.get(0);
 		}		
 		return null;		
 	}
@@ -1177,5 +1186,17 @@ public class ZGWClient {
 		Map<String, String> parameters = new HashMap();
 		parameters.put("object", objecturl);
 		return this.getObjectInformatieObjectsByUrl(authorization, parameters);
+	}
+
+	public List<ZgwEnkelvoudigInformatieObject> getEnkelvoudigInformatieObjectenByObject(ZgwAuthorization authorization, String objecturl) {
+		log.debug("get getEnkelvoudigInformatieObjectenByObject #" + objecturl);
+
+		Map<String, String> parameters = new HashMap();		
+		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
+		parameters.put("objectinformatieobjecten__object", objecturl);
+		parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		
+		return getZgwEnkelvoudigInformatieObjecten(authorization, parameters);
+	
 	}
 }

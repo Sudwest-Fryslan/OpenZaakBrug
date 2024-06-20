@@ -657,45 +657,78 @@ public class ZaakService {
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, false);
 	
 		var relevanteDocumenten = new ArrayList<ZdsHeeftRelevant>();
-		List<ZgwZaakInformatieObject> zgwZaakInformatieObjecten = new ArrayList<ZgwZaakInformatieObject>();
-		if(zgwZaak.getZaakinformatieobjecten() != null) {
-			for(String zaakinformatieobjectenUrl : zgwZaak.zaakinformatieobjecten) {
-				zgwZaakInformatieObjecten.add(this.zgwClient.getZaakInformatieObjectByUrl(authorization, zaakinformatieobjectenUrl));
+		if(this.zgwClient.experimentalEnkelvoudiginformatieobjectenObject) {
+			List<ZgwZaakInformatieObject> zgwZaakInformatieObjecten = new ArrayList<ZgwZaakInformatieObject>();			
+			zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
+			
+			// experimenteel
+			var zgwEnkelvoudigInformatieObjecten = this.zgwClient.getEnkelvoudigInformatieObjectenByObject(authorization, zgwZaak.getUrl());
+			// we kunnen over 2 dingen itereren, laten we analoog aan onderstaande blijven
+			for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
+				ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = null;
+				for(ZgwEnkelvoudigInformatieObject huidige : zgwEnkelvoudigInformatieObjecten) {
+					if(zgwZaakInformatieObject.getInformatieobject().equals(huidige.getIdentificatie())) {
+						zgwEnkelvoudigInformatieObjecten.add(zgwEnkelvoudigInformatieObject);
+					}
+				}
+				
+				if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
+					throw new ConverterException("could not get the zaakdocument: "
+							+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);
+				}
+				
+				ZgwInformatieObjectType documenttype = this.zgwClient
+						.getZgwInformatieObjectTypeByUrl(authorization, zgwEnkelvoudigInformatieObject.informatieobjecttype);
+				if (documenttype == null) {
+					throw new ConverterException("getZgwInformatieObjectType #"
+							+ zgwEnkelvoudigInformatieObject.informatieobjecttype + " could not be found");
+				}
+				ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject,
+						ZdsZaakDocument.class);
+				zdsZaakDocument.omschrijving = documenttype.omschrijving;
+				ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
+				heeftRelevant.gerelateerde = zdsZaakDocument;
+				relevanteDocumenten.add(heeftRelevant);		
 			}
 		}
 		else {
-			zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
-		}
-			
-		// var zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
-		
-		if(this.zgwClient.additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching && zgwZaakInformatieObjecten.size() > 0) {
-			// fill the cache in the drc if needed
-			var zgwObjectInformatieObjecten = this.zgwClient.getObjectInformatieObjectsByUrl(authorization, zgwZaak.url);
-			debugWarning("Retrieved ObjectInformatieObjecten to fill the cache on the (CMIS-)DRC (call not needed for ZdsToZgw)");
-		}
-		for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
-			ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-					.getZgwEnkelvoudigInformatieObjectByUrl(authorization, zgwZaakInformatieObject.informatieobject, true);
-			if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
-				throw new ConverterException("could not get the zaakdocument: "
-						+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);
+			List<ZgwZaakInformatieObject> zgwZaakInformatieObjecten = new ArrayList<ZgwZaakInformatieObject>();
+			if(zgwZaak.getZaakinformatieobjecten() != null) {
+				for(String zaakinformatieobjectenUrl : zgwZaak.zaakinformatieobjecten) {
+					zgwZaakInformatieObjecten.add(this.zgwClient.getZaakInformatieObjectByUrl(authorization, zaakinformatieobjectenUrl));
+				}
 			}
-			ZgwInformatieObjectType documenttype = this.zgwClient
-					.getZgwInformatieObjectTypeByUrl(authorization, zgwEnkelvoudigInformatieObject.informatieobjecttype);
-			if (documenttype == null) {
-				throw new ConverterException("getZgwInformatieObjectType #"
-						+ zgwEnkelvoudigInformatieObject.informatieobjecttype + " could not be found");
+			else {
+				zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
+			}				
+			// var zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);			
+			if(this.zgwClient.additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching && zgwZaakInformatieObjecten.size() > 0) {
+				// fill the cache in the drc if needed
+				var zgwObjectInformatieObjecten = this.zgwClient.getObjectInformatieObjectsByUrl(authorization, zgwZaak.url);
+				debugWarning("Retrieved ObjectInformatieObjecten to fill the cache on the (CMIS-)DRC (call not needed for ZdsToZgw)");
 			}
-			ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject,
-					ZdsZaakDocument.class);
-			zdsZaakDocument.omschrijving = documenttype.omschrijving;
-			ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
-			heeftRelevant.gerelateerde = zdsZaakDocument;
-			relevanteDocumenten.add(heeftRelevant);
-
+			for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
+				ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
+						.getZgwEnkelvoudigInformatieObjectByUrl(authorization, zgwZaakInformatieObject.informatieobject, true);
+				if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
+					throw new ConverterException("could not get the zaakdocument: "
+							+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);
+				}
+				ZgwInformatieObjectType documenttype = this.zgwClient
+						.getZgwInformatieObjectTypeByUrl(authorization, zgwEnkelvoudigInformatieObject.informatieobjecttype);
+				if (documenttype == null) {
+					throw new ConverterException("getZgwInformatieObjectType #"
+							+ zgwEnkelvoudigInformatieObject.informatieobjecttype + " could not be found");
+				}
+				ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject,
+						ZdsZaakDocument.class);
+				zdsZaakDocument.omschrijving = documenttype.omschrijving;
+				ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
+				heeftRelevant.gerelateerde = zdsZaakDocument;
+				relevanteDocumenten.add(heeftRelevant);	
+			}
 		}
-		return relevanteDocumenten;
+		return relevanteDocumenten;		
 	}
 
 	
