@@ -1183,7 +1183,7 @@ public class ZaakService {
 	}
 
 	public ZgwEnkelvoudigInformatieObject updateZaakDocument(ZgwAuthorization authorization, String lock, ZdsZaakDocumentInhoud zdsWasInformatieObject, ZdsZaakDocumentInhoud zdsWordtInformatieObject) {
-		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWasInformatieObject.identificatie);
+		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWordtInformatieObject.identificatie);
 
 		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWasInformatieObject.identificatie);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
@@ -1193,7 +1193,7 @@ public class ZaakService {
 
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
 		// 		Move code to the ModelMapperConfig.java
-		//		Also merge, we shouldnt overwrite the old values this hard
+		//		Also merge, we shouldnt overwrite the old values this hard		
 		var zgwWordtEnkelvoudigInformatieObjectPut = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObjectPut.class);
 		zgwWordtEnkelvoudigInformatieObjectPut.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
 		zgwWordtEnkelvoudigInformatieObjectPut.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;
