@@ -75,7 +75,7 @@ public class ZgwAuthorization {
 			var authorizationRequestHeaders = new HttpHeaders();
 	        String json =  "{\n" +
 	            "    \"clientIds\": [\n" +
-	            "        \"test_user\"\n" +
+	            "        \"" + jwtIssuer + "\"\n" +
 	            "    ],\n" +
 	            "    \"secret\": \"" + jwtSecret +  "\",\n" +
 	            "    \"label\": \"" + jwtIssuer +  "\",\n" +

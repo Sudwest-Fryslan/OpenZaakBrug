@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import lombok.Getter;
 
 public class StringUtils {
-	public static int MAX_MESSAGE_SIZE = 2 * 1024;
+	public static int MAX_MESSAGE_SIZE = 4 * 1024;
 	public static int MAX_ERROR_SIZE = 2 * 1024;
 
 	public static String shortenLongString(String message, int maxLength) {
