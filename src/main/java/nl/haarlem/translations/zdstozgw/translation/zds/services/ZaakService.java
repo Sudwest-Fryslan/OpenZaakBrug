@@ -804,7 +804,13 @@ public class ZaakService {
 	public ZgwZaakInformatieObject addZaakInformatieObject(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObject doc, String zaakUrl) {
 		var zgwZaakInformatieObject = new ZgwZaakInformatieObject();
 		zgwZaakInformatieObject.setZaak(zaakUrl);
-		zgwZaakInformatieObject.setInformatieobject(doc.getUrl());
+		var documenturl = doc.getUrl();
+		var epevio = this.zgwClient.getDocumentenUrl() + this.zgwClient.getEndpointEnkelvoudiginformatieobject();
+		if(!documenturl.startsWith(epevio)) {
+	        String fileName = epevio + documenturl.substring(documenturl.lastIndexOf('/') + 1);
+			log.warn("drc is changing the url from:" + fileName + " to: " + documenturl);
+		}
+		zgwZaakInformatieObject.setInformatieobject(documenturl);
 		zgwZaakInformatieObject.setTitel(doc.getTitel());
 		return this.zgwClient.addDocumentToZaak(authorization, zgwZaakInformatieObject);
 	}

@@ -267,7 +267,7 @@ def publiceerObject(zgwobjecturl, mapping):
     if path in ('besluittypen', 'informatieobjecttypen', 'zaaktypen'):
         url = mapping[zgwobjecturl] + '/publish'
         response = httpPost(url, '')
-        if response.status_code not in (200, 201):
+        if response and response.status_code not in (200, 201):
             logging.warning(f"Error posting to the url: {url}\n\tStatus Code: {response.status_code}\n\tResponse: {response.content}")
             return None
 

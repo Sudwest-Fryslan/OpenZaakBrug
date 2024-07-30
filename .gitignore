@@ -34,4 +34,5 @@ build/
 /data/
 /src/main/resources/*.properties
 /src/main/resources/*.json
-/examples/import/.vs
+.vs
+__pycache__
