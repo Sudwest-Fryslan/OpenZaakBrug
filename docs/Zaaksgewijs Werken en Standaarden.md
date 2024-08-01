@@ -1,6 +1,6 @@
 ### Zaaksgewijs Werken Standaarden
 
-Zaaksgewijs werken is een methode waarbij alle informatie en documenten die bij een specifieke zaak horen, centraal beheerd worden. Dit concept ontstond in de jaren 90 en is verder ontwikkeld met de introductie van digitale systemen. Zaaksgewijs werken stelt gemeenten in staat om klantgericht en transparant te werken, waardoor processen efficiënter worden en de dienstverlening aan burgers en bedrijven verbetert. 
+Zaaksgewijs werken is een methode waarbij alle informatie en documenten die bij een specifieke zaak horen, centraal beheerd worden. Dit concept ontstond in de jaren 90 en is verder ontwikkeld met de introductie van digitale systemen. Zaaksgewijs werken stelt gemeenten in staat om klantgericht en transparant te werken, waardoor processen efficiënter worden en de dienstverlening aan burgers en bedrijven verbetert.
 
 #### Voordelen van Zaaksgewijs Werken
 - **Centrale Registratie**: Alle gegevens en documenten van een zaak worden op één plek beheerd, wat zorgt voor overzicht en efficiëntie.
@@ -56,16 +56,25 @@ De Zaakgericht Werken API's (ZGW API's) zijn de opvolger van ZDS en bieden moder
   - **Koppel Zaakdocument aan Zaak**: Document aan een zaak koppelen.
   - **Ontkoppel Zaakdocument**: Document van een zaak ontkoppelen.
 
+### Componenten van een Zaaksysteem
+Een Zaaksysteem (ZS) bestaat uit verschillende componenten die samenwerken om zaken en documenten efficiënt te beheren. De belangrijkste componenten zijn:
+
+- **Zaakservices Component (ZSC)**: Ondersteunt specifieke diensten en functionaliteiten gerelateerd aan zaakbeheer, zoals het verwerken van zaakstatussen en details.
+- **Document Services Component (DSC)**: Beheert documentgerelateerde diensten, inclusief het opslaan, ophalen, bijwerken en verwijderen van documenten.
+
+Een ZS integreert zowel de ZSC als de DSC om een volledige set aan zaak- en documentbeheerdiensten te bieden. 
+Vakapplicaties communiceren met het ZS via gestandaardiseerde interfaces zoals STUF-ZKN en ZDS om gegevens uit te wisselen en processen te stroomlijnen.
+
 ### Extensies binnen ZDS
 Extensies binnen ZDS bieden aanvullende functionaliteiten bovenop de basisstandaard. Ze zijn optioneel en kunnen naar behoefte worden geïmplementeerd.
 
 #### Beschikbare Extensies
-- **DSC verwijdert document (via StUF-ZKN en CMIS)**
-   - **Doel**: Synchroniseren van documentverwijdering tussen DSC en ZS.
-- **Document ontkoppelen van zaak (via StUF-ZKN en CMIS)**
+- **DSC (Document Services Component) verwijdert document (via STUF-ZKN en CMIS)**
+   - **Doel**: Synchroniseren van documentverwijdering tussen DSC (Document Services Component) en ZS (Zaaksysteem).
+- **Document ontkoppelen van zaak (via STUF-ZKN en CMIS)**
    - **Doel**: Documenten ontkoppelen van zaken en deze wijziging doorgeven aan betrokken systemen.
-- **ZS informeert ZSC/DSC over mutatie met betrekking tot zaak of document**
-   - **Doel**: Informeren van ZSC/DSC over wijzigingen in zaken of documenten met behulp van StUF-ZKN berichten.
+- **ZS (Zaaksysteem) informeert ZSC (Zaakservices Component)/DSC (Document Services Component) over mutatie met betrekking tot zaak of document**
+   - **Doel**: Informeren van ZSC (Zaakservices Component) en DSC (Document Services Component) over wijzigingen in zaken of documenten met behulp van STUF-ZKN berichten.
 
 ### Disclaimer
 Deze informatie is samengesteld op basis van gegevens die beschikbaar zijn op verschillende bronnen:
