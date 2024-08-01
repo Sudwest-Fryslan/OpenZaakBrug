@@ -46,6 +46,7 @@ De functioneel beheerders van de verschillende backoffice applicaties hebben de 
 | Signicat CityPermit                             | in acceptatie  |
 
 ### Webservice functies
+
 | Webservice functie                              | Proxy      | Translate  | Replicate  |
 |-------------------------------------------------|------------|------------|------------|
 | ZDS 1.1 genereerZaakIdentificatie_Di02          | ondersteund| ondersteund| ondersteund|
@@ -71,6 +72,7 @@ Zaakbrug biedt geen ondersteuning voor een gefaseerde implementatie zonder een '
 De naam is gewijzigd om de verwarring dat de (Open) Zaakbrug alleen met OpenZaak werkt te voorkomen. Zowel Open Zaakbrug en Zaakbrug werken met goed geimplementeerde zgw-api's
 
 ### Verschillen tussen Open Zaakbrug en Zaakbrug
+
 | Kenmerk                              | Open Zaakbrug                         | Zaakbrug                                      |
 |--------------------------------------|---------------------------------------|-----------------------------------------------|
 | Onderhoud en fixes                   | Onderhoud en bugfixes                 | Onderhoud en bugfixes                         |
