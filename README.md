@@ -69,7 +69,7 @@ Zaakbrug is de beoogde opvolger van Open Zaakbrug en fungeert als een vertaler d
 Zaakbrug biedt geen ondersteuning voor een gefaseerde implementatie zonder een 'big bang' aanpak (proxy, replicatie). 
 [Meer informatie](https://www.zaakbrug.nl).
 
-De naam is gewijzigd om de verwarring dat de (Open) Zaakbrug alleen met OpenZaak werkt te voorkomen. Zowel Open Zaakbrug en Zaakbrug werken met goed geimplementeerde zgw-api's
+De naamswijziging is doorgevoerd om misverstanden te voorkomen. Het werd ten onrechte verondersteld dat de (Open) Zaakbrug exclusief met OpenZaak zou functioneren. Zowel Open Zaakbrug als Zaakbrug zijn compatibel met correct geïmplementeerde ZGW-API's.
 
 ### Verschillen tussen Open Zaakbrug en Zaakbrug
 
