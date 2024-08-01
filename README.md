@@ -27,12 +27,8 @@ De [ZGW API-standaarden](https://www.vngrealisatie.nl/producten/api-standaarden-
 - Docker Containers : Beschikbaar op [Docker Hub](https://hub.docker.com/r/openzaakbrug/openzaakbrug/tags) voor eenvoudige installatie van Open Zaakbrug.
 - Installatie voor Ontwikkelaars : Zie de installatie-instructies in de documentatie: [Installing Open Zaakbrug.md](https://sudwest-fryslan.github.io/OpenZaakBrug/docs/Installing%20Open%20Zaakbrug.md).
 - Transitie Ondersteuning en Data Migratie : Ondersteunt de overgang van oude zaaksystemen naar ZGW-zaakregistratie. [Meer details](https://sudwest-fryslan.github.io/OpenZaakBrug/docs/Workings%20of%20Replication.md).
-
-**Berichtenstroom Overzicht**
-Te vinden in: [Flow](https://sudwest-fryslan.github.io/OpenZaakBrug/docs/media/flow.png).
-
-**Aanvullende Documentatie**
-Beschikbaar in de repository: [Open Zaakbrug Docs](https://sudwest-fryslan.github.io/OpenZaakBrug/docs/).
+- Berichtenstroom Overzicht:  [Flow](https://sudwest-fryslan.github.io/OpenZaakBrug/docs/media/flow.png).
+- Beschikbaar in de repository: [Open Zaakbrug Docs](https://sudwest-fryslan.github.io/OpenZaakBrug/docs/).
 
 ### Ondersteunde Applicaties
 De functioneel beheerders van de verschillende backoffice applicaties hebben de vertaler getest en goedgekeurd. De bestaande zaken uit het oude zaaksysteem worden goed gerepliceerd naar het nieuwe systeem, mits de gegevenskwaliteit goed is.
