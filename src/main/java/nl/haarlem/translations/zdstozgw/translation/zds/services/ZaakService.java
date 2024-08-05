@@ -265,6 +265,9 @@ public class ZaakService {
 
 	public void updateZaak(ZgwAuthorization authorization, ZdsZaak zdsWasZaak, ZdsZaak zdsWordtZaak) {
 		log.debug("updateZaak:" + zdsWordtZaak.identificatie);
+		if(zdsWasZaak != null && !zdsWordtZaak.identificatie.equals(zdsWasZaak.identificatie)) {
+			throw new ConverterException("illegal attempt to change the zaak identification from: '" + zdsWasZaak.identificatie + "' to:" + zdsWordtZaak.identificatie);
+		}				
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zdsWordtZaak.identificatie);
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak with identification: '" + zdsWordtZaak.identificatie + "' not found in ZGW");
@@ -801,7 +804,13 @@ public class ZaakService {
 	public ZgwZaakInformatieObject addZaakInformatieObject(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObject doc, String zaakUrl) {
 		var zgwZaakInformatieObject = new ZgwZaakInformatieObject();
 		zgwZaakInformatieObject.setZaak(zaakUrl);
-		zgwZaakInformatieObject.setInformatieobject(doc.getUrl());
+		var documenturl = doc.getUrl();
+		var epevio = this.zgwClient.getDocumentenUrl() + this.zgwClient.getEndpointEnkelvoudiginformatieobject();
+		if(!documenturl.startsWith(epevio)) {
+	        String fileName = epevio + documenturl.substring(documenturl.lastIndexOf('/') + 1);
+			log.warn("drc is changing the url from:" + fileName + " to: " + documenturl);
+		}
+		zgwZaakInformatieObject.setInformatieobject(documenturl);
 		zgwZaakInformatieObject.setTitel(doc.getTitel());
 		return this.zgwClient.addDocumentToZaak(authorization, zgwZaakInformatieObject);
 	}
@@ -1183,9 +1192,12 @@ public class ZaakService {
 	}
 
 	public ZgwEnkelvoudigInformatieObject updateZaakDocument(ZgwAuthorization authorization, String lock, ZdsZaakDocumentInhoud zdsWasInformatieObject, ZdsZaakDocumentInhoud zdsWordtInformatieObject) {
-		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWasInformatieObject.identificatie);
-
-		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWasInformatieObject.identificatie);
+		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWordtInformatieObject.identificatie);
+		if(zdsWasInformatieObject != null && !zdsWordtInformatieObject.identificatie.equals(zdsWasInformatieObject.identificatie)) {
+			throw new ConverterException("illegal attempt to change the document identification from: '" + zdsWasInformatieObject.identificatie + "' to:" + zdsWordtInformatieObject.identificatie);
+		}
+		
+		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWordtInformatieObject.identificatie);
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
 			throw new ConverterException("ZgwEnkelvoudigInformatieObject #: " + zdsWasInformatieObject.identificatie + " has status 'defintief ' and therefore cannot be locked and then changed");
 		}
@@ -1193,7 +1205,7 @@ public class ZaakService {
 
 		// https://github.com/Sudwest-Fryslan/OpenZaakBrug/issues/54
 		// 		Move code to the ModelMapperConfig.java
-		//		Also merge, we shouldnt overwrite the old values this hard
+		//		Also merge, we shouldnt overwrite the old values this hard		
 		var zgwWordtEnkelvoudigInformatieObjectPut = this.modelMapper.map(zdsWordtInformatieObject, ZgwEnkelvoudigInformatieObjectPut.class);
 		zgwWordtEnkelvoudigInformatieObjectPut.bronorganisatie = zgwWasEnkelvoudigInformatieObject.bronorganisatie;
 		zgwWordtEnkelvoudigInformatieObjectPut.informatieobjecttype = zgwWasEnkelvoudigInformatieObject.informatieobjecttype;

@@ -1,132 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="11.0.16" class="java.beans.XMLDecoder">
+<java version="11.0.9" class="java.beans.XMLDecoder">
  <object class="nl.nn.testtool.Report" id="Report0">
   <void property="checkpoints">
    <void method="add">
     <object class="nl.nn.testtool.Checkpoint">
      <void property="message">
-      <string>&lt;SOAP-ENV:Envelope
-							xsi:schemaLocation=&quot;http://www.egem.nl/StUF/sector/zkn/0310
-							zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd&quot;
-							xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;
-							xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot;
-							xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot;
-							xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;
-							xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&#13;
-							&lt;SOAP-ENV:Header/&gt;&#13;
-							&lt;SOAP-ENV:Body&gt;&#13;
-							&lt;ZKN:zakLk01&gt;&#13;
-							&lt;ZKN:stuurgegevens&gt;&#13;
-							&lt;StUF:berichtcode&gt;Lk01&lt;/StUF:berichtcode&gt;&#13;
-							&lt;StUF:zender&gt;&#13;
-							&lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;&#13;
-							&lt;StUF:applicatie&gt;GWS4all&lt;/StUF:applicatie&gt;&#13;
-							&lt;StUF:gebruiker&gt;Gebruiker&lt;/StUF:gebruiker&gt;&#13;
-							&lt;/StUF:zender&gt;&#13;
-							&lt;StUF:ontvanger&gt;&#13;
-							&lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;&#13;
-							&lt;StUF:applicatie&gt;CDR&lt;/StUF:applicatie&gt;&#13;
-							&lt;/StUF:ontvanger&gt;&#13;
-							&lt;StUF:referentienummer&gt;e26f2750-f75e-412a-b549-8f664448c4d3&lt;/StUF:referentienummer&gt;&#13;
-							&lt;StUF:tijdstipBericht&gt;20230103085716809&lt;/StUF:tijdstipBericht&gt;&#13;
-							&lt;StUF:entiteittype&gt;ZAK&lt;/StUF:entiteittype&gt;&#13;
-							&lt;/ZKN:stuurgegevens&gt;&#13;
-							&lt;ZKN:parameters&gt;&#13;
-							&lt;StUF:mutatiesoort&gt;W&lt;/StUF:mutatiesoort&gt;&#13;
-							&lt;StUF:indicatorOvername&gt;V&lt;/StUF:indicatorOvername&gt;&#13;
-							&lt;/ZKN:parameters&gt;&#13;
-							&lt;ZKN:object
-							StUF:sleutelVerzendend=&quot;1900804&quot;
-							StUF:entiteittype=&quot;ZAK&quot;
-							StUF:verwerkingssoort=&quot;W&quot;&gt;&#13;
-							&lt;ZKN:identificatie&gt;1900804&lt;/ZKN:identificatie&gt;&#13;
-							&lt;ZKN:omschrijving&gt;Aanvraag minimaregelingen
-							(Z)&lt;/ZKN:omschrijving&gt;&#13;
-							&lt;ZKN:startdatum&gt;20230103&lt;/ZKN:startdatum&gt;&#13;
-							&lt;ZKN:registratiedatum&gt;20230103&lt;/ZKN:registratiedatum&gt;&#13;
-							&lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot;
-							StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
-							&lt;ZKN:gerelateerde
-							StUF:entiteittype=&quot;ZKT&quot;
-							StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
-							&lt;ZKN:omschrijving&gt;Aanvraag
-							minima&lt;/ZKN:omschrijving&gt;&#13;
-							&lt;ZKN:code&gt;B1026&lt;/ZKN:code&gt;&#13;
-							&lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot;
-							StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
-							&lt;/ZKN:gerelateerde&gt;&#13;
-							&lt;/ZKN:isVan&gt;&#13;
-							&lt;ZKN:leidtTot
-							StUF:entiteittype=&quot;ZAKBSL&quot;
-							StUF:verwerkingssoort=&quot;T&quot;
-							xsi:nil=&quot;true&quot;
-							StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
-							&lt;/ZKN:object&gt;&#13;
-							&lt;ZKN:object
-							StUF:sleutelVerzendend=&quot;1900804&quot;
-							StUF:entiteittype=&quot;ZAK&quot;
-							StUF:verwerkingssoort=&quot;W&quot;&gt;&#13;
-							&lt;ZKN:identificatie&gt;1900804&lt;/ZKN:identificatie&gt;&#13;
-							&lt;ZKN:omschrijving&gt;Aanvraag minimaregelingen
-							(Z)&lt;/ZKN:omschrijving&gt;&#13;
-							&lt;ZKN:resultaat&gt;&#13;
-							&lt;!--&lt;ZKN:omschrijving&gt;Toegekend&lt;/ZKN:omschrijving&gt;--&gt;&#13;
-							&lt;ZKN:omschrijving&gt;Buiten behandeling
-							gesteld&lt;/ZKN:omschrijving&gt;&#13;
-							&lt;/ZKN:resultaat&gt;&#13;
-							&lt;ZKN:startdatum&gt;20230103&lt;/ZKN:startdatum&gt;&#13;
-							&lt;ZKN:registratiedatum&gt;20230103&lt;/ZKN:registratiedatum&gt;&#13;
-							&lt;ZKN:einddatum&gt;20230103&lt;/ZKN:einddatum&gt;&#13;
-							&lt;ZKN:verlenging&gt;&#13;
-							&lt;ZKN:duur&gt;99&lt;/ZKN:duur&gt;&#13;
-							&lt;ZKN:reden&gt;Overig&lt;/ZKN:reden&gt;&#13;
-							&lt;/ZKN:verlenging&gt;&#13;
-							&lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot;
-							StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
-							&lt;ZKN:gerelateerde
-							StUF:entiteittype=&quot;ZKT&quot;
-							StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
-							&lt;ZKN:omschrijving&gt;Aanvraag
-							minima&lt;/ZKN:omschrijving&gt;&#13;
-							&lt;ZKN:code&gt;B1026&lt;/ZKN:code&gt;&#13;
-							&lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot;
-							StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
-							&lt;/ZKN:gerelateerde&gt;&#13;
-							&lt;/ZKN:isVan&gt;&#13;
-							&lt;ZKN:heeft StUF:entiteittype=&quot;ZAKSTT&quot;
-							StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
-							&lt;ZKN:gerelateerde
-							StUF:entiteittype=&quot;STT&quot;
-							StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
-							&lt;ZKN:zkt.code&gt;B1026&lt;/ZKN:zkt.code&gt;&#13;
-							&lt;ZKN:zkt.omschrijving&gt;Aanvraag
-							minima&lt;/ZKN:zkt.omschrijving&gt;&#13;
-							&lt;ZKN:volgnummer&gt;0010&lt;/ZKN:volgnummer&gt;&#13;
-							&lt;ZKN:code&gt;Afgehandeld&lt;/ZKN:code&gt;&#13;
-							&lt;ZKN:omschrijving&gt;Afgehandeld&lt;/ZKN:omschrijving&gt;&#13;
-							&lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot;
-							StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
-							&lt;/ZKN:gerelateerde&gt;&#13;
-							&lt;ZKN:datumStatusGezet&gt;20230103085716838&lt;/ZKN:datumStatusGezet&gt;&#13;
-							&lt;ZKN:isGezetDoor
-							StUF:entiteittype=&quot;ZAKSTTBTR&quot;
-							StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
-							&lt;ZKN:gerelateerde&gt;&#13;
-							&lt;ZKN:medewerker StUF:entiteittype=&quot;MDW&quot;
-							StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
-							&lt;ZKN:identificatie&gt;012345678901234567890123&lt;/ZKN:identificatie&gt;&#13;
-							&lt;ZKN:achternaam&gt;G.
-							Bruiker&lt;/ZKN:achternaam&gt;&#13;
-							&lt;ZKN:voorletters xsi:nil=&quot;true&quot;
-							StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
-							&lt;/ZKN:medewerker&gt;&#13;
-							&lt;/ZKN:gerelateerde&gt;&#13;
-							&lt;/ZKN:isGezetDoor&gt;&#13;
-							&lt;/ZKN:heeft&gt;&#13;
-							&lt;/ZKN:object&gt;&#13;
-							&lt;/ZKN:zakLk01&gt;&#13;
-							&lt;/SOAP-ENV:Body&gt;&#13;
-							&lt;/SOAP-ENV:Envelope&gt;</string>
+      <string>&lt;SOAP-ENV:Envelope xsi:schemaLocation=&quot;http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd&quot; xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot; xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&#13;
+   &lt;SOAP-ENV:Header/&gt;&#13;
+   &lt;SOAP-ENV:Body&gt;&#13;
+      &lt;ZKN:zakLk01&gt;&#13;
+         &lt;ZKN:stuurgegevens&gt;&#13;
+            &lt;StUF:berichtcode&gt;Lk01&lt;/StUF:berichtcode&gt;&#13;
+            &lt;StUF:zender&gt;&#13;
+               &lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;&#13;
+               &lt;StUF:applicatie&gt;GWS4all&lt;/StUF:applicatie&gt;&#13;
+               &lt;StUF:gebruiker&gt;Gebruiker&lt;/StUF:gebruiker&gt;&#13;
+            &lt;/StUF:zender&gt;&#13;
+            &lt;StUF:ontvanger&gt;&#13;
+               &lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;&#13;
+               &lt;StUF:applicatie&gt;CDR&lt;/StUF:applicatie&gt;&#13;
+            &lt;/StUF:ontvanger&gt;&#13;
+            &lt;StUF:referentienummer&gt;e26f2750-f75e-412a-b549-8f664448c4d3&lt;/StUF:referentienummer&gt;&#13;
+            &lt;StUF:tijdstipBericht&gt;20230103085716809&lt;/StUF:tijdstipBericht&gt;&#13;
+            &lt;StUF:entiteittype&gt;ZAK&lt;/StUF:entiteittype&gt;&#13;
+         &lt;/ZKN:stuurgegevens&gt;&#13;
+         &lt;ZKN:parameters&gt;&#13;
+            &lt;StUF:mutatiesoort&gt;W&lt;/StUF:mutatiesoort&gt;&#13;
+            &lt;StUF:indicatorOvername&gt;V&lt;/StUF:indicatorOvername&gt;&#13;
+         &lt;/ZKN:parameters&gt;&#13;
+         &lt;ZKN:object StUF:sleutelVerzendend=&quot;1900804&quot; StUF:entiteittype=&quot;ZAK&quot; StUF:verwerkingssoort=&quot;W&quot;&gt;&#13;
+            &lt;ZKN:identificatie&gt;1900804&lt;/ZKN:identificatie&gt;&#13;
+            &lt;ZKN:omschrijving&gt;Aanvraag minimaregelingen (Z)&lt;/ZKN:omschrijving&gt;&#13;
+            &lt;ZKN:startdatum&gt;20230103&lt;/ZKN:startdatum&gt;&#13;
+            &lt;ZKN:registratiedatum&gt;20230103&lt;/ZKN:registratiedatum&gt;&#13;
+            &lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
+               &lt;ZKN:gerelateerde StUF:entiteittype=&quot;ZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
+                  &lt;ZKN:omschrijving&gt;Aanvraag minima&lt;/ZKN:omschrijving&gt;&#13;
+                  &lt;ZKN:code&gt;B1026&lt;/ZKN:code&gt;&#13;
+                  &lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
+               &lt;/ZKN:gerelateerde&gt;&#13;
+            &lt;/ZKN:isVan&gt;&#13;
+            &lt;ZKN:leidtTot StUF:entiteittype=&quot;ZAKBSL&quot; StUF:verwerkingssoort=&quot;T&quot; xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
+         &lt;/ZKN:object&gt;&#13;
+         &lt;ZKN:object StUF:sleutelVerzendend=&quot;1900804&quot; StUF:entiteittype=&quot;ZAK&quot; StUF:verwerkingssoort=&quot;W&quot;&gt;&#13;
+            &lt;ZKN:identificatie&gt;1900804&lt;/ZKN:identificatie&gt;&#13;
+            &lt;ZKN:omschrijving&gt;Aanvraag minimaregelingen (Z)&lt;/ZKN:omschrijving&gt;&#13;
+            &lt;ZKN:resultaat&gt;&#13;
+               &lt;!--&lt;ZKN:omschrijving&gt;Toegekend&lt;/ZKN:omschrijving&gt;--&gt;&#13;
+               &lt;ZKN:omschrijving&gt;Buiten behandeling gesteld&lt;/ZKN:omschrijving&gt;&#13;
+            &lt;/ZKN:resultaat&gt;&#13;
+            &lt;ZKN:startdatum&gt;20230103&lt;/ZKN:startdatum&gt;&#13;
+            &lt;ZKN:registratiedatum&gt;20230103&lt;/ZKN:registratiedatum&gt;&#13;
+            &lt;ZKN:einddatum&gt;20230103&lt;/ZKN:einddatum&gt;&#13;
+            &lt;ZKN:verlenging&gt;&#13;
+               &lt;ZKN:duur&gt;99&lt;/ZKN:duur&gt;&#13;
+               &lt;ZKN:reden&gt;Overig&lt;/ZKN:reden&gt;&#13;
+            &lt;/ZKN:verlenging&gt;&#13;
+            &lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
+               &lt;ZKN:gerelateerde StUF:entiteittype=&quot;ZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
+                  &lt;ZKN:omschrijving&gt;Aanvraag minima&lt;/ZKN:omschrijving&gt;&#13;
+                  &lt;ZKN:code&gt;B1026&lt;/ZKN:code&gt;&#13;
+                  &lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
+               &lt;/ZKN:gerelateerde&gt;&#13;
+            &lt;/ZKN:isVan&gt;&#13;
+            &lt;ZKN:heeft StUF:entiteittype=&quot;ZAKSTT&quot; StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
+               &lt;ZKN:gerelateerde StUF:entiteittype=&quot;STT&quot; StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
+                  &lt;ZKN:zkt.code&gt;B1026&lt;/ZKN:zkt.code&gt;&#13;
+                  &lt;ZKN:zkt.omschrijving&gt;Aanvraag minima&lt;/ZKN:zkt.omschrijving&gt;&#13;
+                  &lt;ZKN:volgnummer&gt;0010&lt;/ZKN:volgnummer&gt;&#13;
+                  &lt;ZKN:code&gt;Afgehandeld&lt;/ZKN:code&gt;&#13;
+                  &lt;ZKN:omschrijving&gt;Afgehandeld&lt;/ZKN:omschrijving&gt;&#13;
+                  &lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
+               &lt;/ZKN:gerelateerde&gt;&#13;
+               &lt;ZKN:datumStatusGezet&gt;20230103085716838&lt;/ZKN:datumStatusGezet&gt;&#13;
+               &lt;ZKN:isGezetDoor StUF:entiteittype=&quot;ZAKSTTBTR&quot; StUF:verwerkingssoort=&quot;T&quot;&gt;&#13;
+                  &lt;ZKN:gerelateerde&gt;&#13;
+                     &lt;ZKN:medewerker StUF:entiteittype=&quot;MDW&quot; StUF:verwerkingssoort=&quot;I&quot;&gt;&#13;
+                        &lt;ZKN:identificatie&gt;012345678901234567890123&lt;/ZKN:identificatie&gt;&#13;
+                        &lt;ZKN:achternaam&gt;G. Bruiker&lt;/ZKN:achternaam&gt;&#13;
+                        &lt;ZKN:voorletters xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&gt;&#13;
+                     &lt;/ZKN:medewerker&gt;&#13;
+                  &lt;/ZKN:gerelateerde&gt;&#13;
+               &lt;/ZKN:isGezetDoor&gt;&#13;
+            &lt;/ZKN:heeft&gt;&#13;
+         &lt;/ZKN:object&gt;&#13;
+      &lt;/ZKN:zakLk01&gt;&#13;
+   &lt;/SOAP-ENV:Body&gt;&#13;
+&lt;/SOAP-ENV:Envelope&gt;</string>
      </void>
      <void property="name">
       <string>Translate updateZaak_Lk01</string>
@@ -138,7 +98,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>1</int>
@@ -163,7 +123,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -188,7 +148,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -213,7 +173,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -238,7 +198,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -251,8 +211,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>
-							http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01</string>
+      <string>http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01</string>
      </void>
      <void property="name">
       <string>soapAction</string>
@@ -264,7 +223,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>4</int>
@@ -277,7 +236,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d09</string>
+      <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f7e</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -289,7 +248,7 @@
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>6</int>
@@ -302,51 +261,1620 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND &quot;Could not load a convertor for path: &apos;translate/generic/zds/OntvangAsynchroon&apos; with soapaction: &apos;
-							http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
-available services:
-	path: &apos;./translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
-	path: &apos;./translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01&apos;
-	path: &apos;./translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
-	path: &apos;./translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02&apos;
-	path: &apos;./translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/voegZaakdocumentToe_Lk01&apos;
-	path: &apos;./translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/maakZaakdocument_Lk01&apos;
-	path: &apos;./translate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefLijstZaakdocumenten_Lv01&apos;
-	path: &apos;./translate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01&apos;
-	path: &apos;./translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/actualiseerZaakstatus_Lk01&apos;
-	path: &apos;./translate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01&apos;
-	path: &apos;./translate/generic/stufzkn/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/zakLv01&apos;
-	path: &apos;./translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentbewerken_Di02&apos;
-	path: &apos;./translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaakdocument_Di02&apos;
-	path: &apos;./translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/cancelCheckout_Di02&apos;
-	path: &apos;./proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
-	path: &apos;./proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01&apos;
-	path: &apos;./proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
-	path: &apos;./proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02&apos;
-	path: &apos;./proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/voegZaakdocumentToe_Lk01&apos;
-	path: &apos;./proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/maakZaakdocument_Lk01&apos;
-	path: &apos;./proxy/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefLijstZaakdocumenten_Lv01&apos;
-	path: &apos;./proxy/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01&apos;
-	path: &apos;./proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/actualiseerZaakstatus_Lk01&apos;
-	path: &apos;./proxy/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01&apos;
-	path: &apos;./proxy/generic/stufzkn/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/zakLv01&apos;
-	path: &apos;./proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentbewerken_Di02&apos;
-	path: &apos;./proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaakdocument_Di02&apos;
-	path: &apos;./proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/cancelCheckout_Di02&apos;
-	path: &apos;./replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
-	path: &apos;./replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01&apos;
-	path: &apos;./replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
-	path: &apos;./replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02&apos;
-	path: &apos;./replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/voegZaakdocumentToe_Lk01&apos;
-	path: &apos;./replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/maakZaakdocument_Lk01&apos;
-	path: &apos;./replicate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefLijstZaakdocumenten_Lv01&apos;
-	path: &apos;./replicate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01&apos;
-	path: &apos;./replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/actualiseerZaakstatus_Lk01&apos;
-	path: &apos;./replicate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01&apos;
-	path: &apos;./replicate/generic/stufzkn/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/zakLv01&apos;
-	path: &apos;./replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentbewerken_Di02&apos;
-	path: &apos;./replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaakdocument_Di02&apos;
-	path: &apos;./translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/cancelCheckout_Di02&apos;&quot;</string>
+      <string>nl.haarlem.translations.zdstozgw.converter.impl.translate.UpdateZaakTranslator</string>
+     </void>
+     <void property="name">
+      <string>converter</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>nl.haarlem.translations.zdstozgw.requesthandler.impl.LoggingRequestHandler</string>
+     </void>
+     <void property="name">
+      <string>handler</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>translate/generic/zds/OntvangAsynchroon</string>
+     </void>
+     <void property="name">
+      <string>path</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/zaken/api/v1/zaken?identificatie=1900804</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>1900804</string>
+     </void>
+     <void property="name">
+      <string>Parameter identificatie</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;count&quot;:1,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,&quot;uuid&quot;:&quot;11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,&quot;identificatie&quot;:&quot;1900804&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;registratiedatum&quot;:&quot;2023-01-03&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2023-01-03&quot;,&quot;einddatum&quot;:null,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;Overig&quot;,&quot;duur&quot;:&quot;P99D&quot;},&quot;opschorting&quot;:{&quot;indicatie&quot;:true,&quot;reden&quot;:&quot;niet tijdig verstrekken inform&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:&quot;http://localhost:8000/zaken/api/v1/statussen/f3af05c4-ce90-44ba-bfab-c8cd1566e727&quot;,&quot;kenmerken&quot;:[{&quot;kenmerk&quot;:&quot;273846&quot;,&quot;bron&quot;:&quot;GWS4all&quot;}],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:null,&quot;resultaat&quot;:null,&quot;opdrachtgevendeOrganisatie&quot;:&quot;&quot;}]}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>GET to: http://localhost:8000/zaken/api/v1/zaken?identificatie=1900804 took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;identificatie&quot;:&quot;B1026&quot;,&quot;omschrijving&quot;:&quot;Minimaregeling aanvraag&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Minimaregeling aanvraag&quot;,&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;doel&quot;:&quot;Het beoordelen van een aanvraag minimaregelingen&quot;,&quot;aanleiding&quot;:&quot;Dit werkproces wordt extern getriggerd door een inkomende aanvraag.&quot;,&quot;toelichting&quot;:&quot;Dit werkproces betreft het beoordelen van een aanvraag voor een minimaregeling. Een minimaregeling is een inkomensondersteunende voorziening voor mensen met een inkomen dat niet hoger is dan 110% van het sociaal minimum. De gemeente kan deze (gedeeltelijke) vergoeding toekennen voor kosten van witgoedapparatuur, kosten voor kinderen en kosten in verband met ouderdom, een handicap of chronische ziekte. Zie voor de minimaregeling voor de kosten in verband met een ziektekostenverzekering werkproces B1261 &apos;Collectieve aanvullende zorgverzekering&apos;.&quot;,&quot;indicatieInternOfExtern&quot;:&quot;extern&quot;,&quot;handelingInitiator&quot;:&quot;Aanvragen&quot;,&quot;onderwerp&quot;:&quot;Minimaregeling&quot;,&quot;handelingBehandelaar&quot;:&quot;Beoordelen&quot;,&quot;doorlooptijd&quot;:null,&quot;servicenorm&quot;:null,&quot;opschortingEnAanhoudingMogelijk&quot;:true,&quot;verlengingMogelijk&quot;:false,&quot;verlengingstermijn&quot;:null,&quot;trefwoorden&quot;:[&quot;Minimaregeling&quot;],&quot;publicatieIndicatie&quot;:false,&quot;publicatietekst&quot;:&quot;&quot;,&quot;verantwoordingsrelatie&quot;:[],&quot;productenOfDiensten&quot;:[&quot;https://referentielijsten-api.vng.cloud/api/v1/procestypen/77453a2e-9c1a-4930-a96a-52aaeb26a288&quot;],&quot;selectielijstProcestype&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/procestypen/f4603775-5a08-4829-85c8-28017dfeee1f&quot;,&quot;referentieproces&quot;:{&quot;naam&quot;:&quot;Behandelen verzoek ondersteuningsproduct&quot;,&quot;link&quot;:&quot;https://www.gemmaonline.nl/index.php/GEMMA2/0.9/id-1b8adc39-0288-4f7a-a0b9-c53ad4e348f5&quot;},&quot;catalogus&quot;:&quot;http://localhost:8000/catalogi/api/v1/catalogussen/40bbcf78-2aa5-457c-8a3f-01c038b01ca8&quot;,&quot;statustypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/statustypen/eeb07e71-6726-49ec-a57f-62db2413b5c0&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/58d6abe7-b9bd-4f31-a347-cb00981086e3&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/bccf20b4-1fef-4ce4-8d12-00624b1279d8&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/840f1242-27fd-4b1b-9d21-08d8b7b9b8ee&quot;,&quot;http://localhost:8000/catalogi/api/v1/statustypen/73f8d573-24f8-46a9-8059-92955854305e&quot;],&quot;resultaattypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b9ee71cd-e743-4d13-90e9-833050516e3c&quot;,&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b1fc2f04-cd0f-4dee-9350-40eec812cd39&quot;,&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/c54b71d3-c14d-415a-9801-a87399601c29&quot;,&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/e9fd59b5-96a0-4ea7-8d9b-9b5d111b1bcb&quot;],&quot;eigenschappen&quot;:[],&quot;informatieobjecttypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/informatieobjecttypen/3ace70d3-07de-4611-b2b1-b8ae68b5f241&quot;],&quot;roltypen&quot;:[&quot;http://localhost:8000/catalogi/api/v1/roltypen/6000f63d-4771-4765-b182-f5017c2d224a&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/623bf10b-179c-462e-a5cc-be236b0f582b&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/51b37112-14e9-45a1-b320-ab4a291c4a65&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/44f8271c-2229-45c5-a544-510812adfc47&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/312b887b-e019-4ca3-9ae5-209182fe059c&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/9ee7d3d8-1fec-4bc9-9931-7962614ae75f&quot;,&quot;http://localhost:8000/catalogi/api/v1/roltypen/460bb791-fe6a-44e7-a767-c0d7556b6292&quot;],&quot;besluittypen&quot;:[],&quot;deelzaaktypen&quot;:[],&quot;gerelateerdeZaaktypen&quot;:[],&quot;beginGeldigheid&quot;:&quot;2022-10-30&quot;,&quot;eindeGeldigheid&quot;:null,&quot;versiedatum&quot;:&quot;2022-10-30&quot;,&quot;concept&quot;:false}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>GET to: http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>{
+  &quot;betalingsindicatieWeergave&quot;: &quot;&quot;,
+  &quot;deelzaken&quot;: [],
+  &quot;eigenschappen&quot;: [],
+  &quot;status&quot;: &quot;http://localhost:8000/zaken/api/v1/statussen/f3af05c4-ce90-44ba-bfab-c8cd1566e727&quot;,
+  &quot;url&quot;: &quot;http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,
+  &quot;uuid&quot;: &quot;11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,
+  &quot;identificatie&quot;: &quot;1900804&quot;,
+  &quot;bronorganisatie&quot;: &quot;823288444&quot;,
+  &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
+  &quot;toelichting&quot;: &quot;&quot;,
+  &quot;zaaktype&quot;: &quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,
+  &quot;registratiedatum&quot;: &quot;2023-01-03&quot;,
+  &quot;verantwoordelijkeOrganisatie&quot;: &quot;823288444&quot;,
+  &quot;startdatum&quot;: &quot;2023-01-03&quot;,
+  &quot;einddatumGepland&quot;: &quot;2021-01-01&quot;,
+  &quot;communicatiekanaal&quot;: &quot;&quot;,
+  &quot;productenOfDiensten&quot;: [],
+  &quot;vertrouwelijkheidaanduiding&quot;: &quot;vertrouwelijk&quot;,
+  &quot;betalingsindicatie&quot;: &quot;&quot;,
+  &quot;verlenging&quot;: {
+    &quot;reden&quot;: &quot;Overig&quot;,
+    &quot;duur&quot;: &quot;P99D&quot;
+  },
+  &quot;opschorting&quot;: {
+    &quot;indicatie&quot;: true,
+    &quot;reden&quot;: &quot;niet tijdig verstrekken inform&quot;
+  },
+  &quot;selectielijstklasse&quot;: &quot;&quot;,
+  &quot;relevanteAndereZaken&quot;: [],
+  &quot;kenmerken&quot;: [
+    {
+      &quot;kenmerk&quot;: &quot;273846&quot;,
+      &quot;bron&quot;: &quot;GWS4all&quot;
+    }
+  ],
+  &quot;archiefnominatie&quot;: &quot;vernietigen&quot;,
+  &quot;archiefstatus&quot;: &quot;nog_te_archiveren&quot;
+}</string>
+     </void>
+     <void property="name">
+      <string>ModelMapper ZgwZaak-&gt;ZdsZaak</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{
+  &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
+  &quot;toelichting&quot;: &quot;&quot;,
+  &quot;kenmerk&quot;: [
+    {
+      &quot;kenmerk&quot;: &quot;273846&quot;,
+      &quot;bron&quot;: &quot;GWS4all&quot;
+    }
+  ],
+  &quot;startdatum&quot;: &quot;20230103&quot;,
+  &quot;registratiedatum&quot;: &quot;20230103&quot;,
+  &quot;einddatumGepland&quot;: &quot;20210101&quot;,
+  &quot;opschorting&quot;: {
+    &quot;indicatie&quot;: &quot;J&quot;,
+    &quot;reden&quot;: &quot;niet tijdig verstrekken inform&quot;
+  },
+  &quot;verlenging&quot;: {
+    &quot;duur&quot;: &quot;P99D&quot;,
+    &quot;reden&quot;: &quot;Overig&quot;
+  },
+  &quot;archiefnominatie&quot;: &quot;N&quot;,
+  &quot;entiteittype&quot;: &quot;ZAK&quot;,
+  &quot;identificatie&quot;: &quot;1900804&quot;
+}</string>
+     </void>
+     <void property="name">
+      <string>ModelMapper ZgwZaak-&gt;ZdsZaak</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: kenmerk does not match (CHANGED) stored-value:&apos;[ZdsKenmerk(kenmerk=273846, bron=GWS4all)]&apos; , was-value:&apos;null&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: einddatumGepland does not match (CHANGED) stored-value:&apos;20210101&apos; , was-value:&apos;null&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: verlenging does not match (CHANGED) stored-value:&apos;ZdsVerlenging(duur=P99D, reden=Overig)&apos; , was-value:&apos;null&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: archiefnominatie does not match (CHANGED) stored-value:&apos;N&apos; , was-value:&apos;null&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: toelichting does not match (CHANGED) stored-value:&apos;&apos; , was-value:&apos;null&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: opschorting does not match (CHANGED) stored-value:&apos;ZdsOpschorting(indicatie=J, reden=niet tijdig verstrekken inform)&apos; , was-value:&apos;null&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>The field: isVan does not match (NEW) stored-value:&apos;null&apos; , was-value:&apos;ZdsVan(entiteittype=ZAKZKT, gerelateerde=ZdsGerelateerde(entiteittype=ZKT, identificatie=null, verwerkingssoort=I, zktCode=null, zktOmschrijving=null, omschrijving=Aanvraag minima, code=B1026, ingangsdatumObject=, volgnummer=null, medewerker=null, natuurlijkPersoon=null, nietNatuurlijkPersoon=null, vestiging=null))&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>{
+  &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
+  &quot;resultaat&quot;: {
+    &quot;omschrijving&quot;: &quot;Buiten behandeling gesteld&quot;
+  },
+  &quot;startdatum&quot;: &quot;20230103&quot;,
+  &quot;registratiedatum&quot;: &quot;20230103&quot;,
+  &quot;einddatum&quot;: &quot;20230103&quot;,
+  &quot;verlenging&quot;: {
+    &quot;duur&quot;: &quot;99&quot;,
+    &quot;reden&quot;: &quot;Overig&quot;
+  },
+  &quot;isVan&quot;: {
+    &quot;entiteittype&quot;: &quot;ZAKZKT&quot;,
+    &quot;gerelateerde&quot;: {
+      &quot;entiteittype&quot;: &quot;ZKT&quot;,
+      &quot;verwerkingssoort&quot;: &quot;I&quot;,
+      &quot;omschrijving&quot;: &quot;Aanvraag minima&quot;,
+      &quot;code&quot;: &quot;B1026&quot;,
+      &quot;ingangsdatumObject&quot;: &quot;&quot;
+    }
+  },
+  &quot;heeft&quot;: [
+    {
+      &quot;entiteittype&quot;: &quot;ZAKSTT&quot;,
+      &quot;gerelateerde&quot;: {
+        &quot;entiteittype&quot;: &quot;STT&quot;,
+        &quot;verwerkingssoort&quot;: &quot;T&quot;,
+        &quot;zktCode&quot;: &quot;B1026&quot;,
+        &quot;zktOmschrijving&quot;: &quot;Aanvraag minima&quot;,
+        &quot;omschrijving&quot;: &quot;Afgehandeld&quot;,
+        &quot;code&quot;: &quot;Afgehandeld&quot;,
+        &quot;ingangsdatumObject&quot;: &quot;&quot;,
+        &quot;volgnummer&quot;: &quot;0010&quot;
+      },
+      &quot;datumStatusGezet&quot;: &quot;20230103085716838&quot;,
+      &quot;isGezetDoor&quot;: {
+        &quot;entiteittype&quot;: &quot;ZAKSTTBTR&quot;,
+        &quot;gerelateerde&quot;: {
+          &quot;medewerker&quot;: {
+            &quot;entiteittype&quot;: &quot;MDW&quot;,
+            &quot;identificatie&quot;: &quot;012345678901234567890123&quot;,
+            &quot;achternaam&quot;: &quot;G. Bruiker&quot;,
+            &quot;voorletters&quot;: &quot;&quot;
+          }
+        }
+      }
+    }
+  ],
+  &quot;entiteittype&quot;: &quot;ZAK&quot;,
+  &quot;identificatie&quot;: &quot;1900804&quot;
+}</string>
+     </void>
+     <void property="name">
+      <string>ModelMapper ZdsZaak-&gt;ZgwZaakPut</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{
+  &quot;identificatie&quot;: &quot;1900804&quot;,
+  &quot;omschrijving&quot;: &quot;Aanvraag minimaregelingen (Z)&quot;,
+  &quot;registratiedatum&quot;: &quot;2023-01-03&quot;,
+  &quot;startdatum&quot;: &quot;2023-01-03&quot;,
+  &quot;verlenging&quot;: {
+    &quot;reden&quot;: &quot;Overig&quot;,
+    &quot;duur&quot;: &quot;99&quot;
+  }
+}</string>
+     </void>
+     <void property="name">
+      <string>ModelMapper ZdsZaak-&gt;ZgwZaakPut</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>{&quot;identificatie&quot;:&quot;1900804&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;registratiedatum&quot;:&quot;2023-01-03&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2023-01-03&quot;,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;Overig&quot;,&quot;duur&quot;:&quot;P99D&quot;},&quot;opschorting&quot;:{&quot;indicatie&quot;:true,&quot;reden&quot;:&quot;niet tijdig verstrekken inform&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;relevanteAndereZaken&quot;:[],&quot;kenmerken&quot;:[{&quot;kenmerk&quot;:&quot;273846&quot;,&quot;bron&quot;:&quot;GWS4all&quot;}],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient PUT</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,&quot;uuid&quot;:&quot;11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,&quot;identificatie&quot;:&quot;1900804&quot;,&quot;bronorganisatie&quot;:&quot;823288444&quot;,&quot;omschrijving&quot;:&quot;Aanvraag minimaregelingen (Z)&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;registratiedatum&quot;:&quot;2023-01-03&quot;,&quot;verantwoordelijkeOrganisatie&quot;:&quot;823288444&quot;,&quot;startdatum&quot;:&quot;2023-01-03&quot;,&quot;einddatum&quot;:null,&quot;einddatumGepland&quot;:&quot;2021-01-01&quot;,&quot;uiterlijkeEinddatumAfdoening&quot;:null,&quot;publicatiedatum&quot;:null,&quot;communicatiekanaal&quot;:&quot;&quot;,&quot;productenOfDiensten&quot;:[],&quot;vertrouwelijkheidaanduiding&quot;:&quot;vertrouwelijk&quot;,&quot;betalingsindicatie&quot;:&quot;&quot;,&quot;betalingsindicatieWeergave&quot;:&quot;&quot;,&quot;laatsteBetaaldatum&quot;:null,&quot;zaakgeometrie&quot;:null,&quot;verlenging&quot;:{&quot;reden&quot;:&quot;Overig&quot;,&quot;duur&quot;:&quot;P99D&quot;},&quot;opschorting&quot;:{&quot;indicatie&quot;:true,&quot;reden&quot;:&quot;niet tijdig verstrekken inform&quot;},&quot;selectielijstklasse&quot;:&quot;&quot;,&quot;hoofdzaak&quot;:null,&quot;deelzaken&quot;:[],&quot;relevanteAndereZaken&quot;:[],&quot;eigenschappen&quot;:[],&quot;status&quot;:&quot;http://localhost:8000/zaken/api/v1/statussen/f3af05c4-ce90-44ba-bfab-c8cd1566e727&quot;,&quot;kenmerken&quot;:[{&quot;kenmerk&quot;:&quot;273846&quot;,&quot;bron&quot;:&quot;GWS4all&quot;}],&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefstatus&quot;:&quot;nog_te_archiveren&quot;,&quot;archiefactiedatum&quot;:null,&quot;resultaat&quot;:null,&quot;opdrachtgevendeOrganisatie&quot;:&quot;&quot;}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient PUT</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>PUT to: http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be</string>
+     </void>
+     <void property="name">
+      <string>Parameter zaaktype</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;count&quot;:5,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/73f8d573-24f8-46a9-8059-92955854305e&quot;,&quot;omschrijving&quot;:&quot;Geaccepteerd&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Geaccepteerd&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:1,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/840f1242-27fd-4b1b-9d21-08d8b7b9b8ee&quot;,&quot;omschrijving&quot;:&quot;In behandeling genomen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;In behandeling genomen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:2,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/bccf20b4-1fef-4ce4-8d12-00624b1279d8&quot;,&quot;omschrijving&quot;:&quot;Ingetrokken&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ingetrokken&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:3,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/58d6abe7-b9bd-4f31-a347-cb00981086e3&quot;,&quot;omschrijving&quot;:&quot;Ontvangen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ontvangen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:4,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/eeb07e71-6726-49ec-a57f-62db2413b5c0&quot;,&quot;omschrijving&quot;:&quot;Afgehandeld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgehandeld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:5,&quot;isEindstatus&quot;:true,&quot;informeren&quot;:false}]}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d</string>
+     </void>
+     <void property="name">
+      <string>Parameter zaak</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;count&quot;:1,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/zaken/api/v1/statussen/f3af05c4-ce90-44ba-bfab-c8cd1566e727&quot;,&quot;uuid&quot;:&quot;f3af05c4-ce90-44ba-bfab-c8cd1566e727&quot;,&quot;zaak&quot;:&quot;http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d&quot;,&quot;statustype&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/58d6abe7-b9bd-4f31-a347-cb00981086e3&quot;,&quot;datumStatusGezet&quot;:&quot;2023-01-03T07:52:07.800000Z&quot;,&quot;statustoelichting&quot;:&quot;Ontvangen&quot;}]}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>GET to: http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be</string>
+     </void>
+     <void property="name">
+      <string>Parameter zaaktype</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;count&quot;:5,&quot;next&quot;:null,&quot;previous&quot;:null,&quot;results&quot;:[{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/73f8d573-24f8-46a9-8059-92955854305e&quot;,&quot;omschrijving&quot;:&quot;Geaccepteerd&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Geaccepteerd&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:1,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/840f1242-27fd-4b1b-9d21-08d8b7b9b8ee&quot;,&quot;omschrijving&quot;:&quot;In behandeling genomen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;In behandeling genomen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:2,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/bccf20b4-1fef-4ce4-8d12-00624b1279d8&quot;,&quot;omschrijving&quot;:&quot;Ingetrokken&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ingetrokken&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:3,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/58d6abe7-b9bd-4f31-a347-cb00981086e3&quot;,&quot;omschrijving&quot;:&quot;Ontvangen&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Ontvangen&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:4,&quot;isEindstatus&quot;:false,&quot;informeren&quot;:false},{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/statustypen/eeb07e71-6726-49ec-a57f-62db2413b5c0&quot;,&quot;omschrijving&quot;:&quot;Afgehandeld&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgehandeld&quot;,&quot;statustekst&quot;:&quot;&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;volgnummer&quot;:5,&quot;isEindstatus&quot;:true,&quot;informeren&quot;:false}]}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>GET to: http://localhost:8000/catalogi/api/v1/statustypen?zaaktype=http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>Zaakstatus verschil in zgw-statustype met omschrijving: Afgehandeld met volgnummer #5 en het meegestuurde omschrijving:&apos;Afgehandeld&apos; volgnummer: &apos;10&apos;</string>
+     </void>
+     <void property="name">
+      <string>Warning</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>{
+  &quot;entiteittype&quot;: &quot;ZAKSTT&quot;,
+  &quot;gerelateerde&quot;: {
+    &quot;entiteittype&quot;: &quot;STT&quot;,
+    &quot;verwerkingssoort&quot;: &quot;T&quot;,
+    &quot;zktCode&quot;: &quot;B1026&quot;,
+    &quot;zktOmschrijving&quot;: &quot;Aanvraag minima&quot;,
+    &quot;omschrijving&quot;: &quot;Afgehandeld&quot;,
+    &quot;code&quot;: &quot;Afgehandeld&quot;,
+    &quot;ingangsdatumObject&quot;: &quot;&quot;,
+    &quot;volgnummer&quot;: &quot;0010&quot;
+  },
+  &quot;datumStatusGezet&quot;: &quot;20230103085716838&quot;,
+  &quot;isGezetDoor&quot;: {
+    &quot;entiteittype&quot;: &quot;ZAKSTTBTR&quot;,
+    &quot;gerelateerde&quot;: {
+      &quot;medewerker&quot;: {
+        &quot;entiteittype&quot;: &quot;MDW&quot;,
+        &quot;identificatie&quot;: &quot;012345678901234567890123&quot;,
+        &quot;achternaam&quot;: &quot;G. Bruiker&quot;,
+        &quot;voorletters&quot;: &quot;&quot;
+      }
+    }
+  }
+}</string>
+     </void>
+     <void property="name">
+      <string>ModelMapper ZdsHeeft-&gt;ZgwStatus</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{
+  &quot;datumStatusGezet&quot;: &quot;2023-01-03T07:52:16.830000Z&quot;
+}</string>
+     </void>
+     <void property="name">
+      <string>ModelMapper ZdsHeeft-&gt;ZgwStatus</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.debug.ModelMapperAdvice</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d</string>
+     </void>
+     <void property="name">
+      <string>url</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d</string>
+     </void>
+     <void property="name">
+      <string>Parameter zaak</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>2</int>
+     </void>
+     <void property="message">
+      <string>{&quot;url&quot;:&quot;http://localhost:8000/catalogi/api/v1/resultaattypen/b9ee71cd-e743-4d13-90e9-833050516e3c&quot;,&quot;zaaktype&quot;:&quot;http://localhost:8000/catalogi/api/v1/zaaktypen/b65cc2bb-8565-4dae-84ef-c54464b189be&quot;,&quot;omschrijving&quot;:&quot;Afgewezen&quot;,&quot;resultaattypeomschrijving&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/resultaattypeomschrijvingen/e6a0c939-3404-45b0-88e3-76c94fb80ea7&quot;,&quot;omschrijvingGeneriek&quot;:&quot;Afgewezen&quot;,&quot;selectielijstklasse&quot;:&quot;https://selectielijst.openzaak.nl/api/v1/resultaten/9debb6c9-0f45-4825-be3b-140f2f7466a6&quot;,&quot;toelichting&quot;:&quot;&quot;,&quot;archiefnominatie&quot;:&quot;vernietigen&quot;,&quot;archiefactietermijn&quot;:&quot;P1826D&quot;,&quot;brondatumArchiefprocedure&quot;:{&quot;afleidingswijze&quot;:&quot;afgehandeld&quot;,&quot;datumkenmerk&quot;:&quot;&quot;,&quot;einddatumBekend&quot;:false,&quot;objecttype&quot;:&quot;&quot;,&quot;registratie&quot;:&quot;&quot;,&quot;procestermijn&quot;:null}}</string>
+     </void>
+     <void property="name">
+      <string>ZGWClient GET</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="stubbed">
+      <boolean>true</boolean>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>2</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>GET to: http://localhost:8000/zaken/api/v1/statussen?zaak=http://localhost:8000/zaken/api/v1/zaken/11ebbb97-f3a0-4582-81a6-6cad4a65628d took 0 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.translation.zgw.client.ZGWClient</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="encoding">
+      <string>XMLEncoder</string>
+     </void>
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;java version=&quot;11.0.9&quot; class=&quot;java.beans.XMLDecoder&quot;&gt;
+ &lt;int&gt;500&lt;/int&gt;
+&lt;/java&gt;
+</string>
+     </void>
+     <void property="messageClassName">
+      <string>java.lang.Integer</string>
+     </void>
+     <void property="name">
+      <string>statusCode</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>5</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>zaakidentificatie:1900804</string>
+     </void>
+     <void property="name">
+      <string>kenmerk</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>5</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01 with kenmerk: &apos;zaakidentificatie:1900804&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 399 milliseconds</string>
+     </void>
+     <void property="name">
+      <string>Total duration</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-18</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;SOAP-ENV:Envelope xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&#13;
+  &lt;SOAP-ENV:Header/&gt;&#13;
+  &lt;SOAP-ENV:Body&gt;&#13;
+    &lt;SOAP-ENV:Fault&gt;&#13;
+      &lt;faultcode xmlns:env=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;env:Receiver&lt;/faultcode&gt;&#13;
+      &lt;faultstring&gt;java.lang.NullPointerException&lt;/faultstring&gt;&#13;
+      &lt;detail&gt;&#13;
+        &lt;Fo03Bericht xmlns=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ns2=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot;&gt;&#13;
+          &lt;stuurgegevens&gt;&#13;
+            &lt;berichtcode&gt;Fo03&lt;/berichtcode&gt;&#13;
+            &lt;zender&gt;&#13;
+              &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
+              &lt;applicatie&gt;CDR&lt;/applicatie&gt;&#13;
+            &lt;/zender&gt;&#13;
+            &lt;ontvanger&gt;&#13;
+              &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
+              &lt;applicatie&gt;GWS4all&lt;/applicatie&gt;&#13;
+              &lt;gebruiker&gt;Gebruiker&lt;/gebruiker&gt;&#13;
+            &lt;/ontvanger&gt;&#13;
+            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f7e&lt;/referentienummer&gt;&#13;
+            &lt;tijdstipBericht&gt;20230110174334&lt;/tijdstipBericht&gt;&#13;
+            &lt;crossRefnummer&gt;e26f2750-f75e-412a-b549-8f664448c4d3&lt;/crossRefnummer&gt;&#13;
+          &lt;/stuurgegevens&gt;&#13;
+          &lt;body&gt;&#13;
+            &lt;code&gt;StUF058&lt;/code&gt;&#13;
+            &lt;plek&gt;server&lt;/plek&gt;&#13;
+            &lt;omschrijving&gt;java.lang.NullPointerException&lt;/omschrijving&gt;&#13;
+            &lt;details&gt;java.lang.NullPointerException&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService.convertZdsStatusDatumtoZgwDateTime(ZaakService.java:378)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService.setResultaatAndStatus(ZaakService.java:424)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService.updateZaak(ZaakService.java:349)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.converter.impl.translate.UpdateZaakTranslator.execute(UpdateZaakTranslator.java:58)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.requesthandler.RequestHandler.execute(RequestHandler.java:98)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.controller.SoapController.HandleRequest(SoapController.java:131)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.debug.Rerunner.rerun(Rerunner.java:72)&amp;#13;&#13;
+	at nl.haarlem.translations.zdstozgw.debug.Rerunner$$FastClassBySpringCGLIB$$ca0b8a6e.invoke(&amp;lt;generated&amp;gt;)&amp;#13;&#13;
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)&amp;#13;&#13;
+	at org.springframewor&lt;/details&gt;&#13;
+            &lt;detailsXML&gt;&#13;
+              &lt;todo&gt;&amp;lt;SOAP-ENV:Envelope xsi:schemaLocation=&quot;http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd&quot; xmlns:SOAP-ENV=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:BG=&quot;http://www.egem.nl/StUF/sector/bg/0310&quot; xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:ZKN=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&amp;gt;&amp;#13;&#13;
+   &amp;lt;SOAP-ENV:Header/&amp;gt;&amp;#13;&#13;
+   &amp;lt;SOAP-ENV:Body&amp;gt;&amp;#13;&#13;
+      &amp;lt;ZKN:zakLk01&amp;gt;&amp;#13;&#13;
+         &amp;lt;ZKN:stuurgegevens&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:berichtcode&amp;gt;Lk01&amp;lt;/StUF:berichtcode&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:zender&amp;gt;&amp;#13;&#13;
+               &amp;lt;StUF:organisatie&amp;gt;1900&amp;lt;/StUF:organisatie&amp;gt;&amp;#13;&#13;
+               &amp;lt;StUF:applicatie&amp;gt;GWS4all&amp;lt;/StUF:applicatie&amp;gt;&amp;#13;&#13;
+               &amp;lt;StUF:gebruiker&amp;gt;Gebruiker&amp;lt;/StUF:gebruiker&amp;gt;&amp;#13;&#13;
+            &amp;lt;/StUF:zender&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:ontvanger&amp;gt;&amp;#13;&#13;
+               &amp;lt;StUF:organisatie&amp;gt;1900&amp;lt;/StUF:organisatie&amp;gt;&amp;#13;&#13;
+               &amp;lt;StUF:applicatie&amp;gt;CDR&amp;lt;/StUF:applicatie&amp;gt;&amp;#13;&#13;
+            &amp;lt;/StUF:ontvanger&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:referentienummer&amp;gt;e26f2750-f75e-412a-b549-8f664448c4d3&amp;lt;/StUF:referentienummer&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:tijdstipBericht&amp;gt;20230103085716809&amp;lt;/StUF:tijdstipBericht&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:entiteittype&amp;gt;ZAK&amp;lt;/StUF:entiteittype&amp;gt;&amp;#13;&#13;
+         &amp;lt;/ZKN:stuurgegevens&amp;gt;&amp;#13;&#13;
+         &amp;lt;ZKN:parameters&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:mutatiesoort&amp;gt;W&amp;lt;/StUF:mutatiesoort&amp;gt;&amp;#13;&#13;
+            &amp;lt;StUF:indicatorOvername&amp;gt;V&amp;lt;/StUF:indicatorOvername&amp;gt;&amp;#13;&#13;
+         &amp;lt;/ZKN:parameters&amp;gt;&amp;#13;&#13;
+         &amp;lt;ZKN:object StUF:sleutelVerzendend=&quot;1900804&quot; StUF:entiteittype=&quot;ZAK&quot; StUF:verwerkingssoort=&quot;W&quot;&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:identificatie&amp;gt;1900804&amp;lt;/ZKN:identificatie&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:omschrijving&amp;gt;Aanvraag minimaregelingen (Z)&amp;lt;/ZKN:omschrijving&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:startdatum&amp;gt;20230103&amp;lt;/ZKN:startdatum&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:registratiedatum&amp;gt;20230103&amp;lt;/ZKN:registratiedatum&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:gerelateerde StUF:entiteittype=&quot;ZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:omschrijving&amp;gt;Aanvraag minima&amp;lt;/ZKN:omschrijving&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:code&amp;gt;B1026&amp;lt;/ZKN:code&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&amp;gt;&amp;#13;&#13;
+               &amp;lt;/ZKN:gerelateerde&amp;gt;&amp;#13;&#13;
+            &amp;lt;/ZKN:isVan&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:leidtTot StUF:entiteittype=&quot;ZAKBSL&quot; StUF:verwerkingssoort=&quot;T&quot; xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&amp;gt;&amp;#13;&#13;
+         &amp;lt;/ZKN:object&amp;gt;&amp;#13;&#13;
+         &amp;lt;ZKN:object StUF:sleutelVerzendend=&quot;1900804&quot; StUF:entiteittype=&quot;ZAK&quot; StUF:verwerkingssoort=&quot;W&quot;&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:identificatie&amp;gt;1900804&amp;lt;/ZKN:identificatie&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:omschrijving&amp;gt;Aanvraag minimaregelingen (Z)&amp;lt;/ZKN:omschrijving&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:resultaat&amp;gt;&amp;#13;&#13;
+               &amp;lt;!--&amp;lt;ZKN:omschrijving&amp;gt;Toegekend&amp;lt;/ZKN:omschrijving&amp;gt;--&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:omschrijving&amp;gt;Buiten behandeling gesteld&amp;lt;/ZKN:omschrijving&amp;gt;&amp;#13;&#13;
+            &amp;lt;/ZKN:resultaat&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:startdatum&amp;gt;20230103&amp;lt;/ZKN:startdatum&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:registratiedatum&amp;gt;20230103&amp;lt;/ZKN:registratiedatum&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:einddatum&amp;gt;20230103&amp;lt;/ZKN:einddatum&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:verlenging&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:duur&amp;gt;99&amp;lt;/ZKN:duur&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:reden&amp;gt;Overig&amp;lt;/ZKN:reden&amp;gt;&amp;#13;&#13;
+            &amp;lt;/ZKN:verlenging&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:isVan StUF:entiteittype=&quot;ZAKZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:gerelateerde StUF:entiteittype=&quot;ZKT&quot; StUF:verwerkingssoort=&quot;I&quot;&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:omschrijving&amp;gt;Aanvraag minima&amp;lt;/ZKN:omschrijving&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:code&amp;gt;B1026&amp;lt;/ZKN:code&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&amp;gt;&amp;#13;&#13;
+               &amp;lt;/ZKN:gerelateerde&amp;gt;&amp;#13;&#13;
+            &amp;lt;/ZKN:isVan&amp;gt;&amp;#13;&#13;
+            &amp;lt;ZKN:heeft StUF:entiteittype=&quot;ZAKSTT&quot; StUF:verwerkingssoort=&quot;T&quot;&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:gerelateerde StUF:entiteittype=&quot;STT&quot; StUF:verwerkingssoort=&quot;T&quot;&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:zkt.code&amp;gt;B1026&amp;lt;/ZKN:zkt.code&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:zkt.omschrijving&amp;gt;Aanvraag minima&amp;lt;/ZKN:zkt.omschrijving&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:volgnummer&amp;gt;0010&amp;lt;/ZKN:volgnummer&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:code&amp;gt;Afgehandeld&amp;lt;/ZKN:code&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:omschrijving&amp;gt;Afgehandeld&amp;lt;/ZKN:omschrijving&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:ingangsdatumObject xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&amp;gt;&amp;#13;&#13;
+               &amp;lt;/ZKN:gerelateerde&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:datumStatusGezet&amp;gt;20230103085716838&amp;lt;/ZKN:datumStatusGezet&amp;gt;&amp;#13;&#13;
+               &amp;lt;ZKN:isGezetDoor StUF:entiteittype=&quot;ZAKSTTBTR&quot; StUF:verwerkingssoort=&quot;T&quot;&amp;gt;&amp;#13;&#13;
+                  &amp;lt;ZKN:gerelateerde&amp;gt;&amp;#13;&#13;
+                     &amp;lt;ZKN:medewerker StUF:entiteittype=&quot;MDW&quot; StUF:verwerkingssoort=&quot;I&quot;&amp;gt;&amp;#13;&#13;
+                        &amp;lt;ZKN:identificatie&amp;gt;012345678901234567890123&amp;lt;/ZKN:identificatie&amp;gt;&amp;#13;&#13;
+                        &amp;lt;ZKN:achternaam&amp;gt;G. Bruiker&amp;lt;/ZKN:achternaam&amp;gt;&amp;#13;&#13;
+                        &amp;lt;ZKN:voorletters xsi:nil=&quot;true&quot; StUF:noValue=&quot;geenWaarde&quot;/&amp;gt;&amp;#13;&#13;
+                     &amp;lt;/ZKN:medewerker&amp;gt;&amp;#13;&#13;
+                  &amp;lt;/ZKN:gerelateerde&amp;gt;&amp;#13;&#13;
+               &amp;lt;/ZKN:isGezetDoor&amp;gt;&amp;#13;&#13;
+            &amp;lt;/ZKN:heeft&amp;gt;&amp;#13;&#13;
+         &amp;lt;/ZKN:object&amp;gt;&amp;#13;&#13;
+      &amp;lt;/ZKN:zakLk01&amp;gt;&amp;#13;&#13;
+   &amp;lt;/SOAP-ENV:Body&amp;gt;&amp;#13;&#13;
+&amp;lt;/SOAP-ENV:Envelope&amp;gt;&lt;/todo&gt;&#13;
+            &lt;/detailsXML&gt;&#13;
+          &lt;/body&gt;&#13;
+        &lt;/Fo03Bericht&gt;&#13;
+      &lt;/detail&gt;&#13;
+    &lt;/SOAP-ENV:Fault&gt;&#13;
+  &lt;/SOAP-ENV:Body&gt;&#13;
+&lt;/SOAP-ENV:Envelope&gt;&#13;
+</string>
      </void>
      <void property="name">
       <string>Translate updateZaak_Lk01</string>
@@ -358,7 +1886,7 @@ available services:
       <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
      </void>
      <void property="threadName">
-      <string>Thread-108</string>
+      <string>Thread-18</string>
      </void>
      <void property="type">
       <int>3</int>
@@ -367,10 +1895,10 @@ available services:
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-20210518.202847--719b5497:18d7ee729c2:-7d09</string>
+   <string>Ladybug_Test_Tool-2.2-20210518.202847--2ae83b5e:1859c7d2318:-7f7e</string>
   </void>
   <void property="endTime">
-   <long>1707233151501</long>
+   <long>1673369014911</long>
   </void>
   <void property="name">
    <string>Translate updateZaak_Lk01</string>
@@ -379,10 +1907,10 @@ available services:
    <string>/Suites4SociaalDomein Natuurlijk Persoon2/</string>
   </void>
   <void property="startTime">
-   <long>1707233151500</long>
+   <long>1673369014510</long>
   </void>
   <void property="storageId">
-   <int>898</int>
+   <int>789</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>
