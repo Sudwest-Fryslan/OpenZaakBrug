@@ -1,61 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-        <zds:geefLijstZaakdocumenten_ZakLv01 xmlns:ns="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:stuf="http://www.egem.nl/StUF/StUF0301" xmlns:xm="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120">
-            <ns:stuurgegevens>
-                <stuf:berichtcode>Lv01</stuf:berichtcode>
-                <stuf:zender>
-                    <stuf:organisatie>1</stuf:organisatie>
-                    <stuf:applicatie>SoapUI</stuf:applicatie>
-                </stuf:zender>
-                <stuf:ontvanger>
-                    <stuf:organisatie>0392</stuf:organisatie>
-                    <stuf:applicatie>ZSH</stuf:applicatie>
-                </stuf:ontvanger>
-                <stuf:referentienummer>1</stuf:referentienummer>
-                <stuf:tijdstipBericht>20170831115500</stuf:tijdstipBericht>
-                <stuf:entiteittype>ZAK</stuf:entiteittype>
-            </ns:stuurgegevens>
-            <!--Optional:-->
-            <ns:parameters>
-                <stuf:sortering>4</stuf:sortering>
-                <!--Optional:-->
-                <!--Optional:-->
-                <stuf:indicatorVervolgvraag>false</stuf:indicatorVervolgvraag>
-                <!--Optional:-->
-                <stuf:maximumAantal>15</stuf:maximumAantal>
-                <!--Optional:-->
-                <stuf:indicatorAfnemerIndicatie>false</stuf:indicatorAfnemerIndicatie>
-                <!--Optional:-->
-                <stuf:indicatorAantal>false</stuf:indicatorAantal>
-            </ns:parameters>
-            <!--Optional:-->
-            <ns:gelijk stuf:entiteittype="ZAK">
-                <ns:identificatie>0392-2020-0000001</ns:identificatie>
-            </ns:gelijk>
-            <!--Optional:-->
-            <ns:scope>
-                <ns:object stuf:entiteittype="ZAK">
-                    <ns:heeftRelevant stuf:entiteittype="ZAKEDC">
-                        <ns:gerelateerde stuf:entiteittype="EDC">
-                            <ns:identificatie xsi:nil="true"/>
-                            <ns:dct.omschrijving xsi:nil="true"/>
-                            <ns:creatiedatum xsi:nil="true"/>
-                            <ns:ontvangstdatum xsi:nil="true"/>
-                            <ns:titel xsi:nil="true"/>
-                            <ns:beschrijving xsi:nil="true"/>
-                            <ns:formaat xsi:nil="true"/>
-                            <ns:taal xsi:nil="true"/>
-                            <ns:versie xsi:nil="true"/>
-                            <ns:status xsi:nil="true"/>
-                            <ns:verzenddatum xsi:nil="true"/>
-                            <ns:vertrouwelijkAanduiding xsi:nil="true"/>
-                            <ns:auteur xsi:nil="true"/>
-                            <ns:link xsi:nil="true"/>
-                        </ns:gerelateerde>
-                        <ns:titel xsi:nil="true"/>
-                    </ns:heeftRelevant>
-                </ns:object>
-            </ns:scope>
-        </zds:geefLijstZaakdocumenten_ZakLv01>
-    </soap:Body>
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<zds:geefLijstZaakdocumenten_ZakLv01
+			xmlns:ns="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+			xmlns:stuf="http://www.egem.nl/StUF/StUF0301"
+			xmlns:xm="http://www.w3.org/2005/05/xmlmime"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120">
+			<ns:stuurgegevens>
+				<stuf:berichtcode>Lv01</stuf:berichtcode>
+				<stuf:zender>
+					<stuf:organisatie>1</stuf:organisatie>
+					<stuf:applicatie>SoapUI</stuf:applicatie>
+				</stuf:zender>
+				<stuf:ontvanger>
+					<stuf:organisatie>0392</stuf:organisatie>
+					<stuf:applicatie>ZSH</stuf:applicatie>
+				</stuf:ontvanger>
+				<stuf:referentienummer>1</stuf:referentienummer>
+				<stuf:tijdstipBericht>20170831115500</stuf:tijdstipBericht>
+				<stuf:entiteittype>ZAK</stuf:entiteittype>
+			</ns:stuurgegevens>
+			<!--Optional:-->
+			<ns:parameters>
+				<stuf:sortering>4</stuf:sortering>
+				<!--Optional:-->
+				<!--Optional:-->
+				<stuf:indicatorVervolgvraag>false</stuf:indicatorVervolgvraag>
+				<!--Optional:-->
+				<stuf:maximumAantal>15</stuf:maximumAantal>
+				<!--Optional:-->
+				<stuf:indicatorAfnemerIndicatie>false</stuf:indicatorAfnemerIndicatie>
+				<!--Optional:-->
+				<stuf:indicatorAantal>false</stuf:indicatorAantal>
+			</ns:parameters>
+			<!--Optional:-->
+			<ns:gelijk stuf:entiteittype="ZAK">
+				<ns:identificatie>0392-2020-0000001</ns:identificatie>
+			</ns:gelijk>
+			<!--Optional:-->
+			<ns:scope>
+				<ns:object stuf:entiteittype="ZAK">
+					<ns:heeftRelevant stuf:entiteittype="ZAKEDC">
+						<ns:gerelateerde stuf:entiteittype="EDC">
+							<ns:identificatie xsi:nil="true" />
+							<ns:dct.omschrijving xsi:nil="true" />
+							<ns:creatiedatum xsi:nil="true" />
+							<ns:ontvangstdatum xsi:nil="true" />
+							<ns:titel xsi:nil="true" />
+							<ns:beschrijving xsi:nil="true" />
+							<ns:formaat xsi:nil="true" />
+							<ns:taal xsi:nil="true" />
+							<ns:versie xsi:nil="true" />
+							<ns:status xsi:nil="true" />
+							<ns:verzenddatum xsi:nil="true" />
+							<ns:vertrouwelijkAanduiding xsi:nil="true" />
+							<ns:auteur xsi:nil="true" />
+							<ns:link xsi:nil="true" />
+						</ns:gerelateerde>
+						<ns:titel xsi:nil="true" />
+					</ns:heeftRelevant>
+				</ns:object>
+			</ns:scope>
+		</zds:geefLijstZaakdocumenten_ZakLv01>
+	</soap:Body>
 </soap:Envelope>

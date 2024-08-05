@@ -1,38 +1,42 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body>
-      <zakLa01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310">
-         <stuurgegevens>
-            <StUF:berichtcode>La01</StUF:berichtcode>
-            <StUF:zender>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>CDR</StUF:applicatie>
-            </StUF:zender>
-            <StUF:ontvanger>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>ZaakDocumentManager</StUF:applicatie>
-            </StUF:ontvanger>
-            <StUF:referentienummer>8d817174-5643-446d-8ecc-0cb4eb15cf85</StUF:referentienummer>
-            <StUF:tijdstipBericht>20200507075604440</StUF:tijdstipBericht>
-            <StUF:crossRefnummer>06407bef-f18f-4f17-bae4-618ef1adbfe0</StUF:crossRefnummer>
-            <StUF:entiteittype>ZAK</StUF:entiteittype>
-         </stuurgegevens>
-         <parameters>
-            <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
-         </parameters>
-         <antwoord>
-            <object StUF:sleutelVerzendend="126620" StUF:entiteittype="ZAK">
-               <identificatie>1900208938</identificatie>
-               <omschrijving>Aanvraag minimaregelingen (Z)</omschrijving>
-               <toelichting xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <isVan StUF:entiteittype="ZAKZKT">
-                  <gerelateerde StUF:entiteittype="ZKT">
-                     <omschrijving>Aanvraag minima</omschrijving>
-                     <code>B1026</code>
-                  </gerelateerde>
-               </isVan>
-               <heeftAlsInitiator xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRINI"/>
-            </object>
-         </antwoord>
-      </zakLa01>
-   </s:Body>
+	<s:Body>
+		<zakLa01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310">
+			<stuurgegevens>
+				<StUF:berichtcode>La01</StUF:berichtcode>
+				<StUF:zender>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>CDR</StUF:applicatie>
+				</StUF:zender>
+				<StUF:ontvanger>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>ZaakDocumentManager</StUF:applicatie>
+				</StUF:ontvanger>
+				<StUF:referentienummer>8d817174-5643-446d-8ecc-0cb4eb15cf85</StUF:referentienummer>
+				<StUF:tijdstipBericht>20200507075604440</StUF:tijdstipBericht>
+				<StUF:crossRefnummer>06407bef-f18f-4f17-bae4-618ef1adbfe0</StUF:crossRefnummer>
+				<StUF:entiteittype>ZAK</StUF:entiteittype>
+			</stuurgegevens>
+			<parameters>
+				<StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+			</parameters>
+			<antwoord>
+				<object StUF:sleutelVerzendend="126620" StUF:entiteittype="ZAK">
+					<identificatie>1900208938</identificatie>
+					<omschrijving>Aanvraag minimaregelingen (Z)</omschrijving>
+					<toelichting xsi:nil="true" StUF:noValue="geenWaarde" />
+					<isVan StUF:entiteittype="ZAKZKT">
+						<gerelateerde StUF:entiteittype="ZKT">
+							<omschrijving>Aanvraag minima</omschrijving>
+							<code>B1026</code>
+						</gerelateerde>
+					</isVan>
+					<heeftAlsInitiator xsi:nil="true" StUF:noValue="geenWaarde"
+						StUF:entiteittype="ZAKBTRINI" />
+				</object>
+			</antwoord>
+		</zakLa01>
+	</s:Body>
 </s:Envelope>

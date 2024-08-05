@@ -41,14 +41,16 @@ public class CreeerZaakTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
-		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+		
 		ZdsZakLk01 zdsZakLk01 = (ZdsZakLk01) this.zdsDocument;
 		ZdsZaak zdsZaak = zdsZakLk01.objects.get(0);
 
 		this.getSession().setFunctie("CreeerZaak");
 		this.getSession().setKenmerk("zaakidentificatie:" + zdsZaak.identificatie);
 
-		var zgwZaak = this.getZaakService().creeerZaak(rsin, zdsZaak);
+		var zgwZaak = this.getZaakService().creeerZaak(authorization, zdsZaak);
 		var bv03 = new ZdsBv03(zdsZakLk01.stuurgegevens, this.getSession().getReferentienummer());
 		var response = XmlUtils.getSOAPMessageFromObject(bv03);
 		return new ResponseEntity<>(response, HttpStatus.OK);

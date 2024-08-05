@@ -44,8 +44,8 @@ import lombok.Data;
 public class RestTemplateService {
 	private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-	@Autowired
-	private JWTService jwtService;
+	//@Autowired
+	//private JWTService jwtService;
 
 	RestTemplateBuilder restTemplateBuilder;
 
@@ -92,14 +92,16 @@ public class RestTemplateService {
 		return requestFactory;
 	}
 
+	/*
 	public HttpHeaders getHeaders() {
 		var headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("Accept-Crs", "EPSG:4326");
 		headers.set("Content-Crs", "EPSG:4326");
 		headers.set("Authorization", "Bearer " + this.jwtService.getJWT());
-		log.debug("headers:" + headers);
+		log.info("headers:" + headers);
 
 		return headers;
 	}
+	*/
 }
