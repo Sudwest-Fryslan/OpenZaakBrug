@@ -63,6 +63,13 @@ public abstract class RequestHandler {
 		var fo03 = this.converter.getZdsDocument() != null
 				? new ZdsFo03(this.converter.getZdsDocument().stuurgegevens, convertor.getSession().getReferentienummer())
 				: new ZdsFo03();
+		
+		/////////////////////////////////////////////////////
+		// Dit is meestal de eerste fout wanneer lombok niet werkt:
+		//		Description	Resource	Path	Location	Type
+		//		body cannot be resolved or is not a field	RequestHandler.java	/zds-to-zgw/src/main/java/nl/haarlem/translations/zdstozgw/requesthandler	line 66	Java Problem
+		// https://www.baeldung.com/lombok-ide
+		///////////////////////////////////////////////////
 		fo03.body = new ZdsFo03.Body();
 		fo03.body.code = "StUF058";
 		fo03.body.plek = "server";
