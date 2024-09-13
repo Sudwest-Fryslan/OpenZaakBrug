@@ -15,11 +15,20 @@
  */
 package nl.haarlem.translations.zdstozgw.jpa;
 
+import javax.persistence.LockModeType;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 
 import nl.haarlem.translations.zdstozgw.jpa.model.EmulateParameter;
 
 @Repository
 public interface EmulateParameterRepository extends JpaRepository<EmulateParameter, String> {
+
+	// use pessimistic locking for id generation
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
+	default EmulateParameter getByIdWithLock(String id) {
+		return getById(id);
+	}
 }

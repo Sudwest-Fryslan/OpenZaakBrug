@@ -52,8 +52,8 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 		 */
 		
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
-		var prefixparam = repository.getOne("ZaakIdentificatiePrefix");
-		var idparam = repository.getOne("ZaakIdentificatieHuidige");
+		var prefixparam = repository.getById("ZaakIdentificatiePrefix");
+		var idparam = repository.getByIdWithLock("ZaakIdentificatieHuidige");
 		var identificatie = Long.parseLong(idparam.getParameterValue()) + 1;
 		idparam.setParameterValue(Long.toString(identificatie));
 		repository.save(idparam);
