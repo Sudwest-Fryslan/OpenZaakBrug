@@ -5,7 +5,7 @@ mv ./src/main/resources/config.json_example ./src/main/resources/config.json
 
 mvn install -Dmaven.javadoc.skip=true -B -V -DskipTests
 
-sudo docker-compose -f docker-compose.yml up --build -d
+sudo docker compose -f docker-compose.yml up --build -d
 
 # start the counter from 5 seconds
 timeCounter=5
@@ -30,4 +30,4 @@ else
 	echo "=== Something went wrong while starting the application check log files. ==="
 	exit 1
 fi
-sudo docker-compose logs
+sudo docker compose logs
