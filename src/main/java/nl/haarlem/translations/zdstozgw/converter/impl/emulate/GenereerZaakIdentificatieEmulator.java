@@ -15,6 +15,7 @@
  */
 package nl.haarlem.translations.zdstozgw.converter.impl.emulate;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,9 @@ import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GenereerZaakIdentificatieEmulator extends Converter {
 
+	@Value("${id.generatie.zaakIdentificatiePrefix:1900}")
+	public String zaakIdentificatiePrefix;
+
 	public GenereerZaakIdentificatieEmulator(RequestResponseCycle session, Translation translation,
 			ZaakService zaakService) {
 		super(session, translation, zaakService);
@@ -50,14 +54,10 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 			1e 4 posities: gemeentecode van de gemeente die verantwoordelijk is voor de behandeling van de zaak;
 			pos. 5 – 40: alle alfanumerieke tekens m.u.v. diacrieten  
 		 */
-		
+
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
-		var prefixparam = repository.getById("ZaakIdentificatiePrefix");
-		var idparam = repository.getByIdWithLock("ZaakIdentificatieHuidige");
-		var identificatie = Long.parseLong(idparam.getParameterValue()) + 1;
-		idparam.setParameterValue(Long.toString(identificatie));
-		repository.save(idparam);
-		var zid = prefixparam.getParameterValue() + identificatie;
+		var identificatie = repository.getZaakId();
+		var zid = zaakIdentificatiePrefix + identificatie;
 		this.getSession().setFunctie("GenereerZaakIdentificatie");
 		this.getSession().setKenmerk("zaakidentificatie:" + zid);
 
