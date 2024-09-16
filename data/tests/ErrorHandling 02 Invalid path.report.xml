@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.2" class="java.beans.XMLDecoder">
+ <object class="nl.nn.testtool.Report" id="Report0">
+  <void property="checkpoints">
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="message">
+      <string>&lt;s:Envelope xmlns:s=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;&#13;
+   &lt;s:Body&gt;&#13;
+      &lt;genereerZaakIdentificatie_Di02 xmlns=&quot;http://www.egem.nl/StUF/sector/zkn/0310&quot; xmlns:StUF=&quot;http://www.egem.nl/StUF/StUF0301&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&#13;
+         &lt;stuurgegevens&gt;&#13;
+            &lt;StUF:berichtcode&gt;Di02&lt;/StUF:berichtcode&gt;&#13;
+            &lt;StUF:zender&gt;&#13;
+               &lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;&#13;
+               &lt;StUF:applicatie&gt;GISVG&lt;/StUF:applicatie&gt;&#13;
+            &lt;/StUF:zender&gt;&#13;
+            &lt;StUF:ontvanger&gt;&#13;
+               &lt;StUF:organisatie&gt;1900&lt;/StUF:organisatie&gt;&#13;
+               &lt;StUF:applicatie&gt;ZDS&lt;/StUF:applicatie&gt;&#13;
+            &lt;/StUF:ontvanger&gt;&#13;
+            &lt;StUF:referentienummer&gt;c8e8f52f-69d1-4110-93a7-f4690c63f99a&lt;/StUF:referentienummer&gt;&#13;
+            &lt;StUF:tijdstipBericht&gt;20210520204501593&lt;/StUF:tijdstipBericht&gt;&#13;
+            &lt;StUF:functie&gt;genereerZaakidentificatie&lt;/StUF:functie&gt;&#13;
+         &lt;/stuurgegevens&gt;&#13;
+      &lt;/genereerZaakIdentificatie_Di02&gt;&#13;
+   &lt;/s:Body&gt;&#13;
+&lt;/s:Envelope&gt;</string>
+     </void>
+     <void property="name">
+      <string>Translate genereerZaakIdentificatie_Di02</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>1</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>translate</string>
+     </void>
+     <void property="name">
+      <string>modus</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>generic</string>
+     </void>
+     <void property="name">
+      <string>version</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>zds</string>
+     </void>
+     <void property="name">
+      <string>protocol</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>InvalidPath</string>
+     </void>
+     <void property="name">
+      <string>endpoint</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02</string>
+     </void>
+     <void property="name">
+      <string>soapAction</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>4</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>Ladybug_Test_Tool-2.2-20210518.202847--5efdfd72:17aa23591ab:-7fff</string>
+     </void>
+     <void property="name">
+      <string>referentienummer</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>6</int>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="nl.nn.testtool.Checkpoint">
+     <void property="level">
+      <int>1</int>
+     </void>
+     <void property="message">
+      <string>org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND &quot;Could not load a convertor for path: &apos;translate/generic/zds/InvalidPath&apos; with soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
+available services:
+	path: &apos;translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
+	path: &apos;translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01&apos;
+	path: &apos;translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
+	path: &apos;translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02&apos;
+	path: &apos;translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/voegZaakdocumentToe_Lk01&apos;
+	path: &apos;translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/maakZaakdocument_Lk01&apos;
+	path: &apos;translate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefLijstZaakdocumenten_Lv01&apos;
+	path: &apos;translate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01&apos;
+	path: &apos;translate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/actualiseerZaakstatus_Lk01&apos;
+	path: &apos;translate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01&apos;
+	path: &apos;translate/generic/stufzkn/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/zakLv01&apos;
+	path: &apos;translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentbewerken_Di02&apos;
+	path: &apos;translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaakdocument_Di02&apos;
+	path: &apos;translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/cancelCheckout_Di02&apos;
+	path: &apos;proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
+	path: &apos;proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01&apos;
+	path: &apos;proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
+	path: &apos;proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02&apos;
+	path: &apos;proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/voegZaakdocumentToe_Lk01&apos;
+	path: &apos;proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/maakZaakdocument_Lk01&apos;
+	path: &apos;proxy/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefLijstZaakdocumenten_Lv01&apos;
+	path: &apos;proxy/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01&apos;
+	path: &apos;proxy/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/actualiseerZaakstatus_Lk01&apos;
+	path: &apos;proxy/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01&apos;
+	path: &apos;proxy/generic/stufzkn/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/zakLv01&apos;
+	path: &apos;proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentbewerken_Di02&apos;
+	path: &apos;proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaakdocument_Di02&apos;
+	path: &apos;proxy/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/cancelCheckout_Di02&apos;
+	path: &apos;replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02&apos;
+	path: &apos;replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01&apos;
+	path: &apos;replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaak_Lk01&apos;
+	path: &apos;replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/genereerDocumentIdentificatie_Di02&apos;
+	path: &apos;replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/voegZaakdocumentToe_Lk01&apos;
+	path: &apos;replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/maakZaakdocument_Lk01&apos;
+	path: &apos;replicate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefLijstZaakdocumenten_Lv01&apos;
+	path: &apos;replicate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01&apos;
+	path: &apos;replicate/generic/zds/OntvangAsynchroon&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/actualiseerZaakstatus_Lk01&apos;
+	path: &apos;replicate/generic/zds/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01&apos;
+	path: &apos;replicate/generic/stufzkn/BeantwoordVraag&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/zakLv01&apos;
+	path: &apos;replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentbewerken_Di02&apos;
+	path: &apos;replicate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/updateZaakdocument_Di02&apos;
+	path: &apos;translate/generic/zds/VrijBericht&apos; soapaction: &apos;http://www.egem.nl/StUF/sector/zkn/0310/cancelCheckout_Di02&apos;&quot;</string>
+     </void>
+     <void property="name">
+      <string>Translate genereerZaakIdentificatie_Di02</string>
+     </void>
+     <void property="report">
+      <object idref="Report0"/>
+     </void>
+     <void property="sourceClassName">
+      <string>nl.haarlem.translations.zdstozgw.controller.SoapController</string>
+     </void>
+     <void property="threadName">
+      <string>Thread-75</string>
+     </void>
+     <void property="type">
+      <int>3</int>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="correlationId">
+   <string>Ladybug_Test_Tool-2.2-20210518.202847--5efdfd72:17aa23591ab:-7fff</string>
+  </void>
+  <void property="description">
+   <string></string>
+  </void>
+  <void property="endTime">
+   <long>1626219059910</long>
+  </void>
+  <void property="name">
+   <string>ErrorHandling 02 Invalid path</string>
+  </void>
+  <void property="path">
+   <string></string>
+  </void>
+  <void property="startTime">
+   <long>1626219059909</long>
+  </void>
+  <void property="storageId">
+   <int>444</int>
+  </void>
+  <void property="stubStrategy">
+   <string>Stub all external connection code</string>
+  </void>
+  <void property="transformation">
+   <string></string>
+  </void>
+ </object>
+</java>
