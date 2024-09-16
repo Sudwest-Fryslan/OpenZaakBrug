@@ -15,7 +15,6 @@
  */
 package nl.haarlem.translations.zdstozgw.converter.impl.emulate;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
@@ -32,10 +31,8 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakIdentificat
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
-public class GenereerZaakIdentificatieEmulator extends Converter {
 
-	@Value("${id.generatie.zaakIdentificatiePrefix:1900}")
-	public String zaakIdentificatiePrefix;
+public class GenereerZaakIdentificatieEmulator extends Converter {
 
 	public GenereerZaakIdentificatieEmulator(RequestResponseCycle session, Translation translation,
 			ZaakService zaakService) {
@@ -57,7 +54,7 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
 		var identificatie = repository.getZaakId();
-		var zid = zaakIdentificatiePrefix + identificatie;
+		var zid = zaakService.getZaakIdentificatiePrefix() + identificatie;
 		this.getSession().setFunctie("GenereerZaakIdentificatie");
 		this.getSession().setKenmerk("zaakidentificatie:" + zid);
 

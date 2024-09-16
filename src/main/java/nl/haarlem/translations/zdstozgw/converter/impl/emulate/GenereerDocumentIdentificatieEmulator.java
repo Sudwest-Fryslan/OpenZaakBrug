@@ -15,7 +15,6 @@
  */
 package nl.haarlem.translations.zdstozgw.converter.impl.emulate;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
@@ -34,9 +33,6 @@ import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
 public class GenereerDocumentIdentificatieEmulator extends Converter {
 
-	@Value("${id.generatie.documentIdentificatiePrefix:1900}")
-	public String documentIdentificatiePrefix;
-
 	public GenereerDocumentIdentificatieEmulator(RequestResponseCycle session, Translation translation,
 			ZaakService zaakService) {
 		super(session, translation, zaakService);
@@ -52,7 +48,7 @@ public class GenereerDocumentIdentificatieEmulator extends Converter {
 	public ResponseEntity<?> execute() throws ConverterException {
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
 		var identificatie = repository.getDocumentId();
-		var did = documentIdentificatiePrefix + identificatie;
+		var did = zaakService.getDocumentIdentificatiePrefix() + identificatie;
 		this.getSession().setFunctie("GenereerDocumentIdentificatie");
 		this.getSession().setKenmerk("documentidentificatie:" + did);
 
