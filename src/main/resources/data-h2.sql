@@ -13,3 +13,5 @@ INSERT INTO emulate_parameter (parameter_name, parameter_description, parameter_
 SELECT 'DocumentIdentificatieHuidige', 'Het laatste volgnummer dat is gebruikt voor de documentidentificatie in nl.haarlem.translations.zdstozgw.convertor.impl.GenereerDocumentIdentificatie', '1'
 WHERE ( SELECT COUNT(*) FROM emulate_parameter WHERE parameter_name = 'DocumentIdentificatieHuidige') = 0;
 
+CREATE SEQUENCE IF NOT EXISTS ZaakIdentificatieHuidige START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS DocumentIdentificatieHuidige START WITH 1 INCREMENT BY 1;
