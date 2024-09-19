@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 The Open Zaakbrug Contributors
+ * Copyright 2020-2021, 2024 The Open Zaakbrug Contributors
  *
  * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
  * European Commission - subsequent versions of the EUPL (the "Licence");
@@ -31,6 +31,7 @@ import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakIdentificat
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
 import nl.haarlem.translations.zdstozgw.utils.XmlUtils;
 
+
 public class GenereerZaakIdentificatieEmulator extends Converter {
 
 	public GenereerZaakIdentificatieEmulator(RequestResponseCycle session, Translation translation,
@@ -50,14 +51,12 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 			1e 4 posities: gemeentecode van de gemeente die verantwoordelijk is voor de behandeling van de zaak;
 			pos. 5 – 40: alle alfanumerieke tekens m.u.v. diacrieten  
 		 */
-		
+
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
-		var prefixparam = repository.getOne("ZaakIdentificatiePrefix");
-		var idparam = repository.getOne("ZaakIdentificatieHuidige");
-		var identificatie = Long.parseLong(idparam.getParameterValue()) + 1;
-		idparam.setParameterValue(Long.toString(identificatie));
-		repository.save(idparam);
+		var prefixparam = repository.getById("ZaakIdentificatiePrefix");
+		var identificatie = repository.getZaakId();
 		var zid = prefixparam.getParameterValue() + identificatie;
+
 		this.getSession().setFunctie("GenereerZaakIdentificatie");
 		this.getSession().setKenmerk("zaakidentificatie:" + zid);
 

@@ -31,3 +31,20 @@ BEGIN
   	RETURN resultaat;
 END;
 $$ LANGUAGE 'plpgsql'
+
+CREATE OR REPLACE FUNCTION create_sequences_if_not_exists()
+RETURNS VOID AS '
+DECLARE
+	zaak_id_start_value BIGINT;
+	document_id_start_value BIGINT;
+BEGIN
+	SELECT parameter_value INTO zaak_id_start_value FROM emulate_parameter WHERE parameter_name = ''ZaakIdentificatieHuidige'';
+	EXECUTE ''CREATE SEQUENCE HuidigeZaakIdentificatie START WITH '' || zaak_id_start_value + 1;
+
+	SELECT parameter_value INTO document_id_start_value FROM emulate_parameter WHERE parameter_name = ''DocumentIdentificatieHuidige'';
+	EXECUTE ''CREATE SEQUENCE HuidigeDocumentIdentificatie START WITH '' || document_id_start_value + 1;
+END;
+' LANGUAGE plpgsql;
+
+SELECT create_sequences_if_not_exists();
+
