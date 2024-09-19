@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 The Open Zaakbrug Contributors
+ * Copyright 2020-2021, 2024 The Open Zaakbrug Contributors
  *
  * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
  * European Commission - subsequent versions of the EUPL (the "Licence");
@@ -24,10 +24,10 @@ import nl.haarlem.translations.zdstozgw.jpa.model.EmulateParameter;
 @Repository
 public interface EmulateParameterRepository extends JpaRepository<EmulateParameter, String> {
 
-	@Query(value = "SELECT NEXTVAL('ZaakIdentificatieHuidige')", nativeQuery = true)
+	@Query(value = "SELECT NEXTVAL('HuidigeZaakIdentificatie')", nativeQuery = true)
 	Long getZaakId();
 
-	@Query(value = "SELECT NEXTVAL('DocumentIdentificatieHuidige')", nativeQuery = true)
+	@Query(value = "SELECT NEXTVAL('HuidigeDocumentIdentificatie')", nativeQuery = true)
 	Long getDocumentId();
 
 }

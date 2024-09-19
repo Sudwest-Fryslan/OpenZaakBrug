@@ -29,10 +29,8 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import lombok.Getter;
 import nl.haarlem.translations.zdstozgw.config.ConfigService;
 import nl.haarlem.translations.zdstozgw.config.ModelMapperConfig;
 import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
@@ -83,13 +81,6 @@ public class ZaakService {
 
 	private final ModelMapper modelMapper;
 	public final ConfigService configService;
-
-	@Value("${id.generatie.documentIdentificatiePrefix:1900}")
-	private @Getter String documentIdentificatiePrefix;
-
-	@Value("${id.generatie.zaakIdentificatiePrefix:1900}")
-	private @Getter String zaakIdentificatiePrefix;
-
 
 	@Autowired
 	public ZaakService(ZGWClient zgwClient, ModelMapper modelMapper, ConfigService configService) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 The Open Zaakbrug Contributors
+ * Copyright 2020-2021, 2024 The Open Zaakbrug Contributors
  *
  * Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the 
  * European Commission - subsequent versions of the EUPL (the "Licence");
@@ -53,8 +53,10 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 		 */
 
 		EmulateParameterRepository repository = SpringContext.getBean(EmulateParameterRepository.class);
+		var prefixparam = repository.getById("ZaakIdentificatiePrefix");
 		var identificatie = repository.getZaakId();
-		var zid = zaakService.getZaakIdentificatiePrefix() + identificatie;
+		var zid = prefixparam.getParameterValue() + identificatie;
+
 		this.getSession().setFunctie("GenereerZaakIdentificatie");
 		this.getSession().setKenmerk("zaakidentificatie:" + zid);
 
