@@ -30,7 +30,7 @@ BEGIN
 	resultaat := SUBSTRING(resultaat, 0, positie);
 	RETURN resultaat;
 END;
-' LANGUAGE plpgsql
+' LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION create_sequences_if_not_exists()
 RETURNS VOID AS '
