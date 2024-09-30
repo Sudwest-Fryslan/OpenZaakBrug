@@ -1,54 +1,64 @@
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-        <zds:creeerZaak_ZakLk01 xmlns:stuf="http://www.egem.nl/StUF/StUF0301" xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120" xmlns:zkn="http://www.egem.nl/StUF/sector/zkn/0310">
-            <zkn:stuurgegevens>
-                <stuf:berichtcode>Lk01</stuf:berichtcode>
-                <stuf:zender>
-                    <stuf:organisatie>0392</stuf:organisatie>
-                    <stuf:applicatie>MORPLUS</stuf:applicatie>
-                    <stuf:administratie>MOR</stuf:administratie>
-                    <stuf:gebruiker>system</stuf:gebruiker>
-                </stuf:zender>
-                <stuf:ontvanger>
-                    <stuf:organisatie>0392</stuf:organisatie>
-                    <stuf:applicatie>ZSH</stuf:applicatie>
-                </stuf:ontvanger>
-                <stuf:referentienummer>e443d87f-69ee-4fd4-b1d9-dd797ffff628</stuf:referentienummer>
-                <stuf:tijdstipBericht>20200206101152</stuf:tijdstipBericht>
-                <stuf:entiteittype>ZAK</stuf:entiteittype>
-            </zkn:stuurgegevens>
-            <zkn:parameters>
-                <stuf:mutatiesoort>T</stuf:mutatiesoort>
-                <stuf:indicatorOvername>V</stuf:indicatorOvername>
-            </zkn:parameters>
-            <zkn:object stuf:entiteittype="ZAK" stuf:verwerkingssoort="T">
-                <zkn:identificatie>0392-2020-0000027</zkn:identificatie>
-                <zkn:omschrijving>Test 4</zkn:omschrijving>
-                <zkn:toelichting>Test 4</zkn:toelichting>
-                <zkn:startdatum stuf:exact="true" stuf:indOnvolledigeDatum="V">20200207</zkn:startdatum>
-                <zkn:registratiedatum stuf:exact="true" stuf:indOnvolledigeDatum="V">20200207</zkn:registratiedatum>
-                <zkn:einddatumGepland>20200214</zkn:einddatumGepland>
-                <zkn:archiefnominatie>J</zkn:archiefnominatie>
-                <zkn:zaakniveau>1</zkn:zaakniveau>
-                <zkn:deelzakenIndicatie>N</zkn:deelzakenIndicatie>
-                <zkn:isVan stuf:entiteittype="ZAKZKT" stuf:verwerkingssoort="T">
-                    <zkn:gerelateerde stuf:entiteittype="ZKT" stuf:verwerkingssoort="I">
-                        <zkn:code>1</zkn:code>
-                    </zkn:gerelateerde>
-                </zkn:isVan>
-                <zkn:heeftAlsInitiator stuf:entiteittype="ZAKBTRINI" stuf:verwerkingssoort="T">
-                    <zkn:gerelateerde>
-                        <zkn:natuurlijkPersoon xmlns:bg="http://www.egem.nl/StUF/sector/bg/0310" stuf:entiteittype="NPS" stuf:verwerkingssoort="T">
-                            <bg:inp.bsn>900070511</bg:inp.bsn>
-                            <bg:geslachtsnaam>Mug</bg:geslachtsnaam>
-                            <bg:voorvoegselGeslachtsnaam>de</bg:voorvoegselGeslachtsnaam>
-                            <bg:voornamen>Sjaak</bg:voornamen>
-                            <bg:geslachtsaanduiding>M</bg:geslachtsaanduiding>
-                            <bg:geboortedatum stuf:exact="true" stuf:indOnvolledigeDatum="V" stuf:noValue="geenWaarde">19760930</bg:geboortedatum>
-                        </zkn:natuurlijkPersoon>
-                    </zkn:gerelateerde>
-                </zkn:heeftAlsInitiator>
-            </zkn:object>
-        </zds:creeerZaak_ZakLk01>
-    </soap:Body>
+	<soap:Body>
+		<zds:creeerZaak_ZakLk01 xmlns:stuf="http://www.egem.nl/StUF/StUF0301"
+			xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120"
+			xmlns:zkn="http://www.egem.nl/StUF/sector/zkn/0310">
+			<zkn:stuurgegevens>
+				<stuf:berichtcode>Lk01</stuf:berichtcode>
+				<stuf:zender>
+					<stuf:organisatie>0392</stuf:organisatie>
+					<stuf:applicatie>MORPLUS</stuf:applicatie>
+					<stuf:administratie>MOR</stuf:administratie>
+					<stuf:gebruiker>system</stuf:gebruiker>
+				</stuf:zender>
+				<stuf:ontvanger>
+					<stuf:organisatie>0392</stuf:organisatie>
+					<stuf:applicatie>ZSH</stuf:applicatie>
+				</stuf:ontvanger>
+				<stuf:referentienummer>e443d87f-69ee-4fd4-b1d9-dd797ffff628</stuf:referentienummer>
+				<stuf:tijdstipBericht>20200206101152</stuf:tijdstipBericht>
+				<stuf:entiteittype>ZAK</stuf:entiteittype>
+			</zkn:stuurgegevens>
+			<zkn:parameters>
+				<stuf:mutatiesoort>T</stuf:mutatiesoort>
+				<stuf:indicatorOvername>V</stuf:indicatorOvername>
+			</zkn:parameters>
+			<zkn:object stuf:entiteittype="ZAK" stuf:verwerkingssoort="T">
+				<zkn:identificatie>0392-2020-0000027</zkn:identificatie>
+				<zkn:omschrijving>Test 4</zkn:omschrijving>
+				<zkn:toelichting>Test 4</zkn:toelichting>
+				<zkn:startdatum stuf:exact="true" stuf:indOnvolledigeDatum="V">
+					20200207</zkn:startdatum>
+				<zkn:registratiedatum stuf:exact="true"
+					stuf:indOnvolledigeDatum="V">20200207</zkn:registratiedatum>
+				<zkn:einddatumGepland>20200214</zkn:einddatumGepland>
+				<zkn:archiefnominatie>J</zkn:archiefnominatie>
+				<zkn:zaakniveau>1</zkn:zaakniveau>
+				<zkn:deelzakenIndicatie>N</zkn:deelzakenIndicatie>
+				<zkn:isVan stuf:entiteittype="ZAKZKT" stuf:verwerkingssoort="T">
+					<zkn:gerelateerde stuf:entiteittype="ZKT"
+						stuf:verwerkingssoort="I">
+						<zkn:code>1</zkn:code>
+					</zkn:gerelateerde>
+				</zkn:isVan>
+				<zkn:heeftAlsInitiator stuf:entiteittype="ZAKBTRINI"
+					stuf:verwerkingssoort="T">
+					<zkn:gerelateerde>
+						<zkn:natuurlijkPersoon
+							xmlns:bg="http://www.egem.nl/StUF/sector/bg/0310"
+							stuf:entiteittype="NPS" stuf:verwerkingssoort="T">
+							<bg:inp.bsn>900070511</bg:inp.bsn>
+							<bg:geslachtsnaam>Mug</bg:geslachtsnaam>
+							<bg:voorvoegselGeslachtsnaam>de</bg:voorvoegselGeslachtsnaam>
+							<bg:voornamen>Sjaak</bg:voornamen>
+							<bg:geslachtsaanduiding>M</bg:geslachtsaanduiding>
+							<bg:geboortedatum stuf:exact="true"
+								stuf:indOnvolledigeDatum="V"
+								stuf:noValue="geenWaarde">19760930</bg:geboortedatum>
+						</zkn:natuurlijkPersoon>
+					</zkn:gerelateerde>
+				</zkn:heeftAlsInitiator>
+			</zkn:object>
+		</zds:creeerZaak_ZakLk01>
+	</soap:Body>
 </soap:Envelope>

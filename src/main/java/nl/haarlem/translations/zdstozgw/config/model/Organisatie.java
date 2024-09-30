@@ -28,5 +28,6 @@ public class Organisatie {
 	public String gemeenteCode;
 	@Expose
 	public String RSIN;
-
+	@Expose
+	public Boolean voorkeur = false;
 }
