@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
+import nl.haarlem.translations.zdstozgw.config.model.Organisatie;
 import nl.haarlem.translations.zdstozgw.config.model.Translation;
 import nl.haarlem.translations.zdstozgw.converter.Converter;
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
@@ -41,6 +42,9 @@ public class VoegZaakdocumentToeTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+		
 		var zdsEdcLk01 = (ZdsEdcLk01) this.getZdsDocument();
 		var zdsInformatieObject = zdsEdcLk01.objects.get(0);
 		var zdsZaakObject = zdsInformatieObject.isRelevantVoor.gerelateerde;
@@ -48,8 +52,7 @@ public class VoegZaakdocumentToeTranslator extends Converter {
 		this.getSession().setFunctie("VoegZaakdocumentToe");
 		this.getSession().setKenmerk("zaakidentificatie:" + zdsZaakObject.identificatie + " documentidentificatie:" + zdsInformatieObject.identificatie);
 
-		this.getZaakService().voegZaakDocumentToe(
-				this.getZaakService().getRSIN(zdsEdcLk01.stuurgegevens.zender.organisatie), zdsInformatieObject);
+		this.getZaakService().voegZaakDocumentToe(authorization, zdsInformatieObject);
 		var bv03 = new ZdsBv03(zdsEdcLk01.stuurgegevens, this.getSession().getReferentienummer());
 		var response = XmlUtils.getSOAPMessageFromObject(bv03);
 		return new ResponseEntity<>(response, HttpStatus.OK);

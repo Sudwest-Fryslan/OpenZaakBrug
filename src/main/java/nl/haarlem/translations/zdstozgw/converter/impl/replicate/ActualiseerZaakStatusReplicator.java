@@ -28,6 +28,7 @@ import nl.haarlem.translations.zdstozgw.converter.impl.translate.ActualiseerZaak
 import nl.haarlem.translations.zdstozgw.requesthandler.RequestResponseCycle;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZakLk01ActualiseerZaakstatus;
 import nl.haarlem.translations.zdstozgw.translation.zds.services.ZaakService;
+import nl.haarlem.translations.zdstozgw.translation.zgw.client.ZgwAuthorization;
 
 public class ActualiseerZaakStatusReplicator extends ActualiseerZaakStatusTranslator {
 
@@ -45,10 +46,13 @@ public class ActualiseerZaakStatusReplicator extends ActualiseerZaakStatusTransl
      */
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+				
 		var zdsZakLk01ActualiseerZaakstatus = (ZdsZakLk01ActualiseerZaakstatus) this.getZdsDocument();
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		replicator.replicateZaak(zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
+		replicator.replicateZaak(authorization, zdsZakLk01ActualiseerZaakstatus.objects.get(0).identificatie);
 		return super.execute();
 	}
 }

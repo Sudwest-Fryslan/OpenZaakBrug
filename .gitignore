@@ -34,3 +34,5 @@ build/
 /data/
 /src/main/resources/*.properties
 /src/main/resources/*.json
+.vs
+__pycache__

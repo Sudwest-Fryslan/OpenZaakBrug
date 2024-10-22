@@ -1,51 +1,57 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body>
-      <edcLa01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <stuurgegevens>
-            <StUF:berichtcode>La01</StUF:berichtcode>
-            <StUF:zender>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>CDR</StUF:applicatie>
-            </StUF:zender>
-            <StUF:ontvanger>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>GWS4all</StUF:applicatie>
-               <StUF:gebruiker>Gebruiker</StUF:gebruiker>
-            </StUF:ontvanger>
-            <StUF:referentienummer>438039a6-3b23-47df-82f9-1921b7e27781</StUF:referentienummer>
-            <StUF:tijdstipBericht>20200507075604097</StUF:tijdstipBericht>
-            <StUF:crossRefnummer>b84e08ea-b406-4fcb-842d-6397e78da8b2</StUF:crossRefnummer>
-            <StUF:entiteittype>EDC</StUF:entiteittype>
-         </stuurgegevens>
-         <parameters>
-            <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
-         </parameters>
-         <antwoord>
-            <object StUF:entiteittype="EDC">
-               <identificatie>1900209655</identificatie>
-               <dct.omschrijving>documenttype</dct.omschrijving>
-               <creatiedatum>20200501</creatiedatum>
-               <ontvangstdatum>00010101</ontvangstdatum>
-               <titel>titel</titel>
-               <beschrijving xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <formaat>formaat</formaat>
-               <taal>nld</taal>
-               <versie xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <status xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <verzenddatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <vertrouwelijkAanduiding>VERTROUWELIJK</vertrouwelijkAanduiding>
-               <auteur>gebruiker</auteur>
-               <link xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <inhoud a:contentType="application/octet-stream" StUF:bestandsnaam="valid.svg" xmlns:a="http://www.w3.org/2005/05/xmlmime">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIwLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA2NTAgNjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2NTAgNjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzgwN0Y3Rjt9Cgkuc3Qxe2NsaXAtcGF0aDp1cmwoI1NWR0lEXzFfKTt9Cgkuc3Qye2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qze2ZpbGw6I0U4RThFODt9Cgkuc3Q0e2ZpbGw6IzAwRUUwMDt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMzI0LjciIGN5PSIzMjQuOSIgcj0iMzIxLjUiLz4KCTwvZz4KPC9nPgo8ZyBpZD0iTGF5ZXJfNCI+Cgk8Zz4KCQk8ZGVmcz4KCQkJPHBhdGggaWQ9IlNWR0lEXzNfIiBkPSJNNDYzLjIsMTYwYy0wLjQtMTAuNS05LTE5LTE5LjYtMTlIMjA5LjFjLTEwLjYsMC0xOS4yLDguNS0xOS42LDE5aC0wLjF2MjQzLjZjMCwyOS43LDEsNTguOCw1NCw3NS4yCgkJCQlsODIuOSwyNy44bDgzLTI3LjhjNTMuNC0yMS44LDU0LTQ1LjYsNTQtNzUuMkw0NjMuMiwxNjBMNDYzLjIsMTYweiIvPgoJCTwvZGVmcz4KCQk8Y2xpcFBhdGggaWQ9IlNWR0lEXzFfIj4KCQkJPHVzZSB4bGluazpocmVmPSIjU1ZHSURfM18iICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiLz4KCQk8L2NsaXBQYXRoPgoJCTxnIGNsYXNzPSJzdDEiPgoJCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjE4MS45LDUzMi42IDE4MS45LDEzMi4yIDQ3NS43LDEzMi4yIAkJCSIvPgoJCQk8cG9seWdvbiBjbGFzcz0ic3QzIiBwb2ludHM9IjQ3NS43LDEzMi4yIDQ3NS43LDUzMi42IDE4MS45LDUzMi42IAkJCSIvPgoJCTwvZz4KCTwvZz4KCTxjaXJjbGUgY2xhc3M9InN0NCIgY3g9IjMyNi41IiBjeT0iMzE0LjIiIHI9IjYzIi8+Cgk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMzE1LjEsMzQ3LjJsLTI5LjYtMjcuNGw5LjktMTAuN2wxOC44LDE3LjVsNDIuNC00NS43bDEwLjcsMTBMMzE1LjEsMzQ3LjJ6Ii8+CjwvZz4KPC9zdmc+Cg==</inhoud>
-               <isRelevantVoor StUF:entiteittype="EDCZAK">
-                  <gerelateerde StUF:entiteittype="ZAK">
-                     <identificatie>1900208787</identificatie>
-                     <omschrijving xsi:nil="true" StUF:noValue="waardeOnbekend"/>
-                  </gerelateerde>
-               </isRelevantVoor>
-            </object>
-         </antwoord>
-		 
-      </edcLa01>
-   </s:Body>
+	<s:Body>
+		<edcLa01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<stuurgegevens>
+				<StUF:berichtcode>La01</StUF:berichtcode>
+				<StUF:zender>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>CDR</StUF:applicatie>
+				</StUF:zender>
+				<StUF:ontvanger>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>GWS4all</StUF:applicatie>
+					<StUF:gebruiker>Gebruiker</StUF:gebruiker>
+				</StUF:ontvanger>
+				<StUF:referentienummer>438039a6-3b23-47df-82f9-1921b7e27781</StUF:referentienummer>
+				<StUF:tijdstipBericht>20200507075604097</StUF:tijdstipBericht>
+				<StUF:crossRefnummer>b84e08ea-b406-4fcb-842d-6397e78da8b2</StUF:crossRefnummer>
+				<StUF:entiteittype>EDC</StUF:entiteittype>
+			</stuurgegevens>
+			<parameters>
+				<StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+			</parameters>
+			<antwoord>
+				<object StUF:entiteittype="EDC">
+					<identificatie>1900209655</identificatie>
+					<dct.omschrijving>documenttype</dct.omschrijving>
+					<creatiedatum>20200501</creatiedatum>
+					<ontvangstdatum>00010101</ontvangstdatum>
+					<titel>titel</titel>
+					<beschrijving xsi:nil="true" StUF:noValue="geenWaarde" />
+					<formaat>formaat</formaat>
+					<taal>nld</taal>
+					<versie xsi:nil="true" StUF:noValue="geenWaarde" />
+					<status xsi:nil="true" StUF:noValue="geenWaarde" />
+					<verzenddatum xsi:nil="true" StUF:noValue="geenWaarde" />
+					<vertrouwelijkAanduiding>VERTROUWELIJK</vertrouwelijkAanduiding>
+					<auteur>gebruiker</auteur>
+					<link xsi:nil="true" StUF:noValue="geenWaarde" />
+					<inhoud a:contentType="application/octet-stream"
+						StUF:bestandsnaam="valid.svg"
+						xmlns:a="http://www.w3.org/2005/05/xmlmime">
+						PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIwLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA2NTAgNjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2NTAgNjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzgwN0Y3Rjt9Cgkuc3Qxe2NsaXAtcGF0aDp1cmwoI1NWR0lEXzFfKTt9Cgkuc3Qye2ZpbGw6I0ZGRkZGRjt9Cgkuc3Qze2ZpbGw6I0U4RThFODt9Cgkuc3Q0e2ZpbGw6IzAwRUUwMDt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGNpcmNsZSBjbGFzcz0ic3QwIiBjeD0iMzI0LjciIGN5PSIzMjQuOSIgcj0iMzIxLjUiLz4KCTwvZz4KPC9nPgo8ZyBpZD0iTGF5ZXJfNCI+Cgk8Zz4KCQk8ZGVmcz4KCQkJPHBhdGggaWQ9IlNWR0lEXzNfIiBkPSJNNDYzLjIsMTYwYy0wLjQtMTAuNS05LTE5LTE5LjYtMTlIMjA5LjFjLTEwLjYsMC0xOS4yLDguNS0xOS42LDE5aC0wLjF2MjQzLjZjMCwyOS43LDEsNTguOCw1NCw3NS4yCgkJCQlsODIuOSwyNy44bDgzLTI3LjhjNTMuNC0yMS44LDU0LTQ1LjYsNTQtNzUuMkw0NjMuMiwxNjBMNDYzLjIsMTYweiIvPgoJCTwvZGVmcz4KCQk8Y2xpcFBhdGggaWQ9IlNWR0lEXzFfIj4KCQkJPHVzZSB4bGluazpocmVmPSIjU1ZHSURfM18iICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiLz4KCQk8L2NsaXBQYXRoPgoJCTxnIGNsYXNzPSJzdDEiPgoJCQk8cG9seWdvbiBjbGFzcz0ic3QyIiBwb2ludHM9IjE4MS45LDUzMi42IDE4MS45LDEzMi4yIDQ3NS43LDEzMi4yIAkJCSIvPgoJCQk8cG9seWdvbiBjbGFzcz0ic3QzIiBwb2ludHM9IjQ3NS43LDEzMi4yIDQ3NS43LDUzMi42IDE4MS45LDUzMi42IAkJCSIvPgoJCTwvZz4KCTwvZz4KCTxjaXJjbGUgY2xhc3M9InN0NCIgY3g9IjMyNi41IiBjeT0iMzE0LjIiIHI9IjYzIi8+Cgk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMzE1LjEsMzQ3LjJsLTI5LjYtMjcuNGw5LjktMTAuN2wxOC44LDE3LjVsNDIuNC00NS43bDEwLjcsMTBMMzE1LjEsMzQ3LjJ6Ii8+CjwvZz4KPC9zdmc+Cg==</inhoud>
+					<isRelevantVoor StUF:entiteittype="EDCZAK">
+						<gerelateerde StUF:entiteittype="ZAK">
+							<identificatie>1900208787</identificatie>
+							<omschrijving xsi:nil="true"
+								StUF:noValue="waardeOnbekend" />
+						</gerelateerde>
+					</isRelevantVoor>
+				</object>
+			</antwoord>
+
+		</edcLa01>
+	</s:Body>
 </s:Envelope>
