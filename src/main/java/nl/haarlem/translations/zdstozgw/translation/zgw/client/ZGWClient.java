@@ -189,7 +189,7 @@ public class ZGWClient {
 		return 	authorization;
 	}
 	
-	private HttpHeaders getHeaders(ZgwAuthorization authorization, String url) {
+	private HttpHeaders getRequestHeaders(ZgwAuthorization authorization, String url) {
 		var headers = new HttpHeaders();
 		headers.set("Authorization", authorization.getAuthorizationToken(url));		
 		headers.set("Accept-Crs", "EPSG:4326");
@@ -198,23 +198,28 @@ public class ZGWClient {
 
 		return headers;
 	}
-
+		
+	
 	private String post(ZgwAuthorization authorization, String url, String json) {
 		String debugName = "ZGWClient POST";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization, url));
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getRequestHeaders(authorization, url));
 		log.debug("\n\tPOST: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
-			long[] exchangeDuration = new long[2];
+			//long[] exchangeDuration = new long[2];
 			String finalUrl = url;
 			String zgwResponse = (String) debug.endpoint(debugName, () -> {
-				exchangeDuration[0] = System.currentTimeMillis();
-				String response = this.restTemplateService.getRestTemplate().postForObject(finalUrl, entity, String.class);
-				exchangeDuration[1] = System.currentTimeMillis();
+				//exchangeDuration[0] = System.currentTimeMillis();
+		        ResponseEntity<String> responseEntity = this.restTemplateService.getRestTemplate().exchange(finalUrl, HttpMethod.POST, entity, String.class);    
+		        authorization.setVersion(url, responseEntity);
+		        log.info(authorization.getVersion(url));
+		        String response = responseEntity.getBody();
+				//exchangeDuration[1] = System.currentTimeMillis();
 				return response;
-			});
+			});					
+			
 			long endTime = System.currentTimeMillis();
 			var duration = endTime - startTime;
 			var message = "POST to: " + url + " took " + duration + " milliseconds";
@@ -257,7 +262,7 @@ public class ZGWClient {
 				parameters.put(key, debug.inputpoint("Parameter " + key, parameters.get(key)));
 			}
 		}
-		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization, url));
+		HttpEntity<String> entity = new HttpEntity<String>(this.getRequestHeaders(authorization, url));
 		log.debug("\n\tGET: " + url + "\n\tHeaders:" + entity.getHeaders().toString());
 		try {
 			long startTime = System.currentTimeMillis();
@@ -294,7 +299,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient GET(BASE64)";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
-		HttpEntity entity = new HttpEntity(this.getHeaders(authorization, url));
+		HttpEntity entity = new HttpEntity<>(this.getRequestHeaders(authorization, url));
 		log.debug("\n\tGET(BASE64): " + url + "\n\tHeaders:" + entity.getHeaders().toString() );
 		try {
 			long startTime = System.currentTimeMillis();
@@ -327,7 +332,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient DELETE";
 		debug.startpoint(debugName);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(this.getHeaders(authorization, url));
+		HttpEntity<String> entity = new HttpEntity<String>(this.getRequestHeaders(authorization, url));
 		log.debug("\n\tDELETE: " + url + "\n\tHeaders:" + entity.getHeaders().toString());	
 		try {
 			long startTime = System.currentTimeMillis();
@@ -364,7 +369,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient PUT";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization, url));
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getRequestHeaders(authorization, url));
 		log.debug("\n\tPUT: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
@@ -403,7 +408,7 @@ public class ZGWClient {
 		String debugName = "ZGWClient PATCH";
 		json = debug.startpoint(debugName, json);
 		url = debug.inputpoint("url", url);
-		HttpEntity<String> entity = new HttpEntity<String>(json, this.getHeaders(authorization, url));
+		HttpEntity<String> entity = new HttpEntity<String>(json, this.getRequestHeaders(authorization, url));
 		log.debug("\n\tPATCH: " + url + "\n\tHeaders:" + entity.getHeaders().toString() + "\n\tJson: " + json);
 		try {
 			long startTime = System.currentTimeMillis();
@@ -456,31 +461,31 @@ public class ZGWClient {
 		return null;		
 	}
 	
-	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByIdentiticatie(ZgwAuthorization authorization, String documentIdentificatie, boolean expand) {
+	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByIdentiticatie(ZgwAuthorization authorization, String documentIdentificatie, String expand) {
 		log.debug("get zaakdocument #" + documentIdentificatie);
 
 		if(documentIdentificatie == null || documentIdentificatie.length() == 0) {
 			throw new ConverterException("getZgwEnkelvoudigInformatieObjectByIdentiticatie without an identificatie");
 		}
 
-		Map<String, String> parameters = new HashMap();		
+		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", documentIdentificatie);
-		if(expand) {
-			parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		if(expand != null) {
+			parameters.put("expand", expand);
 		}		
 		ZgwEnkelvoudigInformatieObject zgwDocument = this.getZgwEnkelvoudigInformatieObject(authorization, parameters);
 		authorization.cacheAdd(zgwDocument);
 		return zgwDocument;
 	}
 	
-	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByUrl(ZgwAuthorization authorization, String url, boolean expand) {
+	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByUrl(ZgwAuthorization authorization, String url, String expand) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwEnkelvoudigInformatieObject) cachedObject;		
 
-		Map<String, String> parameters = new HashMap();
-		if(expand) {
-			parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		Map<String, String> parameters = new HashMap<>();
+		if(expand != null) {
+			parameters.put("expand", expand);
 		}
 		var zaakInformatieObjectJson = get(authorization, url, parameters);
 		Gson gson = new Gson();
@@ -521,13 +526,13 @@ public class ZGWClient {
 		return queryResult.getResults();
 	}	
 
-	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url, boolean expand) {
+	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url, String expand) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwZaak) cachedObject;
 		
-		Map<String, String> parameters = new HashMap();
-		if(expand) {
-			parameters.put("expand", getZakenExpandParameterValue());
+		Map<String, String> parameters = new HashMap<>();
+		if(expand != null) {
+			parameters.put("expand", expand);
 		}
 		var zaakJson = get(authorization, url, parameters);
 		Gson gson = new Gson();
@@ -540,11 +545,6 @@ public class ZGWClient {
 		return result;
 	}	
 	
-	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url) {
-		return getZaakByUrl(authorization, url, true);
-	}
-
-
 	public ZgwCatalogus getCatalogus(ZgwAuthorization authorization, Map<String, String> parameters) {
 		ZgwCatalogus result = null;
 		var catalogusJson = get(authorization, this.catalogiUrl + this.endpointCatalogus, parameters);
@@ -563,7 +563,7 @@ public class ZGWClient {
 			throw new ConverterException("getCatalogusByRsin without an rsin");
 		}
 
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("rsin", rsin);
 		ZgwCatalogus zgwCatalogus = this.getCatalogus(authorization, parameters);
 
@@ -765,7 +765,7 @@ public class ZGWClient {
 //	}
 
 	public ZgwRolType getRolTypeByZaaktypeAndOmschrijving(ZgwAuthorization authorization, ZgwZaakType zgwZaakType, String omschrijving) {		
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaaktype", zgwZaakType.url);
 		List<ZgwRolType> roltypen = getRolTypen(authorization, parameters);
 		for (ZgwRolType roltype : roltypen) {
@@ -799,7 +799,7 @@ public class ZGWClient {
 
 
 	public List<ZgwZaakInformatieObject> getZaakInformatieObjectenByZaak(ZgwAuthorization authorization, String zaakUrl) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaak", zaakUrl);
 		return this.getZgwZaakInformatieObjects(authorization, parameters);
 	}
@@ -817,62 +817,18 @@ public class ZGWClient {
 		authorization.cacheAdd(result);
 		return result;
 	}
-	
-	private String getEnkelvoudigInformatieObjectenExpandParameterValue() {
-		var expand = new ArrayList<String>();
-		expand.add("informatieobjecttype");
-		return String.join(",", expand);
-	}
-	
-	
-	private String getZakenExpandParameterValue() {
-		var expand = new ArrayList<String>();
-		expand.add("zaaktype");
-		//expand.add("eigenschappen");
-		//expand.add("eigenschappen.eigenschap");
-		expand.add("status");
-		expand.add("status.statustype");
-		expand.add("resultaat");
-		expand.add("resultaat.resultaattype");
-		expand.add("rollen");
-		expand.add("rollen.roltype");
-		if(!additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching) {
-			expand.add("zaakinformatieobjecten");
-		}
-		//expand.add("zaakobjecten");
-		//expand.add("hoofdzaak");	
-		//expand.add("hoofdzaak.zaaktype");		
-		//expand.add("hoofdzaak.status");
-		//expand.add("hoofdzaak.status.statustype");
-		//expand.add("hoofdzaak.resultaat");
-		//expand.add("hoofdzaak.resultaat.resultaattype");
-		//expand.add("hoofdzaak.rollen");
-		//expand.add("hoofdzaak.rollen.roltype");
-		//expand.add("hoofdzaak.zaakinformatieobjecten");
-		//expand.add("hoofdzaak.zaakobjecten");
-		//expand.add("deelzaken");	
-		//expand.add("deelzaken.zaaktype");		
-		//expand.add("deelzaken.status");
-		//expand.add("deelzaken.status.statustype");
-		//expand.add("deelzaken.resultaat");
-		//expand.add("deelzaken.resultaat.resultaattype");
-		//expand.add("deelzaken.rollen");
-		//expand.add("deelzaken.rollen.roltype");
-		//expand.add("deelzaken.zaakinformatieobjecten");
-		//expand.add("deelzaken.zaakobjecten");
-		return String.join(",", expand);
-	}
 
-	public List<ZgwZaak> getZakenByBsn(ZgwAuthorization authorization, String bsn, boolean expand) {
+
+	public List<ZgwZaak> getZakenByBsn(ZgwAuthorization authorization, String bsn, String expand) {
 		if(bsn == null || bsn.length() == 0) {
 			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
 
-		Map<String, String> parameters = new HashMap();		
+		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);	
-		if(expand) {
-			parameters.put("expand", getZakenExpandParameterValue());
+		if(expand != null) {
+			parameters.put("expand", expand);
 		}
 
 		List<ZgwZaak> zaken = this.getZaken(authorization, parameters);
@@ -881,16 +837,16 @@ public class ZGWClient {
 	}	
 	
 	
-	public ZgwZaak getZaakByIdentificatie(ZgwAuthorization authorization, String zaakIdentificatie, boolean expand) {
+	public ZgwZaak getZaakByIdentificatie(ZgwAuthorization authorization, String zaakIdentificatie, String expand) {
 		if(zaakIdentificatie == null || zaakIdentificatie.length() == 0) {
 			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
 
-		Map<String, String> parameters = new HashMap();		
+		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", zaakIdentificatie);
-		if(expand) {
-			parameters.put("expand", getZakenExpandParameterValue());
+		if(expand!=null) {
+			parameters.put("expand", expand);
 		}		
 		ZgwZaak zgwZaak = this.getZaak(authorization, parameters);		
 		if (zgwZaak == null) {
@@ -913,12 +869,8 @@ public class ZGWClient {
 		return zgwZaak;
 	}
 
-	public ZgwZaak getZaakByIdentificatie(ZgwAuthorization authorization, String zaakIdentificatie) {
-		return getZaakByIdentificatie(authorization, zaakIdentificatie, true);
-	}
-	
 	public ZgwZaakInformatieObject getZgwZaakInformatieObjectByEnkelvoudigInformatieObjectUrl(ZgwAuthorization authorization, String url) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("informatieobject", url);		
 		var zaakinformatieobjecten = this.getZgwZaakInformatieObjects(authorization, parameters);		
 		if(zaakinformatieobjecten.size() == 0) {
@@ -930,7 +882,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwStatusType> getStatusTypesByZaakType(ZgwAuthorization authorization, ZgwZaakType zgwZaakType) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaaktype", zgwZaakType.url);
 		List<ZgwStatusType> statustypes = this.getStatusTypes(authorization, parameters);
 		return statustypes;
@@ -938,7 +890,7 @@ public class ZGWClient {
 
 
 	public ZgwStatusType getLastStatusTypeByZaakType(ZgwAuthorization authorization, ZgwZaakType zgwZaakType) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaaktype", zgwZaakType.url);
 		for(ZgwStatusType statustype : this.getStatusTypes(authorization, parameters)) {
 			if("true".equals(statustype.isEindstatus)) {
@@ -949,7 +901,7 @@ public class ZGWClient {
 	}
 
 	public ZgwStatusType getStatusTypeByZaakTypeAndOmschrijving(ZgwAuthorization authorization, ZgwZaakType zaakType, String statusOmschrijving, String verwachteVolgnummer) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaaktype", zaakType.url);
 		List<ZgwStatusType> statustypes = this.getStatusTypes(authorization, parameters);
 
@@ -1009,13 +961,13 @@ public class ZGWClient {
 	}
 
 	public List<ZgwResultaat> getResultatenByZaakUrl(ZgwAuthorization authorization, String zaakUrl) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaak", zaakUrl);
 		return this.getResultaten(authorization, parameters);
 	}
 
 	public List<ZgwRol> getRollenByZaakUrl(ZgwAuthorization authorization, String zaakUrl) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaak", zaakUrl);
 
 		return this.getRollen(authorization, parameters);
@@ -1038,14 +990,14 @@ public class ZGWClient {
 	
 
 	public List<ZgwRol> getRollenByBsn(ZgwAuthorization authorization, String bsn) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);
 		return this.getRollen(authorization, parameters);
 	}
 	
 
 	public ZgwRol getRolByZaakUrlAndRolTypeUrl(ZgwAuthorization authorization, String zaakUrl, String rolTypeUrl) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaak", zaakUrl);
 		parameters.put("roltype", rolTypeUrl);
 
@@ -1053,7 +1005,7 @@ public class ZGWClient {
 	}
 
 	public List<ZgwStatus> getStatussenByZaakUrl(ZgwAuthorization authorization, String zaakUrl) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("zaak", zaakUrl);
 
 		return this.getStatussen(authorization, parameters);
@@ -1183,20 +1135,23 @@ public class ZGWClient {
 	}
 
 	public List<ZgwObjectInformatieObject> getObjectInformatieObjectsByUrl(ZgwAuthorization authorization, String objecturl) {
-		Map<String, String> parameters = new HashMap();
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("object", objecturl);
 		return this.getObjectInformatieObjectsByUrl(authorization, parameters);
 	}
 
-	public List<ZgwEnkelvoudigInformatieObject> getEnkelvoudigInformatieObjectenByObject(ZgwAuthorization authorization, String objecturl) {
+	public List<ZgwEnkelvoudigInformatieObject> getEnkelvoudigInformatieObjectenByObject(ZgwAuthorization authorization, String objecturl, String expand) {
 		log.debug("get getEnkelvoudigInformatieObjectenByObject #" + objecturl);
 
-		Map<String, String> parameters = new HashMap();		
+		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("objectinformatieobjecten__object", objecturl);
-		parameters.put("expand", getEnkelvoudigInformatieObjectenExpandParameterValue());
+		if(expand != null) {
+			parameters.put("expand", expand);
+		}		
 		
-		return getZgwEnkelvoudigInformatieObjecten(authorization, parameters);
-	
+		var result = getZgwEnkelvoudigInformatieObjecten(authorization, parameters);
+		authorization.cacheAdd(result);				
+		return result; 	
 	}
 }

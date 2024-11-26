@@ -25,6 +25,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 
 import nl.haarlem.translations.zdstozgw.converter.ConverterException;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwBetrokkeneIdentificatie;
@@ -56,6 +57,16 @@ public class ZgwAuthorization {
 			this.jwtSecret = jwtSecret;
 			this.jwtClientIds = jwtClientIds;
 			this.authorization = authorization;
+		}
+		
+		private String version;
+
+		public void setVersion(String version) {
+			this.version = version;			
+		}
+
+		public String getVersion() {
+			return this.version;
 		}
 	}
 	
@@ -138,6 +149,28 @@ public class ZgwAuthorization {
 		throw new ConverterException("No authorization defined for the url: " + url); 
 	}
 
+	public void setVersion(String url, ResponseEntity<String> responseEntity) {
+        List<String> apiVersionHeader = responseEntity.getHeaders().get("API-version");
+        String version = responseEntity.getHeaders().get("API-version").get(0);
+        log.info(version);		
+		
+		for(String baseurl: this.authorizations.keySet()) {
+			if(url.startsWith(baseurl)) {
+				authorizations.get(baseurl).setVersion(version);
+			}
+		}
+		throw new ConverterException("No authorization defined for the url: " + url); 
+	}
+
+	public String getVersion(String url) {
+		for(String baseurl: this.authorizations.keySet()) {
+			if(url.startsWith(baseurl)) {
+				return authorizations.get(baseurl).getVersion();
+			}
+		}
+		throw new ConverterException("No authorization defined for the url: " + url); 
+	}	
+	
 	public void setCatalogus(ZgwCatalogus catalogus) {
 		this.catalogus = catalogus;
 	}
@@ -174,10 +207,10 @@ public class ZgwAuthorization {
 	    @Override
 	    public String toString() {
 	        StringBuilder sb = new StringBuilder();
-	        sb.append(String.format("LRUCache{capacity=%d, currentSize=%d}\n", capacity, size()));
+	        sb.append(String.format("\n\t\t[CACHE-LRU Cachecapacity=%d, currentSize=%d]\n", capacity, size()));
 	        for (Map.Entry<K, V> entry : entrySet()) {
 	            // sb.append(String.format("\t[%s] %s %s\n", entry.getKey(), entry.getValue().getClass().getSimpleName(), entry.getValue()));
-	        	sb.append(String.format("\t[%s] %s\n", entry.getKey(), entry.getValue()));
+	        	sb.append(String.format("\t\t\t%s\t%s\n", entry.getKey(), entry.getValue().getClass().getSimpleName()));
 	        }
 	        return sb.toString();
 	    }
@@ -191,7 +224,7 @@ public class ZgwAuthorization {
 	}		
 	
 	public void cacheAdd(ZgwObject zgwObject) {
-		log.debug("Cache add zgwObject:" + getUuid(zgwObject.url));		
+		log.debug("\n\t\t[ADD-CACHE-ZGWOBJECT-ADD] '" + zgwObject.getClass().getSimpleName() + "' : " + getUuid(zgwObject.url));		
 		
 		if(!cache.hasCapacity()) {
 			log.warn("Volle zgwobject-cache!(" + cache.size() + " objects)");
@@ -220,7 +253,7 @@ public class ZgwAuthorization {
 	            }	            
 	            else if (ZgwObject.class.isAssignableFrom(field.getType())) {
 	                ZgwObject zgwObject = (ZgwObject) fieldValue;
-	                log.debug("Cache ZgwObject add '" + field.getName() + "' : " + getUuid(zgwObject.url));
+	                log.debug("\n\t\t[MEMBER-CACHE-ZGWOBJECT-ADD] '" + field.getName() + "' : " + getUuid(zgwObject.url));
 	                cache.put(getUuid(zgwObject.url), zgwObject);
 	                cacheMembers(zgwObject);
 	            } else if (Collection.class.isAssignableFrom(field.getType())) {
@@ -229,7 +262,7 @@ public class ZgwAuthorization {
 	                for (Object item : collection) {
 	                    if (item instanceof ZgwObject) {
 	                        ZgwObject zgwObject = (ZgwObject) item;
-	                        log.debug("Cache Collection-add '" + field.getName() + "' : " + zgwObject.uuid);
+	                        log.debug("\n\t\t[MEMBER-CACHE-COLLECTION-ADD] '" + field.getName() + "' : " + zgwObject.uuid);
 	                        cache.put(getUuid(zgwObject.url), zgwObject);
 	                        cacheMembers(zgwObject);
 	                    }
@@ -241,7 +274,7 @@ public class ZgwAuthorization {
 	            		Object item = Array.get(fieldValue, i);
 	            		if (item instanceof ZgwObject) {
 	            			ZgwObject zgwObject = (ZgwObject) item;
-	            			log.debug("Cache Arry-add " + field.getName() + " : " + getUuid(zgwObject.url));
+	            			log.debug("\n\t\t[MEMBER-CACHE-ARRAY-ADD] '" + field.getName() + "' : " + getUuid(zgwObject.url));
 	            			cache.put(getUuid(zgwObject.url), zgwObject);
 	            			cacheMembers(zgwObject);
 	            		}
@@ -255,7 +288,7 @@ public class ZgwAuthorization {
 	            	// basictypes: no caching needed
 	            }
 	            else {
-	            	log.debug("NOT CACHING: '" + field.getName() + "' : " + field.getType().getName());
+	            	log.debug("\n\t\t[MEMBER-CACHE-IGNORE] '" + field.getName() + "' : " + field.getType().getName());
 	            }
             }
             catch(Exception e) {
@@ -274,11 +307,14 @@ public class ZgwAuthorization {
     }
     
 	public ZgwObject cacheGet(String url) {
-		log.debug("Cache looking for:" + url);
 		// also accept urls
 		var uuid = getUuid(url);
-		if(cache.get(uuid) != null) log.debug("Cache hit:" + uuid + " (url: " + cache.get(uuid).url + " java-type:" + cache.get(uuid).getClass().getName() + ")");
-		else log.debug("Cache miss:" + uuid);
+		if(cache.get(uuid) != null) {
+			log.debug("\n\t\t[GET-CACHE-FOUND]" + uuid + " (url: " + cache.get(uuid).url + " java-type:" + cache.get(uuid).getClass().getName() + ")");			
+		}
+		else {
+			log.debug("\n\t\t[GET-CACHE-MISS]" + uuid);			
+		}
 		return cache.get(uuid);
 	}
 }

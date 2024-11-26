@@ -73,7 +73,7 @@ public class Replicator {
 
 	public void replicateZaak(ZgwAuthorization authorization, String zaakidentificatie) {
 		debug.infopoint("replicatie", "Start repliceren van zaak met identificatie:" + zaakidentificatie);
-		var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie);
+		var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, null);
 		var zdsZaak = getLegacyZaak(zaakidentificatie);		
 		if (zgwZaak == null) {
 			createZaak(authorization, zdsZaak);
@@ -127,7 +127,7 @@ public class Replicator {
 	
 	public void replicateDocument(ZgwAuthorization authorization, String documentidentificatie) {
 		debug.infopoint("replicatie", "Start repliceren van document met identificatie:" + documentidentificatie);
-		var zgwDocument = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentidentificatie, true);
+		var zgwDocument = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, documentidentificatie, null);
 		if (zgwDocument == null) {
 			debug.infopoint("replicatie", "document not found, copying document with identificatie #" + documentidentificatie);
 			copyDocument(authorization, documentidentificatie);
@@ -167,13 +167,13 @@ public class Replicator {
 
     private void replicateDocumenten(ZgwAuthorization authorization, String zaakidentificatie, List<ZdsHeeftRelevant> relevanteDocumenten) {
     	debug.infopoint("replicatie", "Aantal gekoppelde zaakdocumenten is: " + relevanteDocumenten.size() + "(zaakid: " + zaakidentificatie + ")");
-    	var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie);
+    	var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, null);
     	var zgwZaakDocumenten = this.converter.getZaakService().zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
         for (ZdsHeeftRelevant relevant : relevanteDocumenten) {
             var zaakdocumentidentificatie = relevant.gerelateerde.identificatie;
             debug.infopoint("replicatie", "Start repliceren van zaakdocument met  identificatie:" + zaakdocumentidentificatie + "(zaakid: " + zaakidentificatie + ")");
 
-            ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zaakdocumentidentificatie, true);
+            ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.converter.getZaakService().zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zaakdocumentidentificatie, null);
             if (zgwEnkelvoudigInformatieObject == null) {
             	debug.infopoint("replicatie", "document not found, copying document with identificatie #" + zaakdocumentidentificatie);
             	try {

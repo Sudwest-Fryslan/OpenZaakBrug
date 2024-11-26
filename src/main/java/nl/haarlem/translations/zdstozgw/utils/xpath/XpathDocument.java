@@ -46,7 +46,7 @@ public class XpathDocument {
 		this.xPath = XPathFactory.newInstance().newXPath();
 		this.xPath.setNamespaceContext(new NamespaceContext() {
 			@Override
-			public Iterator getPrefixes(String arg0) {
+			public Iterator<String> getPrefixes(String arg0) {
 				return null;
 			}
 
