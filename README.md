@@ -37,13 +37,13 @@ De functioneel beheerders van de verschillende backoffice applicaties hebben de 
 |-------------------------------------------------|----------------|
 | Suites voor Sociaaldomein                       | live           |
 | Gisvg (wabo/apv-vergunningen)                   | live           |
-| Midofficevuller (verhuizing/identiteitskaart/rijbewijs) | live |
-| Sleeptool (toevoegen documenten aan bestaande zaak) | live |
+| Midofficevuller (verhuizing/identiteitskaart/rijbewijs) | live   |
+| Sleeptool (toevoegen documenten aan bestaande zaak) | live       |
 | Verint Kana                                     | in acceptatie  |
 | Gidso regiesysteem                              | live           |
 | Powerbrowser                                    | live           |
 | Centric Leefomgeving                            | in acceptatie  |
-| Signicat CityPermit                             | in acceptatie  |
+| Signicat CityPermit                             | live           |
 
 ### Webservice functies
 
