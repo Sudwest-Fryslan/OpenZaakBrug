@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk
+FROM eclipse-temurin:11-jdk
 ENV TZ=Europe/Amsterdam
 WORKDIR /home
 RUN mkdir lib && mkdir data
