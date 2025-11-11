@@ -29,10 +29,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Setup timezone
-        uses: MathRobin/timezone-action@v1.1
-        with:
-          timezoneLinux: 'Europe/Amsterdam'
+      - name: Switch Timezone to Europe/Amsterdam
+        run: sudo timedatectl set-timezone Europe/Amsterdam
 
       - name: Build project with Maven
         run: mvn -B -Dtest=ModelMapperTests test --file pom.xml
