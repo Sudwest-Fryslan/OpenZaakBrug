@@ -32,6 +32,9 @@ jobs:
       - name: Switch Timezone to Europe/Amsterdam
         run: sudo timedatectl set-timezone Europe/Amsterdam
 
+      - name: Check if timezone is set correctly
+        run: timedatectl
+
       - name: Build project with Maven
         run: mvn -B -Dtest=ModelMapperTests test --file pom.xml
 
