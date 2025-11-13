@@ -332,7 +332,7 @@ public class ModelMapperConfig {
 			}
 
 			var zgwDate = zgwDateFormatter.format(date);
-			System.out.println("convertStufDateToZgwDate: " + stufDate + " (amsterdam) --> " + zgwDate
+			log.debug("convertStufDateToZgwDate: " + stufDate + " (amsterdam) --> " + zgwDate
 					+ "(gmt) with offset minutes:" + ModelMapperConfig.singleton.timeoffset  + "(date:" + date + ")");
 			return zgwDate;
 
@@ -346,23 +346,23 @@ public class ModelMapperConfig {
 	}
 
 	static public String convertStufDateTimeToZgwDateTime(String stufDateTime, int offsetSeconds) {
-		System.out.println("convertStufDateTimeToZgwDateTime:" + stufDateTime);
+		log.debug("convertStufDateTimeToZgwDateTime:" + stufDateTime);
 		if (stufDateTime == null || stufDateTime.length() == 0) {
 			return null;
 		}
 		if (stufDateTime.length() == 8 || stufDateTime.length() == 12 || stufDateTime.length() == 14) {
-			System.out.println("convertStufDateTimeToZgwDateTime input is a datetime of "+stufDateTime.length()+" characters:"
+			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of "+stufDateTime.length()+" characters:"
 					+ stufDateTime + " will be expanded to 16");
 			stufDateTime = stufDateTime + StringUtils.repeat("0", 16 - stufDateTime.length());
 		}
 		if (stufDateTime.length() == 17) {
-			System.out.println("convertStufDateTimeToZgwDateTime input is a datetime of 17 characters:"
+			log.debug("convertStufDateTimeToZgwDateTime input is a datetime of 17 characters:"
 						+ stufDateTime + " will be trimmed to 16");
 			stufDateTime = stufDateTime.substring(0, 16);
 		}
 		if (stufDateTime.length() == 16 ) {
 			// input a datetime
-			System.out.println("convertStufDateTimeToZgwDateTime input is a datetime:\t" + stufDateTime);
+			log.debug("convertStufDateTimeToZgwDateTime input is a datetime:\t" + stufDateTime);
 			try {
 
 				DateTimeFormatter stufFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSS");
@@ -371,24 +371,24 @@ public class ModelMapperConfig {
 				// check if it is a date or a datetime (ignore the seconds, this is used for the status)
 				if(cetDate.getHour() == 0 && cetDate.getMinute() == 0 && cetDate.getNano() == 0) {
 					// a date
-					System.out.println("convertStufDateTimeToZgwDateTime [date] parsed:\t\t\t" + cetDate.toString());
+					log.debug("convertStufDateTimeToZgwDateTime [date] parsed:\t\t\t" + cetDate.toString());
 					cetDate = cetDate.plusSeconds(offsetSeconds);
 					DateTimeFormatter zdsFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 					var result = cetDate.format(zdsFormatter);
-					System.out.println("convertStufDateTimeToZgwDateTime [date] result:\t\t\t" + result);
+					log.debug("convertStufDateTimeToZgwDateTime [date] result:\t\t\t" + result);
 					return result;
 				}
 				else {
 					// a datetime, apply timezone and offset
-					System.out.println("convertStufDateTimeToZgwDateTime [datetime] parsed:\t\t\t" + cetDate.toString());
+					log.debug("convertStufDateTimeToZgwDateTime [datetime] parsed:\t\t\t" + cetDate.toString());
 					var gmtDate = cetDate.withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
-					System.out.println("convertStufDateTimeToZgwDateTime [datetime] to GMT tomezone:\t\t" + gmtDate.toString());
+					log.debug("convertStufDateTimeToZgwDateTime [datetime] to GMT tomezone:\t\t" + gmtDate.toString());
 					gmtDate = gmtDate.plusMinutes(Integer.parseInt(ModelMapperConfig.singleton.timeoffset));
 					gmtDate = gmtDate.plusSeconds(offsetSeconds);
-					System.out.println("convertStufDateTimeToZgwDateTime [datetime] added offset:\t\t" + gmtDate.toString() + " (offset in minutes:" + ModelMapperConfig.singleton.timeoffset  + ")");
+					log.debug("convertStufDateTimeToZgwDateTime [datetime] added offset:\t\t" + gmtDate.toString() + " (offset in minutes:" + ModelMapperConfig.singleton.timeoffset  + ")");
 					DateTimeFormatter zdsFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 					var result = gmtDate.format(zdsFormatter);
-					System.out.println("convertStufDateTimeToZgwDateTime [datetime] result:\t\t\t" + result);
+					log.debug("convertStufDateTimeToZgwDateTime [datetime] result:\t\t\t" + result);
 					return result;
 				}
 			} catch (Exception e) {
@@ -402,7 +402,7 @@ public class ModelMapperConfig {
 	}
 
 	static public String convertZgwDateToStufDate(String zgwDateTime) {
-		System.out.println("convertZgwDateToStufDate:" + zgwDateTime);
+		log.debug("convertZgwDateToStufDate:" + zgwDateTime);
 		if (zgwDateTime == null || zgwDateTime.length() == 0) {
 			return null;
 		}
@@ -413,10 +413,10 @@ public class ModelMapperConfig {
 		try {
 			DateTimeFormatter zdsFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			var gmtDate = LocalDate.parse(zgwDateTime, zdsFormatter);
-			System.out.println("convertZgwDateToStufDate parsed: " + gmtDate.toString());
+			log.debug("convertZgwDateToStufDate parsed: " + gmtDate.toString());
 			DateTimeFormatter stufFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 			var result = gmtDate.format(stufFormatter);
-			System.out.println("convertZgwDateToStufDate result: " + result);
+			log.debug("convertZgwDateToStufDate result: " + result);
 			return result;
 		} catch (Exception e) {
 			log.warn("error parsing the string:" + zgwDateTime, e);
@@ -425,7 +425,7 @@ public class ModelMapperConfig {
 	}
 
 	static public String convertZgwDateTimeToStufDateTime(String zgwDateTime) {
-		System.out.println("convertZgwDateTimeToStufDateTime:\t" + zgwDateTime);
+		log.debug("convertZgwDateTimeToStufDateTime:\t" + zgwDateTime);
 		if (zgwDateTime == null || zgwDateTime.length() == 0) {
 			return null;
 		}
@@ -439,11 +439,11 @@ public class ModelMapperConfig {
 		try {
 			DateTimeFormatter zdsFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 			ZonedDateTime gmtDate = LocalDateTime.parse(zgwDateTime, zdsFormatter).atZone(ZoneId.of("GMT"));
-			System.out.println("convertZgwDateTimeToStufDateTime parsed:\t" + gmtDate.toString());
+			log.debug("convertZgwDateTimeToStufDateTime parsed:\t" + gmtDate.toString());
 			gmtDate = gmtDate.plusMinutes(-Integer.parseInt(ModelMapperConfig.singleton.timeoffset));
-			System.out.println("convertZgwDateTimeToStufDateTime substractedoffset:\t" + gmtDate.toString());
+			log.debug("convertZgwDateTimeToStufDateTime substractedoffset:\t" + gmtDate.toString());
 			OffsetDateTime cetDate = gmtDate.toOffsetDateTime();
-			System.out.println("convertZgwDateTimeToStufDateTime to cet timezone:\t" + cetDate.toString());
+			log.debug("convertZgwDateTimeToStufDateTime to cet timezone:\t" + cetDate.toString());
 			DateTimeFormatter stufFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 			return gmtDate.format(stufFormatter);
 		} catch (Exception e) {
@@ -498,7 +498,7 @@ public class ModelMapperConfig {
 			@Override
 			protected String convert(String archiefNominatie) {
 				var result = archiefNominatie.toUpperCase().equals("J") ? "vernietigen" : "blijvend_bewaren";
-				System.out.println("getZGWArchiefNominatie: " + archiefNominatie + " --> " + result);
+				log.debug("getZGWArchiefNominatie: " + archiefNominatie + " --> " + result);
 				return result;
 			}
 		};
@@ -510,7 +510,7 @@ public class ModelMapperConfig {
 			@Override
 			protected Boolean convert(String s) {
 				var result = s.toLowerCase().equals("j");
-				System.out.println("convertStringToBoolean: " + s + " --> " + result);
+				log.debug("convertStringToBoolean: " + s + " --> " + result);
 				return result;
 			}
 		};
@@ -522,7 +522,7 @@ public class ModelMapperConfig {
 			@Override
 			protected String convert(Boolean b) {
 				var result = b ? "J" : "N";
-				System.out.println("convertBooleanToString: " + b + " --> " + result);
+				log.debug("convertBooleanToString: " + b + " --> " + result);
 				return result;
 			}
 		};
@@ -534,7 +534,7 @@ public class ModelMapperConfig {
 			@Override
 			protected String convert(String s) {
 				var result = s.toUpperCase().equals("vernietigen") ? "J" : "N";
-				System.out.println("convertZgwArchiefNomitieToZdsArchiefNominatie: " + s + " --> " + result);
+				log.debug("convertZgwArchiefNomitieToZdsArchiefNominatie: " + s + " --> " + result);
 				return result;
 			}
 		};
@@ -546,7 +546,7 @@ public class ModelMapperConfig {
 			@Override
 			protected String convert(String s) {
 				var result = s.toLowerCase();
-				System.out.println("convertToLowerCase: " + s + " --> " + result);
+				log.debug("convertToLowerCase: " + s + " --> " + result);
 				return result;
 			}
 		};
@@ -589,7 +589,7 @@ public class ModelMapperConfig {
 				else {
 					throw new RuntimeException("Betrokkene type: " + zgwRol.getBetrokkeneType() + " nog niet geïmplementeerd");
 				}
-				System.out.println("convertToLowerCase: " + zgwRol.roltoelichting + " --> " + zdsRol.toString());
+				log.debug("convertToLowerCase: " + zgwRol.roltoelichting + " --> " + zdsRol.toString());
 				return zdsRol;
 			}
 		};
