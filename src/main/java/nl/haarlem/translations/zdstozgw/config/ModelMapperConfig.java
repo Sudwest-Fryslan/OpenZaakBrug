@@ -366,7 +366,7 @@ public class ModelMapperConfig {
 			try {
 
 				DateTimeFormatter stufFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSS");
-				ZonedDateTime cetDate = LocalDateTime.parse(stufDateTime, stufFormatter).atZone(ZoneId.systemDefault());
+				ZonedDateTime cetDate = LocalDateTime.parse(stufDateTime, stufFormatter).atZone(ZoneId.of("Europe/Amsterdam"));
 
 				// check if it is a date or a datetime (ignore the seconds, this is used for the status)
 				if(cetDate.getHour() == 0 && cetDate.getMinute() == 0 && cetDate.getNano() == 0) {
