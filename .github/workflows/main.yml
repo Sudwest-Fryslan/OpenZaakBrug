@@ -36,7 +36,7 @@ jobs:
         run: timedatectl
 
       - name: Build project with Maven
-        run: mvn -B -Dtest=ModelMapperTests test --file pom.xml
+        run: mvn -B package --file pom.xml
 
   start_docker_container_and_publish_image:
     needs: build_and_test
