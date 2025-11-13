@@ -53,7 +53,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Cache the Maven packages to speed up build
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -81,7 +81,7 @@ jobs:
           fetch-depth: 0
       
       - name: Cache the Maven packages to speed up build
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
