@@ -44,13 +44,25 @@ public class ConfigService {
 
 	private Configuration configuration;
 
-	public ConfigService(@Value("${config.json.location:config.json}") String configPath) throws Exception {
-		var cpr = new ClassPathResource(configPath);
-
+	public ConfigService(@Value("${config.json.location:config.json}") String configjson) throws Exception {
+		var cpr = new ClassPathResource(configjson);
+        if (!cpr.exists()) {
+            log.error("config.json-file not found at path: {}", configjson);
+            java.util.List<String> searchedLocations = java.util.List.of(
+                    "Classpath: " + getClass().getClassLoader().getResource(configjson),
+                    "File system relative to application: " + java.nio.file.Paths.get("").toAbsolutePath().resolve(configjson).toString()
+            );            
+            log.info("Searched locations: {}", searchedLocations);
+            throw new ConverterException("Error loading config.json-file from:" + configjson);
+        }		
+		
 		try(InputStream configStream = cpr.getInputStream()){
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(configStream));
 			Gson gson = new Gson();
 			this.configuration = gson.fromJson(bufferedReader, Configuration.class);
+		}
+		catch(Exception e) {
+			throw new ConverterException("Error reading configuration", e);
 		}
 
 		validateConfiguration();

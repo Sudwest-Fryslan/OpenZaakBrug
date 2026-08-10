@@ -11,7 +11,7 @@
   
     <groupId>nl.haarlem.translations</groupId>
     <artifactId>zds-to-zgw</artifactId>
-    <version>1.2.18-SNAPSHOT</version>
+    <version>1.2.21-SNAPSHOT</version>
     <name>Open Zaakbrug</name>
     <description>StUF ZDS 1.2 to ZGW API 1.x translator</description>
 
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.10</version>
+			<version>1.18.32</version>
 		</dependency>
 
 		<dependency>
@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>org.ibissource</groupId>
 			<artifactId>ibis-ladybug</artifactId>
-			<version>2.2-20210518.202847</version>
+			<version>2.2-for.old.zaak.brug-20251107.163308</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->

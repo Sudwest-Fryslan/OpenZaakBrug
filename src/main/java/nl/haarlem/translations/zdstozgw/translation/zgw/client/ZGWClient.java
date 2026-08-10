@@ -213,8 +213,8 @@ public class ZGWClient {
 			String zgwResponse = (String) debug.endpoint(debugName, () -> {
 				//exchangeDuration[0] = System.currentTimeMillis();
 		        ResponseEntity<String> responseEntity = this.restTemplateService.getRestTemplate().exchange(finalUrl, HttpMethod.POST, entity, String.class);    
-		        authorization.setVersion(url, responseEntity);
-		        log.info(authorization.getVersion(url));
+		        authorization.setVersion(finalUrl, responseEntity);
+		        log.info(authorization.getVersion(finalUrl));
 		        String response = responseEntity.getBody();
 				//exchangeDuration[1] = System.currentTimeMillis();
 				return response;
