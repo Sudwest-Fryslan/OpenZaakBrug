@@ -1,143 +1,178 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body>
-      <zakLa01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310">
-         <stuurgegevens>
-            <StUF:berichtcode>La01</StUF:berichtcode>
-            <StUF:referentienummer>006523b2-95f4-4eb1-b535-af4637a042c4</StUF:referentienummer>
-            <StUF:tijdstipBericht>20200507081937435</StUF:tijdstipBericht>
-            <StUF:entiteittype>ZAK</StUF:entiteittype>
-         </stuurgegevens>
-         <parameters>
-            <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
-         </parameters>
-         <antwoord>
-            <object StUF:sleutelVerzendend="126620" StUF:entiteittype="ZAK">
-               <identificatie>1900208938</identificatie>
-               <omschrijving>Aanvraag minimaregelingen (Z)</omschrijving>
-               <toelichting xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <resultaat>
-                  <omschrijving xsi:nil="true" StUF:noValue="geenWaarde"/>
-                  <toelichting xsi:nil="true" StUF:noValue="geenWaarde"/>
-               </resultaat>
-               <startdatum>20200309</startdatum>
-               <registratiedatum>20200309</registratiedatum>
-               <publicatiedatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <einddatumGepland>20200530</einddatumGepland>
-               <uiterlijkeEinddatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <einddatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <opschorting>
-                  <indicatie>J</indicatie>
-                  <reden>niet tijdig verstrekken inform</reden>
-               </opschorting>
-               <verlenging>
-                  <duur>0</duur>
-                  <reden xsi:nil="true" StUF:noValue="geenWaarde"/>
-               </verlenging>
-               <betalingsIndicatie xsi:nil="true"/>
-               <laatsteBetaaldatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <archiefnominatie>N</archiefnominatie>
-               <datumVernietigingDossier xsi:nil="true" StUF:noValue="geenWaarde"/>
-               <zaakniveau>1</zaakniveau>
-               <deelzakenIndicatie>N</deelzakenIndicatie>
-               <isVan StUF:entiteittype="ZAKZKT">
-                  <gerelateerde StUF:entiteittype="ZKT">
-                     <omschrijving>Aanvraag minima</omschrijving>
-                     <code>B1026</code>
-                  </gerelateerde>
-               </isVan>
-               <heeftBetrekkingOp xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKOBJ"/>
-               <heeftAlsBelanghebbende xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRBLH"/>
-               <heeftAlsGemachtigde xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRGMC"/>
-               <heeftAlsInitiator xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRINI"/>
-               <heeftAlsUitvoerende xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRUTV"/>
-               <heeftAlsVerantwoordelijke xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRVRA"/>
-               <heeftAlsOverigBetrokkene StUF:entiteittype="ZAKBTROVR">
-                  <gerelateerde>
-                     <medewerker StUF:entiteittype="MDW">
-                        <identificatie>012345678901234567890123</identificatie>
-                        <achternaam>G. Bruiker</achternaam>
-                        <voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>
-                        <voorvoegselAchternaam xsi:nil="true" StUF:noValue="geenWaarde"/>
-                        <functie xsi:nil="true" StUF:noValue="geenWaarde"/>
-                        <telefoonnummer xsi:nil="true" StUF:noValue="geenWaarde"/>
-                        <emailadres xsi:nil="true" StUF:noValue="geenWaarde"/>
-                     </medewerker>
-                  </gerelateerde>
-                  <code xsi:nil="true" StUF:noValue="geenWaarde"/>
-                  <omschrijving>Overig</omschrijving>
-                  <toelichting xsi:nil="true" StUF:noValue="geenWaarde"/>
-                  <heeftAlsAanspreekpunt StUF:entiteittype="ZAKBTROVRCTP">
-                     <gerelateerde StUF:entiteittype="CTP"/>
-                  </heeftAlsAanspreekpunt>
-               </heeftAlsOverigBetrokkene>
-               <heeftAlsHoofdzaak xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKZAKHFD"/>
-               <heeft StUF:entiteittype="ZAKSTT">
-                  <gerelateerde StUF:entiteittype="STT">
-                     <code>Inbeh</code>
-                     <omschrijving>In behandeling</omschrijving>
-                  </gerelateerde>
-                  <datumStatusGezet>20200311075106000</datumStatusGezet>
-                  <indicatieLaatsteStatus>N</indicatieLaatsteStatus>
-                  <isGezetDoor StUF:entiteittype="ZAKSTTBTR">
-                     <gerelateerde>
-                        <medewerker StUF:entiteittype="MDW">
-                           <identificatie>012345678901234567890123</identificatie>
-                           <achternaam>G. Bruiker</achternaam>
-                           <voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <voorvoegselAchternaam xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <functie xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <telefoonnummer xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <emailadres xsi:nil="true" StUF:noValue="geenWaarde"/>
-                        </medewerker>
-                     </gerelateerde>
-                     <rolOmschrijving>Overig</rolOmschrijving>
-                     <rolomschrijvingGeneriek>Overig</rolomschrijvingGeneriek>
-                  </isGezetDoor>
-               </heeft>
-               <heeft StUF:entiteittype="ZAKSTT">
-                  <gerelateerde StUF:entiteittype="STT">
-                     <code>Afgeh</code>
-                     <omschrijving>Afgehandeld</omschrijving>
-                  </gerelateerde>
-                  <datumStatusGezet>20200311092516000</datumStatusGezet>
-                  <indicatieLaatsteStatus>J</indicatieLaatsteStatus>
-                  <isGezetDoor StUF:entiteittype="ZAKSTTBTR">
-                     <gerelateerde>
-                        <medewerker StUF:entiteittype="MDW">
-                           <identificatie>012345678901234567890123</identificatie>
-                           <achternaam>G. Bruiker</achternaam>
-                           <voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <voorvoegselAchternaam xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <functie xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <telefoonnummer xsi:nil="true" StUF:noValue="geenWaarde"/>
-                           <emailadres xsi:nil="true" StUF:noValue="geenWaarde"/>
-                        </medewerker>
-                     </gerelateerde>
-                     <rolOmschrijving>Overig</rolOmschrijving>
-                     <rolomschrijvingGeneriek>Overig</rolomschrijvingGeneriek>
-                  </isGezetDoor>
-               </heeft>
-               <heeftRelevant StUF:entiteittype="ZAKEDC">
-                  <gerelateerde StUF:entiteittype="EDC">
-                     <identificatie>1900209818</identificatie>
-                     <creatiedatum>20200311</creatiedatum>
-                     <ontvangstdatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-                     <titel>Brief bijdrageregeling minima  -  Verzoek om aanvullende gegevens</titel>
-                     <beschrijving xsi:nil="true" StUF:noValue="geenWaarde"/>
-                     <formaat>pdf</formaat>
-                     <taal>nld</taal>
-                     <versie xsi:nil="true" StUF:noValue="geenWaarde"/>
-                     <status xsi:nil="true" StUF:noValue="geenWaarde"/>
-                     <verzenddatum xsi:nil="true" StUF:noValue="geenWaarde"/>
-                     <vertrouwelijkAanduiding>VERTROUWELIJK</vertrouwelijkAanduiding>
-                     <auteur>Be Handelaar</auteur>
-                     <link>urn:Centric/Publieksdiensten/Documentenopslag:130406</link>
-                     <inhoud a:contentType="application/pdf" StUF:bestandsnaam="795880.pdf" xmlns:a="http://www.w3.org/2005/05/xmlmime"/>
-                  </gerelateerde>
-               </heeftRelevant>
-               <leidtTot xsi:nil="true" StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBSL"/>
-            </object>
-         </antwoord>
-      </zakLa01>
-   </s:Body>
+	<s:Body>
+		<zakLa01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310">
+			<stuurgegevens>
+				<StUF:berichtcode>La01</StUF:berichtcode>
+				<StUF:referentienummer>006523b2-95f4-4eb1-b535-af4637a042c4</StUF:referentienummer>
+				<StUF:tijdstipBericht>20200507081937435</StUF:tijdstipBericht>
+				<StUF:entiteittype>ZAK</StUF:entiteittype>
+			</stuurgegevens>
+			<parameters>
+				<StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+			</parameters>
+			<antwoord>
+				<object StUF:sleutelVerzendend="126620" StUF:entiteittype="ZAK">
+					<identificatie>1900208938</identificatie>
+					<omschrijving>Aanvraag minimaregelingen (Z)</omschrijving>
+					<toelichting xsi:nil="true" StUF:noValue="geenWaarde" />
+					<resultaat>
+						<omschrijving xsi:nil="true" StUF:noValue="geenWaarde" />
+						<toelichting xsi:nil="true" StUF:noValue="geenWaarde" />
+					</resultaat>
+					<startdatum>20200309</startdatum>
+					<registratiedatum>20200309</registratiedatum>
+					<publicatiedatum xsi:nil="true" StUF:noValue="geenWaarde" />
+					<einddatumGepland>20200530</einddatumGepland>
+					<uiterlijkeEinddatum xsi:nil="true"
+						StUF:noValue="geenWaarde" />
+					<einddatum xsi:nil="true" StUF:noValue="geenWaarde" />
+					<opschorting>
+						<indicatie>J</indicatie>
+						<reden>niet tijdig verstrekken inform</reden>
+					</opschorting>
+					<verlenging>
+						<duur>0</duur>
+						<reden xsi:nil="true" StUF:noValue="geenWaarde" />
+					</verlenging>
+					<betalingsIndicatie xsi:nil="true" />
+					<laatsteBetaaldatum xsi:nil="true" StUF:noValue="geenWaarde" />
+					<archiefnominatie>N</archiefnominatie>
+					<datumVernietigingDossier xsi:nil="true"
+						StUF:noValue="geenWaarde" />
+					<zaakniveau>1</zaakniveau>
+					<deelzakenIndicatie>N</deelzakenIndicatie>
+					<isVan StUF:entiteittype="ZAKZKT">
+						<gerelateerde StUF:entiteittype="ZKT">
+							<omschrijving>Aanvraag minima</omschrijving>
+							<code>B1026</code>
+						</gerelateerde>
+					</isVan>
+					<heeftBetrekkingOp xsi:nil="true" StUF:noValue="geenWaarde"
+						StUF:entiteittype="ZAKOBJ" />
+					<heeftAlsBelanghebbende xsi:nil="true"
+						StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRBLH" />
+					<heeftAlsGemachtigde xsi:nil="true"
+						StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRGMC" />
+					<heeftAlsInitiator xsi:nil="true" StUF:noValue="geenWaarde"
+						StUF:entiteittype="ZAKBTRINI" />
+					<heeftAlsUitvoerende xsi:nil="true"
+						StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRUTV" />
+					<heeftAlsVerantwoordelijke xsi:nil="true"
+						StUF:noValue="geenWaarde" StUF:entiteittype="ZAKBTRVRA" />
+					<heeftAlsOverigBetrokkene StUF:entiteittype="ZAKBTROVR">
+						<gerelateerde>
+							<medewerker StUF:entiteittype="MDW">
+								<identificatie>012345678901234567890123</identificatie>
+								<achternaam>G. Bruiker</achternaam>
+								<voorletters xsi:nil="true"
+									StUF:noValue="geenWaarde" />
+								<voorvoegselAchternaam xsi:nil="true"
+									StUF:noValue="geenWaarde" />
+								<functie xsi:nil="true"
+									StUF:noValue="geenWaarde" />
+								<telefoonnummer xsi:nil="true"
+									StUF:noValue="geenWaarde" />
+								<emailadres xsi:nil="true"
+									StUF:noValue="geenWaarde" />
+							</medewerker>
+						</gerelateerde>
+						<code xsi:nil="true" StUF:noValue="geenWaarde" />
+						<omschrijving>Overig</omschrijving>
+						<toelichting xsi:nil="true" StUF:noValue="geenWaarde" />
+						<heeftAlsAanspreekpunt StUF:entiteittype="ZAKBTROVRCTP">
+							<gerelateerde StUF:entiteittype="CTP" />
+						</heeftAlsAanspreekpunt>
+					</heeftAlsOverigBetrokkene>
+					<heeftAlsHoofdzaak xsi:nil="true" StUF:noValue="geenWaarde"
+						StUF:entiteittype="ZAKZAKHFD" />
+					<heeft StUF:entiteittype="ZAKSTT">
+						<gerelateerde StUF:entiteittype="STT">
+							<code>Inbeh</code>
+							<omschrijving>In behandeling</omschrijving>
+						</gerelateerde>
+						<datumStatusGezet>20200311075106000</datumStatusGezet>
+						<indicatieLaatsteStatus>N</indicatieLaatsteStatus>
+						<isGezetDoor StUF:entiteittype="ZAKSTTBTR">
+							<gerelateerde>
+								<medewerker StUF:entiteittype="MDW">
+									<identificatie>012345678901234567890123</identificatie>
+									<achternaam>G. Bruiker</achternaam>
+									<voorletters xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<voorvoegselAchternaam xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<functie xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<telefoonnummer xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<emailadres xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+								</medewerker>
+							</gerelateerde>
+							<rolOmschrijving>Overig</rolOmschrijving>
+							<rolomschrijvingGeneriek>Overig</rolomschrijvingGeneriek>
+						</isGezetDoor>
+					</heeft>
+					<heeft StUF:entiteittype="ZAKSTT">
+						<gerelateerde StUF:entiteittype="STT">
+							<code>Afgeh</code>
+							<omschrijving>Afgehandeld</omschrijving>
+						</gerelateerde>
+						<datumStatusGezet>20200311092516000</datumStatusGezet>
+						<indicatieLaatsteStatus>J</indicatieLaatsteStatus>
+						<isGezetDoor StUF:entiteittype="ZAKSTTBTR">
+							<gerelateerde>
+								<medewerker StUF:entiteittype="MDW">
+									<identificatie>012345678901234567890123</identificatie>
+									<achternaam>G. Bruiker</achternaam>
+									<voorletters xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<voorvoegselAchternaam xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<functie xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<telefoonnummer xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+									<emailadres xsi:nil="true"
+										StUF:noValue="geenWaarde" />
+								</medewerker>
+							</gerelateerde>
+							<rolOmschrijving>Overig</rolOmschrijving>
+							<rolomschrijvingGeneriek>Overig</rolomschrijvingGeneriek>
+						</isGezetDoor>
+					</heeft>
+					<heeftRelevant StUF:entiteittype="ZAKEDC">
+						<gerelateerde StUF:entiteittype="EDC">
+							<identificatie>1900209818</identificatie>
+							<creatiedatum>20200311</creatiedatum>
+							<ontvangstdatum xsi:nil="true"
+								StUF:noValue="geenWaarde" />
+							<titel>Brief bijdrageregeling minima - Verzoek om
+								aanvullende gegevens</titel>
+							<beschrijving xsi:nil="true"
+								StUF:noValue="geenWaarde" />
+							<formaat>pdf</formaat>
+							<taal>nld</taal>
+							<versie xsi:nil="true" StUF:noValue="geenWaarde" />
+							<status xsi:nil="true" StUF:noValue="geenWaarde" />
+							<verzenddatum xsi:nil="true"
+								StUF:noValue="geenWaarde" />
+							<vertrouwelijkAanduiding>VERTROUWELIJK</vertrouwelijkAanduiding>
+							<auteur>Be Handelaar</auteur>
+							<link>
+								urn:Centric/Publieksdiensten/Documentenopslag:130406</link>
+							<inhoud a:contentType="application/pdf"
+								StUF:bestandsnaam="795880.pdf"
+								xmlns:a="http://www.w3.org/2005/05/xmlmime" />
+						</gerelateerde>
+					</heeftRelevant>
+					<leidtTot xsi:nil="true" StUF:noValue="geenWaarde"
+						StUF:entiteittype="ZAKBSL" />
+				</object>
+			</antwoord>
+		</zakLa01>
+	</s:Body>
 </s:Envelope>

@@ -1,24 +1,27 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body>
-      <ZKN:genereerZaakIdentificatie_Du02 xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <ZKN:stuurgegevens>
-            <StUF:berichtcode>Du02</StUF:berichtcode>
-            <StUF:zender>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>CDR</StUF:applicatie>
-            </StUF:zender>
-            <StUF:ontvanger>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>GWS4all</StUF:applicatie>
-               <StUF:gebruiker>Gebruiker</StUF:gebruiker>
-            </StUF:ontvanger>
-            <StUF:referentienummer>8d820e7c-14ca-4374-a025-59354b377161</StUF:referentienummer>
-            <StUF:tijdstipBericht>20200507075603223</StUF:tijdstipBericht>
-            <StUF:functie>genereerZaakidentificatie</StUF:functie>
-         </ZKN:stuurgegevens>
-         <ZKN:zaak StUF:entiteittype="ZAK" StUF:functie="entiteit">
-            <ZKN:identificatie>1900208938</ZKN:identificatie>
-         </ZKN:zaak>
-      </ZKN:genereerZaakIdentificatie_Du02>
-   </s:Body>
+	<s:Body>
+		<ZKN:genereerZaakIdentificatie_Du02
+			xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+			xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ZKN:stuurgegevens>
+				<StUF:berichtcode>Du02</StUF:berichtcode>
+				<StUF:zender>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>CDR</StUF:applicatie>
+				</StUF:zender>
+				<StUF:ontvanger>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>GWS4all</StUF:applicatie>
+					<StUF:gebruiker>Gebruiker</StUF:gebruiker>
+				</StUF:ontvanger>
+				<StUF:referentienummer>8d820e7c-14ca-4374-a025-59354b377161</StUF:referentienummer>
+				<StUF:tijdstipBericht>20200507075603223</StUF:tijdstipBericht>
+				<StUF:functie>genereerZaakidentificatie</StUF:functie>
+			</ZKN:stuurgegevens>
+			<ZKN:zaak StUF:entiteittype="ZAK" StUF:functie="entiteit">
+				<ZKN:identificatie>1900208938</ZKN:identificatie>
+			</ZKN:zaak>
+		</ZKN:genereerZaakIdentificatie_Du02>
+	</s:Body>
 </s:Envelope>

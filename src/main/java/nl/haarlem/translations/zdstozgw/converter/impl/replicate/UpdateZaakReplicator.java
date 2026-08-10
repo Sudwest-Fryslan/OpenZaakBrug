@@ -45,11 +45,14 @@ public class UpdateZaakReplicator extends UpdateZaakTranslator {
      */
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+		
 		var zdsZakLk01 = (ZdsZakLk01) this.getZdsDocument();
 
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		replicator.replicateZaak(zdsZakLk01.objects.get(0).identificatie);
+		replicator.replicateZaak(authorization, zdsZakLk01.objects.get(0).identificatie);
 		return super.execute();
 	}
 }

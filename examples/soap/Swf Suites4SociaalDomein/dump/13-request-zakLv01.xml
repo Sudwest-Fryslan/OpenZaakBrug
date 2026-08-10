@@ -1,7 +1,12 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd">
-	<SOAP-ENV:Header/>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310"
+	xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+	xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd">
+	<SOAP-ENV:Header />
 	<SOAP-ENV:Body>
 		<ZKN:zakLk01>
 			<ZKN:stuurgegevens>
@@ -23,41 +28,52 @@
 				<StUF:mutatiesoort>W</StUF:mutatiesoort>
 				<StUF:indicatorOvername>V</StUF:indicatorOvername>
 			</ZKN:parameters>
-			<ZKN:object StUF:sleutelVerzendend="284634" StUF:entiteittype="ZAK" StUF:verwerkingssoort="W">
+			<ZKN:object StUF:sleutelVerzendend="284634" StUF:entiteittype="ZAK"
+				StUF:verwerkingssoort="W">
 				<ZKN:identificatie>1900400023</ZKN:identificatie>
 				<ZKN:omschrijving>Aanvraag minimaregelingen (Z)</ZKN:omschrijving>
 				<ZKN:startdatum>20200618</ZKN:startdatum>
 				<ZKN:registratiedatum>20200618</ZKN:registratiedatum>
 				<ZKN:isVan StUF:entiteittype="ZAKZKT" StUF:verwerkingssoort="I">
-					<ZKN:gerelateerde StUF:entiteittype="ZKT" StUF:verwerkingssoort="I">
+					<ZKN:gerelateerde StUF:entiteittype="ZKT"
+						StUF:verwerkingssoort="I">
 						<ZKN:omschrijving>Aanvraag minima</ZKN:omschrijving>
 						<ZKN:code>B1026</ZKN:code>
-						<ZKN:ingangsdatumObject xsi:nil="true" StUF:noValue="geenWaarde"/>
+						<ZKN:ingangsdatumObject xsi:nil="true"
+							StUF:noValue="geenWaarde" />
 					</ZKN:gerelateerde>
 				</ZKN:isVan>
-				<ZKN:heeftAlsVerantwoordelijke StUF:entiteittype="ZAKBTRVRA" StUF:verwerkingssoort="V">
+				<ZKN:heeftAlsVerantwoordelijke StUF:entiteittype="ZAKBTRVRA"
+					StUF:verwerkingssoort="V">
 					<ZKN:gerelateerde>
-						<ZKN:medewerker StUF:entiteittype="MDW" StUF:verwerkingssoort="I">
+						<ZKN:medewerker StUF:entiteittype="MDW"
+							StUF:verwerkingssoort="I">
 							<ZKN:identificatie>1900002</ZKN:identificatie>
 							<ZKN:achternaam>E. van Wijk</ZKN:achternaam>
-							<ZKN:voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>
+							<ZKN:voorletters xsi:nil="true"
+								StUF:noValue="geenWaarde" />
 						</ZKN:medewerker>
 					</ZKN:gerelateerde>
 				</ZKN:heeftAlsVerantwoordelijke>
 			</ZKN:object>
-			<ZKN:object StUF:sleutelVerzendend="284634" StUF:entiteittype="ZAK" StUF:verwerkingssoort="W">
+			<ZKN:object StUF:sleutelVerzendend="284634" StUF:entiteittype="ZAK"
+				StUF:verwerkingssoort="W">
 				<ZKN:identificatie>1900400023</ZKN:identificatie>
 				<ZKN:omschrijving>Aanvraag minimaregelingen (Z)</ZKN:omschrijving>
 				<ZKN:startdatum>20200618</ZKN:startdatum>
 				<ZKN:registratiedatum>20200618</ZKN:registratiedatum>
 				<ZKN:isVan StUF:entiteittype="ZAKZKT" StUF:verwerkingssoort="I">
-					<ZKN:gerelateerde StUF:entiteittype="ZKT" StUF:verwerkingssoort="I">
+					<ZKN:gerelateerde StUF:entiteittype="ZKT"
+						StUF:verwerkingssoort="I">
 						<ZKN:omschrijving>Aanvraag minima</ZKN:omschrijving>
 						<ZKN:code>B1026</ZKN:code>
-						<ZKN:ingangsdatumObject xsi:nil="true" StUF:noValue="geenWaarde"/>
+						<ZKN:ingangsdatumObject xsi:nil="true"
+							StUF:noValue="geenWaarde" />
 					</ZKN:gerelateerde>
 				</ZKN:isVan>
-				<ZKN:heeftAlsVerantwoordelijke StUF:entiteittype="ZAKBTRVRA" StUF:verwerkingssoort="V" xsi:nil="true" StUF:noValue="geenWaarde"/>
+				<ZKN:heeftAlsVerantwoordelijke StUF:entiteittype="ZAKBTRVRA"
+					StUF:verwerkingssoort="V" xsi:nil="true"
+					StUF:noValue="geenWaarde" />
 			</ZKN:object>
 		</ZKN:zakLk01>
 	</SOAP-ENV:Body>

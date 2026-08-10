@@ -1,32 +1,43 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120" xmlns:ns="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:stuf="http://www.egem.nl/StUF/StUF0301" xmlns:xlin="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:ns1="http://www.egem.nl/StUF/sector/bg/0310">
-    <soapenv:Header/>
-    <soapenv:Body>
-        <zds:geefZaakdetails_ZakLv01 xmlns:ns="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:ns1="http://www.egem.nl/StUF/sector/bg/0310" xmlns:stuf="http://www.egem.nl/StUF/StUF0301" xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120">
-            <zkn:stuurgegevens xmlns:zkn="http://www.egem.nl/StUF/sector/zkn/0310">
-                <stuf:berichtcode>Lv01</stuf:berichtcode>
-                <stuf:zender>
-                    <stuf:organisatie>0392</stuf:organisatie>
-                    <stuf:applicatie>Zaaksyeem</stuf:applicatie>
-                  </stuf:zender>
-                <stuf:ontvanger>
-                    <stuf:organisatie>0392</stuf:organisatie>
-                    <stuf:applicatie>ZSH</stuf:applicatie>
-                </stuf:ontvanger>
-                <stuf:entiteittype>ZAK</stuf:entiteittype>
-            </zkn:stuurgegevens>
-            <ns:parameters>
-                <stuf:sortering>4</stuf:sortering>
-                <stuf:indicatorVervolgvraag>false</stuf:indicatorVervolgvraag>
-                <stuf:maximumAantal>15</stuf:maximumAantal>
-                <stuf:indicatorAfnemerIndicatie>false</stuf:indicatorAfnemerIndicatie>
-                <stuf:indicatorAantal>false</stuf:indicatorAantal>
-            </ns:parameters>
-            <ns:gelijk stuf:entiteittype="ZAK">
-                <ns:identificatie>0392-2020-000001</ns:identificatie>
-            </ns:gelijk>
-            <ns:scope>
-                <ns:object stuf:entiteittype="ZAK" stuf:scope="alles"/>
-            </ns:scope>
-        </zds:geefZaakdetails_ZakLv01>
-    </soapenv:Body>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120"
+	xmlns:ns="http://www.egem.nl/StUF/sector/zkn/0310"
+	xmlns:stuf="http://www.egem.nl/StUF/StUF0301"
+	xmlns:xlin="http://www.w3.org/1999/xlink"
+	xmlns:gml="http://www.opengis.net/gml"
+	xmlns:ns1="http://www.egem.nl/StUF/sector/bg/0310">
+	<soapenv:Header />
+	<soapenv:Body>
+		<zds:geefZaakdetails_ZakLv01
+			xmlns:ns="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:ns1="http://www.egem.nl/StUF/sector/bg/0310"
+			xmlns:stuf="http://www.egem.nl/StUF/StUF0301"
+			xmlns:zds="http://www.stufstandaarden.nl/koppelvlak/zds0120">
+			<zkn:stuurgegevens
+				xmlns:zkn="http://www.egem.nl/StUF/sector/zkn/0310">
+				<stuf:berichtcode>Lv01</stuf:berichtcode>
+				<stuf:zender>
+					<stuf:organisatie>0392</stuf:organisatie>
+					<stuf:applicatie>Zaaksyeem</stuf:applicatie>
+				</stuf:zender>
+				<stuf:ontvanger>
+					<stuf:organisatie>0392</stuf:organisatie>
+					<stuf:applicatie>ZSH</stuf:applicatie>
+				</stuf:ontvanger>
+				<stuf:entiteittype>ZAK</stuf:entiteittype>
+			</zkn:stuurgegevens>
+			<ns:parameters>
+				<stuf:sortering>4</stuf:sortering>
+				<stuf:indicatorVervolgvraag>false</stuf:indicatorVervolgvraag>
+				<stuf:maximumAantal>15</stuf:maximumAantal>
+				<stuf:indicatorAfnemerIndicatie>false</stuf:indicatorAfnemerIndicatie>
+				<stuf:indicatorAantal>false</stuf:indicatorAantal>
+			</ns:parameters>
+			<ns:gelijk stuf:entiteittype="ZAK">
+				<ns:identificatie>0392-2020-000001</ns:identificatie>
+			</ns:gelijk>
+			<ns:scope>
+				<ns:object stuf:entiteittype="ZAK" stuf:scope="alles" />
+			</ns:scope>
+		</zds:geefZaakdetails_ZakLv01>
+	</soapenv:Body>
 </soapenv:Envelope>

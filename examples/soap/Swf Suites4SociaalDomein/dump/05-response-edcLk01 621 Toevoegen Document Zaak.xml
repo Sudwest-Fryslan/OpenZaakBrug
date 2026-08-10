@@ -1,21 +1,21 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body>
-      <StUF:Bv03Bericht xmlns:StUF="http://www.egem.nl/StUF/StUF0301">
-         <StUF:stuurgegevens>
-            <StUF:berichtcode>Bv03</StUF:berichtcode>
-            <StUF:zender>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>CDR</StUF:applicatie>
-            </StUF:zender>
-            <StUF:ontvanger>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>GWS4all</StUF:applicatie>
-               <StUF:gebruiker>Gebruiker</StUF:gebruiker>
-            </StUF:ontvanger>
-            <StUF:referentienummer>48dbf81a-7468-401f-86c9-a692e74f179b</StUF:referentienummer>
-            <StUF:tijdstipBericht>20200507075603691</StUF:tijdstipBericht>
-            <StUF:crossRefnummer>e50e2f5d-5dfc-4235-b781-3442e401ae58</StUF:crossRefnummer>
-         </StUF:stuurgegevens>
-      </StUF:Bv03Bericht>
-   </s:Body>
+	<s:Body>
+		<StUF:Bv03Bericht xmlns:StUF="http://www.egem.nl/StUF/StUF0301">
+			<StUF:stuurgegevens>
+				<StUF:berichtcode>Bv03</StUF:berichtcode>
+				<StUF:zender>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>CDR</StUF:applicatie>
+				</StUF:zender>
+				<StUF:ontvanger>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>GWS4all</StUF:applicatie>
+					<StUF:gebruiker>Gebruiker</StUF:gebruiker>
+				</StUF:ontvanger>
+				<StUF:referentienummer>48dbf81a-7468-401f-86c9-a692e74f179b</StUF:referentienummer>
+				<StUF:tijdstipBericht>20200507075603691</StUF:tijdstipBericht>
+				<StUF:crossRefnummer>e50e2f5d-5dfc-4235-b781-3442e401ae58</StUF:crossRefnummer>
+			</StUF:stuurgegevens>
+		</StUF:Bv03Bericht>
+	</s:Body>
 </s:Envelope>

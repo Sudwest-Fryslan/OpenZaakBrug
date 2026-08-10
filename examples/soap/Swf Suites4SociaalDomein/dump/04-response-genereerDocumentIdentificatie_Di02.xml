@@ -1,24 +1,27 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-   <s:Body>
-      <ZKN:genereerDocumentIdentificatie_Du02 xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-         <ZKN:stuurgegevens>
-            <StUF:berichtcode>Du02</StUF:berichtcode>
-            <StUF:zender>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>CDR</StUF:applicatie>
-            </StUF:zender>
-            <StUF:ontvanger>
-               <StUF:organisatie>1900</StUF:organisatie>
-               <StUF:applicatie>GWS4all</StUF:applicatie>
-               <StUF:gebruiker>Gebruiker</StUF:gebruiker>
-            </StUF:ontvanger>
-            <StUF:referentienummer>2e255326-9be4-4b22-aed6-da6d527038a1</StUF:referentienummer>
-            <StUF:tijdstipBericht>20200507075603551</StUF:tijdstipBericht>
-            <StUF:functie>genereerDocumentidentificatie</StUF:functie>
-         </ZKN:stuurgegevens>
-         <ZKN:document StUF:entiteittype="EDC" StUF:functie="entiteit">
-            <ZKN:identificatie>1900209818</ZKN:identificatie>
-         </ZKN:document>
-      </ZKN:genereerDocumentIdentificatie_Du02>
-   </s:Body>
+	<s:Body>
+		<ZKN:genereerDocumentIdentificatie_Du02
+			xmlns:StUF="http://www.egem.nl/StUF/StUF0301"
+			xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ZKN:stuurgegevens>
+				<StUF:berichtcode>Du02</StUF:berichtcode>
+				<StUF:zender>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>CDR</StUF:applicatie>
+				</StUF:zender>
+				<StUF:ontvanger>
+					<StUF:organisatie>1900</StUF:organisatie>
+					<StUF:applicatie>GWS4all</StUF:applicatie>
+					<StUF:gebruiker>Gebruiker</StUF:gebruiker>
+				</StUF:ontvanger>
+				<StUF:referentienummer>2e255326-9be4-4b22-aed6-da6d527038a1</StUF:referentienummer>
+				<StUF:tijdstipBericht>20200507075603551</StUF:tijdstipBericht>
+				<StUF:functie>genereerDocumentidentificatie</StUF:functie>
+			</ZKN:stuurgegevens>
+			<ZKN:document StUF:entiteittype="EDC" StUF:functie="entiteit">
+				<ZKN:identificatie>1900209818</ZKN:identificatie>
+			</ZKN:document>
+		</ZKN:genereerDocumentIdentificatie_Du02>
+	</s:Body>
 </s:Envelope>

@@ -29,6 +29,7 @@ import nl.haarlem.translations.zdstozgw.config.ModelMapperConfig;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsHeeft;
 import nl.haarlem.translations.zdstozgw.translation.zds.model.ZdsZaakDocument;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObject;
+import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwEnkelvoudigInformatieObjectPost;
 import nl.haarlem.translations.zdstozgw.translation.zgw.model.ZgwStatus;
 
 @RunWith(SpringRunner.class)
@@ -43,7 +44,7 @@ public class ModelMapperTests {
         //assign
     	System.setProperty("user.timezone", "CET");
     	ModelMapperConfig.singleton.timeoffset = "0";
-        ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = new ZgwEnkelvoudigInformatieObject()
+        ZgwEnkelvoudigInformatieObjectPost zgwEnkelvoudigInformatieObject = new ZgwEnkelvoudigInformatieObjectPost()
                 .setBestandsnaam("bestandsnaam")
                 .setInhoud("inhoud")
                 .setAuteur("auteur")

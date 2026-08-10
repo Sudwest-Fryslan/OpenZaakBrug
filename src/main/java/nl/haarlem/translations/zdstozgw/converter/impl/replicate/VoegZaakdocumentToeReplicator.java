@@ -47,10 +47,13 @@ public class VoegZaakdocumentToeReplicator extends VoegZaakdocumentToeTranslator
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens.zender.organisatie);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);
+		
 		var zdsEdcLk01 = (ZdsEdcLk01) this.getZdsDocument();
 		var replicator = new Replicator(this);
 		var legacyresponse = replicator.proxy();
-		replicator.replicateZaak(zdsEdcLk01.objects.get(0).identificatie);
+		replicator.replicateZaak(authorization, zdsEdcLk01.objects.get(0).identificatie);
 		return super.execute();
 	}
 }
