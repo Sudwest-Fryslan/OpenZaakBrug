@@ -68,7 +68,9 @@ public abstract class RequestHandler {
 		// Dit is meestal de eerste fout wanneer lombok niet werkt:
 		//		Description	Resource	Path	Location	Type
 		//		body cannot be resolved or is not a field	RequestHandler.java	/zds-to-zgw/src/main/java/nl/haarlem/translations/zdstozgw/requesthandler	line 66	Java Problem
-		// https://www.baeldung.com/lombok-ide
+		// Oplossing: https://www.baeldung.com/lombok-ide
+		//		Download: https://search.maven.org/remotecontent?filepath=org/projectlombok/lombok/1.18.4/lombok-1.18.4.jar
+		//		java -jar lombok-1.18.4.jar
 		///////////////////////////////////////////////////
 		fo03.body = new ZdsFo03.Body();
 		fo03.body.code = "StUF058";
