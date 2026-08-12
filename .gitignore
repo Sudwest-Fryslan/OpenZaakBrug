@@ -36,3 +36,10 @@ build/
 /src/main/resources/*.json
 .vs
 __pycache__
+
+### SoapUI schema cache (downloaded on demand, see examples/soap/wsdl-schema/README.md) ###
+/examples/soap/wsdl-schema/
+
+### Local run logs ###
+/app.log
+/app.log.*

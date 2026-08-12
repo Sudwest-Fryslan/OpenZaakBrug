@@ -38,11 +38,19 @@ DECLARE
 	zaak_id_start_value BIGINT;
 	document_id_start_value BIGINT;
 BEGIN
-	SELECT parameter_value INTO zaak_id_start_value FROM emulate_parameter WHERE parameter_name = ''ZaakIdentificatieHuidige'';
-	EXECUTE ''CREATE SEQUENCE IF NOT EXISTS HuidigeZaakIdentificatie START WITH '' || zaak_id_start_value + 1;
+	-- de start-waarde wordt alleen gelezen op het moment dat de sequence nog niet bestaat;
+	-- daarna staat er een obsolete-melding in parameter_value die niet meer als getal gelezen mag worden
+	IF to_regclass(''public.huidigezaakidentificatie'') IS NULL THEN
+		SELECT parameter_value INTO zaak_id_start_value FROM emulate_parameter WHERE parameter_name = ''ZaakIdentificatieHuidige'';
+		EXECUTE ''CREATE SEQUENCE HuidigeZaakIdentificatie START WITH '' || zaak_id_start_value + 1;
+		UPDATE emulate_parameter SET parameter_value = ''obsolete: identificatie wordt nu door sequence HuidigeZaakIdentificatie bepaald'' WHERE parameter_name = ''ZaakIdentificatieHuidige'';
+	END IF;
 
-	SELECT parameter_value INTO document_id_start_value FROM emulate_parameter WHERE parameter_name = ''DocumentIdentificatieHuidige'';
-	EXECUTE ''CREATE SEQUENCE IF NOT EXISTS HuidigeDocumentIdentificatie START WITH '' || document_id_start_value + 1;
+	IF to_regclass(''public.huidigedocumentidentificatie'') IS NULL THEN
+		SELECT parameter_value INTO document_id_start_value FROM emulate_parameter WHERE parameter_name = ''DocumentIdentificatieHuidige'';
+		EXECUTE ''CREATE SEQUENCE HuidigeDocumentIdentificatie START WITH '' || document_id_start_value + 1;
+		UPDATE emulate_parameter SET parameter_value = ''obsolete: identificatie wordt nu door sequence HuidigeDocumentIdentificatie bepaald'' WHERE parameter_name = ''DocumentIdentificatieHuidige'';
+	END IF;
 END;
 ' LANGUAGE plpgsql;
 
