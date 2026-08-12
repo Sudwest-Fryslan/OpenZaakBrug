@@ -41,6 +41,11 @@ public class GenereerZaakIdentificatieEmulator extends Converter {
 	}
 
 	@Override
+	public boolean needsZgwAuthorization() {
+		return false;
+	}
+
+	@Override
 	public void load() throws ResponseStatusException {
 		this.zdsDocument = (ZdsGenereerZaakIdentificatieDi02) XmlUtils.getStUFObject(this.getSession().getClientRequestBody(), ZdsGenereerZaakIdentificatieDi02.class);
 	}

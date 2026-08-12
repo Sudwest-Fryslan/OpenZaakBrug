@@ -112,7 +112,9 @@ public abstract class RequestHandler {
 				throw new ConverterException("zdsdocument.stuurgegevens was null");
 			}
 			var stuurgegevens = converter.getZdsDocument().stuurgegevens;
-			var authorization = converter.getZaakService().zgwClient.getAuthorization(configuration, stuurgegevens);				
+			var authorization = converter.needsZgwAuthorization()
+					? converter.getZaakService().zgwClient.getAuthorization(configuration, stuurgegevens)
+					: null;
 			var response = this.converter.execute(authorization);
 
 			return response;

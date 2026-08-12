@@ -48,4 +48,10 @@ public abstract class Converter {
 	public abstract void load() throws ResponseStatusException;
 
 	public abstract ResponseEntity<?> execute(ZgwAuthorization authorization) throws ConverterException;
+
+	// proxy- en emulate-converters raken de ZGW-api nooit aan; alleen translate/replicate hebben
+	// een echte authorization/catalogus nodig, dus die halen we niet op als hij toch genegeerd wordt.
+	public boolean needsZgwAuthorization() {
+		return true;
+	}
 }

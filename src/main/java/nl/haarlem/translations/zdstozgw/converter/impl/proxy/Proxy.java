@@ -40,6 +40,11 @@ public class Proxy extends Converter {
 	}
 
 	@Override
+	public boolean needsZgwAuthorization() {
+		return false;
+	}
+
+	@Override
 	public void load() throws ResponseStatusException {
 		// nothing to do here, we dont set the zdsDocument
 		this.zdsDocument = null;
