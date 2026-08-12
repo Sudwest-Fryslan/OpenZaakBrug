@@ -146,20 +146,23 @@ public class ZgwAuthorization {
 				return authorizations.get(baseurl).getAuthorization();
 			}
 		}
-		throw new ConverterException("No authorization defined for the url: " + url); 
+		log.warn("getAuthorizationToken: no match for url: " + url + " - registered baseurls: " + this.authorizations.keySet() + " (this authorization instance: " + System.identityHashCode(this) + ")");
+		throw new ConverterException("No authorization defined for the url: " + url);
 	}
 
 	public void setVersion(String url, ResponseEntity<String> responseEntity) {
         List<String> apiVersionHeader = responseEntity.getHeaders().get("API-version");
         String version = responseEntity.getHeaders().get("API-version").get(0);
-        log.info(version);		
-		
+        log.info(version);
+
 		for(String baseurl: this.authorizations.keySet()) {
 			if(url.startsWith(baseurl)) {
 				authorizations.get(baseurl).setVersion(version);
+				return;
 			}
 		}
-		throw new ConverterException("No authorization defined for the url: " + url); 
+		log.warn("setVersion: no match for url: " + url + " - registered baseurls: " + this.authorizations.keySet() + " (this authorization instance: " + System.identityHashCode(this) + ")");
+		throw new ConverterException("No authorization defined for the url: " + url);
 	}
 
 	public String getVersion(String url) {
@@ -168,7 +171,8 @@ public class ZgwAuthorization {
 				return authorizations.get(baseurl).getVersion();
 			}
 		}
-		throw new ConverterException("No authorization defined for the url: " + url); 
+		log.warn("getVersion: no match for url: " + url + " - registered baseurls: " + this.authorizations.keySet() + " (this authorization instance: " + System.identityHashCode(this) + ")");
+		throw new ConverterException("No authorization defined for the url: " + url);
 	}	
 	
 	public void setCatalogus(ZgwCatalogus catalogus) {
