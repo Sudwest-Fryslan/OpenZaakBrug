@@ -50,7 +50,7 @@ public class ModelMapperTests {
                 .setAuteur("auteur")
                 .setBeschrijving("beschrijving")
                 .setBronorganisatie("bronorganisatie")
-                .setCreatiedatum("2020-02-30")
+                .setCreatiedatum("2020-02-29")
                 .setFormaat("formaat")
                 .setIdentificatie("identificatie")
                 .setInformatieobjecttype("informatieobjecttype")
@@ -62,8 +62,6 @@ public class ModelMapperTests {
                 .setVertrouwelijkheidaanduiding("vertrouwelijkheidaanduiding")
                 .setVerzenddatum("2020-05-09")
                 .setUrl("url");
-        // String expectedCreatieDatum = "20200230";
-        // TODO: use gooed expectd values
         String expectedCreatieDatum = "20200229";
 
         //act

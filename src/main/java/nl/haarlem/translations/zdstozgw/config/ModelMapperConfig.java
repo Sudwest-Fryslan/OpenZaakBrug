@@ -127,6 +127,7 @@ public class ModelMapperConfig {
 
 		
 		addZgwEnkelvoudigInformatieObjectToZaakDocumentLinkTypeMapping(modelMapper);
+		addZgwEnkelvoudigInformatieObjectPostToZdsZaakDocumentTypeMapping(modelMapper);
 		addZgwEnkelvoudigInformatieObjectToZdsZaakDocumentInhoudTypeMapping(modelMapper);
 		
 		addZdsZaakDocumentInhoudToZgwEnkelvoudigInformatieObjectPostTypeMapping(modelMapper);
@@ -219,6 +220,22 @@ public class ModelMapperConfig {
 						ZgwEnkelvoudigInformatieObject::getVertrouwelijkheidaanduiding,
 						ZdsZaakDocument::setVertrouwelijkAanduiding))
 				.addMappings(mapper -> mapper.map(ZgwEnkelvoudigInformatieObject::getUrl, ZdsZaakDocument::setLink));
+	}
+
+	// ZgwEnkelvoudigInformatieObjectPost extends ZgwObject, niet ZgwEnkelvoudigInformatieObject, dus deze
+	// combinatie erft de datum-conversie hierboven niet automatisch mee en heeft een eigen typeMap nodig.
+	private void addZgwEnkelvoudigInformatieObjectPostToZdsZaakDocumentTypeMapping(ModelMapper modelMapper) {
+		modelMapper.typeMap(ZgwEnkelvoudigInformatieObjectPost.class, ZdsZaakDocument.class)
+				.addMappings(mapper -> mapper.using(convertZgwDateToStufDate())
+						.map(ZgwEnkelvoudigInformatieObjectPost::getCreatiedatum, ZdsZaakDocument::setCreatiedatum))
+				.addMappings(mapper -> mapper.using(convertZgwDateToStufDate())
+						.map(ZgwEnkelvoudigInformatieObjectPost::getOntvangstdatum, ZdsZaakDocument::setOntvangstdatum))
+				.addMappings(mapper -> mapper.using(convertZgwDateToStufDate())
+						.map(ZgwEnkelvoudigInformatieObjectPost::getVerzenddatum, ZdsZaakDocument::setVerzenddatum))
+				.addMappings(mapper -> mapper.using(convertToUpperCase()).map(
+						ZgwEnkelvoudigInformatieObjectPost::getVertrouwelijkheidaanduiding,
+						ZdsZaakDocument::setVertrouwelijkAanduiding))
+				.addMappings(mapper -> mapper.map(ZgwEnkelvoudigInformatieObjectPost::getUrl, ZdsZaakDocument::setLink));
 	}
 
 	public void addZgwEnkelvoudigInformatieObjectToZdsZaakDocumentInhoudTypeMapping(ModelMapper modelMapper) {
