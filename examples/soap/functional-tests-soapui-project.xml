@@ -164207,7 +164207,276 @@ testRunner.gotoStep(4)</script></con:config></con:testStep><con:testStep type="r
       </ZKN:scope>
     </ZKN:edcLv01>
   </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3a07afc9-ffb9-46dc-9912-696ac4f33a47" name="SOAP Response"/><con:assertion type="Schema Compliance" id="da90796f-9673-4fd3-8829-f10940fd9a65" name="Schema Compliance"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>StgZenderOrganisatie</con:name><con:value>ZenderOrganisatie</con:value></con:property><con:property><con:name>StgZenderApplicatie</con:name><con:value>ZenderApplicatie</con:value></con:property><con:property><con:name>StgZenderGebruiker</con:name><con:value>ZenderGebruiker</con:value></con:property><con:property><con:name>StgOntvangerOrganisatie</con:name><con:value>OntvangerOrganisatie</con:value></con:property><con:property><con:name>StgOntvangerApplicatie</con:name><con:value>OntvangerApplicatie</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="414837d4-85ca-4e95-bade-4186ef311c43" name="Issue Tests"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="46ed94a6-2842-4f03-ba58-191d76000100" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="#332 De waarde 'initiator' komt al 1 keer voor" searchProperties="true"><con:settings/><con:testStep type="properties" name="Properties" id="3e39e36f-1800-4cab-8bb3-34f9d9e47836"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>ZaakIdentificatie</con:name><con:value>1901275</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" id="08caedd9-3cf9-4e97-9bca-1f386bc99391" name="genereerZaakIdentificatie_Di02"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ZdsVrijeBerichten</con:interface><con:operation>genereerZaakIdentificatie_Di02</con:operation><con:request name="genereerZaakIdentificatie_Di02" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="78a97417-a2f7-4fe6-87ad-6af33391b0e1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@dump-file"/></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/zds/VrijBericht</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xsi:schemaLocation="http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\zs-dms\zkn0310_msg_zs-dms_resolved.xsd" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3a07afc9-ffb9-46dc-9912-696ac4f33a47" name="SOAP Response"/><con:assertion type="Schema Compliance" id="da90796f-9673-4fd3-8829-f10940fd9a65" name="Schema Compliance"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdocumentLezen_Lv01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>StgZenderOrganisatie</con:name><con:value>ZenderOrganisatie</con:value></con:property><con:property><con:name>StgZenderApplicatie</con:name><con:value>ZenderApplicatie</con:value></con:property><con:property><con:name>StgZenderGebruiker</con:name><con:value>ZenderGebruiker</con:value></con:property><con:property><con:name>StgOntvangerOrganisatie</con:name><con:value>OntvangerOrganisatie</con:value></con:property><con:property><con:name>StgOntvangerApplicatie</con:name><con:value>OntvangerApplicatie</con:value></con:property></con:properties></con:testCase><con:properties/><con:testCase id="f0daed49-8134-43ef-a65d-24adfdb762dc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase Translate Suites4SociaalDomein ProfPortaal" searchProperties="true"><con:settings/><con:testStep type="properties" name="Properties" id="e11b4c13-3f24-4d6a-adee-40fa82473491"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>ZaakIdentificatie</con:name><con:value>1900596718</con:value></con:property><con:property><con:name>DocumentIdentificatie</con:name><con:value>19009547</con:value></con:property><con:property><con:name>CheckedOutId</con:name><con:value>c54b80b6c001407a9a90d9d33064cfae</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" id="f836ad2d-9d49-4c4b-9996-8066a02877d6" name="01-zds-genereerZaakIdentificatie_Di02"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ZdsVrijeBerichten</con:interface><con:operation>20240926 103813 1 bffd43d0-1ce0-4d0b-9b3c-a6c8b540d7b4 ZaakIdentificatie Request</con:operation><con:request name="01-zds-genereerZaakIdentificatie_Di02" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="78a97417-a2f7-4fe6-87ad-6af33391b0e1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@dump-file"/></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/zds/VrijBericht</con:endpoint><con:request><![CDATA[<Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+<Header />
+<Body>
+<genereerZaakIdentificatie_Di02 xmlns="http://www.egem.nl/StUF/sector/zkn/0310">
+<stuurgegevens>
+<berichtcode xmlns="http://www.egem.nl/StUF/StUF0301">Di02</berichtcode>
+<zender xmlns="http://www.egem.nl/StUF/StUF0301">
+<organisatie>1900</organisatie>
+<applicatie>InForm</applicatie>
+<administratie>Schulinck</administratie>
+<gebruiker>Schulinck</gebruiker>
+</zender>
+<ontvanger xmlns="http://www.egem.nl/StUF/StUF0301">
+<organisatie>1900</organisatie>
+<applicatie>CDR</applicatie>
+</ontvanger>
+<referentienummer xmlns="http://www.egem.nl/StUF/StUF0301">${=java.util.UUID.randomUUID().toString() }</referentienummer>
+<tijdstipBericht xmlns="http://www.egem.nl/StUF/StUF0301">${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMddHHmmssSS").format(new Date())}</tijdstipBericht>
+<functie xmlns="http://www.egem.nl/StUF/StUF0301">genereerZaakidentificatie</functie>
+</stuurgegevens>
+</genereerZaakIdentificatie_Di02>
+</Body>
+</Envelope>]]></con:request><con:assertion type="SOAP Response" id="d95790e3-4684-4e55-bc88-a3472c2a786b" name="SOAP Response"/><con:assertion type="Schema Compliance" id="7c41213e-fa45-4a54-9b26-a2aae7cae18f" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion" id="18ca3e91-13ed-4d5d-951f-992518c27752" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/genereerZaakIdentificatie_Di02"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="01a-TransferZaakIdentificatie" id="1022f8d0-54ef-4e0b-a7b9-2ddad4a857ac"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false" disabled="false"><con:name>TransferZaakIdentificatie</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>01-zds-genereerZaakIdentificatie_Di02</con:sourceStep><con:sourcePath>declare namespace ZKN="http://www.egem.nl/StUF/sector/zkn/0310";
+//ZKN:identificatie[1]</con:sourcePath><con:targetType>ZaakIdentificatie</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath/><con:type>XPATH</con:type><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" id="20869c25-0b04-4c37-b889-0decd9a7582e" name="02-zds-geefZaakdetails_Lv01 zaakid (zaakbestaat nog niet)"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ZdsBeantwoordVraag</con:interface><con:operation>geefZaakdetails_Lv01</con:operation><con:request name="02-zds-geefZaakdetails_Lv01 zaakid (zaakbestaat nog niet)" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="b86f0444-e5bf-4a09-97a2-3d650e0b93ff"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/zds/BeantwoordVraag</con:endpoint><con:request><![CDATA[<Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+<Body>
+<zakLv01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310">
+<stuurgegevens>
+<berichtcode xmlns="http://www.egem.nl/StUF/StUF0301">Lv01</berichtcode>
+<zender xmlns="http://www.egem.nl/StUF/StUF0301">
+<organisatie>1900</organisatie>
+<applicatie>InForm</applicatie>
+<administratie>Schulinck</administratie>
+<gebruiker>Schulinck</gebruiker>
+</zender>
+<ontvanger xmlns="http://www.egem.nl/StUF/StUF0301">
+<organisatie>1900</organisatie>
+<applicatie>CDR</applicatie>
+</ontvanger>
+<referentienummer xmlns="http://www.egem.nl/StUF/StUF0301">${=java.util.UUID.randomUUID().toString() }</referentienummer>
+<tijdstipBericht xmlns="http://www.egem.nl/StUF/StUF0301">${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMddHHmmssSS").format(new Date())}</tijdstipBericht>
+<entiteittype xmlns="http://www.egem.nl/StUF/StUF0301">ZAK</entiteittype>
+</stuurgegevens>
+<parameters>
+<sortering xmlns="http://www.egem.nl/StUF/StUF0301">0</sortering>
+<indicatorVervolgvraag xmlns="http://www.egem.nl/StUF/StUF0301">false</indicatorVervolgvraag>
+<maximumAantal xmlns="http://www.egem.nl/StUF/StUF0301">1</maximumAantal>
+</parameters>
+<gelijk d4p1:entiteittype="ZAK" xmlns:d4p1="http://www.egem.nl/StUF/StUF0301">
+<identificatie>${Properties#ZaakIdentificatie}</identificatie>
+</gelijk>
+<scope>
+<object d5p1:entiteittype="ZAK" d5p1:scope="alles" xmlns:d5p1="http://www.egem.nl/StUF/StUF0301" />
+</scope>
+</zakLv01>
+</Body>
+</Envelope>]]></con:request><con:assertion type="SOAP Response" id="a5bb9a97-6aff-4a26-bd8c-283295080f00" name="SOAP Response"/><con:assertion type="Schema Compliance" id="ed311230-3e49-4b1f-ad19-4ff7dad1ecf2" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="Not SOAP Fault Assertion" id="8bac181d-d5d2-4aa4-8a98-46ee20d80154" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="4c6d7f6a-1a9e-46ac-b6f4-fb6b7363abe5" name="03-zds-creeerZaak_Lk01"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ZdsOntvangAsynchroon</con:interface><con:operation>creeerZaak_Lk01</con:operation><con:request name="03-zds-creeerZaak_Lk01" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="4afca0bd-189b-4572-b269-39ac6814fb73"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@dump-file"/></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/zds/OntvangAsynchroon</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xsi:schemaLocation="http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\mutatie\zkn0310_msg_mutatie_resolved.xsd" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:BG="http://www.egem.nl/StUF/sector/bg/0310" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\r
+   <SOAP-ENV:Header/>\r
+   <SOAP-ENV:Body>\r
+      <ZKN:zakLk01>\r
+      	<!-- dit bericht komt uit suites!! 			-->
+      	<!-- wordt via de webintake op de suite gestart 	-->
+         <ZKN:stuurgegevens>\r
+            <StUF:berichtcode>Lk01</StUF:berichtcode>\r
+            <StUF:zender>\r
+               <StUF:organisatie>1900</StUF:organisatie>\r
+               <StUF:applicatie>GWS4all</StUF:applicatie>\r
+               <StUF:gebruiker>Gebruiker</StUF:gebruiker>\r
+            </StUF:zender>\r
+            <StUF:ontvanger>\r
+               <StUF:organisatie>1900</StUF:organisatie>\r
+               <StUF:applicatie>CDR</StUF:applicatie>\r
+            </StUF:ontvanger>\r
+            <StUF:referentienummer>${=java.util.UUID.randomUUID().toString() }</StUF:referentienummer>\r
+            <StUF:tijdstipBericht>${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMddHHmmssSS").format(new Date())}</StUF:tijdstipBericht>\r
+            <StUF:entiteittype>ZAK</StUF:entiteittype>\r
+         </ZKN:stuurgegevens>\r
+         <ZKN:parameters>\r
+            <StUF:mutatiesoort>T</StUF:mutatiesoort>\r
+            <StUF:indicatorOvername>V</StUF:indicatorOvername>\r
+         </ZKN:parameters>\r
+         <ZKN:object StUF:sleutelVerzendend="${Properties#ZaakIdentificatie}" StUF:entiteittype="ZAK" StUF:verwerkingssoort="T">\r
+            <ZKN:identificatie>${Properties#ZaakIdentificatie}</ZKN:identificatie>\r
+            <ZKN:omschrijving>Aanvraag minimaregelingen (Z)</ZKN:omschrijving>\r
+            <!--<ZKN:resultaat>
+               <ZKN:omschrijving>Toegekend</ZKN:omschrijving>
+            </ZKN:resultaat>-->\r
+            <ZKN:startdatum>${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMdd").format(new Date())}</ZKN:startdatum>\r
+            <ZKN:registratiedatum>${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMdd").format(new Date())}</ZKN:registratiedatum>\r
+            <ZKN:einddatumGepland>20210101</ZKN:einddatumGepland>\r
+            <ZKN:einddatum>${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMdd").format(new Date())}</ZKN:einddatum>\r
+            <ZKN:archiefnominatie>J</ZKN:archiefnominatie>\r
+            <ZKN:zaakniveau>1</ZKN:zaakniveau>\r
+            <ZKN:deelzakenIndicatie>N</ZKN:deelzakenIndicatie>\r
+            <ZKN:isVan StUF:entiteittype="ZAKZKT" StUF:verwerkingssoort="T">\r
+               <ZKN:gerelateerde StUF:entiteittype="ZKT" StUF:verwerkingssoort="T">\r
+                  <ZKN:omschrijving>Aanvraag minima</ZKN:omschrijving>\r
+                  <ZKN:code>B1026</ZKN:code>\r
+                  <ZKN:ingangsdatumObject xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+               </ZKN:gerelateerde>\r
+            </ZKN:isVan>\r
+            <ZKN:heeftBetrekkingOp StUF:entiteittype="ZAKOBJ" StUF:verwerkingssoort="T">\r
+               <ZKN:gerelateerde>\r
+                  <ZKN:natuurlijkPersoon StUF:entiteittype="NPS" StUF:verwerkingssoort="T">\r
+                     <BG:inp.bsn>111111110</BG:inp.bsn>\r
+                     <BG:authentiek StUF:metagegeven="true">J</BG:authentiek>\r
+                     <BG:geslachtsnaam>Precies</BG:geslachtsnaam>\r
+                     <BG:voorvoegselGeslachtsnaam xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                     <BG:voorletters>P</BG:voorletters>\r
+                     <BG:voornamen>Pietje</BG:voornamen>\r
+                     <BG:geslachtsaanduiding>M</BG:geslachtsaanduiding>\r
+                     <BG:geboortedatum StUF:indOnvolledigeDatum="V">19010101</BG:geboortedatum>\r
+                     <BG:verblijfsadres>\r
+                        <BG:aoa.identificatie xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:authentiek StUF:metagegeven="true">J</BG:authentiek>\r
+                        <BG:wpl.woonplaatsNaam>Bolsward</BG:wpl.woonplaatsNaam>\r
+                        <BG:gor.openbareRuimteNaam xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:gor.straatnaam>Kerkstraat</BG:gor.straatnaam>\r
+                        <BG:aoa.postcode>8701HP</BG:aoa.postcode>\r
+                        <BG:aoa.huisnummer>1</BG:aoa.huisnummer>\r
+                        <BG:aoa.huisletter xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:aoa.huisnummertoevoeging xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:inp.locatiebeschrijving xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                     </BG:verblijfsadres>\r
+                  </ZKN:natuurlijkPersoon>\r
+               </ZKN:gerelateerde>\r
+               <ZKN:omschrijving>Client</ZKN:omschrijving>\r
+            </ZKN:heeftBetrekkingOp>\r
+            <ZKN:heeftAlsBelanghebbende StUF:entiteittype="ZAKBTRBLH" StUF:verwerkingssoort="T">\r
+               <ZKN:gerelateerde>\r
+                  <ZKN:natuurlijkPersoon StUF:entiteittype="NPS" StUF:verwerkingssoort="T">\r
+                     <BG:inp.bsn>111111110</BG:inp.bsn>\r
+                     <BG:authentiek StUF:metagegeven="true">J</BG:authentiek>\r
+                     <BG:geslachtsnaam>Precies</BG:geslachtsnaam>\r
+                     <BG:voorvoegselGeslachtsnaam xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                     <BG:voorletters>P</BG:voorletters>\r
+                     <BG:voornamen>Pietje</BG:voornamen>\r
+                     <BG:geslachtsaanduiding>M</BG:geslachtsaanduiding>\r
+                     <BG:geboortedatum StUF:indOnvolledigeDatum="V">19010101</BG:geboortedatum>\r
+                     <BG:verblijfsadres>\r
+                        <BG:aoa.identificatie xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:authentiek StUF:metagegeven="true">J</BG:authentiek>\r
+                        <BG:wpl.woonplaatsNaam>Bolsward</BG:wpl.woonplaatsNaam>\r
+                        <BG:gor.openbareRuimteNaam xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:gor.straatnaam>Kerkstraat</BG:gor.straatnaam>\r
+                        <BG:aoa.postcode>8701HP</BG:aoa.postcode>\r
+                        <BG:aoa.huisnummer>1</BG:aoa.huisnummer>\r
+                        <BG:aoa.huisletter xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:aoa.huisnummertoevoeging xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:inp.locatiebeschrijving xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                     </BG:verblijfsadres>\r
+                  </ZKN:natuurlijkPersoon>\r
+               </ZKN:gerelateerde>\r
+               <ZKN:omschrijving>Client</ZKN:omschrijving>\r
+            </ZKN:heeftAlsBelanghebbende>\r
+            <ZKN:heeftAlsInitiator StUF:entiteittype="ZAKBTRINI" StUF:verwerkingssoort="T">\r
+               <ZKN:gerelateerde>\r
+                  <ZKN:natuurlijkPersoon StUF:entiteittype="NPS" StUF:verwerkingssoort="T">\r
+                     <BG:inp.bsn>111111110</BG:inp.bsn>\r
+                     <BG:authentiek StUF:metagegeven="true">J</BG:authentiek>\r
+                     <BG:geslachtsnaam>Precies</BG:geslachtsnaam>\r
+                     <BG:voorvoegselGeslachtsnaam xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                     <BG:voorletters>P</BG:voorletters>\r
+                     <BG:voornamen>Pietje</BG:voornamen>\r
+                     <BG:geslachtsaanduiding>M</BG:geslachtsaanduiding>\r
+                     <BG:geboortedatum StUF:indOnvolledigeDatum="V">19010101</BG:geboortedatum>\r
+                     <BG:verblijfsadres>\r
+                        <BG:aoa.identificatie xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:authentiek StUF:metagegeven="true">J</BG:authentiek>\r
+                        <BG:wpl.woonplaatsNaam>Bolsward</BG:wpl.woonplaatsNaam>\r
+                        <BG:gor.openbareRuimteNaam xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:gor.straatnaam>Kerkstraat</BG:gor.straatnaam>\r
+                        <BG:aoa.postcode>8701HP</BG:aoa.postcode>\r
+                        <BG:aoa.huisnummer>1</BG:aoa.huisnummer>\r
+                        <BG:aoa.huisletter xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:aoa.huisnummertoevoeging xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                        <BG:inp.locatiebeschrijving xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                     </BG:verblijfsadres>\r
+                  </ZKN:natuurlijkPersoon>\r
+               </ZKN:gerelateerde>\r
+            </ZKN:heeftAlsInitiator>\r
+            <ZKN:heeftAlsUitvoerende StUF:entiteittype="ZAKBTRUTV" StUF:verwerkingssoort="T">\r
+               <ZKN:gerelateerde>\r
+                  <ZKN:medewerker StUF:entiteittype="MDW" StUF:verwerkingssoort="T">\r
+                     <ZKN:identificatie>012345678901234567890123</ZKN:identificatie>\r
+                     <ZKN:achternaam>G. Bruiker</ZKN:achternaam>\r
+                     <ZKN:voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                  </ZKN:medewerker>\r
+               </ZKN:gerelateerde>\r
+               <ZKN:heeftAlsAanspreekpunt StUF:entiteittype="ZAKBTRUTVCTP" StUF:verwerkingssoort="T">\r
+                  <ZKN:gerelateerde StUF:entiteittype="CTP" StUF:verwerkingssoort="T">\r
+                     <ZKN:identificatie>012345678901234567890123</ZKN:identificatie>\r
+                     <ZKN:naam>G. Bruiker</ZKN:naam>\r
+                     <ZKN:telefoonnummer>0515489000</ZKN:telefoonnummer>\r
+                     <ZKN:emailadres>info@sudwestfryslan.nl</ZKN:emailadres>\r
+                  </ZKN:gerelateerde>\r
+               </ZKN:heeftAlsAanspreekpunt>\r
+            </ZKN:heeftAlsUitvoerende>\r
+            <ZKN:heeftAlsVerantwoordelijke StUF:entiteittype="ZAKBTRVRA" StUF:verwerkingssoort="T">\r
+               <ZKN:gerelateerde>\r
+                  <ZKN:medewerker StUF:entiteittype="MDW" StUF:verwerkingssoort="T">\r
+                     <ZKN:identificatie>012345678901234567890123</ZKN:identificatie>\r
+                     <ZKN:achternaam>G. Bruiker</ZKN:achternaam>\r
+                     <ZKN:voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>\r
+                  </ZKN:medewerker>\r
+               </ZKN:gerelateerde>\r
+               <ZKN:heeftAlsAanspreekpunt StUF:entiteittype="ZAKBTRVRACTP" StUF:verwerkingssoort="T">\r
+                  <ZKN:gerelateerde StUF:entiteittype="CTP" StUF:verwerkingssoort="T">\r
+                     <ZKN:identificatie>012345678901234567890123</ZKN:identificatie>\r
+                     <ZKN:naam>G. Bruiker</ZKN:naam>\r
+                     <ZKN:telefoonnummer>0515489000</ZKN:telefoonnummer>\r
+                     <ZKN:emailadres>info@sudwestfryslan.nl</ZKN:emailadres>\r
+                  </ZKN:gerelateerde>\r
+               </ZKN:heeftAlsAanspreekpunt>\r
+            </ZKN:heeftAlsVerantwoordelijke>\r
+            <!--<ZKN:heeft StUF:entiteittype="ZAKSTT" StUF:verwerkingssoort="T">
+               <ZKN:gerelateerde StUF:entiteittype="STT" StUF:verwerkingssoort="T">
+                  <ZKN:zkt.code>B1026</ZKN:zkt.code>
+                  <ZKN:zkt.omschrijving>Aanvraag minima</ZKN:zkt.omschrijving>
+                  <ZKN:volgnummer>0009</ZKN:volgnummer>
+                  <ZKN:code>einde</ZKN:code>
+                  <ZKN:omschrijving>einde</ZKN:omschrijving>
+                  <ZKN:ingangsdatumObject xsi:nil="true" StUF:noValue="geenWaarde"/>
+               </ZKN:gerelateerde>
+               <ZKN:datumStatusGezet>${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMddHHmmssSS").format(new Date())}</ZKN:datumStatusGezet>
+               <ZKN:isGezetDoor StUF:entiteittype="ZAKSTTBTR" StUF:verwerkingssoort="T">
+                  <ZKN:gerelateerde>
+                     <ZKN:medewerker StUF:entiteittype="MDW" StUF:verwerkingssoort="T">
+                        <ZKN:identificatie>012345678901234567890123</ZKN:identificatie>
+                        <ZKN:achternaam>G. Bruiker</ZKN:achternaam>
+                        <ZKN:voorletters xsi:nil="true" StUF:noValue="geenWaarde"/>
+                     </ZKN:medewerker>
+                  </ZKN:gerelateerde>
+               </ZKN:isGezetDoor>
+            </ZKN:heeft>-->\r
+         </ZKN:object>\r
+      </ZKN:zakLk01>\r
+   </SOAP-ENV:Body>\r
+</SOAP-ENV:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3cb2e495-2a67-440c-92d2-dc7a422a76cd" name="SOAP Response"/><con:assertion type="Schema Compliance" id="c6cff34b-dc2b-4014-adc6-06944c6d8448" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion" id="d4a4374c-f7f8-4e40-a7c1-8a25215bb312" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/creeerZaak_Lk01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="df843c39-dce1-4188-861f-bd67ebcd55ac" name="04-zds-geefZaakdetails_Lv01 zaakid (zaakbestaat nu wel)"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ZdsBeantwoordVraag</con:interface><con:operation>geefZaakdetails_Lv01</con:operation><con:request name="04-zds-geefZaakdetails_Lv01 zaakid (zaakbestaat nu wel)" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="b86f0444-e5bf-4a09-97a2-3d650e0b93ff"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/zds/BeantwoordVraag</con:endpoint><con:request><![CDATA[<Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+<Body>
+<zakLv01 xmlns="http://www.egem.nl/StUF/sector/zkn/0310">
+<stuurgegevens>
+<berichtcode xmlns="http://www.egem.nl/StUF/StUF0301">Lv01</berichtcode>
+<zender xmlns="http://www.egem.nl/StUF/StUF0301">
+<organisatie>1900</organisatie>
+<applicatie>InForm</applicatie>
+<administratie>Schulinck</administratie>
+<gebruiker>Schulinck</gebruiker>
+</zender>
+<ontvanger xmlns="http://www.egem.nl/StUF/StUF0301">
+<organisatie>1900</organisatie>
+<applicatie>CDR</applicatie>
+</ontvanger>
+<referentienummer xmlns="http://www.egem.nl/StUF/StUF0301">${=java.util.UUID.randomUUID().toString() }</referentienummer>
+<tijdstipBericht xmlns="http://www.egem.nl/StUF/StUF0301">${=import java.text.SimpleDateFormat; new SimpleDateFormat("yyyyMMddHHmmssSS").format(new Date())}</tijdstipBericht>
+<entiteittype xmlns="http://www.egem.nl/StUF/StUF0301">ZAK</entiteittype>
+</stuurgegevens>
+<parameters>
+<sortering xmlns="http://www.egem.nl/StUF/StUF0301">0</sortering>
+<indicatorVervolgvraag xmlns="http://www.egem.nl/StUF/StUF0301">false</indicatorVervolgvraag>
+<maximumAantal xmlns="http://www.egem.nl/StUF/StUF0301">1</maximumAantal>
+</parameters>
+<gelijk d4p1:entiteittype="ZAK" xmlns:d4p1="http://www.egem.nl/StUF/StUF0301">
+<identificatie>${Properties#ZaakIdentificatie}</identificatie>
+</gelijk>
+<scope>
+<object d5p1:entiteittype="ZAK" d5p1:scope="alles" xmlns:d5p1="http://www.egem.nl/StUF/StUF0301" />
+</scope>
+</zakLv01>
+</Body>
+</Envelope>]]></con:request><con:assertion type="SOAP Response" id="a5bb9a97-6aff-4a26-bd8c-283295080f00" name="SOAP Response"/><con:assertion type="Schema Compliance" id="ed311230-3e49-4b1f-ad19-4ff7dad1ecf2" name="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion" id="ecf082e3-2bda-418f-bc9e-32a49965d93b" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase></con:testSuite><con:testSuite id="414837d4-85ca-4e95-bade-4186ef311c43" name="Issue Tests"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="46ed94a6-2842-4f03-ba58-191d76000100" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="#332 De waarde 'initiator' komt al 1 keer voor" searchProperties="true"><con:settings/><con:testStep type="properties" name="Properties" id="3e39e36f-1800-4cab-8bb3-34f9d9e47836"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>ZaakIdentificatie</con:name><con:value>1901275</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" id="08caedd9-3cf9-4e97-9bca-1f386bc99391" name="genereerZaakIdentificatie_Di02"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ZdsVrijeBerichten</con:interface><con:operation>genereerZaakIdentificatie_Di02</con:operation><con:request name="genereerZaakIdentificatie_Di02" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="78a97417-a2f7-4fe6-87ad-6af33391b0e1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.support.AbstractHttpRequest@dump-file"/></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/zds/VrijBericht</con:endpoint><con:request><![CDATA[<SOAP-ENV:Envelope xsi:schemaLocation="http://www.egem.nl/StUF/sector/zkn/0310 zkn0310-p28\zs-dms\zkn0310_msg_zs-dms_resolved.xsd" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:StUF="http://www.egem.nl/StUF/StUF0301" xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\r
    <SOAP-ENV:Header/>\r
    <SOAP-ENV:Body>\r
       <ZKN:genereerZaakIdentificatie_Di02>\r
