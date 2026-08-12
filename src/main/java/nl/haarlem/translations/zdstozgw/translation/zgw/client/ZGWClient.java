@@ -243,6 +243,21 @@ public class ZGWClient {
 		}
 	}
 
+	// ZgwAuthorization.getAuthorizationToken(url) kiest het JWT-token door url.startsWith(baseurl) tegen de
+	// lokaal geconfigureerde registry-urls (zakenUrl/documentenUrl/catalogiUrl/besluitenUrl). Objecten die we
+	// van OpenZaak terugkrijgen verwijzen naar elkaar met OpenZaak's eigen, zelf-gerapporteerde urls - die
+	// kunnen op een andere hostname staan dan lokaal geconfigureerd (bv. achter een proxy, of wanneer
+	// OpenZaak's eigen domeinconfiguratie afwijkt van hoe wij OpenZaak benaderen). We negeren daarom de host
+	// uit zo'n url en herbouwen 'm tegen onze eigen geconfigureerde baseUrl+endpoint, zodat de
+	// auth-prefix-match altijd slaagt.
+	private String rebuildLocalUrl(String baseUrl, String endpoint, ZgwAuthorization authorization, String foreignUrl) {
+		var localUrl = baseUrl + endpoint + "/" + authorization.getUuid(foreignUrl);
+		if (!foreignUrl.startsWith(baseUrl)) {
+			log.warn("rebuildLocalUrl: url:'" + foreignUrl + "' komt niet overeen met de geconfigureerde host, herbouwd naar:'" + localUrl + "'");
+		}
+		return localUrl;
+	}
+
 	private String getUrlWithParameters(String url, Map<String, String> parameters) {
 		for (String key : parameters.keySet()) {
 			url += !url.contains("?") ? "?" + key + "=" + parameters.get(key) : "&" + key + "=" + parameters.get(key);
@@ -481,13 +496,14 @@ public class ZGWClient {
 	
 	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByUrl(ZgwAuthorization authorization, String url, String expand) {
 		var cachedObject = authorization.cacheGet(url);
-		if (cachedObject != null) return (ZgwEnkelvoudigInformatieObject) cachedObject;		
+		if (cachedObject != null) return (ZgwEnkelvoudigInformatieObject) cachedObject;
 
+		var localUrl = rebuildLocalUrl(this.documentenUrl, this.endpointEnkelvoudiginformatieobject, authorization, url);
 		Map<String, String> parameters = new HashMap<>();
 		if(expand != null) {
 			parameters.put("expand", expand);
 		}
-		var zaakInformatieObjectJson = get(authorization, url, parameters);
+		var zaakInformatieObjectJson = get(authorization, localUrl, parameters);
 		Gson gson = new Gson();
 		var result = gson.fromJson(zaakInformatieObjectJson, ZgwEnkelvoudigInformatieObject.class);
 		if(result == null) {
@@ -498,13 +514,15 @@ public class ZGWClient {
 		return result;
 	}
 		
+	// Geen aanroepers meer in deze codebase (getRolTypeByZaaktypeAndOmschrijving gebruikt inmiddels een
+	// filter-query i.p.v. deze by-url lookup) - laten staan voor eventueel toekomstig gebruik, gemarkeerd.
+	@Deprecated
 	public ZgwRolType getRolTypeByUrl(ZgwAuthorization authorization, String url) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwRolType) cachedObject;
-		
-		if(authorization.cacheGet(url) != null) return (ZgwRolType) authorization.cacheGet(url);
-		
-		var rolTypeJson = get(authorization, url, null);
+
+		var localUrl = rebuildLocalUrl(this.catalogiUrl, this.endpointRolType, authorization, url);
+		var rolTypeJson = get(authorization, localUrl, null);
 		Gson gson = new Gson();
 		ZgwRolType result = gson.fromJson(rolTypeJson, ZgwRolType.class);
 		if(result == null) {
@@ -529,12 +547,13 @@ public class ZGWClient {
 	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url, String expand) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwZaak) cachedObject;
-		
+
+		var localUrl = rebuildLocalUrl(this.zakenUrl, this.endpointZaak, authorization, url);
 		Map<String, String> parameters = new HashMap<>();
 		if(expand != null) {
 			parameters.put("expand", expand);
 		}
-		var zaakJson = get(authorization, url, parameters);
+		var zaakJson = get(authorization, localUrl, parameters);
 		Gson gson = new Gson();
 		ZgwZaak result = gson.fromJson(zaakJson, ZgwZaak.class);
 		if(result == null) {
@@ -679,15 +698,30 @@ public class ZGWClient {
 		return queryResult.getResults();
 	}
 
-	public <T> T getResource(ZgwAuthorization authorization, String url, Class<T> resourceType) {		
+	public <T> T getResource(ZgwAuthorization authorization, String url, Class<T> resourceType) {
 		var cachedObject = authorization.cacheGet(url);
-		if (cachedObject != null)  return resourceType.cast(authorization.cacheGet(url));		
-		
+		if (cachedObject != null)  return resourceType.cast(authorization.cacheGet(url));
+
 		Gson gson = new Gson();
 		String response = get(authorization, url, null);
 		var result = gson.fromJson(response, resourceType);
 		authorization.cacheAdd((ZgwObject)result);
-		return result; 
+		return result;
+	}
+
+	public ZgwStatusType getStatusTypeByUrl(ZgwAuthorization authorization, String url) {
+		var cachedObject = authorization.cacheGet(url);
+		if (cachedObject != null) return (ZgwStatusType) cachedObject;
+
+		var localUrl = rebuildLocalUrl(this.catalogiUrl, this.endpointStatustype, authorization, url);
+		var statusTypeJson = get(authorization, localUrl, null);
+		Gson gson = new Gson();
+		ZgwStatusType result = gson.fromJson(statusTypeJson, ZgwStatusType.class);
+		if(result == null) {
+			throw new ConverterException("ZgwStatusType met url:" + url + " niet gevonden!");
+		}
+		authorization.cacheAdd(result);
+		return result;
 	}
 
 	public ZgwStatus addZaakStatus(ZgwAuthorization authorization, ZgwStatus zgwSatus) {
@@ -719,8 +753,9 @@ public class ZGWClient {
 	public ZgwZaakType getZaakTypeByUrl(ZgwAuthorization authorization, String url) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwZaakType) cachedObject;
-		
-		var zaakTypeJson = get(authorization, url, null);
+
+		var localUrl = rebuildLocalUrl(this.catalogiUrl, this.endpointZaaktype, authorization, url);
+		var zaakTypeJson = get(authorization, localUrl, null);
 		Gson gson = new Gson();
 		ZgwZaakType result = gson.fromJson(zaakTypeJson, ZgwZaakType.class);
 		authorization.cacheAdd(result);
@@ -805,8 +840,9 @@ public class ZGWClient {
 	public ZgwZaakInformatieObject getZaakInformatieObjectByUrl(ZgwAuthorization authorization, String url) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwZaakInformatieObject) cachedObject;
-		
-		var zgwZaakInformatieObjectJson = get(authorization, url, null);
+
+		var localUrl = rebuildLocalUrl(this.zakenUrl, this.endpointZaakinformatieobject, authorization, url);
+		var zgwZaakInformatieObjectJson = get(authorization, localUrl, null);
 		Gson gson = new Gson();
 		ZgwZaakInformatieObject result = gson.fromJson(zgwZaakInformatieObjectJson, ZgwZaakInformatieObject.class);
 		if(result == null) {
@@ -958,11 +994,15 @@ public class ZGWClient {
 		return this.getRollen(authorization, parameters);
 	}	
 	
+	// Geen aanroepers meer in deze codebase (ZaakService leest rollen inmiddels via _expand.rollen) - laten
+	// staan voor eventueel toekomstig gebruik, gemarkeerd.
+	@Deprecated
 	public ZgwRol getRolByUrl(ZgwAuthorization authorization, String url) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwRol) cachedObject;
-		
-		var zaakJson = get(authorization, url, null);
+
+		var localUrl = rebuildLocalUrl(this.zakenUrl, this.endpointRol, authorization, url);
+		var zaakJson = get(authorization, localUrl, null);
 		Gson gson = new Gson();
 		ZgwRol result = gson.fromJson(zaakJson, ZgwRol.class);
 		if(result == null) {
@@ -1060,9 +1100,10 @@ public class ZGWClient {
 
 	public ZgwInformatieObjectType getZgwInformatieObjectTypeByUrl(ZgwAuthorization authorization, String url) {
 		var cachedObject = authorization.cacheGet(url);
-		if (cachedObject != null) return (ZgwInformatieObjectType) cachedObject;		
-		
-		var documentType = get(authorization, url, null);
+		if (cachedObject != null) return (ZgwInformatieObjectType) cachedObject;
+
+		var localUrl = rebuildLocalUrl(this.catalogiUrl, this.endpointInformatieobjecttype, authorization, url);
+		var documentType = get(authorization, localUrl, null);
 		Gson gson = new Gson();
 		ZgwInformatieObjectType result = gson.fromJson(documentType, ZgwInformatieObjectType.class);
 		authorization.cacheAdd(result);
@@ -1071,7 +1112,8 @@ public class ZGWClient {
 
 	public ZgwLock getZgwInformatieObjectLock(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject) {
 		String json = "{ }";
-		var lock = post(authorization, zgwEnkelvoudigInformatieObject.url + "/lock", json);
+		var localUrl = rebuildLocalUrl(this.documentenUrl, this.endpointEnkelvoudiginformatieobject, authorization, zgwEnkelvoudigInformatieObject.url);
+		var lock = post(authorization, localUrl + "/lock", json);
 		Gson gson = new Gson();
 		ZgwLock result = gson.fromJson(lock, ZgwLock.class);
 		return result;
@@ -1080,7 +1122,8 @@ public class ZGWClient {
 	public void getZgwInformatieObjectUnLock(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObjectPut zgwEnkelvoudigInformatieObjectPut, ZgwLock zgwLock) {
 			Gson gson = new Gson();
 			String json = gson.toJson(zgwLock);
-			var lock = post(authorization, zgwEnkelvoudigInformatieObjectPut.url + "/unlock", json);
+			var localUrl = rebuildLocalUrl(this.documentenUrl, this.endpointEnkelvoudiginformatieobject, authorization, zgwEnkelvoudigInformatieObjectPut.url);
+			var lock = post(authorization, localUrl + "/unlock", json);
 			Object result = gson.fromJson(lock, Object.class);
 			return;
 	}
@@ -1088,7 +1131,8 @@ public class ZGWClient {
 	public ZgwEnkelvoudigInformatieObject putZaakDocument(ZgwAuthorization authorization, ZgwEnkelvoudigInformatieObjectPut zgwEnkelvoudigInformatieObjectPut) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().excludeFieldsWithoutExposeAnnotation().create();
 		String json = gson.toJson(zgwEnkelvoudigInformatieObjectPut);
-		String response = this.put(authorization, zgwEnkelvoudigInformatieObjectPut.url, json);
+		var localUrl = rebuildLocalUrl(this.documentenUrl, this.endpointEnkelvoudiginformatieobject, authorization, zgwEnkelvoudigInformatieObjectPut.url);
+		String response = this.put(authorization, localUrl, json);
 		return gson.fromJson(response, ZgwEnkelvoudigInformatieObject.class);
 	}
 

@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -301,13 +303,23 @@ public class ZgwAuthorization {
         }
     }	
     
+    private static final Pattern UUID_PATTERN = Pattern.compile(
+    		"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+
     // Not everything has an uuid,
     // Everything does have an url
+    // Zoekt het laatste UUID-patroon in de url, i.p.v. blind de laatste 36 tekens te pakken - dat brak stil
+    // bij een trailing slash, querystring of een actie-suffix zoals "/lock".
     public String getUuid(String url) {
     	if(url == null) {
     		return null;
     	}
-		return url.substring(url.length() - 36);    	
+    	Matcher matcher = UUID_PATTERN.matcher(url);
+    	String uuid = null;
+    	while(matcher.find()) {
+    		uuid = matcher.group();
+    	}
+    	return uuid;
     }
     
 	public ZgwObject cacheGet(String url) {
