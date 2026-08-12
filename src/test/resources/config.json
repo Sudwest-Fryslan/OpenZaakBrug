@@ -14,7 +14,8 @@
 		{
 			"gemeenteNaam": "Súdwest-Fryslân",
 			"gemeenteCode": "1900",
-			"RSIN": "823288444"
+			"RSIN": "823288444",
+			"voorkeur": true
 		}
 	],
 	"zgwRolOmschrijving": {

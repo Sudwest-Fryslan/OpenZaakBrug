@@ -87,7 +87,7 @@
 	<xsl:template match="*[local-name()='Checkpoint' and @Name='url' and @Type='Inputpoint' and @Level='2']">
 		<xsl:copy>
 			<xsl:apply-templates select="@*"/>
-			<xsl:value-of select="replace(replace(replace(replace(replace(replace(replace(replace(replace(., 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'openzaak.local', 'IGNORED'), 'test.openzaak.nl', 'IGNORED'), 'localhost:8000', 'IGNORED'), 'localhost', 'IGNORED'), 'https://', 'http://'), 'localhost:9001', 'IGNORED'), 'localhost:8080', 'IGNORED')"/>
+			<xsl:value-of select="replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(., 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'fieldlab.westeurope.cloudapp.azure.com', 'IGNORED'), 'openzaak.local', 'IGNORED'), 'test.openzaak.nl', 'IGNORED'), 'localhost:8000', 'IGNORED'), 'localhost', 'IGNORED'), 'https://', 'http://'), 'localhost:9001', 'IGNORED'), 'localhost:8080', 'IGNORED'), 'zaken-api.vng.cloud', 'IGNORED'), 'documenten-api.vng.cloud', 'IGNORED'), 'catalogi-api.vng.cloud', 'IGNORED'), 'besluiten-api.vng.cloud', 'IGNORED'), '/catalogi/api/v1', '/api/v1'), '/zaken/api/v1', '/api/v1'), '/documenten/api/v1', '/api/v1'), '/besluiten/api/v1', '/api/v1')"/>
 		</xsl:copy>
 	</xsl:template>
 	
