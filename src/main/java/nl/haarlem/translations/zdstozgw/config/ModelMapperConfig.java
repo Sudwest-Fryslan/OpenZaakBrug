@@ -415,6 +415,7 @@ public class ModelMapperConfig {
 			try {
 
 				DateTimeFormatter stufFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSS");
+				// StUF timestamps carry no timezone of their own and are always Dutch local time, regardless of the server's own timezone
 				ZonedDateTime cetDate = LocalDateTime.parse(stufDateTime, stufFormatter).atZone(ZoneId.of("Europe/Amsterdam"));
 
 				// check if it is a date or a datetime (ignore the seconds, this is used for the status)

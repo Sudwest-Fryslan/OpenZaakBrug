@@ -1256,13 +1256,13 @@ public class ZaakService {
 
 	public ZgwEnkelvoudigInformatieObject updateZaakDocument(ZgwAuthorization authorization, String lock, ZdsZaakDocumentInhoud zdsWasInformatieObject, ZdsZaakDocumentInhoud zdsWordtInformatieObject) {
 		log.debug("updateZaakDocument lock:" + lock + " informatieobject:" + zdsWordtInformatieObject.identificatie);
-		
+
 		var zgwWasEnkelvoudigInformatieObject = this.zgwClient.getZgwEnkelvoudigInformatieObjectByIdentiticatie(authorization, zdsWordtInformatieObject.identificatie, "informatieobjecttype");
 
 		if(zdsWasInformatieObject != null && !zdsWordtInformatieObject.identificatie.equals(zdsWasInformatieObject.identificatie)) {
 			throw new ConverterException("illegal attempt to change the document identification from: '" + zdsWasInformatieObject.identificatie + "' to:" + zdsWordtInformatieObject.identificatie);
 		}
-		
+
 		if("definitief".equals(zgwWasEnkelvoudigInformatieObject.status)) {
 			throw new ConverterException("ZgwEnkelvoudigInformatieObject #: " + zdsWasInformatieObject.identificatie + " has status 'defintief ' and therefore cannot be locked and then changed");
 		}

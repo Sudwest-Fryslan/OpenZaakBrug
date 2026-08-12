@@ -1,9 +1,10 @@
 # Config.py
 class Config:
-    # 
-    IMPLEMENTATION_CONFIG = ReferenceZgwConfig
-    JWT_CLIENT_ID = 'id'
-    JWT_SECRET = 'secret'
+    # Base configuration class
+    JWT_TOKEN_URL = None
+    JWT_CLIENT_ID = "open-zaakbrug"
+    JWT_SECRET = "Mk?p@dhe95LGsbBG"
+    IMPLEMENTATION_CONFIG = None
 
     ORDER_OF_PERSISTENCE = ["/api/v1/catalogussen/", "/api/v1/zaaktypen"]
 
