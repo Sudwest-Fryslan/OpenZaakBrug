@@ -625,7 +625,9 @@ public class ZGWClient {
 		Gson gson = new Gson();
 		Type documentList = new TypeToken<ArrayList<ZgwZaakInformatieObject>>() {
 		}.getType();
-		return gson.fromJson(zaakInformatieObjectJson, documentList);
+		List<ZgwZaakInformatieObject> result = gson.fromJson(zaakInformatieObjectJson, documentList);
+		authorization.cacheAdd(result);
+		return result;
 	}
 
 	public List<ZgwStatusType> getStatusTypes(ZgwAuthorization authorization, Map<String, String> parameters) {
@@ -725,10 +727,6 @@ public class ZGWClient {
 		return result;
 	}
 
-
-	public ZgwZaakType getZaakTypeByZaak(ZgwAuthorization authorization, ZgwZaak zgwZaak) {
-		return getZaakTypeByUrl(authorization, zgwZaak.getZaaktype());
-	}
 
 	public List<ZgwRol> getRollen(ZgwAuthorization authorization, Map<String, String> parameters) {
 		var zaakTypeJson = get(authorization, this.zakenUrl + this.endpointRol, parameters);
@@ -932,8 +930,9 @@ public class ZGWClient {
 			// maximum length of omschrijving is 20 characters
 			omschrijving = omschrijving.substring(0, 20);
 		}
-		for (String found: zaakType.resultaattypen) {
-			ZgwResultaatType resultaatType = getResultaatTypeByUrl(authorization, found);
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("zaaktype", zaakType.url);
+		for (ZgwResultaatType resultaatType: getResultaatTypes(authorization, parameters)) {
 			log.debug("opgehaald:" + resultaatType.omschrijving + " zoeken naar: " + omschrijving + "' (ingekort van: " + resultaatOmschrijving + ")");
 
 			// in some applications, the omschrijving can not be as long as we want.....
@@ -945,20 +944,6 @@ public class ZGWClient {
 		throw new ConverterException("zaakresultaat niet gevonden voor omschrijving: '" + resultaatOmschrijving + "'");
 	}
 
-	private ZgwResultaatType getResultaatTypeByUrl(ZgwAuthorization authorization, String url) {
-		var cachedObject = authorization.cacheGet(url);
-		if (cachedObject != null) return (ZgwResultaatType) cachedObject;
-		
-		var resultaatTypeJson = get(authorization, url, null);
-		Gson gson = new Gson();
-		ZgwResultaatType result = gson.fromJson(resultaatTypeJson, ZgwResultaatType.class);
-		if(result == null) {
-			throw new ConverterException("ZgwResultaatType met url:" + url + " niet gevonden!");
-		}
-		authorization.cacheAdd(result);
-		return result;
-
-	}
 
 	public List<ZgwResultaat> getResultatenByZaakUrl(ZgwAuthorization authorization, String zaakUrl) {
 		Map<String, String> parameters = new HashMap<>();
@@ -1049,8 +1034,9 @@ public class ZGWClient {
 	}
 
 	public ZgwInformatieObjectType getZgwInformatieObjectTypeByOmschrijving(ZgwAuthorization authorization, ZgwZaakType zaaktype, String omschrijving) {
-		for (String found : zaaktype.informatieobjecttypen ) {
-			ZgwInformatieObjectType ziot = getZgwInformatieObjectTypeByUrl(authorization, found);
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("zaaktype", zaaktype.url);
+		for (ZgwInformatieObjectType ziot : getInformatieObjectTypes(authorization, parameters)) {
 			log.debug("gevonden ZgwInformatieObjectType met omschrijving: '" + ziot.omschrijving + "'");
 			//if (omschrijving.equals(ziot.omschrijving)) {
 			if (omschrijving.equalsIgnoreCase(ziot.omschrijving)) {
@@ -1058,6 +1044,18 @@ public class ZGWClient {
 			}
 		}
 		return null;
+	}
+
+	public List<ZgwInformatieObjectType> getInformatieObjectTypes(ZgwAuthorization authorization, Map<String, String> parameters) {
+		var informatieObjectTypeJson = get(authorization, this.catalogiUrl + this.endpointInformatieobjecttype, parameters);
+		Type type = new TypeToken<QueryResult<ZgwInformatieObjectType>>() {
+		}.getType();
+		Gson gson = new Gson();
+		QueryResult<ZgwInformatieObjectType> queryResult = gson.fromJson(informatieObjectTypeJson, type);
+		if(queryResult == null || queryResult.getResults() == null) {
+			return new ArrayList<ZgwInformatieObjectType>();
+		}
+		return queryResult.getResults();
 	}
 
 	public ZgwInformatieObjectType getZgwInformatieObjectTypeByUrl(ZgwAuthorization authorization, String url) {

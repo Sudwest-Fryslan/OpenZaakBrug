@@ -167,8 +167,11 @@ public class Replicator {
 
     private void replicateDocumenten(ZgwAuthorization authorization, String zaakidentificatie, List<ZdsHeeftRelevant> relevanteDocumenten) {
     	debug.infopoint("replicatie", "Aantal gekoppelde zaakdocumenten is: " + relevanteDocumenten.size() + "(zaakid: " + zaakidentificatie + ")");
-    	var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, null);
-    	var zgwZaakDocumenten = this.converter.getZaakService().zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
+    	var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, "zaakinformatieobjecten");
+    	if(zgwZaak._expand == null || zgwZaak._expand.zaakinformatieobjecten == null) {
+    		throw new ConverterException("zaakinformatieobjecten expand was null voor zaak:" + zgwZaak.identificatie);
+    	}
+    	var zgwZaakDocumenten = zgwZaak._expand.zaakinformatieobjecten;
         for (ZdsHeeftRelevant relevant : relevanteDocumenten) {
             var zaakdocumentidentificatie = relevant.gerelateerde.identificatie;
             debug.infopoint("replicatie", "Start repliceren van zaakdocument met  identificatie:" + zaakdocumentidentificatie + "(zaakid: " + zaakidentificatie + ")");
