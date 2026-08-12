@@ -258,7 +258,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Ladybug_Test_Tool-2.2-for.old.zaak.brug-20251107.163308-60b51368:19ff5dfdb45:-7ff5</string>
+      <string>Ladybug_Test_Tool-2.2-for.old.zaak.brug-20251107.163308--4991f239:19ff64dab17:-7ff5</string>
      </void>
      <void property="name">
       <string>referentienummer</string>
@@ -505,7 +505,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>https://test.openzaak.nl/zaken/api/v1/zaken?expand=zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype&amp;identificatie=1900852&amp;bronorganisatie=null</string>
+      <string>https://test.openzaak.nl/zaken/api/v1/zaken?expand=zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype,hoofdzaak,deelzaken&amp;identificatie=1900852&amp;bronorganisatie=null</string>
      </void>
      <void property="name">
       <string>url</string>
@@ -530,7 +530,7 @@
       <int>2</int>
      </void>
      <void property="message">
-      <string>zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype</string>
+      <string>zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype,hoofdzaak,deelzaken</string>
      </void>
      <void property="name">
       <string>Parameter expand</string>
@@ -630,7 +630,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>GET to: https://test.openzaak.nl/zaken/api/v1/zaken?expand=zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype&amp;identificatie=1900852&amp;bronorganisatie=null took 0 milliseconds</string>
+      <string>GET to: https://test.openzaak.nl/zaken/api/v1/zaken?expand=zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype,hoofdzaak,deelzaken&amp;identificatie=1900852&amp;bronorganisatie=null took 0 milliseconds</string>
      </void>
      <void property="name">
       <string>Duration</string>
@@ -715,7 +715,7 @@
       <int>1</int>
      </void>
      <void property="message">
-      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01 with kenmerk: &apos;zaakidentificatie:1900852&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 27 milliseconds</string>
+      <string>Soapaction: http://www.egem.nl/StUF/sector/zkn/0310/geefZaakdetails_Lv01 with kenmerk: &apos;zaakidentificatie:1900852&apos; returned statuscode:500 INTERNAL_SERVER_ERROR and took 28 milliseconds</string>
      </void>
      <void property="name">
       <string>Total duration</string>
@@ -758,8 +758,8 @@
               &lt;organisatie&gt;1900&lt;/organisatie&gt;&#13;
               &lt;applicatie&gt;GISVG&lt;/applicatie&gt;&#13;
             &lt;/ontvanger&gt;&#13;
-            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-for.old.zaak.brug-20251107.163308-60b51368:19ff5dfdb45:-7ff5&lt;/referentienummer&gt;&#13;
-            &lt;tijdstipBericht&gt;20260812140837&lt;/tijdstipBericht&gt;&#13;
+            &lt;referentienummer&gt;Ladybug_Test_Tool-2.2-for.old.zaak.brug-20251107.163308--4991f239:19ff64dab17:-7ff5&lt;/referentienummer&gt;&#13;
+            &lt;tijdstipBericht&gt;20260812160833&lt;/tijdstipBericht&gt;&#13;
             &lt;crossRefnummer&gt;f9b5b5c0-14b4-465f-a944-6833b5e6a885&lt;/crossRefnummer&gt;&#13;
           &lt;/stuurgegevens&gt;&#13;
           &lt;body&gt;&#13;
@@ -899,10 +899,10 @@
    </void>
   </void>
   <void property="correlationId">
-   <string>Ladybug_Test_Tool-2.2-for.old.zaak.brug-20251107.163308-60b51368:19ff5dfdb45:-7ff5</string>
+   <string>Ladybug_Test_Tool-2.2-for.old.zaak.brug-20251107.163308--4991f239:19ff64dab17:-7ff5</string>
   </void>
   <void property="endTime">
-   <long>1786536517115</long>
+   <long>1786543713772</long>
   </void>
   <void property="name">
    <string>Translate geefZaakdetails_Lv01</string>
@@ -911,10 +911,10 @@
    <string>/Gisvg Natuurlijk Persoon/</string>
   </void>
   <void property="startTime">
-   <long>1786536517087</long>
+   <long>1786543713744</long>
   </void>
   <void property="storageId">
-   <int>829</int>
+   <int>860</int>
   </void>
   <void property="stubStrategy">
    <string>Stub all external connection code</string>
