@@ -323,14 +323,78 @@ public class ZgwAuthorization {
     }
     
 	public ZgwObject cacheGet(String url) {
+		return cacheGet(url, null);
+	}
+
+	// Cache-hits mogen alleen teruggegeven worden als het gecachete object de gevraagde expand-velden
+	// ook daadwerkelijk bevat - anders kan een object dat eerder met minder expand is opgehaald (bv. door
+	// een andere aanroeper met een andere expand-behoefte) stilletjes teruggegeven worden zonder de nu
+	// gevraagde data, wat verderop leidt tot een "expand was null"-fout of stille dataverlies. Bij een
+	// onvoldoende gevulde cache-entry wordt dit behandeld als cache-miss (null), zodat de aanroeper een
+	// live fetch doet; cacheAdd() overschrijft de bestaande entry daarna vanzelf met het completere object.
+	public ZgwObject cacheGet(String url, String expand) {
 		// also accept urls
 		var uuid = getUuid(url);
-		if(cache.get(uuid) != null) {
-			log.debug("\n\t\t[GET-CACHE-FOUND]" + uuid + " (url: " + cache.get(uuid).url + " java-type:" + cache.get(uuid).getClass().getName() + ")");			
+		var cached = cache.get(uuid);
+		if(cached == null) {
+			log.debug("\n\t\t[GET-CACHE-MISS]" + uuid);
+			return null;
 		}
-		else {
-			log.debug("\n\t\t[GET-CACHE-MISS]" + uuid);			
+		if(!cacheEntrySatisfiesExpand(cached, expand)) {
+			// bewust een warning (niet debug): dit signaleert een extra, niet vanzelfsprekende aanroep
+			// bovenop wat de cache had kunnen besparen - de moeite waard om op te merken en later te
+			// beoordelen of dit vaak genoeg voorkomt om de expand-strings verder op elkaar af te stemmen.
+			log.warn("\n\t\t[GET-CACHE-INSUFFICIENT]" + uuid + " mist expand-data voor '" + expand + "', live opnieuw ophalen");
+			return null;
 		}
-		return cache.get(uuid);
+		log.debug("\n\t\t[GET-CACHE-FOUND]" + uuid + " (url: " + cached.url + " java-type:" + cached.getClass().getName() + ")");
+		return cached;
+	}
+
+	private boolean cacheEntrySatisfiesExpand(ZgwObject cached, String expand) {
+		if(expand == null || expand.isEmpty()) {
+			return true;
+		}
+		for(String fieldPath : expand.split(",")) {
+			if(!hasExpandPath(cached, fieldPath.trim().split("\\."), 0)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Loopt een (eventueel gepunte, bv. "status.statustype") expand-pad af via reflectie op het "_expand"-
+	// veld dat elk ZgwObject-subtype zelf declareert (ZgwZrcExpand, ZgwDrcExpand, ...).
+	private boolean hasExpandPath(Object current, String[] segments, int index) {
+		if(current == null) {
+			return false;
+		}
+		try {
+			Field expandField = current.getClass().getField("_expand");
+			Object expandObj = expandField.get(current);
+			if(expandObj == null) {
+				return false;
+			}
+			Field segmentField = expandObj.getClass().getField(segments[index]);
+			Object value = segmentField.get(expandObj);
+			if(value == null) {
+				return false;
+			}
+			if(index == segments.length - 1) {
+				return true;
+			}
+			// segments[index] kan zelf een lijst zijn (bv. "rollen.roltype") - dan is het volgende
+			// segment niet verder te herleiden zonder te weten welk lijst-element bedoeld wordt, dus
+			// behandelen we dat als "niet te verifiëren" -> voorzichtigheidshalve als onvoldoende.
+			if(Collection.class.isAssignableFrom(value.getClass())) {
+				return false;
+			}
+			return hasExpandPath(value, segments, index + 1);
+		} catch(NoSuchFieldException e) {
+			return false;
+		} catch(Exception e) {
+			log.warn("Kon expand-pad '" + String.join(".", segments) + "' niet verifiëren op cache-entry", e);
+			return false;
+		}
 	}
 }

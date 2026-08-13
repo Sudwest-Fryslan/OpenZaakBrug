@@ -495,7 +495,7 @@ public class ZGWClient {
 	}
 	
 	public ZgwEnkelvoudigInformatieObject getZgwEnkelvoudigInformatieObjectByUrl(ZgwAuthorization authorization, String url, String expand) {
-		var cachedObject = authorization.cacheGet(url);
+		var cachedObject = authorization.cacheGet(url, expand);
 		if (cachedObject != null) return (ZgwEnkelvoudigInformatieObject) cachedObject;
 
 		var localUrl = rebuildLocalUrl(this.documentenUrl, this.endpointEnkelvoudiginformatieobject, authorization, url);
@@ -545,7 +545,7 @@ public class ZGWClient {
 	}	
 
 	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url, String expand) {
-		var cachedObject = authorization.cacheGet(url);
+		var cachedObject = authorization.cacheGet(url, expand);
 		if (cachedObject != null) return (ZgwZaak) cachedObject;
 
 		var localUrl = rebuildLocalUrl(this.zakenUrl, this.endpointZaak, authorization, url);

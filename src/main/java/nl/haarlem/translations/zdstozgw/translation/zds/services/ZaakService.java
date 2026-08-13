@@ -89,6 +89,11 @@ public class ZaakService {
 	private final ModelMapper modelMapper;
 	public final ConfigService configService;
 
+	// expand-velden die getZaakDetailsByZgwZaak() zelf gebruikt (zaaktype, rollen) -
+	// aanroepers die deze methode voeden verwijzen hierna, i.p.v. het zelf te dupliceren, zodat een
+	// wijziging in wat getZaakDetailsByZgwZaak gebruikt maar op één plek bijgewerkt hoeft te worden.
+	private static final String EXPAND_ZAAK_DETAILS = "zaaktype,rollen";
+
 	@Autowired
 	public ZaakService(ZGWClient zgwClient, ModelMapper modelMapper, ConfigService configService) {
 		this.zgwClient = zgwClient;
@@ -245,7 +250,9 @@ public class ZaakService {
 		if(zdsWasZaak != null && !zdsWordtZaak.identificatie.equals(zdsWasZaak.identificatie)) {
 			throw new ConverterException("illegal attempt to change the zaak identification from: '" + zdsWasZaak.identificatie + "' to:" + zdsWordtZaak.identificatie);
 		}				
-		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zdsWordtZaak.identificatie, "zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype");
+		// alleen zaaktype nodig: status/resultaat/rollen worden in deze methode toch los (opnieuw)
+		// opgehaald via setResultaatAndStatus/deleteRolFromZgw/updateRolInZgw/addRolToZgw
+		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zdsWordtZaak.identificatie, "zaaktype");
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak with identification: '" + zdsWordtZaak.identificatie + "' not found in ZGW");
 		}
@@ -952,7 +959,13 @@ public class ZaakService {
 	public List<ZdsZaak> getZaakDetailsByBsn(ZgwAuthorization authorization, String bsn) {
 		log.debug("getZaakDetailsByBsn:" + bsn);
 		
-		var zgwZaken = this.zgwClient.getZakenByBsn(authorization, bsn, "zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype,hoofdzaak,deelzaken");
+		// hoofdzaak/deelzaken bewust niet in de lijst-expand: die worden pas na de Initiator-filter
+		// (hieronder) voor de overgebleven zaken opgehaald via de bestaande fallback in
+		// getZaakDetailsByZgwZaak, i.p.v. voor alle (tot 100) zaken in deze pagina.
+		// rollen.roltype hier wel nodig (anders dan in EXPAND_ZAAK_DETAILS zelf): de Initiator-filter
+		// hieronder leest zgwRol._expand.roltype.omschrijving, een ander veld dan de zgwRol.omschrijving
+		// die getZaakDetailsByZgwZaak gebruikt.
+		var zgwZaken = this.zgwClient.getZakenByBsn(authorization, bsn, EXPAND_ZAAK_DETAILS + ",rollen.roltype");
 		var result = new ArrayList<ZdsZaak>();
 		zaken:
 		for (ZgwZaak zgwZaak : zgwZaken) {
@@ -982,7 +995,9 @@ public class ZaakService {
 	
 	public ZdsZaak getZaakDetailsByIdentificatie(ZgwAuthorization authorization, String zaakidentificatie) {
 		log.debug("getZaakDetailsByIdentificatie:" + zaakidentificatie);
-		var zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, "zaaktype,status,status.statustype,resultaat,resultaat.resultaattype,rollen,rollen.roltype,hoofdzaak,deelzaken");
+		// single-zaak-fetch: hoofdzaak/deelzaken hier wel meteen in de expand (geen kosten-voor-100-
+		// gebruik-voor-20-afweging zoals bij getZaakDetailsByBsn)
+		var zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, EXPAND_ZAAK_DETAILS + ",hoofdzaak,deelzaken");
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak not found for identification: '" + zaakidentificatie + "'");
 		}		
