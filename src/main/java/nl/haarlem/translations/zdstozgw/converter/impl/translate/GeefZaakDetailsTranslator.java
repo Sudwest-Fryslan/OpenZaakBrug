@@ -78,8 +78,17 @@ public class GeefZaakDetailsTranslator extends Converter {
 			this.getSession().setFunctie("GeefZaakDetails-Bsn");
 			this.getSession().setKenmerk("bsn:" + bsn);
 
-			zdsResponse.antwoord.zaak = this.getZaakService()
-					.getZaakDetailsByBsn(authorization, gerelateerdeidentificatie.substring(2));
+			// zender identificeert, samen met de bsn, de StUF-vervolgvraag-sessie (zie ZakLv01PagingCache) -
+			// niet het referentienummer/crossRefnummer, want die verschillen juist per vervolgvraag.
+			var zenderOrganisatie = zdsZakLv01.stuurgegevens.zender != null ? zdsZakLv01.stuurgegevens.zender.organisatie : null;
+			var zenderApplicatie = zdsZakLv01.stuurgegevens.zender != null ? zdsZakLv01.stuurgegevens.zender.applicatie : null;
+			var indicatorVervolgvraag = Boolean.parseBoolean(zdsZakLv01.parameters.indicatorVervolgvraag);
+
+			var result = this.getZaakService().getZaakDetailsByBsn(authorization, bsn, zenderOrganisatie,
+					zenderApplicatie, zdsZakLv01.parameters.maximumAantal, indicatorVervolgvraag);
+			zdsResponse.antwoord.zaak = result.getZaken();
+			zdsResponse.parameters.indicatorVervolgvraag = String.valueOf(result.isHeeftVervolg());
+			zdsResponse.parameters.aantalVoorkomens = String.valueOf(result.getAantalVoorkomens());
 		} else {
 			throw new ConverterException("Niet ondersteunde vraag binnengekregen");
 		}

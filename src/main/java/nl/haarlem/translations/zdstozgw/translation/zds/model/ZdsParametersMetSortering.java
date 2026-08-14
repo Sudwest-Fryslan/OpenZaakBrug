@@ -30,9 +30,11 @@ public class ZdsParametersMetSortering extends ZdsParameters{
 	@XmlElement(namespace = STUF, nillable = true)
 	public String sortering;
 
-	// Overrides the base.indicatorVervolgvraag
+	// vraag-veld: StUF default "15" (stuf0301.xsd ParametersVraag) - JAXB materialiseert xsd:default niet
+	// vanzelf in een kaal veld, dus een ontbrekende/lege waarde wordt door de aanroeper zelf als 15
+	// behandeld i.p.v. hier.
 	@XmlElement(namespace = STUF, nillable = true)
-	public String indicatorVervolgvraag;
+	public String maximumAantal;
 
 	public ZdsParametersMetSortering() {
 	}
@@ -40,5 +42,6 @@ public class ZdsParametersMetSortering extends ZdsParameters{
 	public ZdsParametersMetSortering(ZdsParametersMetSortering zdsParameters) {
 		this.sortering = zdsParameters.sortering;
 		this.indicatorVervolgvraag = zdsParameters.indicatorVervolgvraag;
+		this.maximumAantal = zdsParameters.maximumAantal;
 	}
 }

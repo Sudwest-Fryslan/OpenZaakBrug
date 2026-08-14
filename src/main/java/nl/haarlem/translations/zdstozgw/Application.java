@@ -19,10 +19,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @DependsOn("springContext")
 @ImportResource("classpath:spring-ladybug.xml")
+@EnableScheduling
 public class Application {
 
 	public static void main(String[] args) {

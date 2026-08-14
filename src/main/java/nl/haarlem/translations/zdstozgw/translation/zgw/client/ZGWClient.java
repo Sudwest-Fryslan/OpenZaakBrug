@@ -151,13 +151,6 @@ public class ZGWClient {
 	@Value("${zgw.endpoint.informatieobjecttype:/api/v1/informatieobjecttypen}")
 	private @Getter String endpointInformatieobjecttype;
 
-	@Value("${nl.haarlem.translations.zdstozgw.additional-call-to-retrieve-related-object-informatie-objecten-for-caching:true}")
-	public Boolean additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching;
-
-	@Value("${nl.haarlem.translations.zdstozgw.experimental-enkelvoudiginformatieobjecten-object:false}")
-	public Boolean experimentalEnkelvoudiginformatieobjectenObject;
-	
-	
 	@Autowired
 	RestTemplateService restTemplateService;
 	
@@ -533,16 +526,25 @@ public class ZGWClient {
 	}
 
 	public List<ZgwZaak> getZaken(ZgwAuthorization authorization, Map<String, String> parameters) {
+		var results = getZakenPage(authorization, parameters).getResults();
+		return results != null ? results : new ArrayList<ZgwZaak>();
+	}
+
+	// Zoals getZaken, maar geeft de volledige ZGW-paginaomslag (count/next/results) terug i.p.v. alleen de
+	// resultatenlijst - nodig om paging (page/pageSize, of er een volgende pagina is) door te geven aan de
+	// aanroeper, bv. voor de StUF-vervolgvraag-ondersteuning in getZakenByBsnPage/getZaakDetailsByBsn.
+	public QueryResult<ZgwZaak> getZakenPage(ZgwAuthorization authorization, Map<String, String> parameters) {
 		var zaakTypeJson = get(authorization, this.zakenUrl + this.endpointZaak, parameters);
 		Type type = new TypeToken<QueryResult<ZgwZaak>>() {
 		}.getType();
 		Gson gson = new Gson();
 		QueryResult<ZgwZaak> queryResult = gson.fromJson(zaakTypeJson, type);
 		if(queryResult == null) {
-			return new ArrayList<ZgwZaak>();
+			queryResult = new QueryResult<ZgwZaak>();
+			queryResult.results = new ArrayList<ZgwZaak>();
 		}
-		return queryResult.getResults();
-	}	
+		return queryResult;
+	}
 
 	public ZgwZaak getZaakByUrl(ZgwAuthorization authorization, String url, String expand) {
 		var cachedObject = authorization.cacheGet(url, expand);
@@ -853,20 +855,27 @@ public class ZGWClient {
 	}
 
 
-	public List<ZgwZaak> getZakenByBsn(ZgwAuthorization authorization, String bsn, String expand) {
+	// page/pageSize sturen de StUF-vervolgvraag-paging in ZaakService.getZaakDetailsByBsn aan.
+	// rol__omschrijvingGeneriek=initiator is een server-side filter die matcht met de client-side
+	// Initiator-check die daar toch al gebeurt - scheelt zaken-zonder-initiator-rol al bij ZGW zelf
+	// ophalen i.p.v. ze pas na expand weg te filteren.
+	public QueryResult<ZgwZaak> getZakenByBsnPage(ZgwAuthorization authorization, String bsn, String expand, int page, int pageSize) {
 		if(bsn == null || bsn.length() == 0) {
 			throw new ConverterException("getZaakByIdentificatie without an identificatie");
 		}
 
-		Map<String, String> parameters = new HashMap<>();		
+		Map<String, String> parameters = new HashMap<>();
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
-		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);	
+		parameters.put("rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn", bsn);
+		parameters.put("rol__omschrijvingGeneriek", "initiator");
+		parameters.put("page", String.valueOf(page));
+		parameters.put("pageSize", String.valueOf(pageSize));
 		if(expand != null) {
 			parameters.put("expand", expand);
 		}
 
-		List<ZgwZaak> zaken = this.getZaken(authorization, parameters);
-		authorization.cacheAdd(zaken);
+		QueryResult<ZgwZaak> zaken = this.getZakenPage(authorization, parameters);
+		authorization.cacheAdd(zaken.getResults());
 		return zaken;
 	}	
 	
@@ -1164,22 +1173,6 @@ public class ZGWClient {
 		relevanteAndereZaak.aardRelatie = aardRelatie;
 		zgwZaak.relevanteAndereZaken.add(relevanteAndereZaak);
 		this.patchZaak(authorization, zgwZaak.uuid, zgwZaak);
-	}
-
-	public List<ZgwObjectInformatieObject> getObjectInformatieObjectsByUrl(ZgwAuthorization authorization, Map<String, String> parameters) {
-		// Fetch ObjectInformatieObject
-		var objectInformatieObjectJson = get(authorization, this.documentenUrl + this.endpointObjectinformatieobject, parameters);
-
-		Gson gson = new Gson();
-		Type documentList = new TypeToken<ArrayList<ZgwObjectInformatieObject>>() {
-		}.getType();
-		return gson.fromJson(objectInformatieObjectJson, documentList);
-	}
-
-	public List<ZgwObjectInformatieObject> getObjectInformatieObjectsByUrl(ZgwAuthorization authorization, String objecturl) {
-		Map<String, String> parameters = new HashMap<>();
-		parameters.put("object", objecturl);
-		return this.getObjectInformatieObjectsByUrl(authorization, parameters);
 	}
 
 	public List<ZgwEnkelvoudigInformatieObject> getEnkelvoudigInformatieObjectenByObject(ZgwAuthorization authorization, String objecturl, String expand) {

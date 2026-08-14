@@ -159061,7 +159061,7 @@ context.leescounter=0
 
 if (++context.leescounter &lt; 5)
 testRunner.gotoStep(10)</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite>
-	<con:testSuite id="a3fb4a4d-0878-40fa-b6b1-db1107a5ce4c" name="Andere testen"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="6c224f1c-bcb9-4e23-a18c-db8ab503f2c5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Zaken bij bsn" searchProperties="true"><con:settings/><con:testStep type="request" id="8bf29ede-f335-48fa-8139-c79b089740f5" name="01-stufzkn-zakLv01"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>StufZknBeantwoordVraag</con:interface><con:operation>zakLv01</con:operation><con:request name="01-stufzkn-zakLv01" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bfbaa2a5-0dca-4374-8162-e56ddcd84436"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/stufzkn/BeantwoordVraag</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<con:testSuite id="a3fb4a4d-0878-40fa-b6b1-db1107a5ce4c" name="Andere testen"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="6c224f1c-bcb9-4e23-a18c-db8ab503f2c5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Zaken bij bsn" searchProperties="true"><con:settings/><con:testStep type="request" id="8bf29ede-f335-48fa-8139-c79b089740f5" name="01-stufzkn-zakLv01-begin"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>StufZknBeantwoordVraag</con:interface><con:operation>zakLv01</con:operation><con:request name="01-stufzkn-zakLv01-begin" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bfbaa2a5-0dca-4374-8162-e56ddcd84436"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/stufzkn/BeantwoordVraag</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
     <soapenv:Header/>
     <soapenv:Body>
         <ZKN:zakLv01 xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310"
@@ -159077,6 +159077,32 @@ testRunner.gotoStep(10)</script></con:config></con:testStep><con:properties/></c
             <ZKN:parameters>
                 <StUF:sortering>0</StUF:sortering>
                 <StUF:indicatorVervolgvraag>false</StUF:indicatorVervolgvraag>
+            </ZKN:parameters>
+            <ZKN:gelijk StUF:entiteittype="ZAK">
+                <ZKN:heeftAlsInitiator StUF:entiteittype="ZAKBTRINI">
+                    <ZKN:gerelateerde>
+                        <ZKN:identificatie>11111111110</ZKN:identificatie>
+                    </ZKN:gerelateerde>
+                </ZKN:heeftAlsInitiator>
+            </ZKN:gelijk>
+        </ZKN:zakLv01>
+    </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="d4f1dca7-687d-44ae-b980-b8a9380d11c8" name="SOAP Response"/><con:assertion type="Schema Compliance" id="000bf09f-3ea7-4370-b66e-36336dd20035" name="Schema Compliance"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.egem.nl/StUF/sector/zkn/0310/zakLv01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" id="518fbd76-f872-4220-bc56-459896bb6529" name="02-stufzkn-zakLv01-vervolg"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>StufZknBeantwoordVraag</con:interface><con:operation>zakLv01</con:operation><con:request name="02-stufzkn-zakLv01-vervolg" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="bfbaa2a5-0dca-4374-8162-e56ddcd84436"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>${#Project#OpenZaakbugServer}/translate/generic/stufzkn/BeantwoordVraag</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ZKN:zakLv01 xmlns:ZKN="http://www.egem.nl/StUF/sector/zkn/0310"
+                     xmlns:StUF="http://www.egem.nl/StUF/StUF0301">
+            <ZKN:stuurgegevens>
+                <StUF:berichtcode>Lv01</StUF:berichtcode>
+                <StUF:zender>
+                    <StUF:organisatie>1900</StUF:organisatie>
+                    <StUF:applicatie>ZaakDocumentManager</StUF:applicatie>
+                </StUF:zender>
+                <StUF:entiteittype>ZAK</StUF:entiteittype>
+            </ZKN:stuurgegevens>
+            <ZKN:parameters>
+                <StUF:sortering>0</StUF:sortering>
+                <StUF:indicatorVervolgvraag>true</StUF:indicatorVervolgvraag>
             </ZKN:parameters>
             <ZKN:gelijk StUF:entiteittype="ZAK">
                 <ZKN:heeftAlsInitiator StUF:entiteittype="ZAKBTRINI">

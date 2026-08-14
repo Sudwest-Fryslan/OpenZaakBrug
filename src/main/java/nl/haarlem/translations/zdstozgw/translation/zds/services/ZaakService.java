@@ -88,6 +88,7 @@ public class ZaakService {
 
 	private final ModelMapper modelMapper;
 	public final ConfigService configService;
+	private final ZakLv01PagingCache pagingCache;
 
 	// expand-velden die getZaakDetailsByZgwZaak() zelf gebruikt (zaaktype, rollen) -
 	// aanroepers die deze methode voeden verwijzen hierna, i.p.v. het zelf te dupliceren, zodat een
@@ -95,10 +96,11 @@ public class ZaakService {
 	private static final String EXPAND_ZAAK_DETAILS = "zaaktype,rollen";
 
 	@Autowired
-	public ZaakService(ZGWClient zgwClient, ModelMapper modelMapper, ConfigService configService) {
+	public ZaakService(ZGWClient zgwClient, ModelMapper modelMapper, ConfigService configService, ZakLv01PagingCache pagingCache) {
 		this.zgwClient = zgwClient;
 		this.modelMapper = modelMapper;
 		this.configService = configService;
+		this.pagingCache = pagingCache;
 	}
 	
 	public ZgwZaak creeerZaak(ZgwAuthorization authorization, ZdsZaak zdsZaak) {
@@ -672,80 +674,52 @@ public class ZaakService {
 		ZgwZaak zgwZaak = this.zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, "zaakinformatieobjecten");
 	
 		var relevanteDocumenten = new ArrayList<ZdsHeeftRelevant>();
-		if(this.zgwClient.experimentalEnkelvoudiginformatieobjectenObject) {
 
-			// experimenteel - expand is ook nodig voor goede werking!
-			var zgwEnkelvoudigInformatieObjecten = this.zgwClient.getEnkelvoudigInformatieObjectenByObject(authorization, zgwZaak.getUrl(), "informatieobjecttype");
-			if(zgwZaak._expand == null || zgwZaak._expand.zaakinformatieobjecten == null) {
-				throw new ConverterException("zaakinformatieobjecten expand was null voor zaak:" + zgwZaak.identificatie);
-			}
-			// op informatieobject-url i.p.v. steeds opnieuw de lijst met zaakinformatieobjecten te doorzoeken
-			Map<String, ZgwZaakInformatieObject> zaakInformatieObjectenByInformatieobjectUrl = new HashMap<>();
-			for(ZgwZaakInformatieObject zaakInformatieObject : zgwZaak._expand.zaakinformatieobjecten) {
-				zaakInformatieObjectenByInformatieobjectUrl.put(zaakInformatieObject.getInformatieobject(), zaakInformatieObject);
-			}
-			for(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject :  zgwEnkelvoudigInformatieObjecten) {
-
-				if(zgwEnkelvoudigInformatieObject._expand == null || zgwEnkelvoudigInformatieObject._expand.informatieobjecttype == null) {
-					throw new ConverterException("informatieobjecttype expand was null voor document:" + zgwEnkelvoudigInformatieObject.getUrl());
-				}
-				ZgwInformatieObjectType documenttype = zgwEnkelvoudigInformatieObject._expand.informatieobjecttype;
-
-				ZgwZaakInformatieObject zgwZaakInformatieObject = zaakInformatieObjectenByInformatieobjectUrl.get(zgwEnkelvoudigInformatieObject.getUrl());
-				if(zgwZaakInformatieObject == null) {
-					// inconsistent, staat wel in documenten maar niet bij de zaak!
-					throw new ConverterException("zaak:" + zgwZaak.identificatie + " verwijst niet naar document: " + zgwEnkelvoudigInformatieObject.identificatie + " (verwijzing wel andersom!)");
-				}
-				// TODO: controleren of alles uit de zaakInformatieObjectUrls van type document ook allemaal in de lijst is gekomen!
-				ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject,ZdsZaakDocument.class);
-				zdsZaakDocument.omschrijving = documenttype.omschrijving;
-				ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
-				heeftRelevant.gerelateerde = zdsZaakDocument;
-				relevanteDocumenten.add(heeftRelevant);
+		// zaakinformatieobjecten-lijst (zaak-document-koppelingen, o.a. registratiedatum) - zonder-expand
+		// fallback voor als expand=zaakinformatieobjecten hierboven om wat voor reden dan ook niets oplevert.
+		List<ZgwZaakInformatieObject> zgwZaakInformatieObjecten;
+		if(zgwZaak._expand != null && zgwZaak._expand.zaakinformatieobjecten != null) {
+			// al opgehaald door de expand=zaakinformatieobjecten hierboven, geen losse calls meer nodig
+			zgwZaakInformatieObjecten = zgwZaak._expand.zaakinformatieobjecten;
+		}
+		else if(zgwZaak.getZaakinformatieobjecten() != null) {
+			zgwZaakInformatieObjecten = new ArrayList<ZgwZaakInformatieObject>();
+			for(String zaakinformatieobjectenUrl : zgwZaak.zaakinformatieobjecten) {
+				zgwZaakInformatieObjecten.add(this.zgwClient.getZaakInformatieObjectByUrl(authorization, zaakinformatieobjectenUrl));
 			}
 		}
 		else {
-			List<ZgwZaakInformatieObject> zgwZaakInformatieObjecten;
-			if(zgwZaak._expand != null && zgwZaak._expand.zaakinformatieobjecten != null) {
-				// al opgehaald door de expand=zaakinformatieobjecten hierboven, geen losse calls meer nodig
-				zgwZaakInformatieObjecten = zgwZaak._expand.zaakinformatieobjecten;
-			}
-			else if(zgwZaak.getZaakinformatieobjecten() != null) {
-				zgwZaakInformatieObjecten = new ArrayList<ZgwZaakInformatieObject>();
-				for(String zaakinformatieobjectenUrl : zgwZaak.zaakinformatieobjecten) {
-					zgwZaakInformatieObjecten.add(this.zgwClient.getZaakInformatieObjectByUrl(authorization, zaakinformatieobjectenUrl));
-				}
-			}
-			else {
-				zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
-			}
-			if(this.zgwClient.additionalCallToRetrieveRelatedObjectInformatieObjectenForCaching && zgwZaakInformatieObjecten.size() > 0) {
-				// fill the cache in the drc if needed
-				var zgwObjectInformatieObjecten = this.zgwClient.getObjectInformatieObjectsByUrl(authorization, zgwZaak.url);
-				debugWarning("Retrieved ObjectInformatieObjecten to fill the cache on the (CMIS-)DRC (call not needed for ZdsToZgw)");
-			}
-			for (ZgwZaakInformatieObject zgwZaakInformatieObject : zgwZaakInformatieObjecten) {
-				ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject = this.zgwClient
-						.getZgwEnkelvoudigInformatieObjectByUrl(authorization, zgwZaakInformatieObject.informatieobject, "informatieobjecttype");
-				if (zgwEnkelvoudigInformatieObject == null || zgwEnkelvoudigInformatieObject.informatieobjecttype == null) {
-					throw new ConverterException("could not get the zaakdocument: "
-							+ zgwZaakInformatieObject.informatieobject + " for zaak:" + zaakidentificatie);
-				}
-				ZgwInformatieObjectType documenttype = this.zgwClient
-						.getZgwInformatieObjectTypeByUrl(authorization, zgwEnkelvoudigInformatieObject.informatieobjecttype);
-				if (documenttype == null) {
-					throw new ConverterException("getZgwInformatieObjectType #"
-							+ zgwEnkelvoudigInformatieObject.informatieobjecttype + " could not be found");
-				}
-				ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject,
-						ZdsZaakDocument.class);
-				zdsZaakDocument.omschrijving = documenttype.omschrijving;
-				ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
-				heeftRelevant.gerelateerde = zdsZaakDocument;
-				relevanteDocumenten.add(heeftRelevant);	
-			}
+			zgwZaakInformatieObjecten = this.zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
 		}
-		return relevanteDocumenten;		
+
+		// documentdetails altijd in één batch-call ophalen i.p.v. een losse GET + aparte type-lookup per
+		// document - expand=informatieobjecttype wordt hier ook echt gebruikt, zie _expand.informatieobjecttype
+		// hieronder (geen tweede, losse getZgwInformatieObjectTypeByUrl-call meer nodig).
+		var zgwEnkelvoudigInformatieObjecten = this.zgwClient.getEnkelvoudigInformatieObjectenByObject(authorization, zgwZaak.getUrl(), "informatieobjecttype");
+
+		// op informatieobject-url i.p.v. steeds opnieuw de lijst met zaakinformatieobjecten te doorzoeken
+		Map<String, ZgwZaakInformatieObject> zaakInformatieObjectenByInformatieobjectUrl = new HashMap<>();
+		for(ZgwZaakInformatieObject zaakInformatieObject : zgwZaakInformatieObjecten) {
+			zaakInformatieObjectenByInformatieobjectUrl.put(zaakInformatieObject.getInformatieobject(), zaakInformatieObject);
+		}
+		for(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject : zgwEnkelvoudigInformatieObjecten) {
+			if(zgwEnkelvoudigInformatieObject._expand == null || zgwEnkelvoudigInformatieObject._expand.informatieobjecttype == null) {
+				throw new ConverterException("informatieobjecttype expand was null voor document:" + zgwEnkelvoudigInformatieObject.getUrl());
+			}
+			ZgwInformatieObjectType documenttype = zgwEnkelvoudigInformatieObject._expand.informatieobjecttype;
+
+			ZgwZaakInformatieObject zgwZaakInformatieObject = zaakInformatieObjectenByInformatieobjectUrl.get(zgwEnkelvoudigInformatieObject.getUrl());
+			if(zgwZaakInformatieObject == null) {
+				// inconsistent, staat wel in documenten maar niet bij de zaak!
+				throw new ConverterException("zaak:" + zgwZaak.identificatie + " verwijst niet naar document: " + zgwEnkelvoudigInformatieObject.identificatie + " (verwijzing wel andersom!)");
+			}
+			ZdsZaakDocument zdsZaakDocument = this.modelMapper.map(zgwEnkelvoudigInformatieObject, ZdsZaakDocument.class);
+			zdsZaakDocument.omschrijving = documenttype.omschrijving;
+			ZdsHeeftRelevant heeftRelevant = this.modelMapper.map(zgwZaakInformatieObject, ZdsHeeftRelevant.class);
+			heeftRelevant.gerelateerde = zdsZaakDocument;
+			relevanteDocumenten.add(heeftRelevant);
+		}
+		return relevanteDocumenten;
 	}
 
 	
@@ -956,40 +930,91 @@ public class ZaakService {
 		return zgwZaak;		
 	}
 
-	public List<ZdsZaak> getZaakDetailsByBsn(ZgwAuthorization authorization, String bsn) {
+	// StUF-default (stuf0301.xsd ParametersVraag) wanneer maximumAantal ontbreekt of leeg is.
+	private static final int DEFAULT_MAXIMUM_AANTAL = 15;
+
+	/**
+	 * @param zenderOrganisatie/zenderApplicatie identificeren de StUF-vervolgvraag-sessie (samen met bsn) -
+	 *        zie ZakLv01PagingCache. Een StUF-vervolgvraag stuurt hetzelfde verzoek (zelfde bsn, zelfde
+	 *        maximumAantal) opnieuw, met indicatorVervolgvraag=true; er is bewust geen afhankelijkheid van
+	 *        referentienummer/crossRefnummer (zie klasse-Javadoc ZakLv01PagingCache).
+	 * @param maximumAantal null of leeg wordt behandeld als StUF-default 15.
+	 */
+	public ZaakDetailsByBsnResult getZaakDetailsByBsn(ZgwAuthorization authorization, String bsn,
+			String zenderOrganisatie, String zenderApplicatie, String maximumAantal, boolean indicatorVervolgvraag) {
 		log.debug("getZaakDetailsByBsn:" + bsn);
-		
+
+		int pageSize = parseMaximumAantal(maximumAantal);
+
+		int page = 1;
+		if (indicatorVervolgvraag) {
+			var cachedNextPage = this.pagingCache.getNextPage(zenderOrganisatie, zenderApplicatie, bsn);
+			// geen (nog geldige) entry gevonden: gewoon vanaf pagina 1 beginnen, geen foutmelding - StUF
+			// kent geen expliciete "onbekende/verlopen vervolgvraag"-foutcode voor dit geval.
+			if (cachedNextPage != null) {
+				page = cachedNextPage;
+			}
+		}
+
 		// hoofdzaak/deelzaken bewust niet in de lijst-expand: die worden pas na de Initiator-filter
 		// (hieronder) voor de overgebleven zaken opgehaald via de bestaande fallback in
-		// getZaakDetailsByZgwZaak, i.p.v. voor alle (tot 100) zaken in deze pagina.
+		// getZaakDetailsByZgwZaak, i.p.v. voor alle zaken in de ZGW-pagina.
 		// rollen.roltype hier wel nodig (anders dan in EXPAND_ZAAK_DETAILS zelf): de Initiator-filter
 		// hieronder leest zgwRol._expand.roltype.omschrijving, een ander veld dan de zgwRol.omschrijving
 		// die getZaakDetailsByZgwZaak gebruikt.
-		var zgwZaken = this.zgwClient.getZakenByBsn(authorization, bsn, EXPAND_ZAAK_DETAILS + ",rollen.roltype");
 		var result = new ArrayList<ZdsZaak>();
-		zaken:
-		for (ZgwZaak zgwZaak : zgwZaken) {
-			if(zgwZaak._expand == null || zgwZaak._expand.rollen == null) {
-				throw new ConverterException("rollen expand was null voor zaak:" + zgwZaak.identificatie);
+		Integer aantalVoorkomens = null;
+		boolean zgwHeeftVolgendePagina = false;
+		while (true) {
+			var zgwPage = this.zgwClient.getZakenByBsnPage(authorization, bsn, EXPAND_ZAAK_DETAILS + ",rollen.roltype", page, pageSize);
+			if (aantalVoorkomens == null) {
+				aantalVoorkomens = zgwPage.count != null ? zgwPage.count : 0;
 			}
-			for(ZgwRol zgwRol : zgwZaak._expand.rollen) {
-				if(zgwRol._expand == null || zgwRol._expand.roltype == null) {
-					throw new ConverterException("roltype expand was null voor rol:" + zgwRol.getUrl());
+			var zgwZaken = zgwPage.getResults() != null ? zgwPage.getResults() : new ArrayList<ZgwZaak>();
+			for (ZgwZaak zgwZaak : zgwZaken) {
+				if(zgwZaak._expand == null || zgwZaak._expand.rollen == null) {
+					throw new ConverterException("rollen expand was null voor zaak:" + zgwZaak.identificatie);
 				}
-				ZgwRolType zgwRolType = zgwRol._expand.roltype;
-				ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
-				if (zgwRolType.omschrijving.equals(zgwRolOmschrijving.getHeeftAlsInitiator())) {
-					// TODO: hier minder overhead: hier wordt nu 2 keer achterelkaar een getzaak op ZgwRegistry gedaan!
-					result.add(getZaakDetailsByZgwZaak(authorization, zgwZaak));
-				}
-				if(result.size() >= 20) {
-					// Max 20 results, it seems we get get unpredicted results after that
-					debugWarning("Limit activated, no more than 20 results! (total amound found: " + zgwZaken.size() + " relations)");
-					break zaken;
+				for(ZgwRol zgwRol : zgwZaak._expand.rollen) {
+					if(zgwRol._expand == null || zgwRol._expand.roltype == null) {
+						throw new ConverterException("roltype expand was null voor rol:" + zgwRol.getUrl());
+					}
+					ZgwRolType zgwRolType = zgwRol._expand.roltype;
+					ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
+					if (zgwRolType.omschrijving.equals(zgwRolOmschrijving.getHeeftAlsInitiator())) {
+						// TODO: hier minder overhead: hier wordt nu 2 keer achterelkaar een getzaak op ZgwRegistry gedaan!
+						result.add(getZaakDetailsByZgwZaak(authorization, zgwZaak));
+					}
 				}
 			}
+			zgwHeeftVolgendePagina = zgwPage.next != null;
+			if (result.size() >= pageSize || !zgwHeeftVolgendePagina) {
+				break;
+			}
+			// deze pagina leverde (door de rol__omschrijvingGeneriek=initiator-filter meestal niet, maar
+			// mogelijk bij afwijkende roltype-configuratie) te weinig Initiator-matches op t.o.v.
+			// maximumAantal - doorschuiven naar de volgende ZGW-pagina binnen dit ene StUF-antwoord.
+			page++;
 		}
-		return result;
+
+		if (zgwHeeftVolgendePagina) {
+			this.pagingCache.putNextPage(zenderOrganisatie, zenderApplicatie, bsn, page + 1);
+		} else {
+			this.pagingCache.remove(zenderOrganisatie, zenderApplicatie, bsn);
+		}
+
+		return new ZaakDetailsByBsnResult(result, zgwHeeftVolgendePagina, aantalVoorkomens);
+	}
+
+	private int parseMaximumAantal(String maximumAantal) {
+		if (maximumAantal == null || maximumAantal.isBlank()) {
+			return DEFAULT_MAXIMUM_AANTAL;
+		}
+		try {
+			return Integer.parseInt(maximumAantal.trim());
+		} catch (NumberFormatException e) {
+			throw new ConverterException("maximumAantal '" + maximumAantal + "' is geen geldig getal");
+		}
 	}
 
 	

@@ -30,6 +30,11 @@ public class ZdsParameters extends ZdsObject {
 	@XmlElement(namespace = STUF)
 	public String indicatorVervolgvraag;
 
+	// antwoord-veld: aantal gevonden voorkomens (StUF stuf0301.xsd ParametersAntwoord*) - gezet door de
+	// vraag-afhandeling zelf (bv. GeefZaakDetailsTranslator), niet uit het verzoek overgenomen.
+	@XmlElement(namespace = STUF)
+	public String aantalVoorkomens;
+
 	@XmlElement(namespace = ZKN)
 	public String checkedOutId;
 
