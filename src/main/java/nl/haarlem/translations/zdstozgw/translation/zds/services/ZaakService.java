@@ -258,10 +258,14 @@ public class ZaakService {
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak with identification: '" + zdsWordtZaak.identificatie + "' not found in ZGW");
 		}
-		if (zgwZaak._expand == null || zgwZaak._expand.zaaktype == null) {
-			throw new ConverterException("zaaktype expand was null voor zaak:" + zgwZaak.identificatie);
+		// zonder expand-ondersteuning (oudere ZGW-backend, zie ZgwAuthorization.supportsExpand) valt terug
+		// op de losse, cache-backed lookup - dezelfde aanpak als vóór commit 0a8bb5a.
+		ZgwZaakType zgwZaakType;
+		if(zgwZaak._expand != null && zgwZaak._expand.zaaktype != null) {
+			zgwZaakType = zgwZaak._expand.zaaktype;
+		} else {
+			zgwZaakType = this.zgwClient.getZaakTypeByUrl(authorization, zgwZaak.zaaktype);
 		}
-		ZgwZaakType zgwZaakType = zgwZaak._expand.zaaktype;
 
 		var changed = false;
 		ChangeDetector changeDetector = new ChangeDetector();
@@ -703,10 +707,12 @@ public class ZaakService {
 			zaakInformatieObjectenByInformatieobjectUrl.put(zaakInformatieObject.getInformatieobject(), zaakInformatieObject);
 		}
 		for(ZgwEnkelvoudigInformatieObject zgwEnkelvoudigInformatieObject : zgwEnkelvoudigInformatieObjecten) {
-			if(zgwEnkelvoudigInformatieObject._expand == null || zgwEnkelvoudigInformatieObject._expand.informatieobjecttype == null) {
-				throw new ConverterException("informatieobjecttype expand was null voor document:" + zgwEnkelvoudigInformatieObject.getUrl());
+			ZgwInformatieObjectType documenttype;
+			if(zgwEnkelvoudigInformatieObject._expand != null && zgwEnkelvoudigInformatieObject._expand.informatieobjecttype != null) {
+				documenttype = zgwEnkelvoudigInformatieObject._expand.informatieobjecttype;
+			} else {
+				documenttype = this.zgwClient.getZgwInformatieObjectTypeByUrl(authorization, zgwEnkelvoudigInformatieObject.informatieobjecttype);
 			}
-			ZgwInformatieObjectType documenttype = zgwEnkelvoudigInformatieObject._expand.informatieobjecttype;
 
 			ZgwZaakInformatieObject zgwZaakInformatieObject = zaakInformatieObjectenByInformatieobjectUrl.get(zgwEnkelvoudigInformatieObject.getUrl());
 			if(zgwZaakInformatieObject == null) {
@@ -730,10 +736,12 @@ public class ZaakService {
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak not found for identificatie: " + zaakIdentificatie);
 		}
-		if (zgwZaak._expand == null || zgwZaak._expand.zaaktype == null) {
-			throw new ConverterException("zaaktype expand was null voor zaak:" + zgwZaak.identificatie);
+		ZgwZaakType zgwZaakType;
+		if(zgwZaak._expand != null && zgwZaak._expand.zaaktype != null) {
+			zgwZaakType = zgwZaak._expand.zaaktype;
+		} else {
+			zgwZaakType = this.zgwClient.getZaakTypeByUrl(authorization, zgwZaak.zaaktype);
 		}
-		ZgwZaakType zgwZaakType = zgwZaak._expand.zaaktype;
 
 		ZgwInformatieObjectType zgwInformatieObjectType = this.zgwClient.getZgwInformatieObjectTypeByOmschrijving(authorization, zgwZaakType, zdsInformatieObject.omschrijving);
 		if (zgwInformatieObjectType == null) {
@@ -834,10 +842,12 @@ public class ZaakService {
 			throw new ConverterException(
 					"ZgwEnkelvoudigInformatieObject #" + documentIdentificatie + " could not be found");
 		}
-		if (zgwEnkelvoudigInformatieObject._expand == null || zgwEnkelvoudigInformatieObject._expand.informatieobjecttype == null) {
-			throw new ConverterException("informatieobjecttype expand was null voor document:" + zgwEnkelvoudigInformatieObject.getUrl());
+		ZgwInformatieObjectType documenttype;
+		if(zgwEnkelvoudigInformatieObject._expand != null && zgwEnkelvoudigInformatieObject._expand.informatieobjecttype != null) {
+			documenttype = zgwEnkelvoudigInformatieObject._expand.informatieobjecttype;
+		} else {
+			documenttype = this.zgwClient.getZgwInformatieObjectTypeByUrl(authorization, zgwEnkelvoudigInformatieObject.informatieobjecttype);
 		}
-		ZgwInformatieObjectType documenttype = zgwEnkelvoudigInformatieObject._expand.informatieobjecttype;
 		var zgwZaakInformatieObject = this.zgwClient
 				.getZgwZaakInformatieObjectByEnkelvoudigInformatieObjectUrl(authorization, zgwEnkelvoudigInformatieObject.getUrl());
 		if (zgwZaakInformatieObject == null) {
@@ -904,11 +914,13 @@ public class ZaakService {
 		if (zgwZaak == null) {
 			throw new ConverterException("Zaak with identification: '" + wordtZaak.identificatie + "' not found in ZGW");
 		}
-		if (zgwZaak._expand == null || zgwZaak._expand.zaaktype == null) {
-			throw new ConverterException("zaaktype expand was null voor zaak:" + zgwZaak.identificatie);
+		ZgwZaakType zgwZaakType;
+		if(zgwZaak._expand != null && zgwZaak._expand.zaaktype != null) {
+			zgwZaakType = zgwZaak._expand.zaaktype;
+		} else {
+			zgwZaakType = this.zgwClient.getZaakTypeByUrl(authorization, zgwZaak.zaaktype);
 		}
-		ZgwZaakType zgwZaakType = zgwZaak._expand.zaaktype;
-		
+
 		ChangeDetector changeDetector = new ChangeDetector();
 		ZdsZaak zdsStored = this.modelMapper.map(zgwZaak, ZdsZaak.class);
 		
@@ -972,14 +984,19 @@ public class ZaakService {
 			}
 			var zgwZaken = zgwPage.getResults() != null ? zgwPage.getResults() : new ArrayList<ZgwZaak>();
 			for (ZgwZaak zgwZaak : zgwZaken) {
-				if(zgwZaak._expand == null || zgwZaak._expand.rollen == null) {
-					throw new ConverterException("rollen expand was null voor zaak:" + zgwZaak.identificatie);
+				List<ZgwRol> rollen;
+				if(zgwZaak._expand != null && zgwZaak._expand.rollen != null) {
+					rollen = zgwZaak._expand.rollen;
+				} else {
+					rollen = this.zgwClient.getRollenByZaakUrl(authorization, zgwZaak.url);
 				}
-				for(ZgwRol zgwRol : zgwZaak._expand.rollen) {
-					if(zgwRol._expand == null || zgwRol._expand.roltype == null) {
-						throw new ConverterException("roltype expand was null voor rol:" + zgwRol.getUrl());
+				for(ZgwRol zgwRol : rollen) {
+					ZgwRolType zgwRolType;
+					if(zgwRol._expand != null && zgwRol._expand.roltype != null) {
+						zgwRolType = zgwRol._expand.roltype;
+					} else {
+						zgwRolType = this.zgwClient.getRolTypeByUrl(authorization, zgwRol.roltype);
 					}
-					ZgwRolType zgwRolType = zgwRol._expand.roltype;
 					ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
 					if (zgwRolType.omschrijving.equals(zgwRolOmschrijving.getHeeftAlsInitiator())) {
 						// TODO: hier minder overhead - de lus scant na een match onnodig door naar de
@@ -1034,17 +1051,19 @@ public class ZaakService {
 	}
 	
 	private ZdsZaak getZaakDetailsByZgwZaak(ZgwAuthorization authorization, ZgwZaak zgwZaak) {
-		if(zgwZaak._expand == null || zgwZaak._expand.zaaktype == null) {
-			throw new ConverterException("zaaktype expand was null voor zaak:" + zgwZaak.identificatie);
+		ZgwZaakType zgwZaakType;
+		if(zgwZaak._expand != null && zgwZaak._expand.zaaktype != null) {
+			zgwZaakType = zgwZaak._expand.zaaktype;
+		} else {
+			zgwZaakType = this.zgwClient.getZaakTypeByUrl(authorization, zgwZaak.zaaktype);
 		}
-		var zgwZaakType = zgwZaak._expand.zaaktype;
 
 		//ZdsZaak zaak = new ZdsZaak();
 		ZdsZaak zaak = this.modelMapper.map(zgwZaak, ZdsZaak.class);
 		ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
 
 		List<ZgwRol> rollen;
-		if(zgwZaak._expand.rollen != null) {
+		if(zgwZaak._expand != null && zgwZaak._expand.rollen != null) {
 			rollen = zgwZaak._expand.rollen;
 		}
 		else {
@@ -1132,9 +1151,12 @@ public class ZaakService {
 		// heefd deze zaak ook een hoofdzaak
 		var hoofdzaak = zgwZaak.getHoofdzaak();
 		if(hoofdzaak != null) {
-			ZgwZaak parentzaak = zgwZaak._expand.hoofdzaak != null
-					? zgwZaak._expand.hoofdzaak
-					: zgwClient.getZaakByUrl(authorization, hoofdzaak, null);
+			ZgwZaak parentzaak;
+			if(zgwZaak._expand != null && zgwZaak._expand.hoofdzaak != null) {
+				parentzaak = zgwZaak._expand.hoofdzaak;
+			} else {
+				parentzaak = zgwClient.getZaakByUrl(authorization, hoofdzaak, null);
+			}
 			zaak.heeftAlsHoofdzaak = new ZdsHeeftGerelateerde();
 			zaak.heeftAlsHoofdzaak.entiteittype = "ZAKZAKBTR";
 			zaak.heeftAlsHoofdzaak.gerelateerde = new ZdsGerelateerde();
@@ -1145,7 +1167,7 @@ public class ZaakService {
 
 		// heeft deze zaak ook deelzaken
 		List<ZgwZaak> deelzaken;
-		if(zgwZaak._expand.deelzaken != null) {
+		if(zgwZaak._expand != null && zgwZaak._expand.deelzaken != null) {
 			deelzaken = zgwZaak._expand.deelzaken;
 		}
 		else {

@@ -280,6 +280,7 @@ public class ZGWClient {
 				exchangeDuration[0] = System.currentTimeMillis();
 				ResponseEntity<String> response = this.restTemplateService.getRestTemplate().exchange(finalUrl,
 						HttpMethod.GET, entity, String.class);
+				authorization.setVersion(finalUrl, response);
 				exchangeDuration[1] = System.currentTimeMillis();
 				return response.getBody();
 			});
@@ -479,7 +480,7 @@ public class ZGWClient {
 		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", documentIdentificatie);
-		if(expand != null) {
+		if(expand != null && authorization.supportsExpand()) {
 			parameters.put("expand", expand);
 		}		
 		ZgwEnkelvoudigInformatieObject zgwDocument = this.getZgwEnkelvoudigInformatieObject(authorization, parameters);
@@ -493,7 +494,7 @@ public class ZGWClient {
 
 		var localUrl = rebuildLocalUrl(this.documentenUrl, this.endpointEnkelvoudiginformatieobject, authorization, url);
 		Map<String, String> parameters = new HashMap<>();
-		if(expand != null) {
+		if(expand != null && authorization.supportsExpand()) {
 			parameters.put("expand", expand);
 		}
 		var zaakInformatieObjectJson = get(authorization, localUrl, parameters);
@@ -507,9 +508,8 @@ public class ZGWClient {
 		return result;
 	}
 		
-	// Geen aanroepers meer in deze codebase (getRolTypeByZaaktypeAndOmschrijving gebruikt inmiddels een
-	// filter-query i.p.v. deze by-url lookup) - laten staan voor eventueel toekomstig gebruik, gemarkeerd.
-	@Deprecated
+	// Fallback voor getZaakDetailsByBsn's Initiator-filter wanneer rollen.roltype niet ge-expand kon
+	// worden (oudere ZGW-backend zonder expand-ondersteuning, zie ZgwAuthorization.supportsExpand).
 	public ZgwRolType getRolTypeByUrl(ZgwAuthorization authorization, String url) {
 		var cachedObject = authorization.cacheGet(url);
 		if (cachedObject != null) return (ZgwRolType) cachedObject;
@@ -552,7 +552,7 @@ public class ZGWClient {
 
 		var localUrl = rebuildLocalUrl(this.zakenUrl, this.endpointZaak, authorization, url);
 		Map<String, String> parameters = new HashMap<>();
-		if(expand != null) {
+		if(expand != null && authorization.supportsExpand()) {
 			parameters.put("expand", expand);
 		}
 		var zaakJson = get(authorization, localUrl, parameters);
@@ -870,7 +870,7 @@ public class ZGWClient {
 		parameters.put("rol__omschrijvingGeneriek", "initiator");
 		parameters.put("page", String.valueOf(page));
 		parameters.put("pageSize", String.valueOf(pageSize));
-		if(expand != null) {
+		if(expand != null && authorization.supportsExpand()) {
 			parameters.put("expand", expand);
 		}
 
@@ -888,7 +888,7 @@ public class ZGWClient {
 		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("identificatie", zaakIdentificatie);
-		if(expand!=null) {
+		if(expand != null && authorization.supportsExpand()) {
 			parameters.put("expand", expand);
 		}		
 		ZgwZaak zgwZaak = this.getZaak(authorization, parameters);		
@@ -1181,7 +1181,7 @@ public class ZGWClient {
 		Map<String, String> parameters = new HashMap<>();		
 		parameters.put("bronorganisatie", authorization.getCatalogusRsin());
 		parameters.put("objectinformatieobjecten__object", objecturl);
-		if(expand != null) {
+		if(expand != null && authorization.supportsExpand()) {
 			parameters.put("expand", expand);
 		}		
 		

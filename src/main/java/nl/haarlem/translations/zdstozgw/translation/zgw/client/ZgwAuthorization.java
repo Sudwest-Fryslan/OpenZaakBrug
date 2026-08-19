@@ -154,8 +154,13 @@ public class ZgwAuthorization {
 
 	public void setVersion(String url, ResponseEntity<String> responseEntity) {
         List<String> apiVersionHeader = responseEntity.getHeaders().get("API-version");
-        String version = responseEntity.getHeaders().get("API-version").get(0);
-        log.info(version);
+        if(apiVersionHeader == null || apiVersionHeader.isEmpty()) {
+        	// geen ZGW-antwoord (bv. een niet-ZGW-endpoint, of een test-stub zonder header) - niets te
+        	// registreren, geen fout: de eerder bekende versie (indien aanwezig) blijft gewoon staan.
+        	return;
+        }
+        String version = apiVersionHeader.get(0);
+        log.debug("API-version voor " + url + ": " + version);
 
 		for(String baseurl: this.authorizations.keySet()) {
 			if(url.startsWith(baseurl)) {
@@ -175,8 +180,62 @@ public class ZgwAuthorization {
 		}
 		log.warn("getVersion: no match for url: " + url + " - registered baseurls: " + this.authorizations.keySet() + " (this authorization instance: " + System.identityHashCode(this) + ")");
 		throw new ConverterException("No authorization defined for the url: " + url);
-	}	
-	
+	}
+
+	// Vanaf Open Zaak 1.11.0 ondersteunen Zaken/Documenten de expand-queryparameter (Zaken API 1.5,
+	// Documenten API 1.4). In diezelfde release ging ook de Catalogi API naar 1.3 (was 1.2). Omdat de
+	// catalogus-lookup (getCatalogusByRsin) toch al bij elk verzoek gebeurt, gebruiken we de daar
+	// meegekregen API-version-header als gratis proxy i.p.v. zelf nog een aanroep te doen naar Zaken of
+	// Documenten (die overigens sowieso een harde HTTP 400 "Onbekende query parameters: expand" teruggeven
+	// als expand niet ondersteund wordt - geverifieerd tegen een live Open Zaak 1.9.1 - dus achteraf
+	// terugvallen op een lege _expand is geen optie, de hele aanroep faalt).
+	//
+	// Let op, bewust vastgelegd: dit is een samenloop in Open Zaak's eigen release-geschiedenis, geen door
+	// de ZGW-standaard gegarandeerde eigenschap - een toekomstige, andere te detecteren functionaliteit
+	// hoeft niet weer gepaard te gaan met een Catalogi-versiesprong. Zie ook de discussie hierover:
+	// https://github.com/VNG-Realisatie/gemma-zaken/issues/2491
+	private static final String MINIMUM_CATALOGI_VERSION_VOOR_EXPAND = "1.3.0";
+
+	public boolean supportsExpand() {
+		if(this.catalogus == null) {
+			// nog geen catalogus-lookup gedaan - kan in de praktijk niet voorkomen (getAuthorization() doet
+			// die altijd eerst), maar optimistisch (huidig gedrag) i.p.v. blokkerend als het toch gebeurt.
+			return true;
+		}
+		String catalogiVersion;
+		try {
+			catalogiVersion = getVersion(this.catalogus.getUrl());
+		} catch (ConverterException e) {
+			return true;
+		}
+		if(catalogiVersion == null || catalogiVersion.isEmpty()) {
+			// versie nog niet bekend (bv. de catalogus-respons had geen API-version-header) - optimistisch.
+			return true;
+		}
+		return isVersionAtLeast(catalogiVersion, MINIMUM_CATALOGI_VERSION_VOOR_EXPAND);
+	}
+
+	private boolean isVersionAtLeast(String version, String minimumVersion) {
+		String[] versionParts = version.trim().split("\\.");
+		String[] minimumParts = minimumVersion.split("\\.");
+		for(int i = 0; i < Math.max(versionParts.length, minimumParts.length); i++) {
+			int versionPart = i < versionParts.length ? parseVersionPart(versionParts[i]) : 0;
+			int minimumPart = i < minimumParts.length ? parseVersionPart(minimumParts[i]) : 0;
+			if(versionPart != minimumPart) {
+				return versionPart > minimumPart;
+			}
+		}
+		return true;
+	}
+
+	private int parseVersionPart(String part) {
+		try {
+			return Integer.parseInt(part.trim());
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+
 	public void setCatalogus(ZgwCatalogus catalogus) {
 		this.catalogus = catalogus;
 	}

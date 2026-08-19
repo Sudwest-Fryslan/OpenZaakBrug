@@ -168,10 +168,21 @@ public class Replicator {
     private void replicateDocumenten(ZgwAuthorization authorization, String zaakidentificatie, List<ZdsHeeftRelevant> relevanteDocumenten) {
     	debug.infopoint("replicatie", "Aantal gekoppelde zaakdocumenten is: " + relevanteDocumenten.size() + "(zaakid: " + zaakidentificatie + ")");
     	var zgwZaak = this.converter.getZaakService().zgwClient.getZaakByIdentificatie(authorization, zaakidentificatie, "zaakinformatieobjecten");
-    	if(zgwZaak._expand == null || zgwZaak._expand.zaakinformatieobjecten == null) {
-    		throw new ConverterException("zaakinformatieobjecten expand was null voor zaak:" + zgwZaak.identificatie);
+    	// zonder-expand fallback (oudere ZGW-backend, zie ZgwAuthorization.supportsExpand) - zelfde
+    	// drielaags patroon als ZaakService.geefLijstZaakdocumenten.
+    	List<ZgwZaakInformatieObject> zgwZaakDocumenten;
+    	if(zgwZaak._expand != null && zgwZaak._expand.zaakinformatieobjecten != null) {
+    		zgwZaakDocumenten = zgwZaak._expand.zaakinformatieobjecten;
     	}
-    	var zgwZaakDocumenten = zgwZaak._expand.zaakinformatieobjecten;
+    	else if(zgwZaak.getZaakinformatieobjecten() != null) {
+    		zgwZaakDocumenten = new ArrayList<ZgwZaakInformatieObject>();
+    		for(String zaakinformatieobjectUrl : zgwZaak.getZaakinformatieobjecten()) {
+    			zgwZaakDocumenten.add(this.converter.getZaakService().zgwClient.getZaakInformatieObjectByUrl(authorization, zaakinformatieobjectUrl));
+    		}
+    	}
+    	else {
+    		zgwZaakDocumenten = this.converter.getZaakService().zgwClient.getZaakInformatieObjectenByZaak(authorization, zgwZaak.url);
+    	}
         for (ZdsHeeftRelevant relevant : relevanteDocumenten) {
             var zaakdocumentidentificatie = relevant.gerelateerde.identificatie;
             debug.infopoint("replicatie", "Start repliceren van zaakdocument met  identificatie:" + zaakdocumentidentificatie + "(zaakid: " + zaakidentificatie + ")");
