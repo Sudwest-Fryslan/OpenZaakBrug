@@ -110,7 +110,8 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.7</version>
+			<!-- 2.7 had GHSA-78wr-2p64-hpwj (XmlStreamReader DoS on untrusted input), fixed in 2.14.0+ -->
+			<version>2.16.1</version>
 		</dependency>
 
 		<dependency>
@@ -141,7 +142,9 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-  			<version>[42.4.4,)</version>
+			<!-- ondergrens was 42.4.4 (GHSA-24rp-q3w6-vc56, SQL-injectie); ook GHSA-98qh-xjc8-98pq
+			     (PBKDF2 CPU-exhaustion) is pas boven 42.7.11 gefixt, dus de floor daarop meegetrokken -->
+  			<version>[42.7.13,)</version>
 		</dependency>
 
 		<dependency>
