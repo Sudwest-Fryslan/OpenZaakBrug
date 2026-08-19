@@ -982,7 +982,11 @@ public class ZaakService {
 					ZgwRolType zgwRolType = zgwRol._expand.roltype;
 					ZgwRolOmschrijving zgwRolOmschrijving = this.configService.getConfiguration().getZgwRolOmschrijving();
 					if (zgwRolType.omschrijving.equals(zgwRolOmschrijving.getHeeftAlsInitiator())) {
-						// TODO: hier minder overhead: hier wordt nu 2 keer achterelkaar een getzaak op ZgwRegistry gedaan!
+						// TODO: hier minder overhead - de lus scant na een match onnodig door naar de
+						// resterende rollen. Geen dubbeltelling-risico: ZGW/Open Zaak staat zelf maximaal 1
+						// initiator-rol per zaak toe (RolOccurenceValidator(initiator, max_amount=1) in
+						// open-zaak's zaken-serializer, geverifieerd tegen versie 1.9.1), dus deze match komt
+						// hoe dan ook maar 1x per zaak voor.
 						result.add(getZaakDetailsByZgwZaak(authorization, zgwZaak));
 					}
 				}
