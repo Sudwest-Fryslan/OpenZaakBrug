@@ -40,6 +40,9 @@ public class CancelCheckoutTranslator extends Converter {
 
 	@Override
 	public ResponseEntity<?> execute() throws ResponseStatusException {
+		String rsin = this.getZaakService().getRSIN(this.zdsDocument.stuurgegevens);
+		var authorization = this.getZaakService().zgwClient.getAuthorization(rsin);		
+		
 		var zdsCancelCheckoutDi02 = (ZdsCancelCheckoutDi02) this.getZdsDocument();
 		var lock = zdsCancelCheckoutDi02.parameters.checkedOutId;
 		var documentIdentificatie = zdsCancelCheckoutDi02.document.identificatie;
@@ -47,7 +50,7 @@ public class CancelCheckoutTranslator extends Converter {
 		this.getSession().setFunctie("CancelCheckout");
 		this.getSession().setKenmerk("documentidentificatie:" + documentIdentificatie + " with lock:" + lock);
 
-		var result = this.getZaakService().cancelCheckOutZaakDocument(documentIdentificatie, lock);
+		var result = this.getZaakService().cancelCheckOutZaakDocument(authorization, documentIdentificatie, lock);
 
 		var bv02 = new ZdsBv02();
 		var response = XmlUtils.getSOAPMessageFromObject(bv02);

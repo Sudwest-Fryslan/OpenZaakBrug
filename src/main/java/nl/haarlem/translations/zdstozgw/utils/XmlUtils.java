@@ -262,11 +262,18 @@ public class XmlUtils {
 	public static Object getStUFObject(String body, Class c) {
 		Object object = null;
 		try {
-			// WORKAROUND [A] : replace header '﻿<?xml version="1.0" encoding="utf-8"?>' here
-			var WRITE_XML_DECLARATION = "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-			if(body.startsWith(WRITE_XML_DECLARATION)) {
-				body = body.substring(WRITE_XML_DECLARATION.length());
+//			// WORKAROUND [A] : replace header '﻿<?xml version="1.0" encoding="utf-8"?>' here
+//			var WRITE_XML_DECLARATION = "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+//			if(body.startsWith(WRITE_XML_DECLARATION)) {
+//				body = body.substring(WRITE_XML_DECLARATION.length());
+//			}
+			String WRITE_XML_DECLARATION_START = "﻿<?xml";
+			String WRITE_XML_DECLARATION_STOP = "?>";
+			var stopIndex = body.indexOf(WRITE_XML_DECLARATION_STOP);
+			if (body.startsWith(WRITE_XML_DECLARATION_START) &&  stopIndex != -1) {
+			    body = body.substring(stopIndex + WRITE_XML_DECLARATION_STOP.length()).trim();
 			}
+			
 			var inputstream = new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
 			var message = MessageFactory.newInstance().createMessage(null, inputstream);
 			var document = message.getSOAPBody().extractContentAsDocument();

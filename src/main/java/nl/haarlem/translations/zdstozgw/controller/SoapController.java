@@ -113,11 +113,12 @@ public class SoapController {
 		// used by the ladybug-tests
 		if (referentienummer == null)  referentienummer = "ozb-" + java.util.UUID.randomUUID().toString();
 		var path = modus + "/" + version + "/" + protocol + "/" + endpoint;
+		soapAction = soapAction.trim();
+		soapAction = soapAction.replace("\"", "");				
 		var msg = "Processing: " + referentienummer + " with path: /" + path + "/ and soapaction: " + soapAction; 
 		log.info(msg);
 
-
-		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction.replace("\"", ""), body, referentienummer);
+		var session = new RequestResponseCycle(modus, version, protocol, endpoint, path, soapAction, body, referentienummer);
 		RequestContextHolder.getRequestAttributes().setAttribute("referentienummer", referentienummer, RequestAttributes.SCOPE_REQUEST);
 		debug.startpoint(session);
 

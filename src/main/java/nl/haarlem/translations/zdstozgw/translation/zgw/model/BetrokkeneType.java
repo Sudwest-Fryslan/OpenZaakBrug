@@ -13,21 +13,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
-package nl.haarlem.translations.zdstozgw.config.model;
+package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+public enum BetrokkeneType {
+	NATUURLIJK_PERSOON("natuurlijk_persoon"), NIET_NATUURLIJK_PERSOON("niet_natuurlijk_persoon"),
+	VESTIGING("vestiging"), ORGANISATORISCHE_EENHEID("organisatorische_eenheid"), MEDEWERKER("medewerker");
 
-import lombok.Data;
+	String description;
 
-@Data
-public class Organisatie {
-	@Expose
-	public String gemeenteNaam;
-	@Expose
-	public String gemeenteCode;
-	@Expose
-	public String RSIN;
-	@Expose
-	public Boolean voorkeur = false;
+	BetrokkeneType(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
 }

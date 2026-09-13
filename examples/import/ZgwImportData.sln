@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ZgwImportData", "ZgwImportData.pyproj", "{AB936292-B96F-4C8C-BAAE-83DD4BA9996F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB936292-B96F-4C8C-BAAE-83DD4BA9996F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB936292-B96F-4C8C-BAAE-83DD4BA9996F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4E0AF35-3FAB-4886-8C6E-0F6D4CE1E086}
+	EndGlobalSection
+EndGlobal

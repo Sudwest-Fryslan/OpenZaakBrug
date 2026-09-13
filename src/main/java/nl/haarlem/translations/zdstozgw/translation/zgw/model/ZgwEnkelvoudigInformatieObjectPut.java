@@ -13,21 +13,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Licence for the specific language governing permissions and limitations under the Licence.
  */
-package nl.haarlem.translations.zdstozgw.config.model;
+package nl.haarlem.translations.zdstozgw.translation.zgw.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
+import com.google.gson.annotations.Expose;
+
+import lombok.Data;
 
 @Data
-public class Organisatie {
+public class ZgwEnkelvoudigInformatieObjectPut  extends ZgwEnkelvoudigInformatieObjectPost {
+	@SerializedName("link")
 	@Expose
-	public String gemeenteNaam;
+	public String link;	
+	
+	@SerializedName("lock")
 	@Expose
-	public String gemeenteCode;
-	@Expose
-	public String RSIN;
-	@Expose
-	public Boolean voorkeur = false;
+	public String lock;
 }

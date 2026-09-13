@@ -48,3 +48,8 @@ END;
 
 SELECT create_sequences_if_not_exists();
 
+-- LET OP: deze waarde wordt alleen nog gebruikt als startwaarde bij de allereerste aanmaak van de sequence hierboven.
+-- Wijzigen heeft daarna geen enkel effect meer; het actuele volgnummer wordt bijgehouden in de database-sequence zelf.
+UPDATE emulate_parameter SET parameter_description = 'NIET MEER GEBRUIKT sinds de introductie van sequences (2024) - het actuele volgnummer staat in sequence HuidigeZaakIdentificatie, deze waarde aanpassen heeft geen effect' WHERE parameter_name = 'ZaakIdentificatieHuidige';
+UPDATE emulate_parameter SET parameter_description = 'NIET MEER GEBRUIKT sinds de introductie van sequences (2024) - het actuele volgnummer staat in sequence HuidigeDocumentIdentificatie, deze waarde aanpassen heeft geen effect' WHERE parameter_name = 'DocumentIdentificatieHuidige';
+

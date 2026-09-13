@@ -25,6 +25,7 @@ import nl.haarlem.translations.zdstozgw.translation.zgw.client.JWTService;
 @RestController
 public class JWTController {
 
+	/*	
 	@Autowired
 	private JWTService jwtService;
 
@@ -39,5 +40,5 @@ public class JWTController {
 		}
 		return jwt;
 	}
-
+	 */
 }
