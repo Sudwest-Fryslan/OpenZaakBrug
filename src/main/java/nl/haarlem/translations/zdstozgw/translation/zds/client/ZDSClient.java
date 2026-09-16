@@ -18,8 +18,12 @@ package nl.haarlem.translations.zdstozgw.translation.zds.client;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -54,17 +58,16 @@ public class ZDSClient {
 	public ResponseEntity<?> post(String referentienummer, String zdsUrl, String zdsSoapAction, String zdsRequestBody) {
 		log.info("Performing ZDS request to: '" + zdsUrl + "' for soapaction:" + zdsSoapAction);
 		log.debug("Requestbody:\n" + zdsRequestBody);
-		var method = new PostMethod(zdsUrl);
+		var method = new HttpPost(zdsUrl);
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		CloseableHttpResponse[] httpResponse = {null};
 		try {
 			long startTime = System.currentTimeMillis();
-			method.setRequestHeader("SOAPAction", zdsSoapAction);
-			method.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-			StringRequestEntity requestEntity = new org.apache.commons.httpclient.methods.StringRequestEntity(
-					zdsRequestBody, "text/xml", "utf-8");
-			method.setRequestEntity(requestEntity);
-			var httpclient = new org.apache.commons.httpclient.HttpClient();
-
-			//String referentienummer = (String) RequestContextHolder.getRequestAttributes().getAttribute("referentienummer", RequestAttributes.SCOPE_REQUEST);
+			method.addHeader("SOAPAction", zdsSoapAction);
+			method.addHeader("Content-Type", "text/xml; charset=utf-8");
+			StringEntity requestEntity = new StringEntity(zdsRequestBody, "UTF-8");
+			requestEntity.setContentType("text/xml; charset=utf-8");
+			method.setEntity(requestEntity);
 
             ZdsRequestResponseCycle zdsRequestResponseCycle = new ZdsRequestResponseCycle(zdsUrl, zdsSoapAction, zdsRequestBody, referentienummer);
             this.repository.save(zdsRequestResponseCycle);
@@ -73,10 +76,11 @@ public class ZDSClient {
 			debug.startpoint(debugName, zdsRequestBody);
 			debug.infopoint("url", zdsUrl);
 			int responsecode = (Integer) debug.outputpoint("statusCode", () -> {
-				return httpclient.executeMethod(method);
+				httpResponse[0] = httpclient.execute(method);
+				return httpResponse[0].getStatusLine().getStatusCode();
 			}, (IOException)null);
 			String zdsResponseBody = (String) debug.endpoint(debugName, () -> {
-					return method.getResponseBodyAsString();
+					return EntityUtils.toString(httpResponse[0].getEntity(), "UTF-8");
 			}, (IOException)null);
 
 			ResponseEntity<?> result = new ResponseEntity<>(zdsResponseBody, HttpStatus.valueOf(responsecode));
@@ -104,8 +108,10 @@ public class ZDSClient {
 					"Error " + iae.toString() + " requesting url:" + zdsUrl + " with soapaction: " + zdsSoapAction,
 					iae);
 		} finally {
-			// Release current connection to the connection pool once you are done
-			method.releaseConnection();
+			if (httpResponse[0] != null) {
+				try { httpResponse[0].close(); } catch (IOException e) { log.warn("Failed to close HTTP response", e); }
+			}
+			try { httpclient.close(); } catch (IOException e) { log.warn("Failed to close HTTP client", e); }
 		}
 	}
 }
